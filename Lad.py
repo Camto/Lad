@@ -27,6 +27,11 @@ async def ping(ctx):
 	await ctx.send(f"Pong! Hey, {ctx.message.author.mention}, your ping is ``{round(client.latency * 1000)}`` ms")
 
 # Starting the bible study
+# Make the bot repeat something.
+@client.command()
+async def say(ctx, text):
+	await ctx.send(text)
+
 @client.command()
 async def bible(ctx):
 	await ctx.send(random.choice(quotes))
