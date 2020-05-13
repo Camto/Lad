@@ -13,7 +13,7 @@ def get_json(filename):
 autoresponses = get_json("autoresponses.json")
 quotes = get_json("bible quotes.json")
 
-client = commands.Bot(command_prefix = "L.")
+client = commands.Bot(command_prefix = "l.")
 
 client.remove_command("help")
 
@@ -21,6 +21,8 @@ client.remove_command("help")
 async def on_ready():
 	activity = discord.Game(name="L.bible", type=3)
 	await client.change_presence(status=discord.Status.online, activity=activity)
+	activity = discord.Game(name = "l.help", type = 3)
+	await client.change_presence(status = discord.Status.online, activity = activity)
 	print("Logged in")
 
 @client.command()
@@ -50,9 +52,9 @@ async def on_message(msg):
 	if msg.author.name != "Lad":
 		content = msg.content
 		
-		if content.startswith("L."):
+		if content.startswith("l."):
 			# The say command is actually here.
-			if content.startswith("L.say"):
+			if content.startswith("l.say"):
 				return await msg.channel.send(content[5:].lstrip())
 			return await client.process_commands(msg)
 		
