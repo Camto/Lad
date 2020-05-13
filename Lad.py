@@ -13,13 +13,19 @@ def get_json(filename):
 autoresponses = get_json("autoresponses.json")
 quotes = get_json("bible quotes.json")
 
-client = commands.Bot(command_prefix = "L.", description="tba")
+client = commands.Bot(command_prefix = "L.")
+
+client.remove_command("help")
 
 @client.event
 async def on_ready():
 	activity = discord.Game(name="L.bible", type=3)
 	await client.change_presence(status=discord.Status.online, activity=activity)
 	print("Logged in")
+
+@client.command()
+async def help(ctx):
+	await ctx.send("Help command test.")
 
 # Ping command to check users ping.
 @client.command()
