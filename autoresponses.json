@@ -34,7 +34,7 @@
 		]
 	},
 	
-	{"keywords": ["@everyone"], "responses": ["No one cares, shut up!"]},
+	{"keywords": ["@everyone", "@here"], "responses": ["No one cares, shut up!"]},
 
 	{"keywords": ["penis", "cock", "scrotum"], "responses": ["8=====D~~~~"]},
 	
