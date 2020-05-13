@@ -13,7 +13,7 @@ Get started with `l.help` to show all possible commands.
 * `l.say` → Make the bot say something    
 * `l.dino` → Returns a random dinosaur
 
-## Authors:
+## Authors
 
 * [Camto](https://github.com/Camto)
 * [jpVinnie](https://github.com/jpVinnie)
