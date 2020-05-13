@@ -34,8 +34,7 @@ async def help(ctx):
 		.add_field(name = "help", value = "Show this message.", inline = False)
 		.add_field(name = "bible", value = "Returns a random bible verse.", inline = False)
 		.add_field(name = "ping", value = "Responds with pong.", inline = False)
-		.add_field(name = "say", value = "Make the bot say something.", inline = False)
-	)
+		.add_field(name = "say", value = "Make the bot say something.", inline = False))
 
 # Ping command to check users ping.
 @client.command()
@@ -43,8 +42,7 @@ async def ping(ctx):
 	await ctx.send(embed = discord.Embed(
 		title = "Pong!",
 		description = f"Hey, {ctx.message.author.mention}, your ping is ``{round(client.latency * 1000)}`` ms.",
-		color = embed_color
-	))
+		color = embed_color))
 
 # Starting the bible study.
 @client.command()
@@ -53,8 +51,7 @@ async def bible(ctx):
 	await ctx.send(embed = discord.Embed(
 		title = quote["location"],
 		description = quote["text"],
-		color = embed_color
-	))
+		color = embed_color))
 
 # Response system.
 @client.event
