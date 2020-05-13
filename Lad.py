@@ -28,9 +28,12 @@ async def on_ready():
 async def help(ctx):
 	await ctx.send(embed = discord.Embed(
 		title = "Commands",
-		description = "Help test.",
-		color = embed_color
-	))
+		description = "This bot's prefix is ``l.`` or ``L.``",
+		color = embed_color)
+		.add_field(name = "bible", value = "Returns a random bible verse.", inline = False)
+		.add_field(name = "ping", value = "Responds with pong.", inline = False)
+		.add_field(name = "say", value = "Make the bot say something.", inline = False)
+	)
 
 # Ping command to check users ping.
 @client.command()
@@ -57,11 +60,12 @@ async def on_message(msg):
 	if msg.author.name != "Lad":
 		content = msg.content
 		
-		if content.startswith("l."):
+		if content.lower().startswith("l."):
 			# The say command is actually here.
-			if content.startswith("l.say"):
+			if content.lower().startswith("l.say"):
 				return await msg.channel.send(content[5:].lstrip())
-			return await client.process_commands(msg)
+			else:
+				return await client.process_commands(msg)
 		
 		text = "".join(content.split()).lower()
 		for pair in autoresponses:
