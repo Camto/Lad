@@ -69,7 +69,7 @@ async def on_message(msg):
 			else:
 				return await client.process_commands(msg)
 		
-		text = "".join(content.split()).lower()
+		text = content.lower()
 		for pair in autoresponses:
 			for keyword in pair["keywords"]:
 				if keyword in text:
