@@ -15,7 +15,7 @@ client.on("ready", () => {
 
 client.on("message", msg => {
 	if(msg.author.username != "Lad") {
-		var text = msg.content.toLowerCase();
+		var text = msg.content.toLowerCase().replace(/\s/, "");
 		for(let swear of swears) {
 			if(text.match(swear)) {
 				msg.channel.send(
