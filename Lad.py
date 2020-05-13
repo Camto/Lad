@@ -26,7 +26,11 @@ async def on_ready():
 
 @client.command()
 async def help(ctx):
-	await ctx.send("Help command test.")
+	await ctx.send(embed = discord.Embed(
+		title = "Commands",
+		description = "Help test.",
+		color = embed_color
+	))
 
 # Ping command to check users ping.
 @client.command()
