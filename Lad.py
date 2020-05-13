@@ -10,7 +10,7 @@ def get_json(filename):
 	file.close()
 	return data
 
-embed_color = 0xff5cbe
+embed_color = 0xe07bb8
 autoresponses = get_json("autoresponses.json")
 quotes = get_json("bible quotes.json")
 
