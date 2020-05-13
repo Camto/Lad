@@ -12,7 +12,13 @@ client.on("ready", () => {
 
 client.on("message", msg => {
 	if(msg.author.username != "Lad") {
-		msg.channel.send(swears[Math.floor(Math.random() * swears.length)]);
+		var text = msg.content.toLowerCase();
+		for(let swear of swears) {
+			if(text.match(swear)) {
+				msg.channel.send("WOAH WOAH WOAH THERE NO SWEARING IN THIS LAND");
+				return
+			}
+		}
 	}
 });
 
