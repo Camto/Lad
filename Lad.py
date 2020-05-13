@@ -47,17 +47,13 @@ async def on_message(msg):
 		if content.startswith("L."):
 			# The say command is actually here.
 			if content.startswith("L.say"):
-				await msg.channel.send(content[5:].lstrip())
-				return
-			
-			await client.process_commands(msg)
-			return
+				return await msg.channel.send(content[5:].lstrip())
+			return await client.process_commands(msg)
 		
 		text = "".join(content.split()).lower()
 		for pair in autoresponses:
 			for keyword in pair["keywords"]:
 				if keyword in text:
-					await msg.channel.send(random.choice(pair["responses"]))
-					return
+					return await msg.channel.send(random.choice(pair["responses"]))
 
 client.run(get_json("auth.json")["token"])
