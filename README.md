@@ -7,5 +7,5 @@ Get started with `l.help` to show all possible commands.
 # All Possible Commands
 `l.bible` → Returns a random bible verse            
 `l.ping` → Responds with Pong!            
-`l.say` → Make the bot say something
-`l.dino' → Returns a random dinosaur
+`l.say` → Make the bot say something    
+`l.dino` → Returns a random dinosaur
