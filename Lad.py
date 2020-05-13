@@ -21,17 +21,17 @@ async def on_ready():
 	await client.change_presence(status=discord.Status.online, activity=activity)
 	print("Logged in")
 
-# Ping command to check users ping 
+# Ping command to check users ping.
 @client.command()
 async def ping(ctx):
 	await ctx.send(f"Pong! Hey, {ctx.message.author.mention}, your ping is ``{round(client.latency * 1000)}`` ms")
 
-# Starting the bible study
 # Make the bot repeat something.
 @client.command()
 async def say(ctx, text):
 	await ctx.send(text)
 
+# Starting the bible study.
 @client.command()
 async def bible(ctx):
 	await ctx.send(random.choice(quotes))
