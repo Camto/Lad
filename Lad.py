@@ -10,6 +10,7 @@ def get_json(filename):
 	file.close()
 	return data
 
+embed_color = 0xff5cbe
 autoresponses = get_json("autoresponses.json")
 quotes = get_json("bible quotes.json")
 
@@ -19,8 +20,6 @@ client.remove_command("help")
 
 @client.event
 async def on_ready():
-	activity = discord.Game(name="L.bible", type=3)
-	await client.change_presence(status=discord.Status.online, activity=activity)
 	activity = discord.Game(name = "l.help", type = 3)
 	await client.change_presence(status = discord.Status.online, activity = activity)
 	print("Logged in")
@@ -34,7 +33,8 @@ async def help(ctx):
 async def ping(ctx):
 	await ctx.send(embed = discord.Embed(
 		title = "Pong!",
-		description = f"Hey, {ctx.message.author.mention}, your ping is ``{round(client.latency * 1000)}`` ms."
+		description = f"Hey, {ctx.message.author.mention}, your ping is ``{round(client.latency * 1000)}`` ms.",
+		color = embed_color
 	))
 
 # Starting the bible study.
@@ -43,7 +43,8 @@ async def bible(ctx):
 	quote = random.choice(quotes)
 	await ctx.send(embed = discord.Embed(
 		title = quote["location"],
-		description = quote["text"]
+		description = quote["text"],
+		color = embed_color
 	))
 
 # Response system.
