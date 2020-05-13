@@ -12,3 +12,5 @@ Get started with `l.help` to show all possible commands.
 * `l.ping` → Responds with Pong!            
 * `l.say` → Make the bot say something    
 * `l.dino` → Returns a random dinosaur
+
+### Authors: Camto | jpVinnie
