@@ -24,7 +24,10 @@ async def on_ready():
 # Ping command to check users ping.
 @client.command()
 async def ping(ctx):
-	await ctx.send(embed = discord.Embed(title="Pong!", description=f"Hey, {ctx.message.author.mention}, your ping is ``{round(client.latency * 1000)}`` ms."))
+	await ctx.send(embed = discord.Embed(
+		title = "Pong!",
+		description = f"Hey, {ctx.message.author.mention}, your ping is ``{round(client.latency * 1000)}`` ms."
+	))
 
 # Make the bot repeat something.
 @client.command()
