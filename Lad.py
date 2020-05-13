@@ -29,11 +29,6 @@ async def ping(ctx):
 		description = f"Hey, {ctx.message.author.mention}, your ping is ``{round(client.latency * 1000)}`` ms."
 	))
 
-# Make the bot repeat something.
-@client.command()
-async def say(ctx, text):
-	await ctx.send(text)
-
 # Starting the bible study.
 @client.command()
 async def bible(ctx):
@@ -50,6 +45,11 @@ async def on_message(msg):
 		content = msg.content
 		
 		if content.startswith("L."):
+			# The say command is actually here.
+			if content.startswith("L.say"):
+				await msg.channel.send(content[5:].lstrip())
+				return
+			
 			await client.process_commands(msg)
 			return
 		
