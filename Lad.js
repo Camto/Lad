@@ -6,9 +6,6 @@ var autoresponses = require("./autoresponses.json");
 
 var client = new discord.Client();
 
-var swears = autoresponses.swears;
-var responses = autoresponses.responses;
-
 client.on("ready", () => {
 	console.log(`${client.user.tag} is logged in!`);
 });
@@ -16,12 +13,15 @@ client.on("ready", () => {
 client.on("message", msg => {
 	if(msg.author.username != "Lad") {
 		var text = msg.content.toLowerCase().replace(/\s/, "");
-		for(let swear of swears) {
-			if(text.match(swear)) {
-				msg.channel.send(
-					responses[Math.floor(Math.random() * responses.length)]
-				);
-				return;
+		
+		for(let pair of autoresponses) {
+			for(let keyword of pair.keywords) {
+				if(text.match(keyword)) {
+					msg.channel.send(
+						pair.responses[Math.floor(Math.random() * pair.responses.length)]
+					);
+					return;
+				}
 			}
 		}
 	}
