@@ -37,7 +37,7 @@ async def say(ctx, text):
 # Starting the bible study.
 @client.command()
 async def bible(ctx):
-	await ctx.send(random.choice(quotes))
+	await ctx.send(embed = discord.Embed(title = "Bible Quote", description = random.choice(quotes)))
 
 # Response system.
 @client.event
