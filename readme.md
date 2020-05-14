@@ -1,5 +1,7 @@
 # Welcome to Ladbot!
 
+![ladbot avatar](https://github.com/Camto/Lad/blob/master/Avatar.jpg?raw=true)
+
 Ladbot is a private **link-request** discord bot who's purpose is to entertain those who are bored.
 
 ## Get Started 
@@ -11,7 +13,9 @@ Get started with `l.help` to show all possible commands.
 * `l.bible` → Returns a random bible verse            
 * `l.ping` → Responds with Pong!            
 * `l.say` → Make the bot say something    
-* `l.dino` → Returns a random dinosaur
+* `l.dino` → Returns a random dinosaur     
+
+  *And some secret commands!*
 
 ## Authors
 
