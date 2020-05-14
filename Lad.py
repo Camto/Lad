@@ -14,6 +14,7 @@ def get_json(filename):
 
 lad_id = 709644595104972890
 embed_color = 0xe07bb8
+bible_icon = "https://raw.githubusercontent.com/Camto/Lad/master/bible.png"
 autoresponses = get_json("autoresponses.json")
 quotes = get_json("bible quotes.json")
 dinos = get_json("dinos.json")
@@ -56,9 +57,11 @@ async def ping(ctx):
 async def bible(ctx):
 	quote = random.choice(quotes)
 	await ctx.send(embed = discord.Embed(
-		title = quote["location"],
 		description = quote["text"],
-		color = embed_color))
+		color = embed_color)
+		.set_author(
+			name = quote["location"],
+			icon_url = bible_icon))
 
 # Process dino related requests.
 @client.command()
