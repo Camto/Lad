@@ -1,0 +1,10 @@
+let dinos = io::fs::read("../Data/dinos.json")
+
+for dino in json_parse(dinos)
+	let wiki_page = document("https://en.wikipedia.org/wiki/" + dino)
+	let body = element(element(wiki_page, ".mw-parser-output"), "p")
+	for p in split(inner_text(body), "
+")
+		filter p != ""
+		limit 1
+		return {[dino]: p}
