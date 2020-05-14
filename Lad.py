@@ -14,6 +14,7 @@ def get_json(filename):
 	file.close()
 	return data
 
+lad_id = 709644595104972890
 embed_color = 0xe07bb8
 autoresponses = get_json("autoresponses.json")
 quotes = get_json("bible quotes.json")
@@ -82,7 +83,7 @@ async def dino(ctx, *args):
 # Response system.
 @client.event
 async def on_message(msg):
-	if msg.author.name != "Lad":
+	if msg.author.id != lad_id:
 		content = msg.content
 		
 		if content.startswith("l."):
