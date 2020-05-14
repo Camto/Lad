@@ -71,7 +71,8 @@ async def dino(ctx, *args):
 	await ctx.send(embed = discord.Embed(
 		title = dino.replace("_", " "),
 		url = to_wiki_link(dino),
-		description = pars[dino]))
+		description = pars[dino],
+		color = embed_color))
 
 # Response system.
 @client.event
