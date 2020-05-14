@@ -1,0 +1,8 @@
+LET page = DOCUMENT("https://en.wikipedia.org/wiki/List_of_dinosaur_genera")
+
+LET body = ELEMENTS(page, ".mw-parser-output ul")
+FOR section IN REMOVE_NTH(body, 0)
+	FOR bullet IN ELEMENTS(section, "li")
+		LET dino_name = ELEMENTS(bullet, "i a")[0]
+		FILTER NOT IS_NONE(dino_name)
+		RETURN dino_name
