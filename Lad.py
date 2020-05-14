@@ -75,7 +75,7 @@ async def dino(ctx, *args):
 	while parrs[0].has_attr("class"): parrs.pop(0)
 	
 	await ctx.send(embed = discord.Embed(
-		title = dino,
+		title = dino.replace("_", " "),
 		url = to_wiki_link(dino),
 		description = parrs[0].get_text()))
 
