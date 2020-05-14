@@ -54,8 +54,12 @@ async def ping(ctx):
 
 # Starting the bible study.
 @client.command()
-async def bible(ctx):
-	quote = random.choice(quotes)
+async def bible(ctx, *args):
+	if len(args) == 0:
+		quote = random.choice(quotes)
+	else:
+		quote = process.extractOne(args[0], quotes)[0]
+
 	await ctx.send(embed = discord.Embed(
 		description = quote["text"],
 		color = embed_color)
