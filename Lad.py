@@ -88,7 +88,8 @@ async def on_message(msg):
 		if content.startswith("l."):
 			# The say command is actually here.
 			if content.startswith("l.say"):
-				return await msg.channel.send(content[5:].lstrip())
+				await msg.channel.send(content[5:].lstrip())
+				return await msg.delete()
 			else:
 				return await client.process_commands(msg)
 		
