@@ -70,12 +70,14 @@ async def dino(ctx, *args):
 	
 	html = requests.get(to_wiki_link(dino)).text
 	soup = bs4.BeautifulSoup(html, "html.parser")
-	parr = soup.select_one(".mw-parser-output").find_all("p")[1].get_text()
+	parrs = soup.select_one(".mw-parser-output").find_all("p")
+	
+	while parrs[0].has_attr("class"): parrs.pop(0)
 	
 	await ctx.send(embed = discord.Embed(
 		title = dino,
 		url = to_wiki_link(dino),
-		description = parr))
+		description = parrs[0].get_text()))
 
 # Response system.
 @client.event
