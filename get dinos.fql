@@ -5,4 +5,4 @@ FOR section IN REMOVE_NTH(body, 0)
 	FOR bullet IN ELEMENTS(section, "li")
 		LET dino_name = ELEMENTS(bullet, "i a")[0]
 		FILTER NOT IS_NONE(dino_name)
-		RETURN dino_name
+		RETURN LOWER(dino_name)
