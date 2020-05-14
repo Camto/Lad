@@ -5,11 +5,9 @@ from discord.ext.commands import Bot
 import random
 import json
 from fuzzywuzzy import process
-import bs4
-import requests
 
 def get_json(filename):
-	file = open("./Data/" + filename)
+	file = open("./Data/" + filename, encoding = "utf-8")
 	data = json.load(file)
 	file.close()
 	return data
@@ -19,6 +17,7 @@ embed_color = 0xe07bb8
 autoresponses = get_json("autoresponses.json")
 quotes = get_json("bible quotes.json")
 dinos = get_json("dinos.json")
+pars = get_json("pars.json")
 to_wiki_link = lambda s: "https://en.wikipedia.org/wiki/" + s
 
 client = commands.Bot(command_prefix = "l.")
@@ -69,16 +68,10 @@ async def dino(ctx, *args):
 	else:
 		dino = process.extractOne(args[0], dinos)[0]
 	
-	html = requests.get(to_wiki_link(dino)).text
-	soup = bs4.BeautifulSoup(html, "html.parser")
-	parrs = soup.select_one(".mw-parser-output").find_all("p")
-	
-	while parrs[0].has_attr("class"): parrs.pop(0)
-	
 	await ctx.send(embed = discord.Embed(
 		title = dino.replace("_", " "),
 		url = to_wiki_link(dino),
-		description = parrs[0].get_text()))
+		description = pars[dino]))
 
 # Response system.
 @client.event
