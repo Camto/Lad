@@ -1,8 +1,8 @@
 let page = document("https://en.wikipedia.org/wiki/List_of_dinosaur_genera")
 
 let body = elements(page, ".mw-parser-output ul")
-for section in remove_nth(body, 0)
+for section in REMOVE_NTH(body, 0)
 	for bullet in elements(section, "li")
 		let dino_name = elements(bullet, "i a")[0]
-		filter not is_none(dino_name)
+		filter !is_none(dino_name)
 		return dino_name
