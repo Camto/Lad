@@ -40,7 +40,8 @@ async def help(ctx):
 		.add_field(name = "help", value = "Show this message.", inline = False)
 		.add_field(name = "bible", value = "Returns a random bible verse.", inline = False)
 		.add_field(name = "ping", value = "Responds with pong.", inline = False)
-		.add_field(name = "say", value = "Make the bot say something.", inline = False))
+		.add_field(name = "say", value = "Make the bot say something.", inline = False)
+		.add_field(name = "dino", value = "Use `l.dino` for a random dinosaur, `l.dino <dinosuar name here>` to find the dinosaur with that name.", inline = False))
 
 # Ping command to check users ping.
 @client.command()
