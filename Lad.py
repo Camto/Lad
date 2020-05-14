@@ -14,7 +14,7 @@ def get_json(filename):
 
 lad_id = 709644595104972890
 embed_color = 0xe07bb8
-bible_icon = "https://raw.githubusercontent.com/Camto/Lad/master/bible.png"
+bible_icon = "https://raw.githubusercontent.com/Camto/Lad/master/Images/bible.png"
 autoresponses = get_json("autoresponses.json")
 quotes = get_json("bible quotes.json")
 dinos = get_json("dinos.json")
