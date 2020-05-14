@@ -1,6 +1,6 @@
 # Welcome to Ladbot!
 
-![ladbot avatar](https://github.com/Camto/Lad/blob/master/Avatar.jpg?raw=true)
+![ladbot avatar](./Images/Avatar.jpg)
 
 Ladbot is a private **link-request** discord bot who's purpose is to entertain those who are bored.
 
