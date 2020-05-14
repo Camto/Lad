@@ -67,6 +67,36 @@ async def bible(ctx, *args):
 			name = quote["location"],
 			icon_url = icons["bible"]))
 
+# Bible list function
+@client.command()
+async def bibleh(ctx):
+	await ctx.send(embed = discord.Embed(
+		title = "Bible Verses",
+		color = embed_color)
+		.add_field(name = "Matthew", value = "5:9 | 28:19 | 5:28 | 6:5 | 21:18-22 | 11:30 | 12:33 | 18:8 | 18:9", inline = False)
+		.add_field(name = "Leviticus", value = "19:19 | 19:27 | 9:10 | 15:19-20 | 25:44-46 | 21:17-23", inline = False)
+		.add_field(name = "Deuteronomy", value = "22:28-29 | 25:11-1 | 23:1 | 31:8 | 33:27 | 25:11-12", inline = False)
+		.add_field(name = "Psalms", value = "23:1-6 | 46:1-3 | 9:9-10 | 34:10b | 32:7-8", inline = False)
+		.add_field(name = "Exodus", value = "8:1-14 | 21:7-8 | 15:2 | 33:14 | 23:19", inline = False)
+		.add_field(name = "Kings", value = "6:28-29 | 2:23-25 | 23:20-25", inline = False)
+		.add_field(name = "John", value = "3:3 | 14:14 | 14:6 | 3:16", inline = False)
+		.add_field(name = "Chronicles", value = "21:14-15 | 16:11", inline = False)
+		.add_field(name = "Ephesians", value = "2:8 | 6:5 | 5:4", inline = False)
+		.add_field(name = "Proverbs", value = "18:10 | 15:4", inline = False)
+		.add_field(name = "Isaiah", value = "41:10 | 26:3-4", inline = False)
+		.add_field(name = "Timothy", value = "6:6-9 | 3:16", inline = False)
+		.add_field(name = "Luke", value = "16:18 | 3:11", inline = False)
+		.add_field(name = "Peter", value = "5:8 | 2:18", inline = False)
+		.add_field(name = "Numbers", value = "31:17-18", inline = False)
+		.add_field(name = "Reverend", value = "21:8", inline = False)
+		.add_field(name = "Nehemiah", value = "8:10", inline = False)
+		.add_field(name = "Ezekiel", value = "47:11", inline = False)
+		.add_field(name = "Hebrews", value = "12:1", inline = False)
+		.add_field(name = "Romans", value = "3:23", inline = False)
+		.add_field(name = "Genesis", value = "1:1", inline = False)
+		.add_field(name = "Samuel", value = "6:19", inline = False)
+		.set_author(name = "To search type NUMBER first; followed by BOOK", icon_url = icons["bible"]))
+
 # Process dino related requests.
 @client.command()
 async def dino(ctx, *args):
