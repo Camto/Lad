@@ -79,6 +79,11 @@ async def dino(ctx, *args):
 			url = to_wiki_link(dino),
 			icon_url = random.choice(icons["dinos"])))
 
+# Change server settings.
+@client.command()
+async def settings(ctx, *args):
+	return await ctx.send(ctx.message.author.guild_permissions.administrator)
+
 # Response system.
 @client.event
 async def on_message(msg):
