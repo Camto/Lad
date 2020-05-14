@@ -1,9 +1,12 @@
-import random
 import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
+
+import random
 import json
 from fuzzywuzzy import process
+import bs4
+import requests
 
 def get_json(filename):
 	file = open(filename)
@@ -61,14 +64,17 @@ async def bible(ctx):
 async def dino(ctx, *args):
 	if len(args) == 0:
 		dino = random.choice(dinos)
-		await ctx.send(embed = discord.Embed(
-			title = dino,
-			url = to_wiki_link(dino)))
 	else:
 		dino = process.extractOne(args[0], dinos)[0]
-		await ctx.send(embed = discord.Embed(
-			title = dino,
-			url = to_wiki_link(dino)))
+	
+	html = requests.get(to_wiki_link(dino)).text
+	soup = bs4.BeautifulSoup(html, "html.parser")
+	parr = soup.select_one(".mw-parser-output").find_all("p")[1].get_text()
+	
+	await ctx.send(embed = discord.Embed(
+		title = dino,
+		url = to_wiki_link(dino),
+		description = parr))
 
 # Response system.
 @client.event
