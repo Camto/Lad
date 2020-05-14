@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
 import json
+from fuzzywuzzy import process
 
 def get_json(filename):
 	file = open(filename)
@@ -13,6 +14,8 @@ def get_json(filename):
 embed_color = 0xe07bb8
 autoresponses = get_json("autoresponses.json")
 quotes = get_json("bible quotes.json")
+dinos = get_json("dinos.json")
+to_wiki_link = lambda s: "https://en.wikipedia.org/wiki/" + s
 
 client = commands.Bot(command_prefix = "l.")
 
@@ -52,6 +55,20 @@ async def bible(ctx):
 		title = quote["location"],
 		description = quote["text"],
 		color = embed_color))
+
+# Process dino related requests.
+@client.command()
+async def dino(ctx, *args):
+	if len(args) == 0:
+		dino = random.choice(dinos)
+		await ctx.send(embed = discord.Embed(
+			title = dino,
+			url = to_wiki_link(dino)))
+	else:
+		dino = process.extractOne(args[0], dinos)[0]
+		await ctx.send(embed = discord.Embed(
+			title = dino,
+			url = to_wiki_link(dino)))
 
 # Response system.
 @client.event
