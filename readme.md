@@ -15,8 +15,6 @@ Get started with `l.help` to show all possible commands.
 * `l.say` → Make the bot say something    
 * `l.dino` → Returns a random dinosaur     
 
-  *And some secret commands!*
-
 ## Authors
 
 * [Camto](https://github.com/Camto)
