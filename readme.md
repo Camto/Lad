@@ -10,10 +10,10 @@ Get started with `l.help` to show all possible commands.
 
 ## All Possible Commands
 
-* `l.bible` → Returns a random bible verse            
-* `l.ping` → Responds with Pong!            
-* `l.say` → Make the bot say something    
-* `l.dino` → Returns a random dinosaur     
+* `l.bible` → Returns a random bible verse and ``l.bibleh`` lists all possible verses            
+* `l.ping` → Responds with Pong!
+* `l.say` → Make the bot say something
+* `l.dino` → Returns a random dinosaur
 
 ## Authors
 
