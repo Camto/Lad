@@ -7,18 +7,18 @@ import json
 from fuzzywuzzy import process
 
 def get_json(filename):
-	file = open("./Data/" + filename, encoding = "utf-8")
+	file = open(f"./Data/{filename}.json", encoding = "utf-8")
 	data = json.load(file)
 	file.close()
 	return data
 
 lad_id = 709644595104972890
 embed_color = 0xe07bb8
-bible_icon = "https://raw.githubusercontent.com/Camto/Lad/master/Images/bible.png"
-autoresponses = get_json("autoresponses.json")
-quotes = get_json("bible quotes.json")
-dinos = get_json("dinos.json")
-pars = get_json("pars.json")
+autoresponses = get_json("autoresponses")
+icons = get_json("icons")
+quotes = get_json("bible quotes")
+dinos = get_json("dinos")
+pars = get_json("pars")
 to_wiki_link = lambda s: "https://en.wikipedia.org/wiki/" + s
 
 client = commands.Bot(command_prefix = "l.")
@@ -61,7 +61,7 @@ async def bible(ctx):
 		color = embed_color)
 		.set_author(
 			name = quote["location"],
-			icon_url = bible_icon))
+			icon_url = icons["bible"]))
 
 # Process dino related requests.
 @client.command()
@@ -72,10 +72,12 @@ async def dino(ctx, *args):
 		dino = process.extractOne(args[0], dinos)[0]
 	
 	await ctx.send(embed = discord.Embed(
-		title = dino.replace("_", " "),
-		url = to_wiki_link(dino),
 		description = pars[dino],
-		color = embed_color))
+		color = embed_color)
+		.set_author(
+			name = dino.replace("_", " "),
+			url = to_wiki_link(dino),
+			icon_url = random.choice(icons["dinos"])))
 
 # Response system.
 @client.event
@@ -97,4 +99,4 @@ async def on_message(msg):
 				if keyword in text:
 					return await msg.channel.send(random.choice(pair["responses"]))
 
-client.run(get_json("auth.json")["token"])
+client.run(get_json("auth")["token"])
