@@ -9,7 +9,7 @@ import bs4
 import requests
 
 def get_json(filename):
-	file = open(filename)
+	file = open("./Data/" + filename)
 	data = json.load(file)
 	file.close()
 	return data
