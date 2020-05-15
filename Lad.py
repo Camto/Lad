@@ -141,6 +141,7 @@ async def settings(ctx, *args):
 					(?, 1)""",
 				(ctx.guild.id,))
 			await db.commit()
+			print(f"Server {ctx.guild.id} has been added to the settings database.")
 	else:
 		await ctx.send(embed = discord.Embed(
 			description = "You're not an admin, you can't change the settings.",
