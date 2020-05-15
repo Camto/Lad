@@ -42,7 +42,7 @@ async def help(ctx):
 		.add_field(name = "bible", value = "Returns a random bible verse.", inline = False)
 		.add_field(name = "ping", value = "Responds with pong.", inline = False)
 		.add_field(name = "say", value = "Make the bot say something.", inline = False)
-		.add_field(name = "dino", value = "Use `l.dino` for a random dinosaur, `l.dino <dinosuar name here>` to find the dinosaur with that name.", inline = False))
+		.add_field(name = "dino", value = "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.", inline = False))
 
 # Ping command to check users ping.
 @client.command()
@@ -69,10 +69,13 @@ async def bible(ctx, *args):
 
 # Bible list function
 @client.command()
-async def bibleh(ctx):
+async def biblehelp(ctx):
 	await ctx.send(embed = discord.Embed(
 		title = "Bible Verses",
 		color = embed_color)
+		.set_author(
+			name = "To search type NUMBER first; followed by BOOK",
+			icon_url = icons["bible"])
 		.add_field(name = "Matthew", value = "5:9 | 28:19 | 5:28 | 6:5 | 21:18-22 | 11:30 | 12:33 | 18:8 | 18:9", inline = False)
 		.add_field(name = "Leviticus", value = "19:19 | 19:27 | 9:10 | 15:19-20 | 25:44-46 | 21:17-23", inline = False)
 		.add_field(name = "Deuteronomy", value = "22:28-29 | 25:11-1 | 23:1 | 31:8 | 33:27 | 25:11-12", inline = False)
@@ -94,8 +97,7 @@ async def bibleh(ctx):
 		.add_field(name = "Hebrews", value = "12:1", inline = False)
 		.add_field(name = "Romans", value = "3:23", inline = False)
 		.add_field(name = "Genesis", value = "1:1", inline = False)
-		.add_field(name = "Samuel", value = "6:19", inline = False)
-		.set_author(name = "To search type NUMBER first; followed by BOOK", icon_url = icons["bible"]))
+		.add_field(name = "Samuel", value = "6:19", inline = False))
 
 # Process dino related requests.
 @client.command()
