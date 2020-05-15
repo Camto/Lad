@@ -5,6 +5,7 @@ from discord.ext.commands import Bot
 import random
 import json
 from fuzzywuzzy import process
+from fuzzywuzzy import fuzz
 
 def get_json(filename):
 	file = open(f"./Data/{filename}.json", encoding = "utf-8")
@@ -58,7 +59,10 @@ async def bible(ctx, *args):
 	if len(args) == 0:
 		quote = random.choice(quotes)
 	else:
-		quote = process.extractOne(args[0], quotes)[0]
+		quote = process.extractOne(
+			args[0],
+			quotes,
+			scorer = fuzz.token_sort_ratio)[0]
 
 	await ctx.send(embed = discord.Embed(
 		description = quote["text"],
