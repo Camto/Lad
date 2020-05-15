@@ -126,7 +126,25 @@ async def dino(ctx, *args):
 # Change server settings.
 @client.command()
 async def settings(ctx, *args):
-	return await ctx.send(ctx.message.author.guild_permissions.administrator)
+	if ctx.message.author.guild_permissions.administrator:
+		# Make sure server is in settings database.
+		
+		guild_in_db = await (await db.execute(
+			"SELECT * FROM settings WHERE guild_id = ?",
+			(ctx.guild.id,))).fetchone()
+		
+		if not guild_in_db:
+			await db.execute("""
+				INSERT INTO settings
+					(guild_id, autoresponses)
+				VALUES
+					(?, 1)""",
+				(ctx.guild.id,))
+			await db.commit()
+	else:
+		await ctx.send(embed = discord.Embed(
+			description = "You're not an admin, you can't change the settings.",
+			color = embed_color))
 
 # Response system.
 @client.event
@@ -153,13 +171,14 @@ async def start_bot():
 	db = aiosqlite.connect("./Data/settings.db")
 	await db.__aenter__()
 	
-	has_created_settings = (await (await db.execute("PRAGMA user_version")).fetchone())[0]
+	has_created_settings = (
+		await (await db.execute("PRAGMA user_version")).fetchone())[0]
+	
 	if has_created_settings == 0:
-		await db.executescript("""
-	CREATE TABLE server_settings (
-		guild_id INTEGER PRIMARY KEY,
-		allows_autoresponses INTEGER);
-	""")
+		await db.execute("""
+			CREATE TABLE settings (
+				guild_id TEXT PRIMARY KEY,
+				autoresponses INTEGER)""")
 		await db.execute("PRAGMA user_version = 1")
 	
 	await client.start(get_json("auth")["token"])
