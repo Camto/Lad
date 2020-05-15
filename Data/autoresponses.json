@@ -34,6 +34,8 @@
 		]
 	},
 	
+	{"keywords": ["Am I right lads or am I right lads?"], "responses": ["You are right lad"]},
+
 	{"keywords": ["@everyone", "@here"], "responses": ["No one cares, shut up!"]},
 
 	{"keywords": ["penis", "cock", "scrotum"], "responses": ["8=====D~~~~"]},
