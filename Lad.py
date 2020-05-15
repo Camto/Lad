@@ -2,8 +2,11 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
 
+import sys
 import random
 import json
+import asyncio
+import aiosqlite
 from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
 
@@ -145,4 +148,18 @@ async def on_message(msg):
 				if keyword in text:
 					return await msg.channel.send(random.choice(pair["responses"]))
 
-client.run(get_json("auth")["token"])
+async def start_bot():
+	global db
+	db = aiosqlite.connect("./Data/settings.db")
+	await db.__aenter__()
+	await client.start(get_json("auth")["token"])
+
+loop = asyncio.get_event_loop()
+
+try:
+	loop.run_until_complete(start_bot())
+except KeyboardInterrupt:
+	loop.run_until_complete(db.__aexit__(0, 0, 0))
+	loop.run_until_complete(client.logout())
+finally:
+	loop.close()
