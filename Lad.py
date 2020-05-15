@@ -128,25 +128,27 @@ async def dino(ctx, *args):
 @client.command()
 async def settings(ctx, *args):
 	if ctx.message.author.guild_permissions.administrator:
-		# Make sure server is in settings database.
-		
-		guild_in_db = await (await db.execute(
-			"SELECT * FROM settings WHERE guild_id = ?",
-			(ctx.guild.id,))).fetchone()
-		
-		if not guild_in_db:
-			await db.execute("""
-				INSERT INTO settings
-					(guild_id, autoresponses)
-				VALUES
-					(?, 1)""",
-				(ctx.guild.id,))
-			await db.commit()
-			print(f"Server {ctx.guild.id} has been added to the settings database.")
-		
 		# If an option is being changed.
 		
-		if len(args) == 2:
+		if len(args) >= 2:
+			# Make sure server is in settings database.
+			
+			guild_in_db = await (await db.execute(
+				"SELECT * FROM settings WHERE guild_id = ?",
+				(ctx.guild.id,))).fetchone()
+			
+			if not guild_in_db:
+				await db.execute("""
+					INSERT INTO settings
+						(guild_id, autoresponses)
+					VALUES
+						(?, 1)""",
+					(ctx.guild.id,))
+				await db.commit()
+				print(f"Server {ctx.guild.name} ({ctx.guild.id}) has been added to the settings database.")
+			
+			# Actually change the options.
+			
 			if args[0] in options:
 				if args[1] == "yes" or args[1] == "no":
 					await db.execute(f"""
@@ -166,6 +168,10 @@ async def settings(ctx, *args):
 				await ctx.send(embed = discord.Embed(
 					description = f"{args[0]} is not an option that can be toggled.",
 					color = embed_color))
+		else:
+			await ctx.send(embed = discord.Embed(
+				description = "Not enough arguments were given to change an option, for help with `l.settings`, please use `l.help settings`.",
+				color = embed_color))
 	else:
 		await ctx.send(embed = discord.Embed(
 			description = "You're not an admin, you can't change the settings.",
