@@ -62,7 +62,7 @@ async def bible(ctx, *args):
 		quote = process.extractOne(
 			args[0],
 			quotes,
-			scorer = fuzz.token_sort_ratio)[0]
+			scorer = fuzz.partial_token_sort_ratio)[0]
 
 	await ctx.send(embed = discord.Embed(
 		description = quote["text"],
