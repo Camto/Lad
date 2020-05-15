@@ -18,6 +18,7 @@ def get_json(filename):
 
 lad_id = 709644595104972890
 embed_color = 0xe07bb8
+options = get_json("options")
 autoresponses = get_json("autoresponses")
 icons = get_json("icons")
 quotes = get_json("bible quotes")
@@ -142,6 +143,29 @@ async def settings(ctx, *args):
 				(ctx.guild.id,))
 			await db.commit()
 			print(f"Server {ctx.guild.id} has been added to the settings database.")
+		
+		# If an option is being changed.
+		
+		if len(args) == 2:
+			if args[0] in options:
+				if args[1] == "yes" or args[1] == "no":
+					await db.execute(f"""
+						UPDATE settings
+						SET {args[0]} = ?
+						WHERE guild_id = ?""",
+						(1 if args[1] == "yes" else 0, ctx.guild.id))
+					await db.commit()
+					await ctx.send(embed = discord.Embed(
+						description = f"Turned {args[0]} {'on' if args[1] == 'yes' else 'off'}.",
+						color = embed_color))
+				else:
+					await ctx.send(embed = discord.Embed(
+						description = f"{args[1]} is not a valid setting, use yes or no.",
+						color = embed_color))
+			else:
+				await ctx.send(embed = discord.Embed(
+					description = f"{args[0]} is not an option that can be toggled.",
+					color = embed_color))
 	else:
 		await ctx.send(embed = discord.Embed(
 			description = "You're not an admin, you can't change the settings.",
