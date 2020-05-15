@@ -152,13 +152,23 @@ async def start_bot():
 	global db
 	db = aiosqlite.connect("./Data/settings.db")
 	await db.__aenter__()
+	
+	has_created_settings = (await (await db.execute("PRAGMA user_version")).fetchone())[0]
+	if has_created_settings == 0:
+		await db.executescript("""
+	CREATE TABLE server_settings (
+		guild_id INTEGER PRIMARY KEY,
+		allows_autoresponses INTEGER);
+	""")
+		await db.execute("PRAGMA user_version = 1")
+	
 	await client.start(get_json("auth")["token"])
 
 loop = asyncio.get_event_loop()
 
 try:
 	loop.run_until_complete(start_bot())
-except KeyboardInterrupt:
+except:
 	loop.run_until_complete(db.__aexit__(0, 0, 0))
 	loop.run_until_complete(client.logout())
 finally:
