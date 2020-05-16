@@ -83,7 +83,7 @@ async def help(ctx, str):
 async def ping(ctx):
 	await ctx.send(embed = discord.Embed(
 		title = "Pong!",
-		description = f"Hey, {ctx.message.author.mention}, your ping is ``{round(client.latency * 1000)}`` ms.",
+		description = f"Hey, {ctx.message.author.mention}. Current ping is: ``{round(client.latency * 1000)}`` ms.",
 		color = embed_color))
 
 # Starting the bible study.
