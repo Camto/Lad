@@ -73,10 +73,9 @@ async def help(ctx, str):
 		description = "This bot's prefix is ``l.``",
 		color = embed_color)
 		.add_field(name = "help", value = "Show this message.", inline = False)
-		.add_field(name = "bible", value = "Returns a random bible verse.", inline = False)
-		.add_field(name = "biblehelp", value = "Returns a list of all the bible verses you can search for.", inline = False)
 		.add_field(name = "ping", value = "Responds with pong.", inline = False)
 		.add_field(name = "say", value = "Make the bot say something.", inline = False)
+		.add_field(name = "bible", value = "Returns a random bible verse. For verses do l.help bible", inline = False)
 		.add_field(name = "dino", value = "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.", inline = False))
 
 # Ping command to check users ping.
