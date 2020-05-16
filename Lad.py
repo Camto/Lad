@@ -31,7 +31,7 @@ client.remove_command("help")
 
 @client.event
 async def on_ready():
-	activity = discord.Streaming(name = "l.help", url = "https://www.twitch.tv/jpvinnie") 
+	activity = discord.Streaming(name = "l.help", url = "https://www.twitch.tv/jpvinnie")
 	await client.change_presence(status = discord.Streaming, activity = activity)
 	print("Logged in")
 
