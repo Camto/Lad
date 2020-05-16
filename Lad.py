@@ -32,7 +32,7 @@ client.remove_command("help")
 @client.event
 async def on_ready():
 	activity = discord.Game(name = "l.help", type = 3)
-	await client.change_presence(status = discord.Status.online, activity = activity)
+	await client.change_presence(status = discord.Status.do_not_disturb, activity = activity)
 	print("Logged in")
 
 # Show command descriptions.
