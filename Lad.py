@@ -128,10 +128,12 @@ async def settings_cmd(ctx, *args):
 		# If an option is being changed.
 		
 		if len(args) >= 2:
+			guild_id = ctx.guild.id
+			
 			# Make sure server is in settings database.
 			guild_in_db = await (await db.execute(
 				"SELECT * FROM settings WHERE guild_id = ?",
-				(ctx.guild.id,))).fetchone()
+				(guild_id,))).fetchone()
 			
 			if not guild_in_db:
 				await db.execute("""
@@ -139,9 +141,9 @@ async def settings_cmd(ctx, *args):
 						(guild_id, autoresponses)
 					VALUES
 						(?, 1)""",
-					(ctx.guild.id,))
+					(guild_id,))
 				await db.commit()
-				print(f"Server {ctx.guild.name} ({ctx.guild.id}) has been added to the settings database.")
+				print(f"Server {ctx.guild.name} ({guild_id}) has been added to the settings database.")
 			
 			# Actually change the options.
 			
@@ -153,13 +155,15 @@ async def settings_cmd(ctx, *args):
 						UPDATE settings
 						SET {args[0]} = ?
 						WHERE guild_id = ?""",
-						(1 if is_yes else 0, ctx.guild.id))
+						(1 if is_yes else 0, guild_id))
 					await db.commit()
 					await ctx.send(embed = discord.Embed(
 						description = f"Turned {args[0]} {'on' if is_yes else 'off'}.",
 						color = embed_color))
 					
-					settings[ctx.guild.id][args[0]] = 1 if is_yes else 0
+					if guild_id not in settings:
+						settings[guild_id] = {"autoresponses": 1}
+					settings[guild_id][args[0]] = 1 if is_yes else 0
 				else:
 					await ctx.send(embed = discord.Embed(
 						description = f"{args[1]} is not a valid setting, use yes or no.",
@@ -191,11 +195,16 @@ async def on_message(msg):
 			else:
 				return await client.process_commands(msg)
 		
-		text = content.lower()
-		for pair in autoresponses:
-			for keyword in pair["keywords"]:
-				if keyword in text:
-					return await msg.channel.send(random.choice(pair["responses"]))
+		
+		if get_setting(msg.guild.id, "autoresponses"):
+			text = content.lower()
+			for pair in autoresponses:
+				for keyword in pair["keywords"]:
+					if keyword in text:
+						return await msg.channel.send(random.choice(pair["responses"]))
+
+def get_setting(guild_id, setting):
+	return guild_id not in settings or settings[guild_id][setting]
 
 async def start_bot():
 	# Start up settings database.
@@ -208,7 +217,7 @@ async def start_bot():
 	has_created_settings = (
 		await (await db.execute("PRAGMA user_version")).fetchone())[0]
 	
-	if has_created_settings == 0:
+	if not has_created_settings:
 		await db.execute("""
 			CREATE TABLE settings (
 				guild_id TEXT PRIMARY KEY,
