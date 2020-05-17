@@ -178,7 +178,7 @@ async def settings_cmd(ctx, *args):
 				color = embed_color))
 	else:
 		await ctx.send(embed = discord.Embed(
-			description = "You're not an admin, you can't change the settings.",
+			description = "You're not an admin, you can't access the settings.",
 			color = embed_color))
 
 # The autoresponse system and relegating commands.
