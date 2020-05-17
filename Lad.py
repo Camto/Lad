@@ -204,9 +204,11 @@ async def on_message(msg):
 		if content.startswith("l."):
 			# The say command is actually here.
 			if content.startswith("l.say"):
-				if get_setting(msg.guild.id, "dino"):
+				if get_setting(msg.guild.id, "say"):
 					await msg.channel.send(content[5:].lstrip())
 					return await msg.delete()
+				else:
+					await msg.channel.send(embed = command_disabled)
 			else:
 				return await client.process_commands(msg)
 		
