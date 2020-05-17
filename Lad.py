@@ -26,6 +26,11 @@ quotes = get_json("bible quotes")
 dinos = get_json("dinos")
 pars = get_json("pars")
 
+command_disabled = discord.Embed(
+	title = "Command disabled!",
+	description = "This command was disabled in the settings by an admin.",
+	color = embed_color)
+
 client = commands.Bot(command_prefix = "l.")
 
 client.remove_command("help")
@@ -82,44 +87,53 @@ async def help(ctx, *cmd):
 # Ping command to check users ping.
 @client.command()
 async def ping(ctx):
-	await ctx.send(embed = discord.Embed(
-		title = "Pong!",
-		description = f"Hey, {ctx.message.author.mention}. Current ping is: ``{round(client.latency * 1000)}`` ms.",
-		color = embed_color))
+	if get_setting(ctx.guild.id, "ping"):
+		await ctx.send(embed = discord.Embed(
+			title = "Pong!",
+			description = f"Hey, {ctx.message.author.mention}. Current ping is: ``{round(client.latency * 1000)}`` ms.",
+			color = embed_color))
+	else:
+		await ctx.send(embed = command_disabled)
 
 # Starting the bible study.
 @client.command()
 async def bible(ctx, *args):
-	if len(args) == 0:
-		quote = random.choice(quotes)
-	else:
-		quote = process.extractOne(
-			args[0],
-			quotes,
-			scorer = fuzz.partial_token_sort_ratio)[0]
+	if get_setting(ctx.guild.id, "bible"):
+		if len(args) == 0:
+			quote = random.choice(quotes)
+		else:
+			quote = process.extractOne(
+				args[0],
+				quotes,
+				scorer = fuzz.partial_token_sort_ratio)[0]
 
-	await ctx.send(embed = discord.Embed(
-		description = quote["text"],
-		color = embed_color)
-		.set_author(
-			name = quote["location"],
-			icon_url = icons["bible"]))
+		await ctx.send(embed = discord.Embed(
+			description = quote["text"],
+			color = embed_color)
+			.set_author(
+				name = quote["location"],
+				icon_url = icons["bible"]))
+	else:
+		await ctx.send(embed = command_disabled)
 
 # Process dino related requests.
 @client.command()
 async def dino(ctx, *args):
-	if len(args) == 0:
-		dino = random.choice(dinos)
+	if get_setting(ctx.guild.id, "dino"):
+		if len(args) == 0:
+			dino = random.choice(dinos)
+		else:
+			dino = process.extractOne(args[0], dinos)[0]
+		
+		await ctx.send(embed = discord.Embed(
+			description = pars[dino],
+			color = embed_color)
+			.set_author(
+				name = dino.replace("_", " "),
+				url = "https://en.wikipedia.org/wiki/" + dino,
+				icon_url = random.choice(icons["dinos"])))
 	else:
-		dino = process.extractOne(args[0], dinos)[0]
-	
-	await ctx.send(embed = discord.Embed(
-		description = pars[dino],
-		color = embed_color)
-		.set_author(
-			name = dino.replace("_", " "),
-			url = "https://en.wikipedia.org/wiki/" + dino,
-			icon_url = random.choice(icons["dinos"])))
+		await ctx.send(embed = command_disabled)
 
 # Change server settings.
 @client.command(name = "settings")
