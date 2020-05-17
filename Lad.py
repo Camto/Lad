@@ -122,8 +122,8 @@ async def dino(ctx, *args):
 			icon_url = random.choice(icons["dinos"])))
 
 # Change server settings.
-@client.command()
-async def settings(ctx, *args):
+@client.command(name = "settings")
+async def settings_cmd(ctx, *args):
 	if ctx.message.author.guild_permissions.administrator:
 		# If an option is being changed.
 		
@@ -195,9 +195,12 @@ async def on_message(msg):
 					return await msg.channel.send(random.choice(pair["responses"]))
 
 async def start_bot():
+	# Start up settings database.
 	global db
 	db = aiosqlite.connect("./settings.db")
 	await db.__aenter__()
+	
+	# Create settings table if it doesn't exist yet.
 	
 	has_created_settings = (
 		await (await db.execute("PRAGMA user_version")).fetchone())[0]
@@ -209,6 +212,12 @@ async def start_bot():
 				autoresponses INTEGER)""")
 		await db.execute("PRAGMA user_version = 1")
 	
+	# Fetch settings.
+	guilds = await (await db.execute("SELECT * FROM settings")).fetchall()
+	for guild in guilds:
+		settings[guild[0]] = {"autoresponses": guild[1]}
+	
+	# Log the bot in.
 	await client.start(get_json("auth")["token"])
 
 loop = asyncio.get_event_loop()
