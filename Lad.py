@@ -33,7 +33,7 @@ client.remove_command("help")
 async def on_ready():
 	activity = discord.Streaming(name = "l.help", url = "https://www.twitch.tv/jpvinnie")
 	await client.change_presence(status = discord.Streaming, activity = activity)
-	print("Logged in")
+	print(f"{client.user.name}#{client.user.discriminator} logged in!")
 
 # Show command descriptions.
 @client.command()
