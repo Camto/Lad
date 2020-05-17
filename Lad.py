@@ -195,7 +195,7 @@ async def on_message(msg):
 
 async def start_bot():
 	global db
-	db = aiosqlite.connect("./Data/settings.db")
+	db = aiosqlite.connect("./settings.db")
 	await db.__aenter__()
 	
 	has_created_settings = (
