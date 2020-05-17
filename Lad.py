@@ -37,8 +37,18 @@ async def on_ready():
 
 # Show command descriptions.
 @client.command()
-async def help(ctx, str):
-	if str == "bible":
+async def help(ctx, *cmd):
+	if len(cmd) == 0:
+		await ctx.send(embed = discord.Embed(
+		title = "Commands",
+		description = "This bot's prefix is ``l.``",
+		color = embed_color)
+		.add_field(name = "help", value = "Show this message.", inline = False)
+		.add_field(name = "ping", value = "Responds with pong.", inline = False)
+		.add_field(name = "say", value = "Make the bot say something.", inline = False)
+		.add_field(name = "bible", value = "Returns a random bible verse. For verses do l.help bible", inline = False)
+		.add_field(name = "dino", value = "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.", inline = False))
+	elif cmd[0] == "bible":
 		await ctx.send(embed = discord.Embed(
 		title = "Bible Verses",
 		color = embed_color)
@@ -67,16 +77,6 @@ async def help(ctx, str):
 		.add_field(name = "Romans", value = "3:23", inline = False)
 		.add_field(name = "Genesis", value = "1:1", inline = False)
 		.add_field(name = "Samuel", value = "6:19", inline = False))
-	else:
-		await ctx.send(embed = discord.Embed(
-		title = "Commands",
-		description = "This bot's prefix is ``l.``",
-		color = embed_color)
-		.add_field(name = "help", value = "Show this message.", inline = False)
-		.add_field(name = "ping", value = "Responds with pong.", inline = False)
-		.add_field(name = "say", value = "Make the bot say something.", inline = False)
-		.add_field(name = "bible", value = "Returns a random bible verse. For verses do l.help bible", inline = False)
-		.add_field(name = "dino", value = "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.", inline = False))
 
 # Ping command to check users ping.
 @client.command()
