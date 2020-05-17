@@ -138,9 +138,9 @@ async def settings_cmd(ctx, *args):
 			if not guild_in_db:
 				await db.execute("""
 					INSERT INTO settings
-						(guild_id, autoresponses)
+						(guild_id, autoresponses, bible, dino, ping)
 					VALUES
-						(?, 1)""",
+						(?, 1, 1, 1, 1)""",
 					(guild_id,))
 				await db.commit()
 				print(f"Server {ctx.guild.name} ({guild_id}) has been added to the settings database.")
@@ -195,7 +195,6 @@ async def on_message(msg):
 			else:
 				return await client.process_commands(msg)
 		
-		
 		if get_setting(msg.guild.id, "autoresponses"):
 			text = content.lower()
 			for pair in autoresponses:
@@ -221,13 +220,21 @@ async def start_bot():
 		await db.execute("""
 			CREATE TABLE settings (
 				guild_id TEXT PRIMARY KEY,
-				autoresponses INTEGER)""")
+				autoresponses INTEGER,
+				bible INTEGER,
+				dino INTEGER,
+				ping INTEGER)""")
 		await db.execute("PRAGMA user_version = 1")
 	
 	# Fetch settings.
 	guilds = await (await db.execute("SELECT * FROM settings")).fetchall()
 	for guild in guilds:
-		settings[int(guild[0])] = {"autoresponses": guild[1]}
+		settings[int(guild[0])] = {
+			"autoresponses": guild[1],
+			"bible": guild[2],
+			"dino": guild[3],
+			"ping": guild[4]
+		}
 	
 	# Log the bot in.
 	await client.start(get_json("auth")["token"])
