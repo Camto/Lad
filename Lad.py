@@ -24,7 +24,7 @@ autoresponses = get_json("autoresponses")
 icons = get_json("icons")
 quotes = get_json("bible quotes")
 dinos = get_json("dinos")
-pars = get_json("pars")
+dino_names = list(dinos.keys())
 
 command_disabled = discord.Embed(
 	title = "Command disabled!",
@@ -121,15 +121,15 @@ async def bible(ctx, *args):
 async def dino(ctx, *args):
 	if get_setting(ctx.guild.id, "dino"):
 		if len(args) == 0:
-			dino = random.choice(dinos)
+			dino = random.choice(dino_names)
 		else:
-			dino = process.extractOne(args[0], dinos)[0]
+			dino = process.extractOne(args[0], dino_names)[0]
 		
 		await ctx.send(embed = discord.Embed(
-			description = pars[dino],
+			description = dinos[dino],
 			color = embed_color)
 			.set_author(
-				name = dino.replace("_", " "),
+				name = dino.replace("_", " ").split("#")[-1],
 				url = "https://en.wikipedia.org/wiki/" + dino,
 				icon_url = random.choice(icons["dinos"])))
 	else:
