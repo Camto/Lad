@@ -129,7 +129,6 @@ async def settings_cmd(ctx, *args):
 		
 		if len(args) >= 2:
 			# Make sure server is in settings database.
-			
 			guild_in_db = await (await db.execute(
 				"SELECT * FROM settings WHERE guild_id = ?",
 				(ctx.guild.id,))).fetchone()
@@ -178,7 +177,7 @@ async def settings_cmd(ctx, *args):
 			description = "You're not an admin, you can't change the settings.",
 			color = embed_color))
 
-# Response system.
+# The autoresponse system and relegating commands.
 @client.event
 async def on_message(msg):
 	if msg.author.id != lad_id:
