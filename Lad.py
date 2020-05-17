@@ -9,21 +9,22 @@ import aiosqlite
 from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
 
+lad_id = 709644595104972890
+embed_color = 0xe07bb8
+settings = {}
+
 def get_json(filename):
 	file = open(f"./Data/{filename}.json", encoding = "utf-8")
 	data = json.load(file)
 	file.close()
 	return data
 
-lad_id = 709644595104972890
-embed_color = 0xe07bb8
 options = get_json("options")
 autoresponses = get_json("autoresponses")
 icons = get_json("icons")
 quotes = get_json("bible quotes")
 dinos = get_json("dinos")
 pars = get_json("pars")
-to_wiki_link = lambda s: "https://en.wikipedia.org/wiki/" + s
 
 client = commands.Bot(command_prefix = "l.")
 
@@ -117,7 +118,7 @@ async def dino(ctx, *args):
 		color = embed_color)
 		.set_author(
 			name = dino.replace("_", " "),
-			url = to_wiki_link(dino),
+			url = "https://en.wikipedia.org/wiki/" + dino,
 			icon_url = random.choice(icons["dinos"])))
 
 # Change server settings.
