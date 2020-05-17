@@ -148,15 +148,19 @@ async def settings_cmd(ctx, *args):
 			
 			if args[0] in options:
 				if args[1] == "yes" or args[1] == "no":
+					is_yes = args[1] == "yes"
+					
 					await db.execute(f"""
 						UPDATE settings
 						SET {args[0]} = ?
 						WHERE guild_id = ?""",
-						(1 if args[1] == "yes" else 0, ctx.guild.id))
+						(1 if is_yes else 0, ctx.guild.id))
 					await db.commit()
 					await ctx.send(embed = discord.Embed(
-						description = f"Turned {args[0]} {'on' if args[1] == 'yes' else 'off'}.",
+						description = f"Turned {args[0]} {'on' if is_yes else 'off'}.",
 						color = embed_color))
+					
+					settings[str(ctx.guild.id)][args[0]] = 1 if is_yes else 0
 				else:
 					await ctx.send(embed = discord.Embed(
 						description = f"{args[1]} is not a valid setting, use yes or no.",
