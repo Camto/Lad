@@ -159,7 +159,7 @@ async def settings_cmd(ctx, *args):
 						description = f"Turned {args[0]} {'on' if is_yes else 'off'}.",
 						color = embed_color))
 					
-					settings[str(ctx.guild.id)][args[0]] = 1 if is_yes else 0
+					settings[ctx.guild.id][args[0]] = 1 if is_yes else 0
 				else:
 					await ctx.send(embed = discord.Embed(
 						description = f"{args[1]} is not a valid setting, use yes or no.",
@@ -218,7 +218,7 @@ async def start_bot():
 	# Fetch settings.
 	guilds = await (await db.execute("SELECT * FROM settings")).fetchall()
 	for guild in guilds:
-		settings[guild[0]] = {"autoresponses": guild[1]}
+		settings[int(guild[0])] = {"autoresponses": guild[1]}
 	
 	# Log the bot in.
 	await client.start(get_json("auth")["token"])
