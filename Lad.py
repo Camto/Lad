@@ -152,9 +152,9 @@ async def settings_cmd(ctx, *args):
 			if not guild_in_db:
 				await db.execute("""
 					INSERT INTO settings
-						(guild_id, autoresponses, bible, dino, ping)
+						(guild_id, autoresponses, bible, dino, ping, say)
 					VALUES
-						(?, 1, 1, 1, 1)""",
+						(?, 1, 1, 1, 1, 1)""",
 					(guild_id,))
 				await db.commit()
 				print(f"Server {ctx.guild.name} ({guild_id}) has been added to the settings database.")
@@ -204,8 +204,9 @@ async def on_message(msg):
 		if content.startswith("l."):
 			# The say command is actually here.
 			if content.startswith("l.say"):
-				await msg.channel.send(content[5:].lstrip())
-				return await msg.delete()
+				if get_setting(msg.guild.id, "dino"):
+					await msg.channel.send(content[5:].lstrip())
+					return await msg.delete()
 			else:
 				return await client.process_commands(msg)
 		
@@ -237,7 +238,8 @@ async def start_bot():
 				autoresponses INTEGER,
 				bible INTEGER,
 				dino INTEGER,
-				ping INTEGER)""")
+				ping INTEGER,
+				say INTEGER)""")
 		await db.execute("PRAGMA user_version = 1")
 	
 	# Fetch settings.
@@ -247,7 +249,8 @@ async def start_bot():
 			"autoresponses": guild[1],
 			"bible": guild[2],
 			"dino": guild[3],
-			"ping": guild[4]
+			"ping": guild[4],
+			"say": guild[5]
 		}
 	
 	# Log the bot in.
