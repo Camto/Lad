@@ -1,1 +1,7 @@
-["autoresponses", "bible", "dino", "ping", "say"]
+{
+	"autoresponses": "If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponses` to see what the preprogrammed messages.",
+	"bible": "If it's on, the command will work. Use `l.help bible` for more information.",
+	"dino": "If it's on, the command will work.",
+	"ping": "If it's on, the command will work.",
+	"say": "If it's on, the command will work."
+}

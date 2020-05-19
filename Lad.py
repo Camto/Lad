@@ -20,6 +20,7 @@ def get_json(filename):
 	return data
 
 options = get_json("options")
+option_names = list(options.keys())
 autoresponses = get_json("autoresponses")
 icons = get_json("icons")
 quotes = get_json("bible quotes")
@@ -83,6 +84,19 @@ async def help(ctx, *cmd):
 		.add_field(name = "Romans", value = "3:23", inline = False)
 		.add_field(name = "Genesis", value = "1:1", inline = False)
 		.add_field(name = "Samuel", value = "6:19", inline = False))
+	elif cmd[0] == "settings":
+		option_list = "\n\n".join(map(
+			lambda option: f"`{option[0]}`: {option[1]}",
+			options.items()))
+		
+		await ctx.send(embed = discord.Embed(
+			description = f"""To change an option, use `l.settings <option name> <value>` <value> can be on or off.
+
+{option_list}""",
+			color = embed_color)
+			.set_author(
+				name = "Settings Help",
+				icon_url = icons["settings"]))
 
 # Ping command to check users ping.
 @client.command()
@@ -161,7 +175,7 @@ async def settings_cmd(ctx, *args):
 			
 			# Actually change the options.
 			
-			if args[0] in options:
+			if args[0] in option_names:
 				if args[1] == "on" or args[1] == "off":
 					is_yes = args[1] == "on"
 					
