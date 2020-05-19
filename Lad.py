@@ -56,10 +56,10 @@ async def help(ctx, *cmd):
 		.add_field(name = "dino", value = "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.", inline = False))
 	elif cmd[0] == "bible":
 		await ctx.send(embed = discord.Embed(
-		title = "Bible Verses",
+		title = "To search type NUMBER first; followed by BOOK",
 		color = embed_color)
 		.set_author(
-			name = "To search type NUMBER first; followed by BOOK",
+			name = "Bible Help",
 			icon_url = icons["bible"])
 		.add_field(name = "Matthew", value = "5:9 | 28:19 | 5:28 | 6:5 | 21:18-22 | 11:30 | 12:33 | 18:8 | 18:9", inline = False)
 		.add_field(name = "Leviticus", value = "19:19 | 19:27 | 9:10 | 15:19-20 | 25:44-46 | 21:17-23", inline = False)
