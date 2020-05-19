@@ -173,27 +173,42 @@ async def settings_cmd(ctx, *args):
 					await db.commit()
 					await ctx.send(embed = discord.Embed(
 						description = f"Turned {args[0]} {'on' if is_yes else 'off'}.",
-						color = embed_color))
+						color = embed_color)
+						.set_author(
+							name = "Changed Setting",
+							icon_url = icons["settings"]))
 					
 					if guild_id not in settings:
 						settings[guild_id] = {"autoresponses": 1}
 					settings[guild_id][args[0]] = 1 if is_yes else 0
 				else:
 					await ctx.send(embed = discord.Embed(
-						description = f"{args[1]} is not a valid setting, use yes or no.",
-						color = embed_color))
+						description = f"{args[1]} is not a valid value, use yes or no.",
+						color = embed_color)
+						.set_author(
+							name = "Invalid Value",
+							icon_url = icons["settings"]))
 			else:
 				await ctx.send(embed = discord.Embed(
 					description = f"{args[0]} is not an option that can be toggled.",
-					color = embed_color))
+					color = embed_color)
+					.set_author(
+						name = "Invalid Option",
+						icon_url = icons["settings"]))
 		else:
 			await ctx.send(embed = discord.Embed(
 				description = "Not enough arguments were given to change an option, for help with `l.settings`, please use `l.help settings`.",
-				color = embed_color))
+				color = embed_color)
+				.set_author(
+					name = "Not Enough Arguments",
+					icon_url = icons["settings"]))
 	else:
 		await ctx.send(embed = discord.Embed(
 			description = "You're not an admin, you can't access the settings.",
-			color = embed_color))
+			color = embed_color)
+			.set_author(
+				name = "Denied Access",
+				icon_url = icons["settings"]))
 
 # The autoresponse system and relegating commands.
 @client.event
