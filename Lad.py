@@ -1,4 +1,5 @@
 import discord
+import Cogs
 from discord.ext import commands
 
 import os
