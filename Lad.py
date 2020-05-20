@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
 
+import os
 import random
 import json
 import asyncio
@@ -285,7 +286,7 @@ async def start_bot():
 		}
 	
 	# Log the bot in.
-	await client.start(get_json("auth")["token"])
+	await client.start(os.getenv("token"))
 
 loop = asyncio.get_event_loop()
 
