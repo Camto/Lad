@@ -228,6 +228,11 @@ async def settings_cmd(ctx, *args):
 				name = "Denied Access",
 				icon_url = icons["settings"]))
 
+# Get Reddit posts and users.
+@client.command
+async def reddit(ctx, *args):
+	pass
+
 # The autoresponse system and relegating commands.
 @client.event
 async def on_message(msg):
