@@ -49,7 +49,7 @@ async def help(ctx, *cmd):
 	if len(cmd) == 0:
 		await ctx.send(embed = discord.Embed(
 		title = "Commands",
-		description = "This bot's prefix is ``l.``",
+		description = "This bot's prefix is ``l. <:github:693519776022003742> [Source code](https://github.com/Camto/Lad)``",
 		color = embed_color)
 		.add_field(name = "help", value = "Show this message.", inline = False)
 		.add_field(name = "ping", value = "Responds with pong.", inline = False)
