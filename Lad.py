@@ -9,7 +9,7 @@ import asyncio
 import aiosqlite
 from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
-#from art import text2art
+import art
 
 lad_id = 709644595104972890
 embed_color = 0xe07bb8
@@ -248,13 +248,13 @@ async def on_message(msg):
 					return await msg.delete()
 				else:
 					await msg.channel.send(embed = command_disabled)
-			#elif content.startWith("l.ascii"):
+			elif content.startswith("l.ascii"):
 				#if get_setting(msg.guild.id, "ascii"):
-					#Art = text2art(content[7:].lstrip())
-					#await msg.channel.send(Art)
-					#return await msg.delete()
+					ascii = art.text2art(content[7:].lstrip())
+					await msg.channel.send(f"```\n{ascii}\n```")
+					return await msg.delete()
 				#else: 
-					#await msg.channel.send(embed = command_disabled)
+				#	await msg.channel.send(embed = command_disabled)
 			else:
 				return await client.process_commands(msg)
 		
