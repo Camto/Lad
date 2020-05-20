@@ -280,7 +280,6 @@ async def on_message(msg):
 				#if get_setting(msg.guild.id, "ascii"):
 					ascii_txt = art.text2art(content[7:].lstrip())
 					await msg.channel.send(f"```\n{ascii_txt}\n```")
-					return await msg.delete()
 				#else: 
 				#	await msg.channel.send(embed = command_disabled)
 			else:
