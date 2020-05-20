@@ -13,5 +13,7 @@
 		"https://raw.githubusercontent.com/Camto/Lad/master/Images/dinos/dino%209.png"
 	],
 	
-	"settings": "https://raw.githubusercontent.com/Camto/Lad/master/Images/settings.png"
+	"settings": "https://raw.githubusercontent.com/Camto/Lad/master/Images/settings.png",
+	
+	"github": "https://raw.githubusercontent.com/Camto/Lad/master/Images/github.png"
 }
