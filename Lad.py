@@ -5,7 +5,7 @@ from discord.ext.commands import Bot
 import random
 import json
 import asyncio
-#import aiosqlite
+import aiosqlite
 from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
 
@@ -253,36 +253,36 @@ def get_setting(guild_id, setting):
 
 async def start_bot():
 	# Start up settings database.
-	#global db
-	#db = aiosqlite.connect("./settings.db")
-	#await db.__aenter__()
+	global db
+	db = aiosqlite.connect("./settings.db")
+	await db.__aenter__()
 	
 	# Create settings table if it doesn't exist yet.
 	
-	#has_created_settings = (
-	#	await (await db.execute("PRAGMA user_version")).fetchone())[0]
+	has_created_settings = (
+		await (await db.execute("PRAGMA user_version")).fetchone())[0]
 	
-	#if not has_created_settings:
-	#	await db.execute("""
-	#		CREATE TABLE settings (
-	#			guild_id TEXT PRIMARY KEY,
-	#			autoresponses INTEGER,
-	#			bible INTEGER,
-	#			dino INTEGER,
-	#			ping INTEGER,
-	#			say INTEGER)""")
-	#	await db.execute("PRAGMA user_version = 1")
+	if not has_created_settings:
+		await db.execute("""
+			CREATE TABLE settings (
+				guild_id TEXT PRIMARY KEY,
+				autoresponses INTEGER,
+				bible INTEGER,
+				dino INTEGER,
+				ping INTEGER,
+				say INTEGER)""")
+		await db.execute("PRAGMA user_version = 1")
 	
 	# Fetch settings.
-	#guilds = await (await db.execute("SELECT * FROM settings")).fetchall()
-	#for guild in guilds:
-	#	settings[int(guild[0])] = {
-	#		"autoresponses": guild[1],
-	#		"bible": guild[2],
-	#		"dino": guild[3],
-	#		"ping": guild[4],
-	#		"say": guild[5]
-	#	}
+	guilds = await (await db.execute("SELECT * FROM settings")).fetchall()
+	for guild in guilds:
+		settings[int(guild[0])] = {
+			"autoresponses": guild[1],
+			"bible": guild[2],
+			"dino": guild[3],
+			"ping": guild[4],
+			"say": guild[5]
+		}
 	
 	# Log the bot in.
 	await client.start(get_json("auth")["token"])
@@ -292,7 +292,7 @@ loop = asyncio.get_event_loop()
 try:
 	loop.run_until_complete(start_bot())
 except:
-#	loop.run_until_complete(db.__aexit__(0, 0, 0))
+	loop.run_until_complete(db.__aexit__(0, 0, 0))
 	loop.run_until_complete(client.logout())
 finally:
 	loop.close()
