@@ -9,6 +9,7 @@ import asyncio
 import aiosqlite
 from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
+from art import *
 
 lad_id = 709644595104972890
 embed_color = 0xe07bb8
