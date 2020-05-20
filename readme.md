@@ -8,7 +8,7 @@ Ladbot is a Discord bot whose purpose is to entertain those who are bored.
 
 Get started with `l.help` to show all possible commands. Get help for specific commands by doing `l.help <command>`
 
-## All the Commands
+## Commands
  
 * `l.settings` → Admin settings to disable/enable commands and/or behaviour.
 * `l.bible` → Returns a random Bible verse.
