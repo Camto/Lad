@@ -6,6 +6,7 @@ import os
 import random
 import json
 import asyncio
+import requests
 import aiosqlite
 from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
@@ -230,9 +231,16 @@ async def settings_cmd(ctx, *args):
 				icon_url = icons["settings"]))
 
 # Get Reddit posts and users.
-@client.command
+@client.command()
 async def reddit(ctx, *args):
-	pass
+	if len(args) >= 1:
+		new_posts = json.loads(requests.get(
+			f"https://www.reddit.com/r/{args[0]}/new.json",
+			headers = {"User-agent": "Ladbot"}).text)
+		if "error" not in new_posts:
+			print(new_posts["data"]["children"])
+		else:
+			print(new_posts["error"])
 
 # The autoresponse system and relegating commands.
 @client.event
