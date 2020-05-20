@@ -252,15 +252,11 @@ def get_setting(guild_id, setting):
 	return guild_id not in settings or settings[guild_id][setting]
 
 async def start_bot():
-	print("Got to start_bot.")
-	
 	# Start up settings database.
 	global db
 	db = aiosqlite.connect("./settings.db")
-	print("Connected to db.")
-	
 	await db.__aenter__()
-	print("__aenter__ed the db.")
+	
 	# Create settings table if it doesn't exist yet.
 	
 	has_created_settings = (
@@ -287,8 +283,6 @@ async def start_bot():
 			"ping": guild[4],
 			"say": guild[5]
 		}
-	
-	print("Loaded settings.")
 	
 	# Log the bot in.
 	await client.start(get_json("auth")["token"])
