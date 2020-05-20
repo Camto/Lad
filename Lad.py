@@ -257,13 +257,14 @@ async def settings_cmd(ctx, *args):
 @client.command()
 async def reddit(ctx, *args):
 	if len(args) >= 1:
-		new_posts = json.loads(requests.get(
-			f"https://www.reddit.com/r/{urllib.parse.quote(args[0], safe = '')}/new.json",
+		post = json.loads(requests.get(
+			f"https://www.reddit.com/r/{urllib.parse.quote(args[0], safe = '')}/random.json",
 			headers = {"User-agent": "Ladbot"}).text)
-		if "error" not in new_posts:
-			print(new_posts["data"]["children"])
+		if "error" not in post:
+			post = post[0]["data"]["children"][0]["data"]
+			msg = await ctx.send(embed = post_to_embed(post))
 		else:
-			print(new_posts["error"])
+			print(post["error"])
 
 # The autoresponse system and relegating commands.
 @client.event
@@ -297,6 +298,17 @@ async def on_message(msg):
 
 def get_setting(guild_id, setting):
 	return guild_id not in settings or settings[guild_id][setting]
+
+def post_to_embed(post):
+	embed = (discord.Embed(
+		description = post["selftext"],
+		color = embed_color)
+		.set_author(
+			name = post["title"],
+			icon_url = icons["reddit"],
+			url = f'https://www.reddit.com{post["permalink"]}'))
+	
+	return embed
 
 async def start_bot():
 	# Start up settings database.
