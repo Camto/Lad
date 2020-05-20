@@ -10,7 +10,7 @@ Get started with `l.help` to show all possible commands. Get help for specific c
 
 ## All the Commands
  
-* `l.settings <option name> <value>` → Value can be on or off.
+* `l.settings <option name> <value>` → Turns on or off the option for your server.
 * `l.bible` → Returns a random Bible verse. 
 * `l.ping` → Responds with Pong!
 * `l.say` → Make the bot say something.
