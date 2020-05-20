@@ -51,6 +51,9 @@ async def help(ctx, *cmd):
 		title = "Commands",
 		description = "This bot's prefix is ``l.``",
 		color = embed_color)
+		.set_footer(
+			text = "https://github.com/Camto/Lad",
+			icon_url = icons["github"])
 		.add_field(name = "help", value = "Show this message.", inline = False)
 		.add_field(name = "ping", value = "Responds with pong.", inline = False)
 		.add_field(name = "say", value = "Make the bot say something.", inline = False)
@@ -63,9 +66,6 @@ async def help(ctx, *cmd):
 		.set_author(
 			name = "Bible Help",
 			icon_url = icons["bible"])
-		.set_footer(
-			text = "[Source code](https://github.com/Camto/Lad)",
-			icon_url = icons["github"])
 		.add_field(name = "Matthew", value = "5:9 | 28:19 | 5:28 | 6:5 | 21:18-22 | 11:30 | 12:33 | 18:8 | 18:9", inline = False)
 		.add_field(name = "Leviticus", value = "19:19 | 19:27 | 9:10 | 15:19-20 | 25:44-46 | 21:17-23", inline = False)
 		.add_field(name = "Deuteronomy", value = "22:28-29 | 25:11-1 | 23:1 | 31:8 | 33:27 | 25:11-12", inline = False)
