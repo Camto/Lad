@@ -45,6 +45,27 @@ async def on_ready():
 	await client.change_presence(status = discord.Streaming, activity = activity)
 	print(f"{client.user.name}#{client.user.discriminator} logged in!")
 
+# Cogs Skeleton
+@client.command()
+async def load(ctx, extension):
+	client.load_extension(f"cogs.{extension}")
+	await ctx.send(embed = discord.Embed(
+		title = "Cogs",
+		description = f"{extension} has been loaded",
+		color = embed_color))
+
+@client.command()
+async def unload(ctx, extension):
+	client.unload_extension(f"cogs.{extension}")
+	await ctx.send(embed = discord.Embed(
+		title = "Cogs",
+		description = f"{extension} has been unloaded",
+		color = embed_color))
+
+for filename in os.listdir("./cogs"):
+	if filename.endswith(".py"):
+		client.load_extension(f"cogs.{filename[:-3]}")
+
 # Show command descriptions.
 @client.command()
 async def help(ctx, *cmd):
