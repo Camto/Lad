@@ -3,13 +3,15 @@ from discord.ext import commands
 
 import os
 import random
-import art
 import json
 import asyncio
+import urllib.parse
+
 import requests
 import aiosqlite
 from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
+import art
 
 lad_id = 709644595104972890
 embed_color = 0xe07bb8
@@ -255,7 +257,7 @@ async def settings_cmd(ctx, *args):
 async def reddit(ctx, *args):
 	if len(args) >= 1:
 		new_posts = json.loads(requests.get(
-			f"https://www.reddit.com/r/{args[0]}/new.json",
+			f"https://www.reddit.com/r/{urllib.parse.quote(args[0], safe = '')}/new.json",
 			headers = {"User-agent": "Ladbot"}).text)
 		if "error" not in new_posts:
 			print(new_posts["data"]["children"])
