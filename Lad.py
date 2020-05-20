@@ -1,16 +1,15 @@
 import discord
 from discord.ext import commands
-from discord.ext.commands import Bot
 
 import os
 import random
+import art
 import json
 import asyncio
 import requests
 import aiosqlite
 from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
-import art
 
 lad_id = 709644595104972890
 embed_color = 0xe07bb8
