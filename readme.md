@@ -2,7 +2,7 @@
 
 ![ladbot avatar](./Images/Avatar.jpg)
 
-Ladbot is a discord bot whose purpose is to entertain those who are bored.
+Ladbot is a Discord bot whose purpose is to entertain those who are bored.
 
 ## Get Started 
 
