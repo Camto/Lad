@@ -1,6 +1,6 @@
 # Welcome to Ladbot!
 
-![ladbot avatar](./Images/Avatar.jpg)
+![ladbot avatar](./Images/Avatar.png)
 
 Ladbot is a Discord bot whose purpose is to entertain those who are bored.
 
