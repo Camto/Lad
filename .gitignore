@@ -4,3 +4,4 @@ ferret.log
 settings.db
 .vscode/settings.json
 Ferret Queries/*.json
+Procfile
