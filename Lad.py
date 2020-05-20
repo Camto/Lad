@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 
+import utils
+
 import os
 import random
 import json
@@ -13,28 +15,15 @@ from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
 import art
 
-lad_id = 709644595104972890
-embed_color = 0xe07bb8
-settings = {}
-
-def get_json(filename):
-	file = open(f"./Data/{filename}.json", encoding = "utf-8")
-	data = json.load(file)
-	file.close()
-	return data
-
-options = get_json("options")
+options = utils.get_json("options")
 option_names = list(options.keys())
-autoresponses = get_json("autoresponses")
-icons = get_json("icons")
-quotes = get_json("bible quotes")
-dinos = get_json("dinos")
-dino_names = list(dinos.keys())
+autoresponses = utils.get_json("autoresponses")
+quotes = utils.get_json("bible quotes")
 
 command_disabled = discord.Embed(
 	title = "Command disabled!",
 	description = "This command was disabled in the settings by an admin.",
-	color = embed_color)
+	color = utils.embed_color)
 
 client = commands.Bot(command_prefix = "l.")
 
@@ -57,10 +46,10 @@ async def help(ctx, *cmd):
 		await ctx.send(embed = discord.Embed(
 		title = "Commands",
 		description = "This bot's prefix is ``l.``",
-		color = embed_color)
+		color = utils.embed_color)
 		.set_footer(
 			text = "https://github.com/Camto/Lad",
-			icon_url = icons["github"])
+			icon_url = utils.icons["github"])
 		.add_field(name = "help", value = "Show this message.", inline = False)
 		.add_field(name = "ping", value = "Responds with pong.", inline = False)
 		.add_field(name = "say", value = "Make the bot say something.", inline = False)
@@ -69,10 +58,10 @@ async def help(ctx, *cmd):
 	elif cmd[0] == "bible":
 		await ctx.send(embed = discord.Embed(
 		title = "To search type NUMBER first; followed by BOOK",
-		color = embed_color)
+		color = utils.embed_color)
 		.set_author(
 			name = "Bible Help",
-			icon_url = icons["bible"])
+			icon_url = utils.icons["bible"])
 		.add_field(name = "Matthew", value = "5:9 | 28:19 | 5:28 | 6:5 | 21:18-22 | 11:30 | 12:33 | 18:8 | 18:9", inline = False)
 		.add_field(name = "Leviticus", value = "19:19 | 19:27 | 9:10 | 15:19-20 | 25:44-46 | 21:17-23", inline = False)
 		.add_field(name = "Deuteronomy", value = "22:28-29 | 25:11-1 | 23:1 | 31:8 | 33:27 | 25:11-12", inline = False)
@@ -104,26 +93,26 @@ async def help(ctx, *cmd):
 			description = f"""To change an option, use `l.settings <option name> <value>` <value> can be on or off.
 
 {option_list}""",
-			color = embed_color)
+			color = utils.embed_color)
 			.set_author(
 				name = "Settings Help",
-				icon_url = icons["settings"]))
+				icon_url = utils.icons["settings"]))
 
 # Ping command to check users ping.
 @client.command()
 async def ping(ctx):
-	if get_setting(ctx.guild.id, "ping"):
+	if utils.get_setting(ctx.guild.id, "ping"):
 		await ctx.send(embed = discord.Embed(
 			title = "Pong!",
 			description = f"Hey, {ctx.message.author.mention}. Current ping is: ``{round(client.latency * 1000)}`` ms.",
-			color = embed_color))
+			color = utils.embed_color))
 	else:
 		await ctx.send(embed = command_disabled)
 
 # Starting the bible study.
 @client.command()
 async def bible(ctx, *args):
-	if get_setting(ctx.guild.id, "bible"):
+	if utils.get_setting(ctx.guild.id, "bible"):
 		if len(args) == 0:
 			quote = random.choice(quotes)
 		else:
@@ -134,29 +123,10 @@ async def bible(ctx, *args):
 
 		await ctx.send(embed = discord.Embed(
 			description = quote["text"],
-			color = embed_color)
+			color = utils.embed_color)
 			.set_author(
 				name = quote["location"],
-				icon_url = icons["bible"]))
-	else:
-		await ctx.send(embed = command_disabled)
-
-# Process dino related requests.
-@client.command()
-async def dino(ctx, *args):
-	if get_setting(ctx.guild.id, "dino"):
-		if len(args) == 0:
-			dino = random.choice(dino_names)
-		else:
-			dino = process.extractOne(args[0], dino_names)[0]
-		
-		await ctx.send(embed = discord.Embed(
-			description = dinos[dino],
-			color = embed_color)
-			.set_author(
-				name = dino.replace("_", " ").split("#")[-1],
-				url = "https://en.wikipedia.org/wiki/" + dino,
-				icon_url = random.choice(icons["dinos"])))
+				icon_url = utils.icons["bible"]))
 	else:
 		await ctx.send(embed = command_disabled)
 
@@ -198,42 +168,42 @@ async def settings_cmd(ctx, *args):
 					await db.commit()
 					await ctx.send(embed = discord.Embed(
 						description = f"Turned {args[0]} {'on' if is_yes else 'off'}.",
-						color = embed_color)
+						color = utils.embed_color)
 						.set_author(
 							name = "Changed Setting",
-							icon_url = icons["settings"]))
+							icon_url = utils.icons["settings"]))
 					
-					if guild_id not in settings:
-						settings[guild_id] = {"autoresponses": 1}
-					settings[guild_id][args[0]] = 1 if is_yes else 0
+					if guild_id not in utils.settings:
+						utils.settings[guild_id] = {"autoresponses": 1}
+					utils.settings[guild_id][args[0]] = 1 if is_yes else 0
 				else:
 					await ctx.send(embed = discord.Embed(
 						description = f"{args[1]} is not a valid value, use on or off.",
-						color = embed_color)
+						color = utils.embed_color)
 						.set_author(
 							name = "Invalid Value",
-							icon_url = icons["settings"]))
+							icon_url = utils.icons["settings"]))
 			else:
 				await ctx.send(embed = discord.Embed(
 					description = f"{args[0]} is not an option that can be toggled.",
-					color = embed_color)
+					color = utils.embed_color)
 					.set_author(
 						name = "Invalid Option",
-						icon_url = icons["settings"]))
+						icon_url = utils.icons["settings"]))
 		else:
 			await ctx.send(embed = discord.Embed(
 				description = "Not enough arguments were given to change an option, for help with `l.settings`, please use `l.help settings`.",
-				color = embed_color)
+				color = utils.embed_color)
 				.set_author(
 					name = "Not Enough Arguments",
-					icon_url = icons["settings"]))
+					icon_url = utils.icons["settings"]))
 	else:
 		await ctx.send(embed = discord.Embed(
 			description = "You're not an admin, you can't access the settings.",
-			color = embed_color)
+			color = utils.embed_color)
 			.set_author(
 				name = "Denied Access",
-				icon_url = icons["settings"]))
+				icon_url = utils.icons["settings"]))
 
 # Get Reddit posts and users.
 @client.command()
@@ -251,19 +221,19 @@ async def reddit(ctx, *args):
 # The autoresponse system and relegating commands.
 @client.event
 async def on_message(msg):
-	if msg.author.id != lad_id:
+	if msg.author.id != utils.lad_id:
 		content = msg.content
 		
 		if content.startswith("l."):
 			# The say command is actually here.
 			if content.startswith("l.say"):
-				if get_setting(msg.guild.id, "say"):
+				if utils.get_setting(msg.guild.id, "say"):
 					await msg.channel.send(content[5:].lstrip())
 					return await msg.delete()
 				else:
 					await msg.channel.send(embed = command_disabled)
 			elif content.startswith("l.ascii"):
-				#if get_setting(msg.guild.id, "ascii"):
+				#if utils.get_setting(msg.guild.id, "ascii"):
 					ascii_txt = art.text2art(content[7:].lstrip())
 					await msg.channel.send(f"```\n{ascii_txt}\n```")
 				#else: 
@@ -271,23 +241,20 @@ async def on_message(msg):
 			else:
 				return await client.process_commands(msg)
 		
-		if get_setting(msg.guild.id, "autoresponses"):
+		if utils.get_setting(msg.guild.id, "autoresponses"):
 			text = content.lower()
 			for pair in autoresponses:
 				for keyword in pair["keywords"]:
 					if keyword in text:
 						return await msg.channel.send(random.choice(pair["responses"]))
 
-def get_setting(guild_id, setting):
-	return guild_id not in settings or settings[guild_id][setting]
-
 def post_to_embed(post):
 	embed = (discord.Embed(
 		description = post["selftext"],
-		color = embed_color)
+		color = utils.embed_color)
 		.set_author(
 			name = post["title"],
-			icon_url = icons["reddit"],
+			icon_url = utils.icons["reddit"],
 			url = f'https://www.reddit.com{post["permalink"]}'))
 	
 	return embed
@@ -317,7 +284,7 @@ async def start_bot():
 	# Fetch settings.
 	guilds = await (await db.execute("SELECT * FROM settings")).fetchall()
 	for guild in guilds:
-		settings[int(guild[0])] = {
+		utils.settings[int(guild[0])] = {
 			"autoresponses": guild[1],
 			"bible": guild[2],
 			"dino": guild[3],
