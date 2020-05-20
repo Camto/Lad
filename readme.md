@@ -10,11 +10,11 @@ Get started with `l.help` to show all possible commands. Get help for specific c
 
 ## All the Commands
  
+* `l.settings <option name> <value>` → Value can be on or off.
 * `l.bible` → Returns a random Bible verse. Verse list can be found by.
 * `l.ping` → Responds with Pong!
 * `l.say` → Make the bot say something.
 * `l.dino` → Returns a random dinosaur.
-* `l.setting <option name> <value>` → Value can be on or off.
 
 ## Authors
 
