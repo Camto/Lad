@@ -62,7 +62,7 @@ async def unload(ctx, extension):
 		description = f"{extension} has been unloaded",
 		color = embed_color))
 
-for filename in os.listdir("./cogs"):
+for filename in os.listdir("./Cogs"):
 	if filename.endswith(".py"):
 		client.load_extension(f"cogs.{filename[:-3]}")
 
