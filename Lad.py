@@ -59,7 +59,7 @@ async def on_ready():
 #	await ctx.send(embed = discord.Embed(
 #		title = "Cogs",
 #		description = f"{extension} has been unloaded",
-#
+#		color = embed_color))
 
 #for filename in os.listdir("./Cogs"):
 #	if filename.endswith(".py"):
