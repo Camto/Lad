@@ -22,6 +22,7 @@ class Help(commands.Cog):
 			.add_field(name = "ping", value = "Responds with pong.", inline = False)
 			.add_field(name = "say", value = "Make the bot say something.", inline = False)
 			.add_field(name = "ascii", value = "Returns your message in ASCII art!", inline = False)
+			.add_field(name = "reddit", value = "Sends a link to a random reddit post.", inline = False)
 			.add_field(name = "bible", value = "Returns a random bible verse. For verses do l.help bible", inline = False)
 			.add_field(name = "dino", value = "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.", inline = False))
 		elif cmd[0] == "bible":
