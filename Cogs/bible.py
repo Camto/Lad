@@ -31,7 +31,7 @@ class Bible(commands.Cog):
 					name = quote["location"],
 					icon_url = utils.icons["bible"]))
 		else:
-			await ctx.send(embed = command_disabled)
+			await ctx.send(embed = utils.command_disabled)
 
 def setup(client):
 	client.add_cog(Bible(client))

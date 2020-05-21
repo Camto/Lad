@@ -1,9 +1,16 @@
+import discord
+
 import json
 
 lad_id = 709644595104972890
 embed_color = 0xe07bb8
 global db
 settings = {}
+
+command_disabled = discord.Embed(
+	title = "Command disabled!",
+	description = "This command was disabled in the settings by an admin.",
+	color = embed_color)
 
 def get_json(filename):
 	file = open(f"./Data/{filename}.json", encoding = "utf-8")

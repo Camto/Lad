@@ -15,11 +15,6 @@ import utils
 
 autoresponses = utils.get_json("autoresponses")
 
-command_disabled = discord.Embed(
-	title = "Command disabled!",
-	description = "This command was disabled in the settings by an admin.",
-	color = utils.embed_color)
-
 client = commands.Bot(command_prefix = "l.")
 
 client.remove_command("help")
@@ -58,13 +53,13 @@ async def on_message(msg):
 					await msg.channel.send(content[5:].lstrip())
 					return await msg.delete()
 				else:
-					await msg.channel.send(embed = command_disabled)
+					await msg.channel.send(embed = utils.command_disabled)
 			elif content.startswith("l.ascii"):
 				#if utils.get_setting(msg.guild.id, "ascii"):
 					ascii_txt = art.text2art(content[7:].lstrip())
 					await msg.channel.send(f"```\n{ascii_txt}\n```")
 				#else: 
-				#	await msg.channel.send(embed = command_disabled)
+				#	await msg.channel.send(embed = utils.command_disabled)
 			else:
 				return await client.process_commands(msg)
 		

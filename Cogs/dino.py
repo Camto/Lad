@@ -30,7 +30,7 @@ class Dino(commands.Cog):
 					url = "https://en.wikipedia.org/wiki/" + dino,
 					icon_url = random.choice(utils.icons["dinos"])))
 		else:
-			await ctx.send(embed = command_disabled)
+			await ctx.send(embed = utils.command_disabled)
 
 def setup(client):
 	client.add_cog(Dino(client))
