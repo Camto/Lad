@@ -17,7 +17,10 @@ class Google(commands.Cog):
                 await ctx.send(embed = discord.Embed(
                     title = "Google Search",
                     description = result.description,
-                    color = utils.embed_color))
+                    color = utils.embed_color)
+                    .set_footer(
+                        text =  result.description.google_link
+                        icon_url = utils.icons["google"]))
 
 def setup(client):
     client.add_cog(Google(client))
