@@ -6,14 +6,10 @@ import os
 import random
 import json
 import asyncio
-
 import aiosqlite
-import art
 
 sys.path.append(".")
 import utils
-
-autoresponses = utils.get_json("autoresponses")
 
 client = commands.Bot(command_prefix = "l.")
 
@@ -28,36 +24,6 @@ async def on_ready():
 for filename in os.listdir("./Cogs"):
 	if filename.endswith(".py"):
 		client.load_extension(f"Cogs.{filename[:-3]}")
-
-# The autoresponse system and relegating commands.
-@client.event
-async def on_message(msg):
-	if msg.author.id != utils.lad_id:
-		content = msg.content
-		
-		if content.startswith("l."):
-			# The say command is actually here.
-			if content.startswith("l.say"):
-				if utils.get_setting(msg.guild.id, "say"):
-					await msg.channel.send(content[5:].lstrip())
-					return await msg.delete()
-				else:
-					await msg.channel.send(embed = utils.command_disabled)
-			elif content.startswith("l.ascii"):
-				#if utils.get_setting(msg.guild.id, "ascii"):
-					ascii_txt = art.text2art(content[7:].lstrip())
-					await msg.channel.send(f"```\n{ascii_txt}\n```")
-				#else: 
-				#	await msg.channel.send(embed = utils.command_disabled)
-			else:
-				return await client.process_commands(msg)
-		
-		if utils.get_setting(msg.guild.id, "autoresponses"):
-			text = content.lower()
-			for pair in autoresponses:
-				for keyword in pair["keywords"]:
-					if keyword in text:
-						return await msg.channel.send(random.choice(pair["responses"]))
 
 async def start_bot():
 	# Start up settings database.
