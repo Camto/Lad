@@ -19,7 +19,7 @@ class Google(commands.Cog):
                     description = result.description,
                     color = utils.embed_color)
                     .set_footer(
-                        text =  result.description.google_link,
+                        text =  google.google_link,
                         icon_url = utils.icons["google"]))
 
 def setup(client):
