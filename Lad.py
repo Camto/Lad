@@ -8,15 +8,12 @@ import json
 import asyncio
 
 import aiosqlite
-from fuzzywuzzy import process
-from fuzzywuzzy import fuzz
 import art
 
 sys.path.append(".")
 import utils
 
 autoresponses = utils.get_json("autoresponses")
-quotes = utils.get_json("bible quotes")
 
 command_disabled = discord.Embed(
 	title = "Command disabled!",
@@ -45,27 +42,6 @@ async def ping(ctx):
 			title = "Pong!",
 			description = f"Hey, {ctx.message.author.mention}. Current ping is: ``{round(client.latency * 1000)}`` ms.",
 			color = utils.embed_color))
-	else:
-		await ctx.send(embed = command_disabled)
-
-# Starting the bible study.
-@client.command()
-async def bible(ctx, *args):
-	if utils.get_setting(ctx.guild.id, "bible"):
-		if len(args) == 0:
-			quote = random.choice(quotes)
-		else:
-			quote = process.extractOne(
-				args[0],
-				quotes,
-				scorer = fuzz.partial_token_sort_ratio)[0]
-
-		await ctx.send(embed = discord.Embed(
-			description = quote["text"],
-			color = utils.embed_color)
-			.set_author(
-				name = quote["location"],
-				icon_url = utils.icons["bible"]))
 	else:
 		await ctx.send(embed = command_disabled)
 

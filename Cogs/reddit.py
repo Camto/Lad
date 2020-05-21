@@ -4,7 +4,6 @@ from discord.ext import commands
 import json
 import requests
 import urllib.parse
-
 import utils
 
 # Get Reddit posts and users.

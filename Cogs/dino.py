@@ -2,7 +2,8 @@ import discord
 from discord.ext import commands
 
 import random
-
+from fuzzywuzzy import process
+from fuzzywuzzy import fuzz
 import utils
 
 dinos = utils.get_json("dinos")
