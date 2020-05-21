@@ -18,11 +18,6 @@ class Google(commands.Cog):
                     title = "Google Search",
                     description = result.description,
                     color = utils.embed_color))
-        elif len(args) == 0:
-            await ctx.send(embed = discord.Embed( 
-                title = "Google Search",
-                description = "No query given.",
-                color = utils.embed_color))
 
 def setup(client):
     client.add_cog(Google(client))
