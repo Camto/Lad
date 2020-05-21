@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 
 from google import google
+import requests
 import utils
 
 class Google(commands.Cog):
@@ -19,7 +20,9 @@ class Google(commands.Cog):
                     color = utils.embed_color)
                     .set_author(
                         name = "Google Search",
-                        icon_url = utils.icons["google"]))
+                        icon_url = utils.icons["google"])
+                    .set_footer(
+                        text = requests.get(f"https://www.google.com/search?q={args}")))
 
 def setup(client):
     client.add_cog(Google(client))
