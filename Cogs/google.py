@@ -11,14 +11,14 @@ class Google(commands.Cog):
     @commands.command()
     async def search(self, ctx, *args):
         num_page = 1
-        search_results = google.search(args, num_page)
+        search_results = google.search(args[0], num_page)
         if len(args) >= 1:
             for result in search_results:
                 await ctx.send(embed = discord.Embed(
                     title = "Google Search",
                     description = result.description,
                     color = utils.embed_color))
-        else:
+        elif len(args) == 0:
             await ctx.send(embed = discord.Embed( 
                 description = "No query given.",
                 color = utils.embed_color))
