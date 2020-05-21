@@ -20,9 +20,10 @@ class Google(commands.Cog):
                     color = utils.embed_color)
                     .set_author(
                         name = "Google Search",
-                        icon_url = utils.icons["google"])
-                    .set_footer(
-                        text = requests.get(f"https://www.google.com/search?q={args}")))
+                        icon_url = utils.icons["google"]))
+                    # To add each link in the footer
+                    #.set_footer(
+                        #text = requests.get(f"https://www.google.com/search?q={args}")))
 
 def setup(client):
     client.add_cog(Google(client))
