@@ -29,17 +29,6 @@ for filename in os.listdir("./Cogs"):
 	if filename.endswith(".py"):
 		client.load_extension(f"Cogs.{filename[:-3]}")
 
-# Ping command to check users ping.
-@client.command()
-async def ping(ctx):
-	if utils.get_setting(ctx.guild.id, "ping"):
-		await ctx.send(embed = discord.Embed(
-			title = "Pong!",
-			description = f"Hey, {ctx.message.author.mention}. Current ping is: ``{round(client.latency * 1000)}`` ms.",
-			color = utils.embed_color))
-	else:
-		await ctx.send(embed = command_disabled)
-
 # The autoresponse system and relegating commands.
 @client.event
 async def on_message(msg):
