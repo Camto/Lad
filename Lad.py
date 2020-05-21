@@ -1,8 +1,7 @@
 import discord
 from discord.ext import commands
 
-import utils
-
+import sys
 import os
 import random
 import json
@@ -15,8 +14,9 @@ from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
 import art
 
-options = utils.get_json("options")
-option_names = list(options.keys())
+sys.path.append(".")
+import utils
+
 autoresponses = utils.get_json("autoresponses")
 quotes = utils.get_json("bible quotes")
 
@@ -87,7 +87,7 @@ async def help(ctx, *cmd):
 	elif cmd[0] == "settings":
 		option_list = "\n\n".join(map(
 			lambda option: f"`{option[0]}`: {option[1]}",
-			options.items()))
+			utils.options.items()))
 		
 		await ctx.send(embed = discord.Embed(
 			description = f"""To change an option, use `l.settings <option name> <value>` <value> can be on or off.
@@ -129,81 +129,6 @@ async def bible(ctx, *args):
 				icon_url = utils.icons["bible"]))
 	else:
 		await ctx.send(embed = command_disabled)
-
-# Change server settings.
-@client.command(name = "settings")
-async def settings_cmd(ctx, *args):
-	if ctx.message.author.guild_permissions.administrator:
-		# If an option is being changed.
-		
-		if len(args) >= 2:
-			guild_id = ctx.guild.id
-			
-			# Make sure server is in settings database.
-			guild_in_db = await (await db.execute(
-				"SELECT * FROM settings WHERE guild_id = ?",
-				(guild_id,))).fetchone()
-			
-			if not guild_in_db:
-				await db.execute("""
-					INSERT INTO settings
-						(guild_id, autoresponses, bible, dino, ping, say)
-					VALUES
-						(?, 1, 1, 1, 1, 1)""",
-					(guild_id,))
-				await db.commit()
-				print(f"Server {ctx.guild.name} ({guild_id}) has been added to the settings database.")
-			
-			# Actually change the options.
-			
-			if args[0] in option_names:
-				if args[1] == "on" or args[1] == "off":
-					is_yes = args[1] == "on"
-					
-					await db.execute(f"""
-						UPDATE settings
-						SET {args[0]} = ?
-						WHERE guild_id = ?""",
-						(1 if is_yes else 0, guild_id))
-					await db.commit()
-					await ctx.send(embed = discord.Embed(
-						description = f"Turned {args[0]} {'on' if is_yes else 'off'}.",
-						color = utils.embed_color)
-						.set_author(
-							name = "Changed Setting",
-							icon_url = utils.icons["settings"]))
-					
-					if guild_id not in utils.settings:
-						utils.settings[guild_id] = {"autoresponses": 1}
-					utils.settings[guild_id][args[0]] = 1 if is_yes else 0
-				else:
-					await ctx.send(embed = discord.Embed(
-						description = f"{args[1]} is not a valid value, use on or off.",
-						color = utils.embed_color)
-						.set_author(
-							name = "Invalid Value",
-							icon_url = utils.icons["settings"]))
-			else:
-				await ctx.send(embed = discord.Embed(
-					description = f"{args[0]} is not an option that can be toggled.",
-					color = utils.embed_color)
-					.set_author(
-						name = "Invalid Option",
-						icon_url = utils.icons["settings"]))
-		else:
-			await ctx.send(embed = discord.Embed(
-				description = "Not enough arguments were given to change an option, for help with `l.settings`, please use `l.help settings`.",
-				color = utils.embed_color)
-				.set_author(
-					name = "Not Enough Arguments",
-					icon_url = utils.icons["settings"]))
-	else:
-		await ctx.send(embed = discord.Embed(
-			description = "You're not an admin, you can't access the settings.",
-			color = utils.embed_color)
-			.set_author(
-				name = "Denied Access",
-				icon_url = utils.icons["settings"]))
 
 # Get Reddit posts and users.
 @client.command()
@@ -261,17 +186,16 @@ def post_to_embed(post):
 
 async def start_bot():
 	# Start up settings database.
-	global db
-	db = aiosqlite.connect("./settings.db")
-	await db.__aenter__()
+	utils.db = aiosqlite.connect("./settings.db")
+	await utils.db.__aenter__()
 	
 	# Create settings table if it doesn't exist yet.
 	
 	has_created_settings = (
-		await (await db.execute("PRAGMA user_version")).fetchone())[0]
+		await (await utils.db.execute("PRAGMA user_version")).fetchone())[0]
 	
 	if not has_created_settings:
-		await db.execute("""
+		await utils.db.execute("""
 			CREATE TABLE settings (
 				guild_id TEXT PRIMARY KEY,
 				autoresponses INTEGER,
@@ -279,10 +203,10 @@ async def start_bot():
 				dino INTEGER,
 				ping INTEGER,
 				say INTEGER)""")
-		await db.execute("PRAGMA user_version = 1")
+		await utils.db.execute("PRAGMA user_version = 1")
 	
 	# Fetch settings.
-	guilds = await (await db.execute("SELECT * FROM settings")).fetchall()
+	guilds = await (await utils.db.execute("SELECT * FROM settings")).fetchall()
 	for guild in guilds:
 		utils.settings[int(guild[0])] = {
 			"autoresponses": guild[1],
@@ -300,7 +224,7 @@ loop = asyncio.get_event_loop()
 try:
 	loop.run_until_complete(start_bot())
 except:
-	loop.run_until_complete(db.__aexit__(0, 0, 0))
+	loop.run_until_complete(utils.db.__aexit__(0, 0, 0))
 	loop.run_until_complete(client.logout())
 finally:
 	loop.close()

@@ -1,10 +1,8 @@
 import discord
 from discord.ext import commands
 
-import sys
 import random
 
-sys.path.append("..")
 import utils
 
 dinos = utils.get_json("dinos")
