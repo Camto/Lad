@@ -15,10 +15,10 @@ class Google(commands.Cog):
         if len(args) >= 1:
             for result in search_results:
                 await ctx.send(embed = discord.Embed(
-                    title = "Google Search",
                     description = result.description,
                     color = utils.embed_color)
-                    .set_footer(
+                    .set_author(
+                        name = "Google Search",
                         icon_url = utils.icons["google"]))
 
 def setup(client):
