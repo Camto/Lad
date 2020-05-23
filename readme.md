@@ -16,7 +16,7 @@ Get started with `l.help` to show all possible commands. Get help for specific c
 * `l.ping` → Responds with Pong!
 * `l.say` → Make the bot say something.
 * `l.ascii` → Make the bot say something, in ASCII art!
-* `l.search` → Search for something on the internet.
+* `l.search` → Get a list of Google search results.
 
 ## Authors
 
