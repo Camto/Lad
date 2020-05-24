@@ -18,19 +18,30 @@ class Reddit(commands.Cog):
 				f"https://www.reddit.com/r/{urllib.parse.quote(args[0], safe = '')}/random.json",
 				headers = {"User-agent": "Ladbot"}).text)
 			if "error" not in post:
-				post = post[0]["data"]["children"][0]["data"]
+				if isinstance(post, list):
+					post = post[0]
+				post = post["data"]["children"][0]["data"]
 				msg = await ctx.send(embed = post_to_embed(post))
 			else:
 				print(post["error"])
 
 def post_to_embed(post):
 	embed = (discord.Embed(
-		description = post["selftext"],
+		description = post["selftext"][:2000],
 		color = utils.embed_color)
 		.set_author(
 			name = post["title"],
 			icon_url = utils.icons["reddit"],
 			url = f'https://www.reddit.com{post["permalink"]}'))
+	
+	if not post["is_self"]:
+		if "post_hint" in post:
+			if post["post_hint"] == "image":
+				embed.set_image(url = post["url"])
+			elif (
+				post["post_hint"] == "link" and
+				post["thumbnail"] != "default"):
+				embed.set_thumbnail(url = post["thumbnail"])
 	
 	return embed
 
