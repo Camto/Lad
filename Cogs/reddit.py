@@ -18,9 +18,11 @@ class Reddit(commands.Cog):
 	async def reddit(self, ctx, *args):
 		if len(args) >= 1:
 			sub = args[0]
+			reload_amount = 1
 			
 			msg = await ctx.send(embed =
-				post_to_embed(get_random_post(sub)))
+				post_to_embed(get_random_post(sub))
+				.set_footer(text = f"#{reload_amount}"))
 			
 			await msg.add_reaction(reload_emoji)
 			
@@ -34,9 +36,11 @@ class Reddit(commands.Cog):
 				except asyncio.TimeoutError:
 					break
 				else:
+					reload_amount += 1
 					await msg.remove_reaction(reload_emoji, user)
 					await msg.edit(embed =
-						post_to_embed(get_random_post(sub)))
+						post_to_embed(get_random_post(sub))
+						.set_footer(text = f"#{reload_amount}"))
 
 def post_to_embed(post):
 	embed = (discord.Embed(
