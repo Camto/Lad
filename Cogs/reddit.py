@@ -97,7 +97,7 @@ def get_n_posts_in_cat(sub, n, cat):
 	if "error" not in posts:
 		return list(map(lambda post: post["data"], posts["data"]["children"]))
 	else:
-		print(post["error"])
+		print(posts["error"])
 		return {
 			"title": "Error",
 			"selftext": "Failed to get posts.",
