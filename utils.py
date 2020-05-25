@@ -22,6 +22,7 @@ def get_json(filename):
 options = get_json("options")
 option_names = list(options.keys())
 icons = get_json("icons")
+emojis = get_json("emojis")
 
 def get_setting(guild_id, setting):
 	return guild_id not in settings or settings[guild_id][setting]

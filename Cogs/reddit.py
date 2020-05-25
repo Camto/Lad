@@ -7,7 +7,7 @@ import requests
 import urllib.parse
 import utils
 
-reload_emoji = "\U0001f504"
+reload_emoji = utils.emojis["reload"]
 
 # Get Reddit posts and users.
 class Reddit(commands.Cog):
