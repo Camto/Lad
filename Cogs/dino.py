@@ -42,7 +42,9 @@ class Dino(commands.Cog):
 							"reaction_add",
 							timeout = 60,
 							check = lambda reaction, user:
-								user == ctx.author and str(reaction.emoji) == reload_emoji)
+								reaction.message.id == msg.id and
+								user == ctx.author and
+								str(reaction.emoji) == reload_emoji)
 					except asyncio.TimeoutError:
 						break
 					else:
