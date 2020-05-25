@@ -79,5 +79,29 @@ def get_random_post(sub):
 			"permalink": ""
 		}
 
+def get_n_posts_in_cat(sub, n, cat):
+	if n < 100:
+		return {
+			"title": "Error",
+			"selftext": "Cannot fetch more than 100 posts.",
+			"is_self": True,
+			"permalink": ""
+		}
+	
+	posts = json.loads(requests.get(
+		f"https://www.reddit.com/r/{urllib.parse.quote(sub, safe = '')}/{cat}.json?limit={n}",
+		headers = {"User-agent": "Ladbot"}).text)
+	
+	if "error" not in posts:
+		return list(map(lambda post: post["data"], posts["data"]["children"]))
+	else:
+		print(post["error"])
+		return {
+			"title": "Error",
+			"selftext": "Failed to get posts.",
+			"is_self": True,
+			"permalink": ""
+		}
+
 def setup(client):
 	client.add_cog(Reddit(client))
