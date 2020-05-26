@@ -9,7 +9,7 @@ global db
 settings = {}
 
 command_disabled = discord.Embed(
-	title = "Command disabled!",
+	title = "Command Disabled!",
 	description = "This command was disabled in the settings by an admin.",
 	color = embed_color)
 

@@ -17,32 +17,47 @@ class Reddit(commands.Cog):
 	@commands.command()
 	async def reddit(self, ctx, *args):
 		if len(args) >= 1:
-			sub = args[0]
-			reload_amount = 1
-			
-			msg = await ctx.send(embed =
-				post_to_embed(get_random_post(sub))
-				.set_footer(text = f"#{reload_amount}"))
-			
-			await msg.add_reaction(reload_emoji)
-			
-			while True:
-				try:
-					reaction, user = await self.client.wait_for(
-						"reaction_add",
-						timeout = 60,
-						check = lambda reaction, user:
-							reaction.message.id == msg.id and
-							user == ctx.author and
-							str(reaction.emoji) == reload_emoji)
-				except asyncio.TimeoutError:
-					break
-				else:
-					reload_amount += 1
-					await msg.remove_reaction(reload_emoji, user)
-					await msg.edit(embed =
-						post_to_embed(get_random_post(sub))
-						.set_footer(text = f"#{reload_amount}"))
+			if args[0].startswith("r/"):
+				sub = args[0][2:]
+				reload_amount = 1
+				
+				msg = await ctx.send(embed =
+					post_to_embed(get_random_post(sub))
+					.set_footer(text = f"#{reload_amount}"))
+				
+				await msg.add_reaction(reload_emoji)
+				
+				while True:
+					try:
+						reaction, user = await self.client.wait_for(
+							"reaction_add",
+							timeout = 60,
+							check = lambda reaction, user:
+								reaction.message.id == msg.id and
+								user == ctx.author and
+								str(reaction.emoji) == reload_emoji)
+					except asyncio.TimeoutError:
+						break
+					else:
+						reload_amount += 1
+						await msg.remove_reaction(reload_emoji, user)
+						await msg.edit(embed =
+							post_to_embed(get_random_post(sub))
+							.set_footer(text = f"#{reload_amount}"))
+			elif args[0].startswith("u/"):
+				await ctx.send(embed = discord.Embed(
+					description = "Getting user information not implemented yet.",
+					color = utils.embed_color)
+					.set_author(
+						name = ":(",
+						icon_url = utils.icons["reddit"]))
+			else:
+				await ctx.send(embed = discord.Embed(
+					description = "Error, you did not provide a subreddit (starting with `r/`) or a user (starting with `u/`) You can use `l.help reddit` for help.",
+					color = utils.embed_color)
+					.set_author(
+						name = "Wrong Arguments",
+						icon_url = utils.icons["reddit"]))
 
 def post_to_embed(post):
 	embed = (discord.Embed(
