@@ -18,14 +18,14 @@ class Settings(commands.Cog):
 				
 				# Make sure server is in settings database.
 				guild_in_db = await (await utils.db.execute(
-					"SELECT * FROM settings WHERE guild_id = ?",
+					"select * from settings where guild_id = ?",
 					(guild_id,))).fetchone()
 				
 				if not guild_in_db:
 					await utils.db.execute("""
-						INSERT INTO settings
+						insert into settings
 							(guild_id, autoresponses, bible, dino, ping, say)
-						VALUES
+						values
 							(?, 1, 1, 1, 1, 1)""",
 						(guild_id,))
 					await utils.db.commit()
@@ -38,9 +38,9 @@ class Settings(commands.Cog):
 						is_yes = args[1] == "on"
 						
 						await utils.db.execute(f"""
-							UPDATE settings
-							SET {args[0]} = ?
-							WHERE guild_id = ?""",
+							update settings
+							set {args[0]} = ?
+							where guild_id = ?""",
 							(1 if is_yes else 0, guild_id))
 						await utils.db.commit()
 						await ctx.send(embed = discord.Embed(

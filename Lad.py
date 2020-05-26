@@ -37,13 +37,13 @@ async def start_bot():
 	
 	if not has_created_settings:
 		await utils.db.execute("""
-			CREATE TABLE settings (
-				guild_id TEXT PRIMARY KEY,
-				autoresponses INTEGER,
-				bible INTEGER,
-				dino INTEGER,
-				ping INTEGER,
-				say INTEGER)""")
+			create table settings (
+				guild_id text primary key,
+				autoresponses integer,
+				bible integer,
+				dino integer,
+				ping integer,
+				say integer)""")
 		await utils.db.execute("PRAGMA user_version = 1")
 	
 	# Fetch settings.
