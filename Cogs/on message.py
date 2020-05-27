@@ -15,19 +15,8 @@ class On_Message(commands.Cog):
 	@commands.Cog.listener()
 	async def on_message(self, msg):
 		if msg.author.id != utils.lad_id:
-			content = msg.content
-			
-			if content.startswith("l."):
-				# The say command is actually here.
-				if content.startswith("l.ascii"):
-					#if utils.get_setting(msg.guild.id, "ascii"):
-						ascii_txt = art.text2art(content[7:].lstrip())
-						await msg.channel.send(f"```\n{ascii_txt}\n```")
-					#else: 
-					#	await msg.channel.send(embed = utils.command_disabled)
-			
 			if utils.get_setting(msg.guild.id, "autoresponses"):
-				text = content.lower()
+				text = msg.content.lower()
 				for pair in autoresponses:
 					for keyword in pair["keywords"]:
 						if keyword in text:
