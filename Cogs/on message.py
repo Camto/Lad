@@ -19,13 +19,7 @@ class On_Message(commands.Cog):
 			
 			if content.startswith("l."):
 				# The say command is actually here.
-				if content.startswith("l.say"):
-					if utils.get_setting(msg.guild.id, "say"):
-						await msg.channel.send(content[5:].lstrip())
-						return await msg.delete()
-					else:
-						await msg.channel.send(embed = utils.command_disabled)
-				elif content.startswith("l.ascii"):
+				if content.startswith("l.ascii"):
 					#if utils.get_setting(msg.guild.id, "ascii"):
 						ascii_txt = art.text2art(content[7:].lstrip())
 						await msg.channel.send(f"```\n{ascii_txt}\n```")
