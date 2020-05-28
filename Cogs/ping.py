@@ -14,7 +14,8 @@ class Ping(commands.Cog):
 			await ctx.send(embed = discord.Embed(
 				title = "Pong!",
 				description = f"Hey, {ctx.message.author.mention}. Current ping is: ``{round(self.client.latency * 1000)}`` ms.",
-				color = utils.embed_color))
+				color = utils.embed_color)
+				.set_footer(text = f"Requested by {ctx.message.author}."))
 		else:
 			await ctx.send(embed = utils.command_disabled)
 
