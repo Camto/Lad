@@ -15,8 +15,9 @@ Get started with `l.help` to show all possible commands. Get help for specific c
 * `l.dino` → Returns a random dinosaur.
 * `l.ping` → Responds with Pong!
 * `l.say` → Make the bot say something.
-* `l.ascii` → Make the bot say something, in ASCII art!
+* `l.ascii` → Make the bot say something, in ASCII art.
 * `l.search` → Get a list of Google search results.
+* `l.bitcoin` → Get the current price of Bitcoin with a wide range of currencies to choose from.
 
 ## Authors
 
