@@ -1,3 +1,4 @@
+'''
 import discord
 from discord.ext import commands
 
@@ -27,3 +28,4 @@ class Google(commands.Cog):
 
 def setup(client):
     client.add_cog(Google(client))
+'''

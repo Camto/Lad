@@ -3,7 +3,6 @@ from discord.ext import commands
 
 import json
 import utils
-import aiohttp
 
 class Bitcoin(commands.Cog):
     def __init__(self, client):

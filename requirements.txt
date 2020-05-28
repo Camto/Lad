@@ -4,5 +4,3 @@ git+https://github.com/seatgeek/fuzzywuzzy
 git+https://github.com/ztane/python-Levenshtein
 git+https://github.com/sepandhaghighi/art
 git+https://github.com/psf/requests
-git+https://github.com/abenassi/Google-Search-API
-git+https://github.com/gastrodon/iFunny
