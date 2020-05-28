@@ -36,3 +36,6 @@ class Bitcoin(commands.Cog):
                     description = f"Bitcoin price is: {info['bpi'][currency]['rate']} {currency}", 
                     color=utils.embed_color)
                     .set_footer(text = f"Requested by {ctx.message.author}."))
+
+def setup(client):
+    client.add_cog(Bitcoin(client))
