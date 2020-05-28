@@ -13,7 +13,7 @@ class Ping(commands.Cog):
 		if utils.get_setting(ctx.guild.id, "ping"):
 			await ctx.send(embed = discord.Embed(
 				title = "Pong!",
-				description = f"Hey, {ctx.message.author.mention}. Current ping is: ``{round(self.client.latency * 1000)}`` ms.",
+				description = f":ping_pong: Hey, {ctx.message.author.mention}. Current ping is: ``{round(self.client.latency * 1000)}`` ms.",
 				color = utils.embed_color)
 				.set_footer(text = f"Requested by {ctx.message.author}."))
 		else:
