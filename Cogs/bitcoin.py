@@ -18,9 +18,8 @@ class Bitcoin(commands.Cog):
             await ctx.send(embed = discord.Embed(
                 title = ':information_source: Info',
                 description = f"Bitcoin price is: {info['bpi']['USD']['rate']} USD", 
-                color = utils.embed_color
-                .set_footer(text = f"Requested by {ctx.message.author}.")
-            ))
+                color = utils.embed_color)
+                .set_footer(text = f"Requested by {ctx.message.author}."))
         else:
             currency = cmd[0].upper()
             request = requests.get(f"https://api.coindesk.com/v1/bpi/currentprice/{urllib.parse.quote(currency, safe = '')}.json")
