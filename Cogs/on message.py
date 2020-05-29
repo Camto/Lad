@@ -14,13 +14,15 @@ class On_Message(commands.Cog):
 	
 	@commands.Cog.listener()
 	async def on_message(self, msg):
-		if msg.author.id != utils.lad_id:
-			if utils.get_setting(msg.guild.id, "autoresponses"):
-				text = msg.content.lower()
-				for pair in autoresponses:
-					for keyword in pair["keywords"]:
-						if keyword in text:
-							return await msg.channel.send(random.choice(pair["responses"]))
+		if (
+			msg.author.id != utils.lad_id and
+			utils.get_setting(msg.guild.id, "autoresponses") and
+			not msg.content.startswith("l.")):
+			text = msg.content.lower()
+			for pair in autoresponses:
+				for keyword in pair["keywords"]:
+					if keyword in text:
+						return await msg.channel.send(random.choice(pair["responses"]))
 
 def setup(client):
 	client.add_cog(On_Message(client))
