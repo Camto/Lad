@@ -49,13 +49,11 @@ async def start_bot():
 	# Fetch settings.
 	guilds = await (await utils.db.execute("select * from settings")).fetchall()
 	for guild in guilds:
-		utils.settings[int(guild[0])] = {
-			"autoresponses": guild[1],
-			"bible": guild[2],
-			"dino": guild[3],
-			"ping": guild[4],
-			"say": guild[5]
-		}
+		guild_id = int(guild[0])
+		utils.settings[guild_id] = {}
+		for option in utils.option_names:
+			column_num = utils.options[option]["column num"]
+			utils.settings[guild_id][option] = guild[column_num]
 	
 	# Log the bot in.
 	await client.start(os.getenv("token"))
