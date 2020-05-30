@@ -3,7 +3,7 @@
 		"type": "bool",
 		"default": 1,
 		"column num": 1,
-		"descr": "If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponses` to see the preprogrammed messages."
+		"descr": "If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponse_file` to see the preprogrammed messages."
 	},
 	"bible": {
 		"type": "bool",
