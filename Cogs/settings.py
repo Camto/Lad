@@ -3,6 +3,9 @@ from discord.ext import commands
 
 import utils
 
+on_strs = ["yes", "y", "true", "t", "1", "enable", "on"]
+off_strs = ["no", "n", "false", "f", "0", "disable", "off"]
+
 # Change server settings.
 class Settings(commands.Cog):
 	def __init__(self, client):
@@ -34,8 +37,8 @@ class Settings(commands.Cog):
 				# Actually change the options.
 				
 				if args[0] in utils.option_names:
-					if args[1] == "on" or args[1] == "off":
-						is_yes = args[1] == "on"
+					if args[1].lower() in on_strs or args[1].lower() in off_strs:
+						is_yes = args[1].lower() in on_strs
 						
 						await utils.db.execute(f"""
 							update settings
