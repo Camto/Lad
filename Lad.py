@@ -33,7 +33,7 @@ async def start_bot():
 	# Create settings table if it doesn't exist yet.
 	
 	has_created_settings = (
-		await (await utils.db.execute("PRAGMA user_version")).fetchone())[0]
+		await (await utils.db.execute("pragma user_version")).fetchone())[0]
 	
 	if not has_created_settings:
 		await utils.db.execute("""
@@ -44,10 +44,10 @@ async def start_bot():
 				dino integer,
 				ping integer,
 				say integer)""")
-		await utils.db.execute("PRAGMA user_version = 1")
+		await utils.db.execute("pragma user_version = 1")
 	
 	# Fetch settings.
-	guilds = await (await utils.db.execute("SELECT * FROM settings")).fetchall()
+	guilds = await (await utils.db.execute("select * from settings")).fetchall()
 	for guild in guilds:
 		utils.settings[int(guild[0])] = {
 			"autoresponses": guild[1],
