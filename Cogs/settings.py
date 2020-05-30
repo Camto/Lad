@@ -6,6 +6,15 @@ import utils
 on_strs = ["yes", "y", "true", "t", "1", "enable", "on"]
 off_strs = ["no", "n", "false", "f", "0", "disable", "off"]
 
+insert_query = f"""
+	insert into settings
+		(guild_id, {",".join(list(map(str, utils.option_names)))})
+	values
+		(?, {",".join(list(map(
+			lambda opt: str(utils.options[opt]["default"]),
+			utils.option_names)))})
+"""
+
 # Change server settings.
 class Settings(commands.Cog):
 	def __init__(self, client):
@@ -25,12 +34,7 @@ class Settings(commands.Cog):
 					(guild_id,))).fetchone()
 				
 				if not guild_in_db:
-					await utils.db.execute("""
-						insert into settings
-							(guild_id, autoresponses, bible, dino, ping, say)
-						values
-							(?, 1, 1, 1, 1, 1)""",
-						(guild_id,))
+					await utils.db.execute(insert_query, (guild_id,))
 					await utils.db.commit()
 					print(f"Server {ctx.guild.name} ({guild_id}) has been added to the settings database.")
 				
