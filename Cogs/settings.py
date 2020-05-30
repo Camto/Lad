@@ -40,36 +40,57 @@ class Settings(commands.Cog):
 				
 				# Actually change the options.
 				
-				if args[0] in utils.option_names:
-					if args[1].lower() in on_strs or args[1].lower() in off_strs:
-						is_yes = args[1].lower() in on_strs
-						
-						await utils.db.execute(f"""
-							update settings
-							set {args[0]} = ?
-							where guild_id = ?""",
-							(1 if is_yes else 0, guild_id))
-						await utils.db.commit()
-						await ctx.send(embed = discord.Embed(
-							description = f"Turned {args[0]} {'on' if is_yes else 'off'}.",
-							color = utils.embed_color)
-							.set_author(
-								name = "Changed Setting",
-								icon_url = utils.icons["settings"]))
-						
-						if guild_id not in utils.settings:
-							utils.settings[guild_id] = {"autoresponses": 1}
-						utils.settings[guild_id][args[0]] = 1 if is_yes else 0
-					else:
-						await ctx.send(embed = discord.Embed(
-							description = f"{args[1]} is not a valid value, use on or off.",
-							color = utils.embed_color)
-							.set_author(
-								name = "Invalid Value",
-								icon_url = utils.icons["settings"]))
+				option = args[0]
+				val = args[1]
+				if option in utils.option_names:
+					type = utils.options[option]["type"]
+					
+					if type == "bool":
+						if val.lower() in on_strs or val.lower() in off_strs:
+							is_yes = val.lower() in on_strs
+							val = 1 if is_yes else 0
+							set_msg = f"Turned {option} {'on' if is_yes else 'off'}."
+						else:
+							return await ctx.send(embed = discord.Embed(
+								description = f"{val} is not a valid value for {option}, use on or off.",
+								color = utils.embed_color)
+								.set_author(
+									name = "Invalid Value",
+									icon_url = utils.icons["settings"]))
+					elif type == "integer":
+						try:
+							val = str(val)
+							set_msg = f"Set {option} to {val}."
+						except:
+							return await ctx.send(embed = discord.Embed(
+								description = f"{val} is not a valid value for {option}, use a whole number.",
+								color = utils.embed_color)
+								.set_author(
+									name = "Invalid Value",
+									icon_url = utils.icons["settings"]))
+					elif type == "text":
+						set_msg = f'Set {option} to "{val}".'
+					
+					await utils.db.execute(f"""
+						update settings
+						set {option} = ?
+						where guild_id = ?""",
+						(val, guild_id))
+					await utils.db.commit()
+					
+					await ctx.send(embed = discord.Embed(
+						description = set_msg,
+						color = utils.embed_color)
+						.set_author(
+							name = "Changed Setting",
+							icon_url = utils.icons["settings"]))
+					
+					if guild_id not in utils.settings:
+						utils.settings[guild_id] = {}
+					utils.settings[guild_id][option] = val
 				else:
 					await ctx.send(embed = discord.Embed(
-						description = f"{args[0]} is not an option that can be toggled.",
+						description = f"{option} is not an option that can be toggled.",
 						color = utils.embed_color)
 						.set_author(
 							name = "Invalid Option",
