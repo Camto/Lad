@@ -30,21 +30,18 @@ async def start_bot():
 	utils.db = aiosqlite.connect("./settings.db")
 	await utils.db.__aenter__()
 	
-	# Create settings table if it doesn't exist yet.
+	try: await utils.db.execute("""
+		create table settings (
+			guild_id text primary key)""")
+	except: pass
 	
-	has_created_settings = (
-		await (await utils.db.execute("pragma user_version")).fetchone())[0]
-	
-	if not has_created_settings:
-		await utils.db.execute("""
-			create table settings (
-				guild_id text primary key,
-				autoresponses integer,
-				bible integer,
-				dino integer,
-				ping integer,
-				say integer)""")
-		await utils.db.execute("pragma user_version = 1")
+	for option in utils.option_names:
+		type = utils.options[option]["type"]
+		default = utils.options[option]["default"]
+		try: await utils.db.execute(f"""
+			alter table settings
+			add {option} {type} default {default}""")
+		except: pass
 	
 	# Fetch settings.
 	guilds = await (await utils.db.execute("select * from settings")).fetchall()
