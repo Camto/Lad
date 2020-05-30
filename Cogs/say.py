@@ -10,7 +10,7 @@ class Say(commands.Cog):
 	
 	@commands.command()
 	async def say(self, ctx, *, arg):
-		if utils.get_setting(ctx, "say"):
+		if utils.get_setting(ctx.guild.id, "say"):
 			await ctx.send(arg)
 			await ctx.message.delete()
 		else:
