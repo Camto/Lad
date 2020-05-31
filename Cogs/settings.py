@@ -10,7 +10,7 @@ insert_query = f"""
 	insert into settings
 		(guild_id, {",".join(list(map(str, utils.option_names)))})
 	values
-		(?, {",".join(list(map(
+		($1, {",".join(list(map(
 			lambda opt: str(utils.options[opt]["default"]),
 			utils.option_names)))})
 """
@@ -29,13 +29,12 @@ class Settings(commands.Cog):
 				guild_id = ctx.guild.id
 				
 				# Make sure server is in settings database.
-				guild_in_db = await (await utils.db.execute(
-					"select * from settings where guild_id = ?",
-					(guild_id,))).fetchone()
+				guild_in_db = await utils.db.fetch(
+					"select * from settings where guild_id = $1",
+					str(guild_id))
 				
 				if not guild_in_db:
-					await utils.db.execute(insert_query, (guild_id,))
-					await utils.db.commit()
+					await utils.db.execute(insert_query, str(guild_id))
 					print(f"Server {ctx.guild.name} ({guild_id}) has been added to the settings database.")
 				
 				# Actually change the options.
@@ -43,13 +42,12 @@ class Settings(commands.Cog):
 				option = args[0]
 				val = args[1]
 				if option in utils.option_names:
-					type = utils.options[option]["type"]
+					opt_type = utils.options[option]["type"]
 					
-					if type == "bool":
+					if opt_type == "bool":
 						if val.lower() in on_strs or val.lower() in off_strs:
-							is_yes = val.lower() in on_strs
-							val = 1 if is_yes else 0
-							set_msg = f"Turned {option} {'on' if is_yes else 'off'}."
+							val = val.lower() in on_strs
+							set_msg = f"Turned {option} {'on' if val else 'off'}."
 						else:
 							return await ctx.send(embed = discord.Embed(
 								description = f"{val} is not a valid value for {option}, use on or off.",
@@ -57,7 +55,7 @@ class Settings(commands.Cog):
 								.set_author(
 									name = "Invalid Value",
 									icon_url = utils.icons["settings"]))
-					elif type == "integer":
+					elif opt_type == "integer":
 						try:
 							val = str(val)
 							set_msg = f"Set {option} to {val}."
@@ -68,15 +66,14 @@ class Settings(commands.Cog):
 								.set_author(
 									name = "Invalid Value",
 									icon_url = utils.icons["settings"]))
-					elif type == "text":
+					elif opt_type == "text":
 						set_msg = f'Set {option} to "{val}".'
 					
 					await utils.db.execute(f"""
 						update settings
-						set {option} = ?
-						where guild_id = ?""",
-						(val, guild_id))
-					await utils.db.commit()
+						set {option} = $1
+						where guild_id = $2""",
+						val, str(guild_id))
 					
 					await ctx.send(embed = discord.Embed(
 						description = set_msg,

@@ -6,7 +6,7 @@ import os
 import random
 import json
 import asyncio
-import aiosqlite
+import asyncpg
 
 sys.path.append(".")
 import utils
@@ -26,32 +26,29 @@ for filename in os.listdir("./Cogs"):
 		client.load_extension(f"Cogs.{filename[:-3]}")
 
 async def start_bot():
-	print(os.getenv("DATABASE_URL"))
 	# Start up settings database.
-	utils.db = aiosqlite.connect("./settings.db")
-	await utils.db.__aenter__()
+	utils.db = await asyncpg.connect(os.getenv("DATABASE_URL"))
 	
-	try: await utils.db.execute("""
-		create table settings (
+	await utils.db.execute("""
+		create table if not exists settings (
 			guild_id text primary key)""")
-	except: pass
 	
 	for option in utils.option_names:
 		type = utils.options[option]["type"]
 		default = utils.options[option]["default"]
-		try: await utils.db.execute(f"""
+		await utils.db.execute(f"""
 			alter table settings
-			add {option} {type} default {default}""")
-		except: pass
+			add column if not exists {option} {type} default {default}""")
 	
 	# Fetch settings.
-	guilds = await (await utils.db.execute("select * from settings")).fetchall()
+	guilds = await utils.db.fetch("select * from settings")
+	
 	for guild in guilds:
-		guild_id = int(guild[0])
+		guild_id = int(guild["guild_id"])
 		utils.settings[guild_id] = {}
 		for option in utils.option_names:
 			column_num = utils.options[option]["column num"]
-			utils.settings[guild_id][option] = guild[column_num]
+			utils.settings[guild_id][option] = guild[option]
 	
 	# Log the bot in.
 	await client.start(os.getenv("token"))
@@ -60,8 +57,8 @@ loop = asyncio.get_event_loop()
 
 try:
 	loop.run_until_complete(start_bot())
-except:
-	loop.run_until_complete(utils.db.__aexit__(0, 0, 0))
+except Exception as err:
+	print(err)
 	loop.run_until_complete(client.logout())
 finally:
 	loop.close()
