@@ -1,5 +1,5 @@
 git+https://github.com/Rapptz/discord.py
-git+https://github.com/omnilib/aiosqlite
+git+https://github.com/MagicStack/asyncpg
 git+https://github.com/seatgeek/fuzzywuzzy
 git+https://github.com/ztane/python-Levenshtein
 git+https://github.com/sepandhaghighi/art
