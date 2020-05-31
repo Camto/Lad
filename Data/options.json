@@ -1,31 +1,31 @@
 {
 	"autoresponses": {
 		"type": "bool",
-		"default": 1,
+		"default": true,
 		"column num": 1,
 		"descr": "If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponse_file` to see the preprogrammed messages."
 	},
 	"bible": {
 		"type": "bool",
-		"default": 1,
+		"default": true,
 		"column num": 2,
 		"descr": "If it's on, the command will work. Use `l.help bible` for more information."
 	},
 	"dino": {
 		"type": "bool",
-		"default": 1,
+		"default": true,
 		"column num": 3,
 		"descr": "If it's on, the command will work."
 	},
 	"ping": {
 		"type": "bool",
-		"default": 1,
+		"default": true,
 		"column num": 4,
 		"descr": "If it's on, the command will work."
 	},
 	"say": {
 		"type": "bool",
-		"default": 1,
+		"default": true,
 		"column num": 5,
 		"descr": "If it's on, the command will work."
 	}
