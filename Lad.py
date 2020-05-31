@@ -26,6 +26,7 @@ for filename in os.listdir("./Cogs"):
 		client.load_extension(f"Cogs.{filename[:-3]}")
 
 async def start_bot():
+	print(os.getenv("database_url"))
 	# Start up settings database.
 	utils.db = aiosqlite.connect("./settings.db")
 	await utils.db.__aenter__()
