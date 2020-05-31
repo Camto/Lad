@@ -20,123 +20,126 @@ class Reddit(commands.Cog):
 	
 	@commands.command()
 	async def reddit(self, ctx, *args):
-		if len(args) >= 1:
-			if args[0].startswith("r/"):
-				sub = args[0][2:]
-				
-				if len(args) == 1 or args[1] == "random":
-					reload_amount = 1
+		if utils.get_setting(ctx.guild.id, "reddit"):
+			if len(args) >= 1:
+				if args[0].startswith("r/"):
+					sub = args[0][2:]
 					
-					msg = await ctx.send(embed =
-						post_to_embed(get_random_post(sub))
-						.set_footer(text = f"#{reload_amount}"))
-					
-					await msg.add_reaction(reload_emoji)
-					
-					while True:
-						try:
-							reaction, user = await self.client.wait_for(
-								"reaction_add",
-								timeout = 60,
-								check = lambda reaction, user:
-									reaction.message.id == msg.id and
-									user == ctx.author and
-									str(reaction.emoji) == reload_emoji)
-						except asyncio.TimeoutError:
-							break
+					if len(args) == 1 or args[1] == "random":
+						reload_amount = 1
+						
+						msg = await ctx.send(embed =
+							post_to_embed(get_random_post(sub))
+							.set_footer(text = f"#{reload_amount}"))
+						
+						await msg.add_reaction(reload_emoji)
+						
+						while True:
+							try:
+								reaction, user = await self.client.wait_for(
+									"reaction_add",
+									timeout = 60,
+									check = lambda reaction, user:
+										reaction.message.id == msg.id and
+										user == ctx.author and
+										str(reaction.emoji) == reload_emoji)
+							except asyncio.TimeoutError:
+								break
+							else:
+								reload_amount += 1
+								await msg.remove_reaction(reload_emoji, user)
+								await msg.edit(embed =
+									post_to_embed(get_random_post(sub))
+									.set_footer(text = f"#{reload_amount}"))
+					elif args[1] in sorting_methods:
+						if args[1] != "top":
+							posts = get_n_posts_by_sort(
+								sub,
+								int(args[2]) if len(args) >= 3 else 25,
+								args[1])
+						elif len(args) >= 3 and args[2] in top_sub_sorts:
+							posts = get_n_posts_by_sort(
+								sub,
+								int(args[3]) if len(args) >= 4 else 25,
+								args[1],
+								args[2])
 						else:
-							reload_amount += 1
-							await msg.remove_reaction(reload_emoji, user)
-							await msg.edit(embed =
-								post_to_embed(get_random_post(sub))
-								.set_footer(text = f"#{reload_amount}"))
-				elif args[1] in sorting_methods:
-					if args[1] != "top":
-						posts = get_n_posts_by_sort(
-							sub,
-							int(args[2]) if len(args) >= 3 else 25,
-							args[1])
-					elif len(args) >= 3 and args[2] in top_sub_sorts:
-						posts = get_n_posts_by_sort(
-							sub,
-							int(args[3]) if len(args) >= 4 else 25,
-							args[1],
-							args[2])
+							posts = get_n_posts_by_sort(
+								sub,
+								int(args[2]) if len(args) >= 3 else 25,
+								args[1])
+						
+						idx = 0
+						total_posts = len(posts)
+						
+						posts_as_embeds = [
+							post_to_embed(posts[0])
+							.set_footer(text = f"{idx+1}/{total_posts}")]
+						
+						msg = await ctx.send(embed = posts_as_embeds[0])
+						
+						await msg.add_reaction(next_emoji)
+						
+						while True:
+							try:
+								reaction, user = await self.client.wait_for(
+									"reaction_add",
+									timeout = 60,
+									check = lambda reaction, user:
+										reaction.message.id == msg.id and
+										user == ctx.author and
+										(
+											str(reaction.emoji) == next_emoji or
+											str(reaction.emoji) == prev_emoji))
+							except asyncio.TimeoutError:
+								break
+							else:
+								idx += 1 if str(reaction.emoji) == next_emoji else -1
+								idx = min(max(idx, 0), total_posts - 1)
+								if len(posts_as_embeds) <= idx:
+									posts_as_embeds.append(
+										post_to_embed(posts[idx])
+											.set_footer(text = f"{idx+1}/{total_posts}"))
+								
+								await msg.edit(embed = posts_as_embeds[idx])
+								
+								await msg.remove_reaction(str(reaction.emoji), user)
+								
+								if idx == 0:
+									await msg.remove_reaction(prev_emoji, self.client.user)
+									await msg.add_reaction(next_emoji)
+								elif idx == total_posts - 1:
+									await msg.remove_reaction(next_emoji, self.client.user)
+									await msg.add_reaction(prev_emoji)
+								elif idx == 1 and str(reaction.emoji) == next_emoji:
+									await msg.remove_reaction(next_emoji, self.client.user)
+									await msg.add_reaction(prev_emoji)
+									await msg.add_reaction(next_emoji)
+								elif idx == total_posts - 2 and str(reaction.emoji) == prev_emoji:
+									await msg.add_reaction(next_emoji)
 					else:
-						posts = get_n_posts_by_sort(
-							sub,
-							int(args[2]) if len(args) >= 3 else 25,
-							args[1])
-					
-					idx = 0
-					total_posts = len(posts)
-					
-					posts_as_embeds = [
-						post_to_embed(posts[0])
-						.set_footer(text = f"{idx+1}/{total_posts}")]
-					
-					msg = await ctx.send(embed = posts_as_embeds[0])
-					
-					await msg.add_reaction(next_emoji)
-					
-					while True:
-						try:
-							reaction, user = await self.client.wait_for(
-								"reaction_add",
-								timeout = 60,
-								check = lambda reaction, user:
-									reaction.message.id == msg.id and
-									user == ctx.author and
-									(
-										str(reaction.emoji) == next_emoji or
-										str(reaction.emoji) == prev_emoji))
-						except asyncio.TimeoutError:
-							break
-						else:
-							idx += 1 if str(reaction.emoji) == next_emoji else -1
-							idx = min(max(idx, 0), total_posts - 1)
-							if len(posts_as_embeds) <= idx:
-								posts_as_embeds.append(
-									post_to_embed(posts[idx])
-										.set_footer(text = f"{idx+1}/{total_posts}"))
-							
-							await msg.edit(embed = posts_as_embeds[idx])
-							
-							await msg.remove_reaction(str(reaction.emoji), user)
-							
-							if idx == 0:
-								await msg.remove_reaction(prev_emoji, self.client.user)
-								await msg.add_reaction(next_emoji)
-							elif idx == total_posts - 1:
-								await msg.remove_reaction(next_emoji, self.client.user)
-								await msg.add_reaction(prev_emoji)
-							elif idx == 1 and str(reaction.emoji) == next_emoji:
-								await msg.remove_reaction(next_emoji, self.client.user)
-								await msg.add_reaction(prev_emoji)
-								await msg.add_reaction(next_emoji)
-							elif idx == total_posts - 2 and str(reaction.emoji) == prev_emoji:
-								await msg.add_reaction(next_emoji)
-				else:
+						await ctx.send(embed = discord.Embed(
+							description = f"Error, {args[1]} is not a sorting method. Use one of `hot`, `new`, `rising`, `top`, or `controversial` instead.",
+							color = utils.embed_color)
+							.set_author(
+								name = "Invalid Sorting Method",
+								icon_url = utils.icons["reddit"]))
+				elif args[0].startswith("u/"):
 					await ctx.send(embed = discord.Embed(
-						description = f"Error, {args[1]} is not a sorting method. Use one of `hot`, `new`, `rising`, `top`, or `controversial` instead.",
+						description = "Getting user information not implemented yet.",
 						color = utils.embed_color)
 						.set_author(
-							name = "Invalid Sorting Method",
+							name = ":(",
 							icon_url = utils.icons["reddit"]))
-			elif args[0].startswith("u/"):
-				await ctx.send(embed = discord.Embed(
-					description = "Getting user information not implemented yet.",
-					color = utils.embed_color)
-					.set_author(
-						name = ":(",
-						icon_url = utils.icons["reddit"]))
-			else:
-				await ctx.send(embed = discord.Embed(
-					description = "Error, you did not provide a subreddit (starting with `r/`) or a user (starting with `u/`) You can use `l.help reddit` for help.",
-					color = utils.embed_color)
-					.set_author(
-						name = "Wrong Arguments",
-						icon_url = utils.icons["reddit"]))
+				else:
+					await ctx.send(embed = discord.Embed(
+						description = "Error, you did not provide a subreddit (starting with `r/`) or a user (starting with `u/`) You can use `l.help reddit` for help.",
+						color = utils.embed_color)
+						.set_author(
+							name = "Wrong Arguments",
+							icon_url = utils.icons["reddit"]))
+		else:
+			await ctx.send(embed = utils.command_disabled)
 
 def post_to_embed(post):
 	embed = (discord.Embed(
