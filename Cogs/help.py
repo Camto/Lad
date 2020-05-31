@@ -58,7 +58,7 @@ class Help(commands.Cog):
 			.add_field(name = "Samuel", value = "6:19", inline = False))
 		elif cmd[0] == "settings":
 			option_list = "\n\n".join(map(
-				lambda option: f"`{option[0]}`: {option[1]}",
+				lambda option: f"`{option[0]}`: {option[1]['descr']}",
 				utils.options.items()))
 			
 			await ctx.send(embed = discord.Embed(
