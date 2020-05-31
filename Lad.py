@@ -47,7 +47,6 @@ async def start_bot():
 		guild_id = int(guild["guild_id"])
 		utils.settings[guild_id] = {}
 		for option in utils.option_names:
-			column_num = utils.options[option]["column num"]
 			utils.settings[guild_id][option] = guild[option]
 	
 	# Log the bot in.
