@@ -15,6 +15,10 @@ insert_query = f"""
 			utils.option_names)))})
 """
 
+default_settings = {
+	k: v["default"]
+	for k, v in utils.options.items()}
+
 # Change server settings.
 class Settings(commands.Cog):
 	def __init__(self, client):
@@ -83,7 +87,7 @@ class Settings(commands.Cog):
 							icon_url = utils.icons["settings"]))
 					
 					if guild_id not in utils.settings:
-						utils.settings[guild_id] = {}
+						utils.settings[guild_id] = default_settings
 					utils.settings[guild_id][option] = val
 				else:
 					await ctx.send(embed = discord.Embed(
