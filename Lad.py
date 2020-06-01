@@ -48,7 +48,7 @@ async def start_bot():
 		utils.settings[guild_id] = {}
 		for option in utils.option_names:
 			utils.settings[guild_id][option] = (
-				guild[option] or utils.options[option]["default"]
+				guild[option] or utils.options[option]["default"])
 	
 	# Log the bot in.
 	await client.start(os.getenv("token"))
