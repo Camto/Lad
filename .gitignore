@@ -1,7 +1,12 @@
-auth.json
+# Windows
 Thumbs.db
-ferret.log
-settings.db
+
+# Editors
 .vscode/settings.json
+
+# Ferret
+ferret.log
 Ferret Queries/*.json
+
+# Python
 __pycache__
