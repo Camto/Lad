@@ -6,15 +6,6 @@ import utils
 on_strs = ["yes", "y", "true", "t", "1", "enable", "on"]
 off_strs = ["no", "n", "false", "f", "0", "disable", "off"]
 
-insert_query = f"""
-	insert into settings
-		(guild_id, {",".join(list(map(str, utils.option_names)))})
-	values
-		($1, {",".join(list(map(
-			lambda opt: str(utils.options[opt]["default"]),
-			utils.option_names)))})
-"""
-
 default_settings = {
 	k: v["default"]
 	for k, v in utils.options.items()}
@@ -38,7 +29,11 @@ class Settings(commands.Cog):
 					str(guild_id))
 				
 				if not guild_in_db:
-					await utils.db.execute(insert_query, str(guild_id))
+					await utils.db.execute(f"""
+						insert into settings
+							(guild_id)
+						values
+							($1)""", str(guild_id))
 					print(f"Server {ctx.guild.name} ({guild_id}) has been added to the settings database.")
 				
 				# Actually change the options.

@@ -38,7 +38,7 @@ async def start_bot():
 		default = utils.options[option]["default"]
 		await utils.db.execute(f"""
 			alter table settings
-			add column if not exists {option} {type} default {default}""")
+			add column if not exists {option} {type}""")
 	
 	# Fetch settings.
 	guilds = await utils.db.fetch("select * from settings")
@@ -47,7 +47,8 @@ async def start_bot():
 		guild_id = int(guild["guild_id"])
 		utils.settings[guild_id] = {}
 		for option in utils.option_names:
-			utils.settings[guild_id][option] = guild[option]
+			utils.settings[guild_id][option] = (
+				guild[option] or utils.options[option]["default"]
 	
 	# Log the bot in.
 	await client.start(os.getenv("token"))
