@@ -24,5 +24,8 @@ option_names = list(options.keys())
 icons = get_json("icons")
 emojis = get_json("emojis")
 
-def get_setting(guild_id, setting):
-	return guild_id not in settings or settings[guild_id][setting]
+def get_setting(guild_id, option):
+	if guild_id in settings:
+		return settings[guild_id][option]
+	else:
+		return options[option]["default"]
