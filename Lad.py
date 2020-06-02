@@ -3,8 +3,6 @@ from discord.ext import commands
 
 import sys
 import os
-import random
-import json
 import asyncio
 import asyncpg
 
