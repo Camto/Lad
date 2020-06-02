@@ -51,7 +51,7 @@ async def start_bot():
 				guild[option] or utils.options[option]["default"])
 	
 	# Log the bot in.
-	await client.start(os.getenv("token"))
+	await client.start(os.getenv("TOKEN"))
 
 loop = asyncio.get_event_loop()
 
