@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 
 import yaml
-import json
 
 lad_id = 709644595104972890
 embed_color = 0xe07bb8
@@ -25,9 +24,6 @@ emojis = get_yaml("emojis")
 
 def get_setting(guild_id, option):
 	if guild_id in settings:
-		val = settings[guild_id][option]
-		#if options[option]["type"] == "json":
-		#	val = json.loads(val)
-		return val
+		return settings[guild_id][option]
 	else:
 		return options[option]["default"]

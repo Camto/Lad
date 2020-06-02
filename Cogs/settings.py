@@ -20,7 +20,7 @@ class Settings(commands.Cog):
 	@commands.command(name = "settings")
 	async def settings_cmd(self, ctx, *, args):
 		args = args.lstrip().split(None, 1)
-		print(args)
+		
 		if ctx.message.author.guild_permissions.administrator:
 			# If an option is being changed.
 			
@@ -75,7 +75,7 @@ class Settings(commands.Cog):
 						if val.startswith("```"): val = val[3:]
 						if val.startswith("yaml"): val = val[4:]
 						if val.startswith("yml"): val = val[3:]
-						if val.endswith("```"): val = val[:3]
+						if val.endswith("```"): val = val[:-3]
 						
 						try:
 							val = yaml.safe_load(val)

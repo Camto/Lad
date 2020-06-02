@@ -5,6 +5,7 @@ import sys
 import os
 import asyncio
 import asyncpg
+import json
 
 sys.path.append(".")
 import utils
@@ -45,8 +46,13 @@ async def start_bot():
 		guild_id = int(guild["guild_id"])
 		utils.settings[guild_id] = {}
 		for option in utils.option_names:
-			utils.settings[guild_id][option] = (
-				guild[option] or utils.options[option]["default"])
+			if option in guild:
+				val = guild[option]
+				if utils.options[option]["type"] == "json":
+					val = json.loads(val)
+			else:
+				val = utils.options[option]["default"]
+			utils.settings[guild_id][option] = val
 	
 	# Log the bot in.
 	await client.start(os.getenv("TOKEN"))
