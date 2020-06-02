@@ -96,7 +96,7 @@ class Settings(commands.Cog):
 						update settings
 						set {option} = $1
 						where guild_id = $2""",
-						val, str(guild_id))
+						db_val, str(guild_id))
 					
 					await ctx.send(embed = discord.Embed(
 						description = set_msg,
