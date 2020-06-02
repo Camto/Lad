@@ -10,3 +10,6 @@ Ferret Queries/*.json
 
 # Python
 __pycache__
+
+# Config
+autoresponses.yaml
