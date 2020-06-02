@@ -1,8 +1,8 @@
 import discord
 from discord.ext import commands
 
+import json
 import yaml
-
 import utils
 
 on_strs = ["yes", "y", "true", "t", "1", "enable", "on"]
@@ -72,8 +72,22 @@ class Settings(commands.Cog):
 					elif opt_type == "text":
 						set_msg = f'Set {option} to "{val}".'
 					elif opt_type == "json":
-						val = yaml.safe_load(val)
+						if var.startswith("```"): var = var[3:]
+						if var.startswith("yaml"): var = var[4:]
+						if var.startswith("yml"): var = var[3:]
+						if var.endswith("```"): var = var[:3]
 						
+						try:
+							val = json.dumps(yaml.safe_load(val))
+						except:
+							return await ctx.send(embed = discord.Embed(
+								description = "The YAML sent wasn't valid.",
+								color = utils.embed_color)
+								.set_author(
+									name = "Invalid Value",
+									icon_url = utils.icons["settings"]))
+						
+						set_msg = f"Changed {option}."
 					
 					await utils.db.execute(f"""
 						update settings

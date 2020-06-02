@@ -2,37 +2,48 @@ autoresponses:
   type: bool
   default: true
   descr: If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponse_file` to see the preprogrammed messages.
- 
+
+autoresponse_file:
+  type: json
+  default:
+    - keywords:
+        - chungus
+        - keanu
+      responses:
+        - reddit moment
+        - "holesome :100:"
+  descr: This will be the file used when auto-responding to messages.
+
 bible:
   type: bool
   default: true
   descr: If it's on, the command will work. Use `l.help bible` for more information.
- 
+
 dino:
   type: bool
   default: true
   descr: If it's on, the command will work.
- 
+
 ping:
   type: bool
   default: true
   descr: If it's on, the command will work.
- 
+
 say:
   type: bool
   default: true
   descr: If it's on, the command will work.
- 
+
 reddit:
   type: bool
   default: true
   descr: If it's on, the command will work.
- 
+
 ascii:
   type: bool
   default: true
   descr: If it's on, the command will work.
- 
+
 bitcoin:
   type: bool
   default: true
