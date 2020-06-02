@@ -14,14 +14,14 @@ Get started with `l.help` to show all possible commands. Get help for specific c
 
 ## Commands
 
-* `l.settings` → Admin settings to disable/enable commands and/or behaviour.
+* `l.settings` → Admin settings to disable/enable commands and change behavior.
 * `l.bible` → Returns a random Bible verse.
-* `l.dino` → Returns a random dinosaur.
+* `l.dino` → Returns a random dinosaur or can search for a specific one.
 * `l.ping` → Responds with Pong!
 * `l.say` → Make the bot say something.
 * `l.ascii` → Make the bot say something, in ASCII art.
-* `l.search` → Get a list of Google search results.
 * `l.bitcoin` → Get the current price of Bitcoin with a wide range of currencies to choose from.
+* `l.reddit` → Lets you browse any subreddit's posts.
 
 ## Authors
 
