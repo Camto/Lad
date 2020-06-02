@@ -72,13 +72,13 @@ class Settings(commands.Cog):
 					elif opt_type == "text":
 						set_msg = f'Set {option} to "{val}".'
 					elif opt_type == "json":
-						if var.startswith("```"): var = var[3:]
-						if var.startswith("yaml"): var = var[4:]
-						if var.startswith("yml"): var = var[3:]
-						if var.endswith("```"): var = var[:3]
+						if val.startswith("```"): val = val[3:]
+						if val.startswith("yaml"): val = val[4:]
+						if val.startswith("yml"): val = val[3:]
+						if val.endswith("```"): val = val[:3]
 						
 						try:
-							val = json.dumps(yaml.safe_load(val))
+							val = yaml.safe_load(val)
 						except:
 							return await ctx.send(embed = discord.Embed(
 								description = "The YAML sent wasn't valid.",
@@ -88,6 +88,9 @@ class Settings(commands.Cog):
 									icon_url = utils.icons["settings"]))
 						
 						set_msg = f"Changed {option}."
+					
+					if opt_type == "json": db_val = json.dumps(val)
+					else: db_val = val
 					
 					await utils.db.execute(f"""
 						update settings
