@@ -5,13 +5,7 @@ autoresponses:
 
 autoresponse_file:
   type: json
-  default:
-    - keywords:
-        - chungus
-        - keanu
-      responses:
-        - reddit moment
-        - "holesome :100:"
+  default: []
   descr: This will be the file used when auto-responding to messages.
 
 bible:
