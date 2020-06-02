@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 
+import yaml
+
 import utils
 
 on_strs = ["yes", "y", "true", "t", "1", "enable", "on"]
@@ -16,7 +18,9 @@ class Settings(commands.Cog):
 		self.client = client
 	
 	@commands.command(name = "settings")
-	async def settings_cmd(self, ctx, *args):
+	async def settings_cmd(self, ctx, *, args):
+		args = args.lstrip().split(None, 1)
+		print(args)
 		if ctx.message.author.guild_permissions.administrator:
 			# If an option is being changed.
 			
@@ -67,6 +71,9 @@ class Settings(commands.Cog):
 									icon_url = utils.icons["settings"]))
 					elif opt_type == "text":
 						set_msg = f'Set {option} to "{val}".'
+					elif opt_type == "json":
+						val = yaml.safe_load(val)
+						
 					
 					await utils.db.execute(f"""
 						update settings
