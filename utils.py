@@ -26,8 +26,8 @@ emojis = get_yaml("emojis")
 def get_setting(guild_id, option):
 	if guild_id in settings:
 		val = settings[guild_id][option]
-		if options[option]["type"] == "json":
-			val = json.loads(val)
+		#if options[option]["type"] == "json":
+		#	val = json.loads(val)
 		return val
 	else:
 		return options[option]["default"]
