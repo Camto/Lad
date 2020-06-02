@@ -1,15 +1,19 @@
-# Welcome to Ladbot!
+# [Welcome to Ladbot!](https://github.com/Camto/Lad)
 
 ![ladbot banner](./Banner.png)
 
 Ladbot is a Discord bot whose purpose is to entertain those who are bored.
+
+## Adding the Bot
+
+Clicking [this link here](https://discord.com/api/oauth2/authorize?client_id=709644595104972890&permissions=8&scope=bot) will let you add Ladbot to your server.
 
 ## Get Started 
 
 Get started with `l.help` to show all possible commands. Get help for specific commands by doing `l.help <command>`
 
 ## Commands
- 
+
 * `l.settings` → Admin settings to disable/enable commands and/or behaviour.
 * `l.bible` → Returns a random Bible verse.
 * `l.dino` → Returns a random dinosaur.
