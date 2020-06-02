@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-import json
+import yaml
 
 lad_id = 709644595104972890
 embed_color = 0xe07bb8
@@ -13,16 +13,14 @@ command_disabled = discord.Embed(
 	description = "This command was disabled in the settings by an admin.",
 	color = embed_color)
 
-def get_json(filename):
-	file = open(f"./Data/{filename}.json", encoding = "utf-8")
-	data = json.load(file)
-	file.close()
-	return data
+def get_yaml(filename):
+	with open(f"./Data/{filename}.yaml", encoding = "utf-8") as stream:
+		return yaml.safe_load(stream)
 
-options = get_json("options")
+options = get_yaml("options")
 option_names = list(options.keys())
-icons = get_json("icons")
-emojis = get_json("emojis")
+icons = get_yaml("icons")
+emojis = get_yaml("emojis")
 
 def get_setting(guild_id, option):
 	if guild_id in settings:

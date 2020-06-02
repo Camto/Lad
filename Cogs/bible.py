@@ -6,7 +6,7 @@ from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
 import utils
 
-quotes = utils.get_json("bible quotes")
+quotes = utils.get_yaml("bible quotes")
 
 # Starting the bible study.
 class Bible(commands.Cog):

@@ -5,7 +5,7 @@ import random
 import art
 import utils
 
-autoresponses = utils.get_json("autoresponses")
+autoresponses = utils.get_yaml("autoresponses")
 
 # The autoresponse system and relegating commands.
 class On_Message(commands.Cog):

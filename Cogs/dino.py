@@ -7,7 +7,7 @@ from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
 import utils
 
-dinos = utils.get_json("dinos")
+dinos = utils.get_yaml("dinos")
 dino_names = list(dinos.keys())
 
 reload_emoji = utils.emojis["reload"]
