@@ -168,9 +168,8 @@ def post_to_embed(post):
 	return embed
 
 def get_random_post(sub):
-	post = json.loads(requests.get(
-		f"https://www.reddit.com/r/{urllib.parse.quote(sub, safe = '')}/random.json",
-		headers = {"User-agent": "Ladbot"}).text)
+	url = f"https://www.reddit.com/r/{urllib.parse.quote(sub, safe = '')}/random.json"
+	post = json.loads(requests.get(url, headers = {"User-agent": "Ladbot"}).text)
 	if "error" not in post:
 		if isinstance(post, list):
 			post = post[0]
@@ -186,12 +185,12 @@ def get_random_post(sub):
 
 def get_n_posts_by_sort(sub, n, sorting_method, top_sub_sort = "all"):
 	if n > 100:
-		return {
+		return [{
 			"title": "Error",
 			"selftext": "Cannot fetch more than 100 posts.",
 			"is_self": True,
 			"permalink": ""
-		}
+		}]
 	
 	url = f"https://www.reddit.com/r/{urllib.parse.quote(sub, safe = '')}/{sorting_method}.json?limit={n}"
 	if sorting_method == "top":
@@ -199,15 +198,15 @@ def get_n_posts_by_sort(sub, n, sorting_method, top_sub_sort = "all"):
 	
 	posts = json.loads(requests.get(url, headers = {"User-agent": "Ladbot"}).text)
 	
-	if "error" not in posts:
+	if len(posts["data"]["children"]) != 0:
 		return list(map(lambda post: post["data"], posts["data"]["children"]))
 	else:
-		print(posts["error"])
-		return {
+		return [{
 			"title": "Error",
-			"selftext": "Failed to get posts.",
+			"selftext": "There are no posts in that subreddit.",
 			"is_self": True,
 			"permalink": ""
+		}]
 		}
 
 def setup(client):
