@@ -140,12 +140,22 @@ async def handle_sub(self, ctx, args):
 				icon_url = utils.icons["reddit"]))
 
 async def handle_user(self, ctx, args):
+	about = get_user_about(args[0][2:])
+	print(about)
+	if about["icon_img"] != "":
+		profile_img = urllib.parse.urlparse(about["icon_img"])
+		profile_img = f"{profile_img.scheme}://{profile_img.netloc}{profile_img.path}"
+	else:
+		profile_img = ""
+	print(profile_img)
 	await ctx.send(embed = discord.Embed(
-		description = "Getting user information not implemented yet.",
+		description = about["subreddit"]["public_description"],
 		color = utils.embed_color)
 		.set_author(
-			name = ":(",
-			icon_url = utils.icons["reddit"]))
+			name = about["name"],
+			icon_url = utils.icons["reddit"],
+			url = f'https://www.reddit.com{about["subreddit"]["url"]}')
+		.set_thumbnail(url = profile_img))
 
 def post_to_embed(post):
 	embed = (discord.Embed(
@@ -207,6 +217,21 @@ def get_n_posts_by_sort(sub, n, sorting_method, top_sub_sort = "all"):
 			"is_self": True,
 			"permalink": ""
 		}]
+
+def get_user_about(user):
+	url = f"https://www.reddit.com/u/{urllib.parse.quote(user, safe = '')}/about.json"
+	post = json.loads(requests.get(url, headers = {"User-agent": "Ladbot"}).text)
+	if "error" not in post:
+		return post["data"]
+	else:
+		print(post["error"])
+		return {
+			"name": "Error",
+			"subreddit": {
+				"public_description": "Failed to get user.",
+				"url": ""
+			},
+			"icon_img": ""
 		}
 
 def setup(client):
