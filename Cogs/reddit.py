@@ -141,13 +141,13 @@ async def handle_sub(self, ctx, args):
 
 async def handle_user(self, ctx, args):
 	about = get_user_about(args[0][2:])
-	print(about)
+	
 	if about["icon_img"] != "":
 		profile_img = urllib.parse.urlparse(about["icon_img"])
 		profile_img = f"{profile_img.scheme}://{profile_img.netloc}{profile_img.path}"
 	else:
 		profile_img = ""
-	print(profile_img)
+	
 	await ctx.send(embed = discord.Embed(
 		description = about["subreddit"]["public_description"],
 		color = utils.embed_color)
