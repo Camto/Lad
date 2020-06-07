@@ -93,12 +93,41 @@ async def handle_user(self, ctx, args):
 				name = "Karma",
 				value = about["link_karma"] + about["comment_karma"]))
 	elif args[1] in ["posts", "comments"]:
-		await ctx.send(embed = discord.Embed(
-			description = "Getting a user's posts or comments not implemented yet.",
-			color = utils.embed_color)
-			.set_author(
-				name = ":(",
-				icon_url = utils.icons["reddit"]))
+		sub = f'{args[0]}/{"submitted" if args[1] == "posts" else "comments"}'
+		
+		if len(args) == 2:
+			posts = get_n_posts_by_sort(
+				sub,
+				int(args[3]) if len(args) >= 4 else 25,
+				"new")
+		elif args[2] != "top":
+			# Sort by method other than top.
+			posts = get_n_posts_by_sort(
+				sub,
+				int(args[3]) if len(args) >= 4 else 25,
+				args[2])
+		elif len(args) >= 4 and args[3] in top_sub_sorts:
+			# Sort by top of all time as the default for top.
+			posts = get_n_posts_by_sort(
+				sub,
+				int(args[4]) if len(args) >= 5 else 25,
+				args[2],
+				args[3])
+		else:
+			# Sort by top of all X.
+			posts = get_n_posts_by_sort(
+				sub,
+				int(args[3]) if len(args) >= 4 else 25,
+				args[2])
+		
+		await menu_posts(self, ctx, posts)
+		
+		#await ctx.send(embed = discord.Embed(
+		#	description = "Getting a user's posts or comments not implemented yet.",
+		#	color = utils.embed_color)
+		#	.set_author(
+		#		name = ":(",
+		#		icon_url = utils.icons["reddit"]))
 	else:
 		await ctx.send(embed = discord.Embed(
 			description = f"``{args[1]}`` is not a property this bot knows how to get from Reddit users. Only `about` (the default), `posts`, and `comments` work.",
@@ -229,7 +258,10 @@ def get_n_posts_by_sort(sub, n, sorting_method, top_sub_sort = "all"):
 			"permalink": ""
 		}]
 	
-	url = f"https://www.reddit.com/{urllib.parse.quote(sub, safe = '')}/{sorting_method}.json?limit={n}"
+	if sub[:2] == "r/":
+		url = f"https://www.reddit.com/{urllib.parse.quote(sub, safe = '')}/{sorting_method}.json?limit={n}"
+	else:
+		url = f"https://www.reddit.com/{urllib.parse.quote(sub, safe = '')}.json?sort={sorting_method}&limit={n}"
 	if sorting_method == "top":
 		url += f"&t={top_sub_sort}"
 	
