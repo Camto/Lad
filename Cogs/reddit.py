@@ -136,7 +136,7 @@ async def handle_sub(self, ctx, args):
 					await msg.add_reaction(next_emoji)
 	else:
 		await ctx.send(embed = discord.Embed(
-			description = f"Error, {args[1]} is not a sorting method. Use one of `hot`, `new`, `rising`, `top`, or `controversial` instead.",
+			description = f"Error, {args[1]} is not a sorting method this bot knows of. Use one of `hot`, `new`, `rising`, `top`, or `controversial` instead.",
 			color = utils.embed_color)
 			.set_author(
 				name = "Invalid Sorting Method",
