@@ -67,17 +67,20 @@ async def handle_sub(self, ctx, args):
 					.set_footer(text = f"#{reload_amount}"))
 	elif args[1] in sorting_methods:
 		if args[1] != "top":
+			# Sort by method other than top.
 			posts = get_n_posts_by_sort(
 				sub,
 				int(args[2]) if len(args) >= 3 else 25,
 				args[1])
 		elif len(args) >= 3 and args[2] in top_sub_sorts:
+			# Sort by top of all time as the default for top.
 			posts = get_n_posts_by_sort(
 				sub,
 				int(args[3]) if len(args) >= 4 else 25,
 				args[1],
 				args[2])
 		else:
+			# Sort by top of all X.
 			posts = get_n_posts_by_sort(
 				sub,
 				int(args[2]) if len(args) >= 3 else 25,
