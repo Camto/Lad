@@ -155,7 +155,10 @@ async def handle_user(self, ctx, args):
 			name = about["name"],
 			icon_url = utils.icons["reddit"],
 			url = f'https://www.reddit.com{about["subreddit"]["url"]}')
-		.set_thumbnail(url = profile_img))
+		.set_thumbnail(url = profile_img)
+		.add_field(
+			name = "Karma",
+			value = about["link_karma"] + about["comment_karma"]))
 
 def post_to_embed(post):
 	embed = (discord.Embed(
@@ -231,7 +234,9 @@ def get_user_about(user):
 				"public_description": "Failed to get user.",
 				"url": ""
 			},
-			"icon_img": ""
+			"icon_img": "",
+			"link_karma": 0,
+			"comment_karma": 0
 		}
 
 def setup(client):
