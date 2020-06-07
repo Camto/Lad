@@ -37,7 +37,7 @@ class Reddit(commands.Cog):
 			await ctx.send(embed = utils.command_disabled)
 
 async def handle_sub(self, ctx, args):
-	sub = args[0][2:]
+	sub = args[0]
 	
 	if len(args) == 1 or args[1] == "random":
 		await menu_sub_random(self, ctx, sub)
@@ -205,7 +205,7 @@ def post_to_embed(post):
 	return embed
 
 def get_random_post(sub):
-	url = f"https://www.reddit.com/r/{urllib.parse.quote(sub, safe = '')}/random.json"
+	url = f"https://www.reddit.com/{urllib.parse.quote(sub, safe = '')}/random.json"
 	post = json.loads(requests.get(url, headers = {"User-agent": "Ladbot"}).text)
 	if "error" not in post:
 		if isinstance(post, list):
@@ -229,7 +229,7 @@ def get_n_posts_by_sort(sub, n, sorting_method, top_sub_sort = "all"):
 			"permalink": ""
 		}]
 	
-	url = f"https://www.reddit.com/r/{urllib.parse.quote(sub, safe = '')}/{sorting_method}.json?limit={n}"
+	url = f"https://www.reddit.com/{urllib.parse.quote(sub, safe = '')}/{sorting_method}.json?limit={n}"
 	if sorting_method == "top":
 		url += f"&t={top_sub_sort}"
 	
