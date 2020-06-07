@@ -143,25 +143,40 @@ async def handle_sub(self, ctx, args):
 				icon_url = utils.icons["reddit"]))
 
 async def handle_user(self, ctx, args):
-	about = get_user_about(args[0][2:])
-	
-	if about["icon_img"] != "":
-		profile_img = urllib.parse.urlparse(about["icon_img"])
-		profile_img = f"{profile_img.scheme}://{profile_img.netloc}{profile_img.path}"
+	if len(args) == 1 or args[1] == "about":
+		about = get_user_about(args[0][2:])
+		
+		if about["icon_img"] != "":
+			profile_img = urllib.parse.urlparse(about["icon_img"])
+			profile_img = f"{profile_img.scheme}://{profile_img.netloc}{profile_img.path}"
+		else:
+			profile_img = ""
+		
+		await ctx.send(embed = discord.Embed(
+			description = about["subreddit"]["public_description"],
+			color = utils.embed_color)
+			.set_author(
+				name = about["name"],
+				icon_url = utils.icons["reddit"],
+				url = f'https://www.reddit.com{about["subreddit"]["url"]}')
+			.set_thumbnail(url = profile_img)
+			.add_field(
+				name = "Karma",
+				value = about["link_karma"] + about["comment_karma"]))
+	elif args[1] in ["posts", "comments"]:
+		await ctx.send(embed = discord.Embed(
+			description = "Getting a user's posts or comments not implemented yet.",
+			color = utils.embed_color)
+			.set_author(
+				name = ":(",
+				icon_url = utils.icons["reddit"]))
 	else:
-		profile_img = ""
-	
-	await ctx.send(embed = discord.Embed(
-		description = about["subreddit"]["public_description"],
-		color = utils.embed_color)
-		.set_author(
-			name = about["name"],
-			icon_url = utils.icons["reddit"],
-			url = f'https://www.reddit.com{about["subreddit"]["url"]}')
-		.set_thumbnail(url = profile_img)
-		.add_field(
-			name = "Karma",
-			value = about["link_karma"] + about["comment_karma"]))
+		await ctx.send(embed = discord.Embed(
+			description = f"``{args[1]}`` is not a property this bot knows how to get from Reddit users. Only `about` (the default), `posts`, and `comments` work.",
+			color = utils.embed_color)
+			.set_author(
+				name = "Can't get user property.",
+				icon_url = utils.icons["reddit"]))
 
 def post_to_embed(post):
 	embed = (discord.Embed(
