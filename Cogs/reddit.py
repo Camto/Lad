@@ -92,8 +92,8 @@ async def handle_user(self, ctx, args):
 			.add_field(
 				name = "Karma",
 				value = about["link_karma"] + about["comment_karma"]))
-	elif args[1] in ["posts", "comments"]:
-		sub = f'{args[0]}/{"submitted" if args[1] == "posts" else "comments"}'
+	elif args[1] == "posts":
+		sub = args[0] + "/submitted"
 		
 		if len(args) == 2:
 			posts = get_n_posts_by_sort(
@@ -121,16 +121,9 @@ async def handle_user(self, ctx, args):
 				args[2])
 		
 		await menu_posts(self, ctx, posts)
-		
-		#await ctx.send(embed = discord.Embed(
-		#	description = "Getting a user's posts or comments not implemented yet.",
-		#	color = utils.embed_color)
-		#	.set_author(
-		#		name = ":(",
-		#		icon_url = utils.icons["reddit"]))
 	else:
 		await ctx.send(embed = discord.Embed(
-			description = f"``{args[1]}`` is not a property this bot knows how to get from Reddit users. Only `about` (the default), `posts`, and `comments` work.",
+			description = f"``{args[1]}`` is not a property this bot knows how to get from Reddit users. Only `about` (the default) and `posts` work.",
 			color = utils.embed_color)
 			.set_author(
 				name = "Can't get user property.",
