@@ -15,12 +15,6 @@ class Roll(commands.Cog):
                 description = "Roll using DnD rules (Example: 1d20)",
                 color = utils.embed_color)
                 .set_footer(text = f'Requested by {ctx.message.author}.'))
-        elif not type(cmd[0]) is int:
-            raise TypeError(
-                            await ctx.send(embed = discord.Embed(
-                                description = "Roll using DnD rules (Example: 1d20)",
-                                color = utils.embed_color)
-                                .set_footer(text = f'Requested by {ctx.message.author}.')))
 
         def d(sides):
             return randint(1, sides)
