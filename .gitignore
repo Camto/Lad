@@ -13,5 +13,4 @@ __pycache__
 
 # Config
 autoresponses.yaml
-
-Data/auth.json
+auth.json
