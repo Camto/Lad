@@ -20,6 +20,7 @@ class Help(commands.Cog):
 				icon_url = utils.icons["github"])
 			.add_field(name = "help", value = "Show this message.", inline = False)
 			.add_field(name = "ping", value = "Responds with pong.", inline = False)
+			.add_field(name = "roll", value = "Roll a dice DnD style", inline = False)
 			.add_field(name = "say", value = "Make the bot say something.", inline = False)
 			.add_field(name = "ascii", value = "Returns your message in ASCII art!", inline = False)
 			.add_field(name = "reddit", value = "Sends a link to a random reddit post.", inline = False)
