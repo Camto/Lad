@@ -43,3 +43,6 @@ class Roll(commands.Cog):
                 description = "Your input is too big to calculate",
                 color = utils.embed_color)
                 .set_footer(text = f'Requested by {ctx.message.author}.'))
+
+def setup(client):
+    client.add_cog(Roll(client))
