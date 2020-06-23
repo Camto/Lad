@@ -12,7 +12,7 @@ class Roll(commands.Cog):
     async def roll(self, ctx, *cmd):
         if len(cmd) == 0:
             await ctx.send(embed = discord.Embed(
-                description = "Roll using DnD rules (Example: 1d20)",
+                description = "Roll using DnD format (Example: 1d20)",
                 color = utils.embed_color)
                 .set_footer(text = f'Requested by {ctx.message.author}.'))
 
