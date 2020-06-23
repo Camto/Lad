@@ -21,7 +21,8 @@ Get started with `l.help` to show all possible commands. Get help for specific c
 * `l.say` → Make the bot say something.
 * `l.ascii` → Make the bot say something, in ASCII art.
 * `l.bitcoin` → Get the current price of Bitcoin with a wide range of currencies to choose from.
-* `l.reddit` → Lets you browse any subreddit's posts.
+* `l.reddit` → Lets you browse any subreddit's posts. 
+* `l.roll`→ Roll dice DnD style (Ex. 1d20).
 
 ## Authors
 
