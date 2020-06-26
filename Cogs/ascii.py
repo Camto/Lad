@@ -4,7 +4,7 @@ from discord.ext import commands
 import art
 import utils
 
-# Process dino related requests
+# Process dino related requests.
 class Ascii(commands.Cog):
 	def __init__(self, client):
 		self.client = client
