@@ -43,9 +43,9 @@ class Bible(commands.Cog):
 						icon_url = utils.icons["bible"]))
 			else:
 				reload_amount = 1
-				
+
 				msg = await ctx.send(embed = discord.Embed(
-					description = quote["text"],
+					description = quotes[quote],
 					color = utils.embed_color)
 					.set_author(
 						name = quote["location"],
@@ -69,7 +69,7 @@ class Bible(commands.Cog):
 						reload_amount += 1
 						await msg.remove_reaction(reload_emoji, user)
 						await msg.edit(embed = discord.Embed(
-							description = quote["text"],
+							description = quotes[random.choice(quote)],
 							color = utils.embed_color)
 							.set_author(
 								name = quote["location"],
