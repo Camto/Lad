@@ -51,11 +51,10 @@ class Bible(commands.Cog):
 						break
 					else:
 						reload_amount += 1
-						n_quote = random.choice(quotes)
 						await msg.remove_reaction(reload_emoji, user)
 						await msg.edit(embed = 
-						bible_to_embed(n_quote)
-						.set_footer(text = f"#{reload_amount}"))
+							bible_to_embed(random.choice(quotes))
+							.set_footer(text = f"#{reload_amount}"))
 		else:
 			await ctx.send(embed = utils.command_disabled)
 
