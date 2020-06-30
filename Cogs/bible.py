@@ -28,22 +28,13 @@ class Bible(commands.Cog):
 					scorer = fuzz.partial_token_sort_ratio)[0]
 
 			if len(args) != 0:
-				await ctx.send(embed = discord.Embed(
-					description = quote["text"],
-					color = utils.embed_color)
-					.set_author(
-						name = quote["location"],
-						icon_url = utils.icons["bible"]))
+				await ctx.send(embed = bible_to_embed(quote))
 			else:
 				reload_amount = 1
 
-				msg = await ctx.send(embed = discord.Embed(
-					description = quote["text"],
-					color = utils.embed_color)
-					.set_author(
-						name = quote["location"],
-						icon_url = utils.icons["bible"])
-					.set_footer(text = f"#{reload_amount}"))
+				msg = await ctx.send(embed = 
+				bible_to_embed(quote)
+				.set_footer(text = f"#{reload_amount}"))
 
 				await msg.add_reaction(reload_emoji)
 
@@ -62,15 +53,19 @@ class Bible(commands.Cog):
 						reload_amount += 1
 						n_quote = random.choice(quotes)
 						await msg.remove_reaction(reload_emoji, user)
-						await msg.edit(embed = discord.Embed(
-							description = n_quote["text"],
-							color = utils.embed_color)
-							.set_author(
-								name = n_quote["location"],
-								icon_url = utils.icons["bible"])
-							.set_footer(text = f"#{reload_amount}"))
+						await msg.edit(embed = 
+						bible_to_embed(n_quote)
+						.set_footer(text = f"#{reload_amount}"))
 		else:
 			await ctx.send(embed = utils.command_disabled)
+
+def bible_to_embed(quote):
+	return (discord.Embed(
+		description = quote["text"],
+		color = utils.embed_color)
+		.set_author(
+			name = quote["location"],
+			icon_url = utils.icons["bible"]))
 
 def setup(client):
 	client.add_cog(Bible(client))
