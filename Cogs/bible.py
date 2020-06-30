@@ -2,11 +2,14 @@ import discord
 from discord.ext import commands
 
 import random
+import asyncio
 from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
 import utils
 
 quotes = utils.get_yaml("bible quotes")
+
+reload_emoji = utils.emojis["reload"]
 
 # Starting the bible study.
 class Bible(commands.Cog):
@@ -30,6 +33,46 @@ class Bible(commands.Cog):
 				.set_author(
 					name = quote["location"],
 					icon_url = utils.icons["bible"]))
+
+			if len(args) != 0:
+				quote = process.extractOne(
+					args[0],
+					quotes,
+					scorer = fuzz.partial_token_sort_ratio)[0]
+			else:
+				reload_amount = 1
+
+				msg = await ctx.send(embed = discord.Embed(
+					description = quote["text"],
+					color = utils.embed_color)
+					.set_author(
+						name = quote["location"],
+						icon_url = utils.icon["bible"])
+					.set_footer(text = f"#{reload_amount}"))
+
+				await msg.add_reaction(reload_emoji)
+
+				while True:
+					try:
+						reaction, user = await self.client.wait_for(
+							"reaction_add",
+							timeout = 60,
+							check = lambda reaction, user:
+								reaction.message.id == msg.id and
+								user == ctx.author and
+								str(reaction.emoji) == reload_emoji)
+					except asyncio.TimeoutError:
+						break
+					else:
+						reload_amount += 1
+						await msg.remove_reaction(reload_emoji, user)
+						await msg.edit(embed = discord.Embed(
+							description = quote["text"],
+							color = utils.embed_color)
+							.set_author(
+								name = quote["location"],
+								icon_url = utils.icon["bible"])
+							.set_footer(text = f"#{reload_amount}"))
 		else:
 			await ctx.send(embed = utils.command_disabled)
 
