@@ -69,7 +69,7 @@ class Bible(commands.Cog):
 						reload_amount += 1
 						await msg.remove_reaction(reload_emoji, user)
 						await msg.edit(embed = discord.Embed(
-							description = quote[random.choice("text")],
+							description = random.choice(quote["text"]),
 							color = utils.embed_color)
 							.set_author(
 								name = quote["location"],
