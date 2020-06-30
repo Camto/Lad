@@ -35,13 +35,15 @@ class Bible(commands.Cog):
 					icon_url = utils.icons["bible"]))
 
 			if len(args) != 0:
-				quote = process.extractOne(
-					args[0],
-					quotes,
-					scorer = fuzz.partial_token_sort_ratio)[0]
+				await ctx.send(embed = discord.Embed(
+					description = quotes[quote],
+					color = utils.embed_color)
+					.set_author(
+						name = quote["location"],
+						icon_url = utils.icons["bible"]))
 			else:
 				reload_amount = 1
-
+				
 				msg = await ctx.send(embed = discord.Embed(
 					description = quote["text"],
 					color = utils.embed_color)
