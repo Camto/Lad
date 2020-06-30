@@ -28,7 +28,7 @@ class Roll(commands.Cog):
 
         try:
             await ctx.send(embed = discord.Embed(
-                title = ":slot_machine: Rolling dice... :slot_machine:",
+                title = ":game_die: Rolling dice...",
                 description = f"Your destiny is... ``{dice, sum(dice)}``",
                 color=utils.embed_color)
                 .set_footer(text = f'Requested by {ctx.message.author}.'))
