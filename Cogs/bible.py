@@ -28,10 +28,10 @@ class Bible(commands.Cog):
 					scorer = fuzz.partial_token_sort_ratio)[0]
 
 			await ctx.send(embed = discord.Embed(
-				description = quotes["text"],
+				description = quote["text"],
 				color = utils.embed_color)
 				.set_author(
-					name = quotes["location"],
+					name = quote["location"],
 					icon_url = utils.icons["bible"]))
 
 			if len(args) != 0:
