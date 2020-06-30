@@ -43,6 +43,7 @@ class Bible(commands.Cog):
 						icon_url = utils.icons["bible"]))
 			else:
 				reload_amount = 1
+				quote = random.choice(quotes)
 
 				msg = await ctx.send(embed = discord.Embed(
 					description = quotes[quote],
