@@ -33,8 +33,8 @@ class Bible(commands.Cog):
 				reload_amount = 1
 
 				msg = await ctx.send(embed = 
-				bible_to_embed(quote)
-				.set_footer(text = f"#{reload_amount}"))
+					bible_to_embed(quote)
+					.set_footer(text = f"#{reload_amount}"))
 
 				await msg.add_reaction(reload_emoji)
 
