@@ -36,19 +36,19 @@ class Bible(commands.Cog):
 
 			if len(args) != 0:
 				await ctx.send(embed = discord.Embed(
-					description = quotes["text"],
+					description = quote["text"],
 					color = utils.embed_color)
 					.set_author(
-						name = quotes["location"],
+						name = quote["location"],
 						icon_url = utils.icons["bible"]))
 			else:
 				reload_amount = 1
 
 				msg = await ctx.send(embed = discord.Embed(
-					description = quotes["text"],
+					description = quote["text"],
 					color = utils.embed_color)
 					.set_author(
-						name = quotes["location"],
+						name = quote["location"],
 						icon_url = utils.icons["bible"])
 					.set_footer(text = f"#{reload_amount}"))
 
@@ -69,10 +69,10 @@ class Bible(commands.Cog):
 						reload_amount += 1
 						await msg.remove_reaction(reload_emoji, user)
 						await msg.edit(embed = discord.Embed(
-							description = quotes[random.choice("text")],
+							description = quote[random.choice("text")],
 							color = utils.embed_color)
 							.set_author(
-								name = quotes["location"],
+								name = quote["location"],
 								icon_url = utils.icons["bible"])
 							.set_footer(text = f"#{reload_amount}"))
 		else:
