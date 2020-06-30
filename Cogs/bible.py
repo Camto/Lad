@@ -47,7 +47,7 @@ class Bible(commands.Cog):
 					color = utils.embed_color)
 					.set_author(
 						name = quote["location"],
-						icon_url = utils.icon["bible"])
+						icon_url = utils.icons["bible"])
 					.set_footer(text = f"#{reload_amount}"))
 
 				await msg.add_reaction(reload_emoji)
@@ -71,7 +71,7 @@ class Bible(commands.Cog):
 							color = utils.embed_color)
 							.set_author(
 								name = quote["location"],
-								icon_url = utils.icon["bible"])
+								icon_url = utils.icons["bible"])
 							.set_footer(text = f"#{reload_amount}"))
 		else:
 			await ctx.send(embed = utils.command_disabled)
