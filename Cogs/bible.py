@@ -28,10 +28,10 @@ class Bible(commands.Cog):
 					scorer = fuzz.partial_token_sort_ratio)[0]
 
 			await ctx.send(embed = discord.Embed(
-				description = quote["text"],
+				description = quotes["text"],
 				color = utils.embed_color)
 				.set_author(
-					name = quote["location"],
+					name = quotes["location"],
 					icon_url = utils.icons["bible"]))
 
 			if len(args) != 0:
@@ -39,7 +39,7 @@ class Bible(commands.Cog):
 					description = quotes["text"],
 					color = utils.embed_color)
 					.set_author(
-						name = quote["location"],
+						name = quotes["location"],
 						icon_url = utils.icons["bible"]))
 			else:
 				reload_amount = 1
@@ -48,7 +48,7 @@ class Bible(commands.Cog):
 					description = quotes["text"],
 					color = utils.embed_color)
 					.set_author(
-						name = quote["location"],
+						name = quotes["location"],
 						icon_url = utils.icons["bible"])
 					.set_footer(text = f"#{reload_amount}"))
 
@@ -72,7 +72,7 @@ class Bible(commands.Cog):
 							description = quotes[random.choice("text")],
 							color = utils.embed_color)
 							.set_author(
-								name = quote["location"],
+								name = quotes["location"],
 								icon_url = utils.icons["bible"])
 							.set_footer(text = f"#{reload_amount}"))
 		else:
