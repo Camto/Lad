@@ -64,5 +64,17 @@ async def menu(client, ctx, gen_):
 	
 	gen.aclose()
 
+def reload_menu(gen_):
+	async def inner(caller):
+		gen = gen_(caller)
+		yield (await gen.__anext__()), emojis["reload"]
+		while True:
+			_ = yield
+			yield (await gen.__anext__()), None
+		await gen.aclose()
+	return inner
+
 class menus():
 	menu = menu
+	async def reload(client, ctx, gen):
+		return await menu(client, ctx, reload_menu(gen))
