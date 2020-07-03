@@ -49,8 +49,7 @@ async def menu(client, ctx, gen_):
 		except asyncio.TimeoutError:
 			break
 		else:
-			await gen.asend(reaction.emoji)
-			embed, new_reactions = await gen.__anext__()
+			embed, new_reactions = await gen.asend(str(reaction.emoji))
 			
 			await msg.edit(embed = embed)
 			await msg.remove_reaction(str(reaction.emoji), user)
@@ -70,9 +69,8 @@ def reload_menu(gen_):
 		reload_number = 1
 		yield (
 			(await gen.__anext__()).set_footer(text = f"#{reload_number}"),
-			emojis["reload"])
+			[emojis["reload"]])
 		while True:
-			_ = yield
 			reload_number += 1
 			yield (
 				(await gen.__anext__()).set_footer(text = f"#{reload_number}"),
