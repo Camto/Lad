@@ -40,7 +40,11 @@ async def handle_sub(self, ctx, args):
 	sub = args[0]
 	
 	if len(args) == 1 or args[1] == "random":
-		await menu_sub_random(self, ctx, sub)
+		async def menu_sub_random(_):
+			while True:
+				yield post_to_embed(get_random_post(sub))
+		
+		await utils.menus.reload(self.client, ctx, menu_sub_random)
 	elif args[1] in sorting_methods:
 		if args[1] != "top":
 			# Sort by method other than top.
@@ -128,33 +132,6 @@ async def handle_user(self, ctx, args):
 			.set_author(
 				name = "Can't get user property.",
 				icon_url = utils.icons["reddit"]))
-
-async def menu_sub_random(self, ctx, sub):
-	reload_amount = 1
-		
-	msg = await ctx.send(embed =
-		post_to_embed(get_random_post(sub))
-		.set_footer(text = f"#{reload_amount}"))
-	
-	await msg.add_reaction(reload_emoji)
-	
-	while True:
-		try:
-			reaction, user = await self.client.wait_for(
-				"reaction_add",
-				timeout = 60,
-				check = lambda reaction, user:
-					reaction.message.id == msg.id and
-					user == ctx.author and
-					str(reaction.emoji) == reload_emoji)
-		except asyncio.TimeoutError:
-			break
-		else:
-			reload_amount += 1
-			await msg.remove_reaction(reload_emoji, user)
-			await msg.edit(embed =
-				post_to_embed(get_random_post(sub))
-				.set_footer(text = f"#{reload_amount}"))
 
 async def menu_posts(self, ctx, posts):
 	idx = 0
