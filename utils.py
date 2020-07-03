@@ -78,7 +78,41 @@ def reload_menu(gen_):
 		await gen.aclose()
 	return inner
 
+def list_menu(gen_):
+	next_emoji = emojis["right pointer"]
+	prev_emoji = emojis["left pointer"]
+	
+	async def inner(caller):
+		gen = gen_(caller)
+		idx = 0
+		total_embeds = await gen.__anext__()
+		embeds = [
+			(await gen.__anext__())
+			.set_footer(text = f"{idx+1}/{total_embeds}")]
+		dir = yield embeds[0], [next_emoji]
+		while True:
+			idx += 1 if dir == next_emoji else -1
+			idx = min(max(idx, 0), total_embeds - 1)
+			if len(embeds) <= idx:
+				embeds.append(
+					(await gen.__anext__())
+					.set_footer(text = f"{idx+1}/{total_embeds}"))
+			
+			reactions = None
+			if idx == 0: reactions = [next_emoji]
+			elif idx == total_embeds - 1: reactions = [prev_emoji]
+			elif (
+				idx == 1 and dir == next_emoji or
+				idx == total_embeds - 2 and dir == prev_emoji):
+				reactions = [prev_emoji, next_emoji]
+			
+			dir = yield embeds[idx], reactions
+	
+	return inner
+
 class menus():
 	menu = menu
 	async def reload(client, ctx, gen):
 		return await menu(client, ctx, reload_menu(gen))
+	async def list(client, ctx, gen):
+		return await menu(client, ctx, list_menu(gen))
