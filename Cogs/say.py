@@ -9,7 +9,7 @@ class Say(commands.Cog):
 		self.client = client
 	
 	@commands.command()
-	async def say(self, ctx, *, arg):
+	async def say(self, ctx, *, arg = "\u200b"):
 		if utils.get_setting(ctx.guild.id, "say"):
 			await ctx.send(arg)
 			await ctx.message.delete()
