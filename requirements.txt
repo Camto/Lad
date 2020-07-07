@@ -5,3 +5,4 @@ git+https://github.com/ztane/python-Levenshtein
 git+https://github.com/sepandhaghighi/art
 git+https://github.com/psf/requests
 git+https://github.com/yaml/pyyaml
+git+https://github.com/python-pillow/Pillow
