@@ -18,7 +18,13 @@ class Convert(commands.Cog):
 
     @commands.command()
     async def convert(self, ctx, *args):
-        if len(args) >= 1:
+        if len(args) == 0 or len(args) == 1:
+            await ctx.send(embed=discord.Embed(
+                title=":no_entry_sign: Error",
+                description=f"Post an image in the chat, copy the link address (right click it) and `l.convert <extension> <link>`",
+                color=utils.embed_color)
+                .set_footer(text=f'Requested by {ctx.message.author}.'))
+        else:
             url = args[1]
             extension = args[0]
             temp_file = ''.join(random.choice(string.ascii_lowercase)
@@ -28,13 +34,13 @@ class Convert(commands.Cog):
             r = requests.get(url, allow_redirects=True)
 
             open(f'{temp_file}', 'wb').write(r.content)
-            await ctx.send(embed=discord.Embed(
-                title=":white_check_mark: File Downloaded",
-                color=utils.embed_color)
-                .set_footer(text=f'Requested by {ctx.message.author}.'))
+            # await ctx.send(embed=discord.Embed(
+            #    title=":white_check_mark: File Downloaded",
+            #    color=utils.embed_color)
+            #    .set_footer(text=f'Requested by {ctx.message.author}.'))
         except:
             await ctx.send(embed=discord.Embed(
-                title=":bangbang: Error while downloading file | File is either too big or format cannot be downloaded.",
+                title=":bangbang: Error while downloading file | Try another link",
                 color=utils.embed_color)
                 .set_footer(text=f'Requested by {ctx.message.author}.'))
         else:
