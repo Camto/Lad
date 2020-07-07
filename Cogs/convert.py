@@ -18,13 +18,7 @@ class Convert(commands.Cog):
 
     @commands.command()
     async def convert(self, ctx, *args):
-        if len(args) == 0 or len(args) == 1:
-            await ctx.send(embed=discord.Embed(
-                title=":no_entry_sign: Error",
-                description=f"Post an image in the chat, copy the link address (right click it) and `l.convert <extension> <link>`",
-                color=utils.embed_color)
-                .set_footer(text=f'Requested by {ctx.message.author}.'))
-        else:
+        if len(args) >= 1:
             url = args[1]
             extension = args[0]
             temp_file = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
