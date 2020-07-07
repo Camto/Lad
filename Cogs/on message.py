@@ -5,7 +5,7 @@ import random
 import art
 import utils
 
-# The autoresponse system and relegating commands.
+# The autoresponse system.
 class On_Message(commands.Cog):
 	def __init__(self, client):
 		self.client = client
