@@ -21,7 +21,8 @@ class Convert(commands.Cog):
         if len(args) >= 1:
             url = args[1]
             extension = args[0]
-            temp_file = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
+            temp_file = ''.join(random.choice(string.ascii_lowercase)
+                                for i in range(10))
 
         try:
             r = requests.get(url, allow_redirects=True)
