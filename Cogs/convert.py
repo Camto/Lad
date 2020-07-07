@@ -1,5 +1,7 @@
 import asyncio
 import os
+import random
+import string
 
 import discord
 import requests
@@ -25,7 +27,7 @@ class Convert(commands.Cog):
         else:
             url = args[1]
             extension = args[0]
-            temp_file = 'temporary.file'
+            temp_file = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
 
         try:
             r = requests.get(url, allow_redirects=True)
@@ -42,16 +44,16 @@ class Convert(commands.Cog):
                 .set_footer(text=f'Requested by {ctx.message.author}.'))
         else:
             im = Image.open(temp_file)
-            im.save(f'newtemplate.{extension}', quality=100)
+            im.save(f'{temp_file}.{extension}', quality=100)
             nfile = discord.File(
-                f'newtemplate.{extension}', filename=f"Converted File.{extension}")
+                f'{temp_file}.{extension}', filename=f"Converted File.{extension}")
             await ctx.send(file=nfile, embed=discord.Embed(
                 title=":white_check_mark: File Successfully Converted!",
                 color=utils.embed_color)
                 .set_footer(text=f'Requested by {ctx.message.author}.'))
         finally:
-            if os.path.isfile(f'newtemplate.{extension}'):
-                os.remove(f'newtemplate.{extension}')
+            if os.path.isfile(f'{temp_file}.{extension}'):
+                os.remove(f'{temp_file}.{extension}')
             if os.path.isfile(temp_file):
                 os.remove(temp_file)
 
