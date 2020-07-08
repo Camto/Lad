@@ -22,7 +22,8 @@ Get started with `l.help` to show all possible commands. Get help for specific c
 * `l.ascii` → Make the bot say something, in ASCII art.
 * `l.bitcoin` → Get the current price of Bitcoin with a wide range of currencies to choose from.
 * `l.reddit` → Lets you browse any subreddit's posts. 
-* `l.roll`→ Roll dice DnD style (Ex. 1d20).
+* `l.roll` → Roll dice DnD style (Ex. 1d20).
+* `l.convert` → Convert a file type to another, JPG -> PNG, GIF -> PNG, and more.
 
 ## Authors
 
