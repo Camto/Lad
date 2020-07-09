@@ -20,8 +20,8 @@ class Convert(commands.Cog):
     async def convert(self, ctx, *args):
         if len(args) == 0 or len(args) == 1:
             await ctx.send(embed=discord.Embed(
-                title=":no_entry_sign: Error",
-                description=f"Post an image in the chat, copy the link address (right click it) and `l.convert <extension> <link>`",
+                title=":x: Error",
+                description=f"Type `l.help convert` for information on how to use the command.",
                 color=utils.embed_color)
                 .set_footer(text=f'Requested by {ctx.message.author}.'))
         else:
@@ -49,12 +49,12 @@ class Convert(commands.Cog):
                         .set_footer(text=f'Requested by {ctx.message.author}.'))
                 except:
                     await ctx.send(embed=discord.Embed(
-                        title=":bangbang: Error while converting file | Link not supported",
+                        title=":x: Error while converting file | Link/Image not supported",
                         color=utils.embed_color)
                         .set_footer(text=f'Requested by {ctx.message.author}.'))
             except:
                 await ctx.send(embed=discord.Embed(
-                    title=":bangbang: Error while downloading | File not supported",
+                    title=":x: Error while downloading | File not supported",
                     color=utils.embed_color)
                     .set_footer(text=f'Requested by {ctx.message.author}.'))
             finally:
