@@ -28,7 +28,7 @@ class Help(commands.Cog):
                 .add_field(name="bible", value="Returns a random bible verse. For verses do l.help bible", inline=False)
                 .add_field(name="bitcoin", value="Get the current price of bitcoin with a wide range of currencies to choose from", inline=False)
                 .add_field(name="dino", value="Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.", inline=False)
-                .add_field(name="convert", value="Convert a file by copying its address and using `l.convert <extension> <copy link address>` Ex. `l.convert png <open image sent and copy address>`", inline=False))
+                .add_field(name="convert", value="Convert a file by copying its address and using `l.convert <extension> <copy link address>` Ex. `l.convert png <link adress of the image sent>`", inline=False))
         elif cmd[0] == "bible":
             await ctx.send(embed=discord.Embed(
                 title="To search type NUMBER first; followed by BOOK",
@@ -58,6 +58,9 @@ class Help(commands.Cog):
                 .add_field(name="Romans", value="3:23", inline=False)
                 .add_field(name="Genesis", value="1:1", inline=False)
                 .add_field(name="Samuel", value="6:19", inline=False))
+        elif cmd[0] == "convert":
+            await ctx.send(embed=discord.Embed()
+                           .set_image(url="https://media.discordapp.net/attachments/710021801849389087/730869301887631400/Screenshot_from_2020-07-09_15-32-22.png?width=1248&height=702"))
         elif cmd[0] == "settings":
             option_list = "\n\n".join(map(
                 lambda option: f"`{option[0]}`: {option[1]['descr']}",
