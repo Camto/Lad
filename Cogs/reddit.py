@@ -1,10 +1,11 @@
-import discord
-from discord.ext import commands
-
 import asyncio
 import json
-import requests
 import urllib.parse
+
+import discord
+import requests
+from discord.ext import commands
+
 import utils
 
 reload_emoji = utils.emojis["reload"]

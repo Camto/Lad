@@ -1,8 +1,9 @@
+import json
+
 import discord
+import yaml
 from discord.ext import commands
 
-import json
-import yaml
 import utils
 
 on_strs = ["yes", "y", "true", "t", "1", "enable", "on"]

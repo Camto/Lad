@@ -1,8 +1,10 @@
+from random import randint
+
 import discord
 from discord.ext import commands
 
 import utils
-from random import randint  
+
 
 class Roll(commands.Cog):
     def __init__(self, client):
@@ -11,10 +13,10 @@ class Roll(commands.Cog):
     @commands.command()
     async def roll(self, ctx, *cmd):
         if len(cmd) == 0:
-            await ctx.send(embed = discord.Embed(
-                description = "Roll using DnD format (Example: 1d20)",
-                color = utils.embed_color)
-                .set_footer(text = f'Requested by {ctx.message.author}.'))
+            await ctx.send(embed=discord.Embed(
+                description="Roll using DnD format (Example: 1d20)",
+                color=utils.embed_color)
+                .set_footer(text=f'Requested by {ctx.message.author}.'))
 
         def d(sides):
             return randint(1, sides)
@@ -27,16 +29,17 @@ class Roll(commands.Cog):
         dice = roll(int(amount), int(side))
 
         try:
-            await ctx.send(embed = discord.Embed(
-                title = ":game_die: Rolling dice...",
-                description = f"Your destiny is... ``{dice, sum(dice)}``",
+            await ctx.send(embed=discord.Embed(
+                title=":game_die: Rolling dice...",
+                description=f"Your destiny is... ``{dice, sum(dice)}``",
                 color=utils.embed_color)
-                .set_footer(text = f'Requested by {ctx.message.author}.'))
+                .set_footer(text=f'Requested by {ctx.message.author}.'))
         except:
-            await ctx.send(embed = discord.Embed(
-                description = "Your input is too big to calculate",
-                color = utils.embed_color)
-                .set_footer(text = f'Requested by {ctx.message.author}.'))
+            await ctx.send(embed=discord.Embed(
+                description="Your input is too big to calculate",
+                color=utils.embed_color)
+                .set_footer(text=f'Requested by {ctx.message.author}.'))
+
 
 def setup(client):
     client.add_cog(Roll(client))
