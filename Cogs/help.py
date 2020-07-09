@@ -27,8 +27,8 @@ class Help(commands.Cog):
                 .add_field(name="reddit", value="Sends a link to a random reddit post.", inline=False)
                 .add_field(name="bible", value="Returns a random bible verse. For verses do l.help bible", inline=False)
                 .add_field(name="bitcoin", value="Get the current price of bitcoin with a wide range of currencies to choose from", inline=False)
-                .add_field(name="dino", value="Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.", inline=False)
-                .add_field(name="convert", value="Converts a file type to another file type. Type `l.help convert` for all file types.", inline=False))
+                .add_field(name="convert", value="Converts a file type to another file type. Type `l.help convert` for all file types.", inline=False)
+                .add_field(name="dino", value="Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.", inline=False))
         elif cmd[0] == "bible":
             await ctx.send(embed=discord.Embed(
                 title="To search type NUMBER first; followed by BOOK",
