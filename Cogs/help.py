@@ -25,7 +25,7 @@ class Help(commands.Cog):
 			.add_field(name = "ascii", value = "Returns your message in ASCII art!", inline = False)
 			.add_field(name = "reddit", value = "Sends a link to a random reddit post.", inline = False)
 			.add_field(name = "bible", value = "Returns a random bible verse. For verses do l.help bible", inline = False)
-			.add_field(name = "convert", value = "Convert a file by copying its address and using 'l.convert <extension> <file>", inline = False)
+			.add_field(name = "convert", value = "Convert a file by copying its address and using `l.convert <extension> <file>`", inline = False)
 			.add_field(name = "bitcoin", value = "Get the current price of bitcoin with a wide range of currencies to choose from", inline = False)
 			.add_field(name = "dino", value = "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.", inline = False))
 		elif cmd[0] == "bible":
