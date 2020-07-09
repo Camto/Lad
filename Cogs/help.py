@@ -59,7 +59,9 @@ class Help(commands.Cog):
                 .add_field(name="Genesis", value="1:1", inline=False)
                 .add_field(name="Samuel", value="6:19", inline=False))
         elif cmd[0] == "convert":
-            await ctx.send(embed=discord.Embed()
+            await ctx.send(embed=discord.Embed(
+                title = "How to use `l.convert` for links",
+                color = utils.embed_color)
                            .set_image(url="https://media.discordapp.net/attachments/710021801849389087/730869301887631400/Screenshot_from_2020-07-09_15-32-22.png?width=1248&height=702"))
         elif cmd[0] == "settings":
             option_list = "\n\n".join(map(
