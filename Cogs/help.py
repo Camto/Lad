@@ -62,7 +62,7 @@ class Help(commands.Cog):
             await ctx.send(embed=discord.Embed(
                 title="How to use `l.convert` for links",
                 color=utils.embed_color)
-                .set_image(url="https://media.discordapp.net/attachments/710021801849389087/730873444702617600/Croppedimage.png?width=1086&height=270"))
+                .set_image(url="https://media.discordapp.net/attachments/711140380384559186/730876183025287290/croppimmage.png?width=549&height=279"))
         elif cmd[0] == "settings":
             option_list = "\n\n".join(map(
                 lambda option: f"`{option[0]}`: {option[1]['descr']}",
