@@ -49,12 +49,12 @@ class Convert(commands.Cog):
                         .set_footer(text=f'Requested by {ctx.message.author}.'))
                 except:
                     await ctx.send(embed=discord.Embed(
-                        title=":x: Error while converting file | Link/Image not supported",
+                        title=":x: Error while converting file → Link/Image not supported",
                         color=utils.embed_color)
                         .set_footer(text=f'Requested by {ctx.message.author}.'))
             except:
                 await ctx.send(embed=discord.Embed(
-                    title=":x: Error while downloading | File not supported",
+                    title=":x: Error while downloading → File too big or not supported",
                     color=utils.embed_color)
                     .set_footer(text=f'Requested by {ctx.message.author}.'))
             finally:
