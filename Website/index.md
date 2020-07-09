@@ -27,4 +27,4 @@ Get started with `l.help` to show all possible commands. Get help for specific c
 ## Authors
 
 * [Camto](https://github.com/Camto) (Camto#5577 on Discord)
-* [jpVinnie](https://github.com/jpVinnie) (jpVinnie#5519 on Discord)
+* [jpVinnie](https://github.com/jpVinnie) (jpVinnie#0001 on Discord)
