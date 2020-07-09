@@ -38,18 +38,23 @@ class Convert(commands.Cog):
                 #    title=":white_check_mark: File Downloaded",
                 #    color=utils.embed_color)
                 #    .set_footer(text=f'Requested by {ctx.message.author}.'))
+                try:
+                    im = Image.open(temp_file)
+                    im.save(f'{temp_file}.{extension}', quality=100)
+                    nfile = discord.File(
+                        f'{temp_file}.{extension}', filename=f"Converted File.{extension}")
+                    await ctx.send(file=nfile, embed=discord.Embed(
+                        title=":white_check_mark: File Successfully Converted!",
+                        color=utils.embed_color)
+                        .set_footer(text=f'Requested by {ctx.message.author}.'))
+                except:
+                    await ctx.send(embed=discord.Embed(
+                        title=":bangbang: Error while converting file | Link not supported",
+                        color=utils.embed_color)
+                        .set_footer(text=f'Requested by {ctx.message.author}.'))
             except:
                 await ctx.send(embed=discord.Embed(
-                    title=":bangbang: Error while downloading file | Try another link",
-                    color=utils.embed_color)
-                    .set_footer(text=f'Requested by {ctx.message.author}.'))
-            else:
-                im = Image.open(temp_file)
-                im.save(f'{temp_file}.{extension}', quality=100)
-                nfile = discord.File(
-                    f'{temp_file}.{extension}', filename=f"Converted File.{extension}")
-                await ctx.send(file=nfile, embed=discord.Embed(
-                    title=":white_check_mark: File Successfully Converted!",
+                    title=":bangbang: Error while downloading | File not supported",
                     color=utils.embed_color)
                     .set_footer(text=f'Requested by {ctx.message.author}.'))
             finally:
