@@ -61,7 +61,7 @@ class Help(commands.Cog):
         elif cmd[0] == "convert":
             await ctx.send(embed=discord.Embed(
                 title="How to use `l.convert` for links",
-                description = "Supports: BMP, DCX, EPS, GIF, IM, JPEG, PCD, PCX, PDF, PNG, PPM, PSD, TIFF, XBM, XPM",
+                description="Supports: BMP, DCX, EPS, GIF, IM, JPEG, PCD, PCX, PDF, PNG, PPM, PSD, TIFF, XBM, XPM",
                 color=utils.embed_color)
                 .set_image(url="https://media.discordapp.net/attachments/711140380384559186/730876183025287290/croppimmage.png?width=549&height=279"))
         elif cmd[0] == "settings":
