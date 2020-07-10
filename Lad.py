@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord.ext.commands import CommandNotFound
 
 import sys
 import os
@@ -13,6 +14,13 @@ import utils
 client = commands.Bot(command_prefix = "l.")
 
 client.remove_command("help")
+
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CommandNotFound):
+        await ctx.send(embed=discord.Embed(
+            title = ":x: Command Not Found | Use `l.help` for command list",
+            color = utils.embed_color))
 
 @client.event
 async def on_ready():
