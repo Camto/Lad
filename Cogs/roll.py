@@ -5,7 +5,6 @@ from discord.ext import commands
 
 import utils
 
-
 class Roll(commands.Cog):
     def __init__(self, client):
         self.client = client
