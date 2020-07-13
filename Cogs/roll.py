@@ -1,9 +1,8 @@
-from random import randint
-
 import discord
 from discord.ext import commands
-
 import utils
+
+from random import randint
 
 class Roll(commands.Cog):
 	def __init__(self, client):
@@ -17,36 +16,34 @@ class Roll(commands.Cog):
 				if "d" in cmd[0]
 				else (1, int(cmd[0])))
 			
+			if amount > 10000 or side > 10000:
+				return await ctx.send(embed = discord.Embed(
+					description = "Your input is too big to calculate",
+					color = utils.embed_color)
+					.set_footer(text = f"Requested by {ctx.message.author}."))
+			
 			dice = tuple(randint(1, side) for _ in range(amount))
 			str_dice = map(str, dice)
 			final_dice = (
 				f"{' + '.join(str_dice)} = {sum(dice)}"
 				if amount > 1
 				else str(sum(dice)))
-			
-			try:
-				if sum(dice) >= 250000:
-					await ctx.send(embed=discord.Embed(
-						description="Your input is too big to calculate",
-						color=utils.embed_color)
-						.set_footer(text=f'Requested by {ctx.message.author}.'))
-				else:
-					await ctx.send(embed=discord.Embed(
-						title=":game_die: Rolling dice...",
-						description=f"Your destiny is... ``{final_dice}``",
-						color=utils.embed_color)
-						.set_footer(text=f'Requested by {ctx.message.author}.'))
+				
+				await ctx.send(embed = discord.Embed(
+					title = ":game_die: Rolling dice...",
+					description = f"Your destiny is... ``{final_dice}``",
+					color = utils.embed_color)
+					.set_footer(text = f"Requested by {ctx.message.author}."))
 			except:
-				await ctx.send(embed=discord.Embed(
-					description="Your input is too big to calculate",
-					color=utils.embed_color)
-					.set_footer(text=f'Requested by {ctx.message.author}.'))
+				await ctx.send(embed = discord.Embed(
+					description = "Your input is too big to calculate",
+					color = utils.embed_color)
+					.set_footer(text = f"Requested by {ctx.message.author}."))
 		except:
-			await ctx.send(embed=discord.Embed(
-				description="Roll using DnD rules (Example: 1d20)",
-				color=utils.embed_color)
-				.set_footer(text=f'Requested by {ctx.message.author}.'))
-
+			await ctx.send(embed = discord.Embed(
+				description = "Roll using DnD rules (Example: 1d20)",
+				color = utils.embed_color)
+				.set_footer(text = f"Requested by {ctx.message.author}."))
 
 def setup(client):
 	client.add_cog(Roll(client))

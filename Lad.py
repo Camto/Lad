@@ -17,10 +17,10 @@ client.remove_command("help")
 
 @client.event
 async def on_command_error(ctx, error):
-    if isinstance(error, CommandNotFound):
-        await ctx.send(embed=discord.Embed(
-            title = ":x: Command Not Found | Use `l.help` for command list",
-            color = utils.embed_color))
+	if isinstance(error, CommandNotFound):
+		await ctx.send(embed = discord.Embed(
+			title = ":x: Command Not Found | Use `l.help` for command list",
+			color = utils.embed_color))
 
 @client.event
 async def on_ready():
