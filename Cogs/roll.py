@@ -28,7 +28,8 @@ class Roll(commands.Cog):
 				f"{' + '.join(str_dice)} = {sum(dice)}"
 				if amount > 1
 				else str(sum(dice)))
-				
+			
+			try:
 				await ctx.send(embed = discord.Embed(
 					title = ":game_die: Rolling dice...",
 					description = f"Your destiny is... ``{final_dice}``",
@@ -36,7 +37,8 @@ class Roll(commands.Cog):
 					.set_footer(text = f"Requested by {ctx.message.author}."))
 			except:
 				await ctx.send(embed = discord.Embed(
-					description = "Your input is too big to calculate",
+					title = ":game_die: Rolling dice...",
+					description = f"Your destiny is... ``{sum(dice)}``",
 					color = utils.embed_color)
 					.set_footer(text = f"Requested by {ctx.message.author}."))
 		except:
