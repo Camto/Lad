@@ -28,7 +28,7 @@ class Roll(commands.Cog):
             try:
                 if sum(dice) >= 250000:
                     await ctx.send(embed=discord.Embed(
-                        description="Your input is too big to calculate | > 250,000",
+                        description="Your input is too big to calculate",
                         color=utils.embed_color)
                         .set_footer(text=f'Requested by {ctx.message.author}.'))
                 else:
