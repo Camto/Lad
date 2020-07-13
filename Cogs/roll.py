@@ -43,7 +43,7 @@ class Roll(commands.Cog):
 					.set_footer(text = f"Requested by {ctx.message.author}."))
 		except:
 			await ctx.send(embed = discord.Embed(
-				description = "Roll using DnD rules (Example: 1d20)",
+				description = "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)",
 				color = utils.embed_color)
 				.set_footer(text = f"Requested by {ctx.message.author}."))
 
