@@ -22,6 +22,8 @@ class Roll(commands.Cog):
             amount, side = cmd[0].split("d")
 
             dice = roll(int(amount), int(side))
+            str_dice = list(map(str, dice))
+            final_dice = " + ".join(str_dice)
 
             try:
                 if sum(dice) >= 250000:
@@ -32,7 +34,7 @@ class Roll(commands.Cog):
                 else:
                     await ctx.send(embed=discord.Embed(
                         title=":game_die: Rolling dice...",
-                        description=f"Your destiny is... ``{dice, sum(dice)}``",
+                        description=f"Your destiny is... ``{final_dice} = {sum(dice)}``",
                         color=utils.embed_color)
                         .set_footer(text=f'Requested by {ctx.message.author}.'))
             except:
