@@ -2,6 +2,12 @@ import discord
 from discord.ext import commands
 import utils
 
+import math
+
+help = utils.get_yaml("help")
+
+chunks = lambda l, n: [l[i * n:(i + 1) * n] for i in range((len(l) + n - 1) // n)]
+
 # Show command descriptions.
 class Help(commands.Cog):
 	def __init__(self, client):
@@ -10,23 +16,25 @@ class Help(commands.Cog):
 	@commands.command()
 	async def help(self, ctx, *cmd):
 		if len(cmd) == 0:
-			await ctx.send(embed = discord.Embed(
-				title = "Commands",
-				description = "This bot's prefix is ``l.``",
-				color = utils.embed_color)
-				.set_footer(
-					text = f"https://github.com/Camto/Lad - In {len(self.client.guilds)} servers!",
-					icon_url = utils.icons["github"])
-				.add_field(name = "help", value = "Show this message.", inline = False)
-				.add_field(name = "ping", value = "Responds with pong.", inline = False)
-				.add_field(name = "roll", value = "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)", inline = False)
-				.add_field(name = "say", value = "Make the bot say something.", inline = False)
-				.add_field(name = "ascii", value = "Returns your message in ASCII art!", inline = False)
-				.add_field(name = "reddit", value = "Sends a link to a random reddit post.", inline = False)
-				.add_field(name = "bible", value = "Returns a random bible verse. For verses, do `l.help bible`", inline = False)
-				.add_field(name = "bitcoin", value = "Get the current price of bitcoin with a wide range of currencies to choose from", inline = False)
-				.add_field(name = "convert", value = "Converts a file type to another file type. Type `l.help convert` for all file types.", inline = False)
-				.add_field(name = "dino", value = "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.", inline = False))
+			
+			async def help_menu(_):
+				yield math.ceil(len(help) / 5)
+				for chunk in chunks(help, 5):
+					help_embed = (discord.Embed(
+						title = "Commands",
+						description = "This bot's prefix is ``l.``",
+						color = utils.embed_color)
+						.set_footer(
+							text = f"https://github.com/Camto/Lad - In {len(self.client.guilds)} servers!",
+							icon_url = utils.icons["github"]))
+					for cmd_help in chunk:
+						help_embed.add_field(
+							name = cmd_help["cmd"],
+							value = cmd_help["msg"],
+							inline = False)
+					yield help_embed
+			
+			await utils.menus.list(self.client, ctx, help_menu)
 		elif cmd[0] == "bible":
 			await ctx.send(embed = discord.Embed(
 				title = "To search type NUMBER first; followed by BOOK",
