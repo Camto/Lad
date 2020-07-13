@@ -15,8 +15,8 @@ class Help(commands.Cog):
 				description = "This bot's prefix is ``l.``",
 				color = utils.embed_color)
 				.set_footer(
-				text = "https://github.com/Camto/Lad",
-				icon_url = utils.icons["github"])
+					text = f"https://github.com/Camto/Lad - In {len(self.client.guilds)} servers!",
+					icon_url = utils.icons["github"])
 				.add_field(name = "help", value = "Show this message.", inline = False)
 				.add_field(name = "ping", value = "Responds with pong.", inline = False)
 				.add_field(name = "roll", value = "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)", inline = False)
@@ -32,8 +32,8 @@ class Help(commands.Cog):
 				title = "To search type NUMBER first; followed by BOOK",
 				color = utils.embed_color)
 				.set_author(
-				name = "Bible Help",
-				icon_url = utils.icons["bible"])
+					name = "Bible Help",
+					icon_url = utils.icons["bible"])
 				.add_field(name = "Matthew", value = "5:9 | 28:19 | 5:28 | 6:5 | 21:18-22 | 11:30 | 12:33 | 18:8 | 18:9", inline = False)
 				.add_field(name = "Leviticus", value = "19:19 | 19:27 | 9:10 | 15:19-20 | 25:44-46 | 21:17-23", inline = False)
 				.add_field(name = "Deuteronomy", value = "22:28-29 | 25:11-1 | 23:1 | 31:8 | 33:27 | 25:11-12", inline = False)
