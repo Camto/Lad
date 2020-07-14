@@ -68,12 +68,12 @@ def reload_menu(gen_):
 		gen = gen_(caller)
 		reload_number = 1
 		yield (
-			(await gen.__anext__()).set_footer(text = f"#{reload_number}"),
+			prepend_footer_text(await gen.__anext__(), f"#{reload_number}"),
 			[emojis["reload"]])
 		while True:
 			reload_number += 1
 			yield (
-				(await gen.__anext__()).set_footer(text = f"#{reload_number}"),
+				prepend_footer_text(await gen.__anext__(), f"#{reload_number}"),
 				None)
 		await gen.aclose()
 	return inner
