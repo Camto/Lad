@@ -17,12 +17,9 @@ class Roll(commands.Cog):
 				else (1, int(cmd[0])))
 			
 			if amount > 10000 or side > 10000:
-				return await ctx.send(embed = discord.Embed(
-					description = "Your input is too big to calculate",
-					color = utils.embed_color)
-					.set_footer(text = f"Requested by {ctx.message.author}."))
+				return await ctx.send(embed = utils.embeds["roll error"])
 			
-			dice = tuple(randint(1, side) for _ in range(amount))
+			dice = [randint(1, side) for _ in range(amount)]
 			str_dice = map(str, dice)
 			final_dice = (
 				f"{' + '.join(str_dice)} = {sum(dice)}"
@@ -33,19 +30,14 @@ class Roll(commands.Cog):
 				await ctx.send(embed = discord.Embed(
 					title = ":game_die: Rolling dice...",
 					description = f"Your destiny is... ``{final_dice}``",
-					color = utils.embed_color)
-					.set_footer(text = f"Requested by {ctx.message.author}."))
+					color = utils.embed_color))
 			except:
 				await ctx.send(embed = discord.Embed(
 					title = ":game_die: Rolling dice...",
 					description = f"Your destiny is... ``{sum(dice)}``",
-					color = utils.embed_color)
-					.set_footer(text = f"Requested by {ctx.message.author}."))
+					color = utils.embed_color))
 		except:
-			await ctx.send(embed = discord.Embed(
-				description = "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)",
-				color = utils.embed_color)
-				.set_footer(text = f"Requested by {ctx.message.author}."))
+			await ctx.send(embed = utils.embeds["roll more args"])
 
 def setup(client):
 	client.add_cog(Roll(client))

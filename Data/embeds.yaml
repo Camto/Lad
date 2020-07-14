@@ -20,7 +20,7 @@ convert help:
   description: "Supports: BMP, DCX, EPS, GIF, IM, JPEG, PCD, PCX, PDF, PNG, PPM, PSD, TIFF, XBM, XPM"
   image: {url: "https://media.discordapp.net/attachments/711140380384559186/730876183025287290/croppimmage.png?width=549&height=279"}
 
-convert more info:
+convert more args:
   title: ":x: Error"
   description: Type `l.help convert` for information on how to use the command.
 
@@ -105,3 +105,9 @@ bible help:
     - name: Samuel
       value: "6:19"
       inline: false
+
+roll error:
+  description: Your input is too big to calculate.
+
+roll more args:
+  description: "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"

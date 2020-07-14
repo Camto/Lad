@@ -18,7 +18,7 @@ class Convert(commands.Cog):
 	@commands.command()
 	async def convert(self, ctx, *args):
 		if len(args) == 0 or len(args) == 1:
-			await ctx.send(embed = utils.embeds["convert more info"])
+			await ctx.send(embed = utils.embeds["convert more args"])
 		else:
 			url = args[1]
 			extension = args[0]
