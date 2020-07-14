@@ -86,17 +86,20 @@ def list_menu(gen_):
 		gen = gen_(caller)
 		idx = 0
 		total_embeds = await gen.__anext__()
-		embeds = [
-			(await gen.__anext__())
-			.set_footer(text = f"{idx+1}/{total_embeds}")]
+		
+		embeds = [prepend_footer_text(
+			await gen.__anext__(),
+			f"{idx+1}/{total_embeds}")]
+		
 		dir = yield embeds[0], [next_emoji]
+		
 		while True:
 			idx += 1 if dir == next_emoji else -1
 			idx = min(max(idx, 0), total_embeds - 1)
 			if len(embeds) <= idx:
-				embeds.append(
-					(await gen.__anext__())
-					.set_footer(text = f"{idx+1}/{total_embeds}"))
+				embeds.append(prepend_footer_text(
+					await gen.__anext__(),
+					f"{idx+1}/{total_embeds}"))
 			
 			reactions = None
 			if idx == 0: reactions = [next_emoji]
@@ -109,6 +112,15 @@ def list_menu(gen_):
 			dir = yield embeds[idx], reactions
 	
 	return inner
+
+def prepend_footer_text(embed, text):
+	if embed.footer.text == discord.Embed.Empty:
+		embed.set_footer(text = text, icon_url = embed.footer.icon_url)
+	else:
+		embed.set_footer(
+			text = f"{text} - {embed.footer.text}",
+			icon_url = embed.footer.icon_url)
+	return embed
 
 class menus():
 	menu = menu
