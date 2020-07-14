@@ -24,8 +24,11 @@ async def on_command_error(ctx, error):
 
 @client.event
 async def on_ready():
-	activity = discord.Streaming(name = "l.help", url = "https://www.twitch.tv/jpvinnie")
-	await client.change_presence(status = discord.Streaming, activity = activity)
+	await client.change_presence(
+		status = discord.Streaming,
+		activity = discord.Streaming(
+			name = "l.help",
+			url = "https://www.twitch.tv/jpvinnie"))
 	print(f"{client.user.name}#{client.user.discriminator} logged in!")
 
 for filename in os.listdir("./Cogs"):
