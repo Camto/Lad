@@ -34,6 +34,13 @@ class Reddit(commands.Cog):
 						.set_author(
 							name = "Wrong Arguments",
 							icon_url = utils.icons["reddit"]))
+			else:
+				await ctx.send(embed = discord.Embed(
+					description = "Error, you did not provide a subreddit (starting with `r/`) or a user (starting with `u/`) You can use `l.help reddit` for help.",
+					color = utils.embed_color)
+					.set_author(
+						name = "Wrong Arguments",
+						icon_url = utils.icons["reddit"]))
 		else:
 			await ctx.send(embed = utils.command_disabled)
 
