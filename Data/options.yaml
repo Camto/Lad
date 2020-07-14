@@ -1,44 +1,36 @@
-autoresponses:
-  type: bool
-  default: true
-  descr: If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponse_file` to see the preprogrammed messages.
-
-autoresponse_file:
-  type: json
-  default: []
-  descr: This will be the file used when auto-responding to messages.
-
-bible:
-  type: bool
-  default: true
-  descr: If it's on, the command will work. Use `l.help bible` for more information.
-
-dino:
-  type: bool
-  default: true
-  descr: If it's on, the command will work.
-
-ping:
-  type: bool
-  default: true
-  descr: If it's on, the command will work.
-
-say:
-  type: bool
-  default: true
-  descr: If it's on, the command will work.
-
-reddit:
-  type: bool
-  default: true
-  descr: If it's on, the command will work.
-
 ascii:
-  type: bool
   default: true
-  descr: If it's on, the command will work.
-
+  descr: "If it's on, the command will work."
+  type: bool
+autoresponse_file:
+  default: []
+  descr: "This will be the file used when auto-responding to messages."
+  type: json
+autoresponses:
+  default: true
+  descr: "If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponse_file` to see the preprogrammed messages."
+  type: bool
+bible:
+  default: true
+  descr: "If it's on, the command will work. Use `l.help bible` for more information."
+  type: bool
 bitcoin:
-  type: bool
   default: true
-  descr: If it's on, the command will work.
+  descr: "If it's on, the command will work."
+  type: bool
+dino:
+  default: true
+  descr: "If it's on, the command will work."
+  type: bool
+ping:
+  default: true
+  descr: "If it's on, the command will work."
+  type: bool
+reddit:
+  default: true
+  descr: "If it's on, the command will work."
+  type: bool
+say:
+  default: true
+  descr: "If it's on, the command will work."
+  type: bool

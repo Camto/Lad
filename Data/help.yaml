@@ -1,15 +1,15 @@
 - cmd: help
   msg: Show this message.
 - cmd: ascii
-  msg: Returns your message in ASCII art!
+  msg: "Returns your message in ASCII art!"
 - cmd: bible
-  msg: Returns a random bible verse. For verses, do `l.help bible`.
+  msg: "Returns a random bible verse. For verses, do `l.help bible`."
 - cmd: bitcoin
   msg: Get the current price of bitcoin with a wide range of currencies to choose from.
 - cmd: convert
-  msg: Converts a file type to another file type. Type `l.help convert` for all file types.
+  msg: "Converts a file type to another file type. Type `l.help convert` for all file types."
 - cmd: dino
-  msg: Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.
+  msg: "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
 - cmd: ping
   msg: Responds with pong.
 - cmd: reddit
