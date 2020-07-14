@@ -28,21 +28,11 @@ class Reddit(commands.Cog):
 				elif args[0].startswith("u/"):
 					await handle_user(self, ctx, args)
 				else:
-					await ctx.send(embed = discord.Embed(
-						description = "Error, you did not provide a subreddit (starting with `r/`) or a user (starting with `u/`) You can use `l.help reddit` for help.",
-						color = utils.embed_color)
-						.set_author(
-							name = "Wrong Arguments",
-							icon_url = utils.icons["reddit"]))
+					await ctx.send(embed = utils.embeds["reddit error"])
 			else:
-				await ctx.send(embed = discord.Embed(
-					description = "Error, you did not provide a subreddit (starting with `r/`) or a user (starting with `u/`) You can use `l.help reddit` for help.",
-					color = utils.embed_color)
-					.set_author(
-						name = "Wrong Arguments",
-						icon_url = utils.icons["reddit"]))
+				await ctx.send(embed = utils.embeds["reddit error"])
 		else:
-			await ctx.send(embed = utils.command_disabled)
+			await ctx.send(embed = utils.embeds["command disabled"])
 
 async def handle_sub(self, ctx, args):
 	sub = args[0]

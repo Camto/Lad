@@ -65,11 +65,7 @@ class Help(commands.Cog):
 				.add_field(name = "Genesis", value = "1:1", inline = False)
 				.add_field(name = "Samuel", value = "6:19", inline = False))
 		elif cmd[0] == "convert":
-			await ctx.send(embed = discord.Embed(
-				title = "How to use `l.convert` for links",
-				description = "Supports: BMP, DCX, EPS, GIF, IM, JPEG, PCD, PCX, PDF, PNG, PPM, PSD, TIFF, XBM, XPM",
-				color = utils.embed_color)
-				.set_image(url = "https://media.discordapp.net/attachments/711140380384559186/730876183025287290/croppimmage.png?width=549&height=279"))
+			await ctx.send(embed = utils.embeds["convert help"])
 		elif cmd[0] == "settings":
 			option_list = "\n\n".join(map(
 				lambda option: f"`{option[0]}`: {option[1]['descr']}",

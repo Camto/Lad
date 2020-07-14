@@ -26,7 +26,7 @@ embeds = my_dictionary = {
 	k: lad_embed_from_dict(v)
 	for k, v in get_yaml("embeds").items()}
 
-command_disabled = embeds["command_disabled"]
+command_disabled = embeds["command disabled"]
 
 def get_setting(guild_id, option):
 	if guild_id in settings:
