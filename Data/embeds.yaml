@@ -111,3 +111,15 @@ roll error:
 
 roll more args:
   description: "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
+
+settings more args:
+  description: Not enough arguments were given to change an option, for help with `l.settings`, please use `l.help settings`.
+  author:
+    name: Not Enough Arguments
+    icon_url: &settings-icon https://raw.githubusercontent.com/Camto/Lad/master/Images/settings.png
+
+settings not admin:
+  description: You're not an admin, you can't access the settings.
+  author:
+    name: Denied Access
+    icon_url: *settings-icon

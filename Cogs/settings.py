@@ -19,7 +19,7 @@ class Settings(commands.Cog):
 		self.client = client
 	
 	@commands.command(name = "settings")
-	async def settings_cmd(self, ctx, *, args):
+	async def settings_cmd(self, ctx, *, args = ""):
 		args = args.lstrip().split(None, 1)
 		
 		if ctx.message.author.guild_permissions.administrator:
@@ -117,19 +117,9 @@ class Settings(commands.Cog):
 							name = "Invalid Option",
 							icon_url = utils.icons["settings"]))
 			else:
-				await ctx.send(embed = discord.Embed(
-					description = "Not enough arguments were given to change an option, for help with `l.settings`, please use `l.help settings`.",
-					color = utils.embed_color)
-					.set_author(
-						name = "Not Enough Arguments",
-						icon_url = utils.icons["settings"]))
+				await ctx.send(embed = utils.embeds["settings more args"])
 		else:
-			await ctx.send(embed = discord.Embed(
-				description = "You're not an admin, you can't access the settings.",
-				color = utils.embed_color)
-				.set_author(
-					name = "Denied Access",
-					icon_url = utils.icons["settings"]))
+			await ctx.send(embed = utils.embeds["settings not admin"])
 
 def setup(client):
 	client.add_cog(Settings(client))
