@@ -20,20 +20,17 @@ class Bitcoin(commands.Cog):
 				info = json.loads(request.text)
 				await ctx.send(embed = discord.Embed(
 					title = ":information_source: Info",
-					description=f"Bitcoin price is: {info['bpi']['USD']['rate']} USD",
+					description = f"Bitcoin price is: {info['bpi']['USD']['rate']} USD",
 					color = utils.embed_color))
 			else:
 				currency = cmd[0].upper()
 				request = requests.get(
 					f"https://api.coindesk.com/v1/bpi/currentprice/{urllib.parse.quote(currency, safe = '')}.json")
 				if request.status_code == 404:
-					await ctx.send(embed = discord.Embed(
-						title = ":anger: Error, currency not found",
-						description = "Current list of currencies: [Official Website](https://www.coindesk.com/price/bitcoin)",
-						color = utils.embed_color))
+					await ctx.send(embed = utils.embeds["bitcoin error"])
 				elif request.status_code == 200:
 					info = json.loads(request.text)
-					await ctx.send(embed=discord.Embed(
+					await ctx.send(embed = discord.Embed(
 						title = ":information_source: Info",
 						description = f"Bitcoin price is: {info['bpi'][currency]['rate']} {currency}",
 						color = utils.embed_color))
