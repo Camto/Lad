@@ -9,19 +9,24 @@ embed_color = 0xe07bb8
 global db
 settings = {}
 
-command_disabled = discord.Embed(
-	title = "Command Disabled!",
-	description = "This command was disabled in the settings by an admin.",
-	color = embed_color)
-
 def get_yaml(filename):
 	with open(f"./Data/{filename}.yaml", encoding = "utf-8") as stream:
 		return yaml.safe_load(stream)
+
+def lad_embed_from_dict(dict):
+	embed = discord.Embed.from_dict(dict)
+	embed.color = embed_color
+	return embed
 
 options = get_yaml("options")
 option_names = list(options.keys())
 icons = get_yaml("icons")
 emojis = get_yaml("emojis")
+embeds = my_dictionary = {
+	k: lad_embed_from_dict(v)
+	for k, v in get_yaml("embeds").items()}
+
+command_disabled = embeds["command_disabled"]
 
 def get_setting(guild_id, option):
 	if guild_id in settings:
