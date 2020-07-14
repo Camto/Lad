@@ -2,6 +2,9 @@ command disabled:
   title: Command Disabled!
   description: This command was disabled in the settings by an admin.
 
+command not found:
+  title: ":x: Command Not Found | Use `l.help` for command list"
+
 reddit error:
   description: Error, you did not provide a subreddit (starting with `r/`) or a user (starting with `u/`) You can use `l.help reddit` for help.
   author:
