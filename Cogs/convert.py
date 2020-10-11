@@ -17,7 +17,7 @@ class Convert(commands.Cog):
 	
 	@commands.command()
 	async def convert(self, ctx, *args):
-		if len(args) == 0 or len(args) == 1:
+		if len(args) <= 1 :
 			await ctx.send(embed = utils.embeds["convert more args"])
 		else:
 			url = args[1]
@@ -28,7 +28,7 @@ class Convert(commands.Cog):
 			
 			try:
 				image_file = requests.get(url, allow_redirects = True)
-				open(f"{temp_file}", "wb").write(image_file.content)
+				open(temp_file, "wb").write(image_file.content)
 
 				try:
 					im = Image.open(temp_file)
