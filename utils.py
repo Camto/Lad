@@ -13,11 +13,6 @@ def get_yaml(filename):
 	with open(f"./Data/{filename}.yaml", encoding = "utf-8") as stream:
 		return yaml.safe_load(stream)
 
-def lad_embed_from_dict(dict):
-	embed = discord.Embed.from_dict(dict)
-	embed.color = embed_color
-	return embed
-
 options = {
 	option["name"]: {"type": option["type"], "default": option["default"], "descr": option["descr"]}
 	for option in get_yaml("options")}
@@ -25,7 +20,7 @@ option_names = list(options.keys())
 icons = get_yaml("icons")
 emojis = get_yaml("emojis")
 embeds = my_dictionary = {
-	k: lad_embed_from_dict(v)
+	k: discord.Embed.from_dict(v)
 	for k, v in get_yaml("embeds").items()}
 
 command_disabled = embeds["command disabled"]
