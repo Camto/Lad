@@ -4,70 +4,70 @@ bible help:
     name: Bible Help
   color: 14711736
   fields:
-  - inline: false
+  - inline: true
     name: Matthew
     value: "5:9 | 28:19 | 5:28 | 6:5 | 21:18-22 | 11:30 | 12:33 | 18:8 | 18:9"
-  - inline: false
+  - inline: true
     name: Leviticus
     value: "19:19 | 19:27 | 9:10 | 15:19-20 | 25:44-46 | 21:17-23"
-  - inline: false
+  - inline: true
     name: Deuteronomy
     value: "22:28-29 | 25:11-1 | 23:1 | 31:8 | 33:27 | 25:11-12"
-  - inline: false
+  - inline: true
     name: Psalms
     value: "23:1-6 | 46:1-3 | 9:9-10 | 34:10b | 32:7-8"
-  - inline: false
+  - inline: true
     name: Exodus
     value: "8:1-14 | 21:7-8 | 15:2 | 33:14 | 23:19"
-  - inline: false
+  - inline: true
     name: Kings
     value: "6:28-29 | 2:23-25 | 23:20-25"
-  - inline: false
+  - inline: true
     name: John
     value: "3:3 | 14:14 | 14:6 | 3:16"
-  - inline: false
+  - inline: true
     name: Chronicles
     value: "21:14-15 | 16:11"
-  - inline: false
+  - inline: true
     name: Ephesians
     value: "2:8 | 6:5 | 5:4"
-  - inline: false
+  - inline: true
     name: Proverbs
     value: "18:10 | 15:4"
-  - inline: false
+  - inline: true
     name: Isaiah
     value: "41:10 | 26:3-4"
-  - inline: false
+  - inline: true
     name: Timothy
     value: "6:6-9 | 3:16"
-  - inline: false
+  - inline: true
     name: Luke
     value: "16:18 | 3:11"
-  - inline: false
+  - inline: true
     name: Peter
     value: "5:8 | 2:18"
-  - inline: false
+  - inline: true
     name: Numbers
     value: "31:17-18"
-  - inline: false
+  - inline: true
     name: Reverend
     value: "21:8"
-  - inline: false
+  - inline: true
     name: Nehemiah
     value: "8:10"
-  - inline: false
+  - inline: true
     name: Ezekiel
     value: "47:11"
-  - inline: false
+  - inline: true
     name: Hebrews
     value: "12:1"
-  - inline: false
+  - inline: true
     name: Romans
     value: "3:23"
-  - inline: false
+  - inline: true
     name: Genesis
     value: "1:1"
-  - inline: false
+  - inline: true
     name: Samuel
     value: "6:19"
   title: To search type NUMBER first; followed by BOOK
@@ -114,8 +114,7 @@ reddit help:
   color: 14711736
   description: "The Reddit command searches for posts either in a subreddit (starting with `r/`) or by a user (starting with `u/`.)"
   fields:
-  - inline: false
-    name: Getting from subreddits
+  - name: Getting from subreddits
     value: |
       Putting the subreddit name will get random posts from there. For example: `l.reddit r/aww`
 
@@ -129,8 +128,7 @@ reddit help:
       For example: `l.reddit r/aww rising` or `l.reddit r/aww top year`
 
       After sorting, a number can be added at the end to specify how many posts you want to fetch. For example: `l.reddit r/aww hot 5`
-  - inline: false
-    name: Getting from users
+  - name: Getting from users
     value: |
       With users, you can get their profile information or their posts. For example `l.reddit u/camto about` will get that user's information, and `l.reddit u/camto posts` will get their newest posts.
 
