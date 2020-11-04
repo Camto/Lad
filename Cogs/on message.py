@@ -14,7 +14,7 @@ class On_Message(commands.Cog):
 	@commands.Cog.listener()
 	async def on_message(self, msg):
 		if (
-				msg.author.id != utils.lad_id and
+				msg.author.id != self.client.user.id and
 				utils.get_setting(msg.guild.id, "autoresponses") and
 				not msg.content.startswith("l.")):
 			text = msg.content.lower()

@@ -4,7 +4,6 @@ from discord.ext import commands
 import asyncio
 import yaml
 
-lad_id = 709644595104972890
 embed_color = 0xe07bb8
 global db
 settings = {}
