@@ -7,8 +7,8 @@ let Embed = ./Embed.dhall
 let icons = ./icons.dhall
 let options = ./options.dhall
 
-let icon-title = \(name: Text) -> \(icon_url: Text) ->
-	Some Embed.Author::{name = Some name, icon_url = Some icon_url}
+let icon-title = \(name: Text) -> \(icon-url: Text) ->
+	Some Embed.Author::{name = Some name, icon_url = Some icon-url}
 
 in {
 	`command disabled` = Embed.Embed::{
