@@ -57,7 +57,7 @@ in {
 
 	`bitcoin help` = Embed.Embed::{
 		title = Some "Bitcoin -> Currency Conversion",
-		description = Some "To change the currency output on your bitcoin conversion, use `l.bitcoin <currency>`. The possible list of currencies can be accessed at: https://www.coindesk.com/price/bitcoin (ex. USD, EUR, GBP):"
+		description = Some "To change the currency output onCoinDesk](https://www.coindesk.com/price/bitcoin) (ex. USD, EUR, GBP):"
 	},
 
 	`convert help` = Embed.Embed::{
