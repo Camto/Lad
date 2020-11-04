@@ -1,7 +1,6 @@
 let List/map = ./Prelude/List/map
 let Text/concatSep = ./Prelude/Text/concatSep
-let Prelude = ./Prelude/package.dhall
-let JSON = Prelude.JSON
+let JSON/Type = ./Prelude/JSON/Type
 
 let Embed = ./Embed.dhall
 let icons = ./icons.dhall
@@ -96,7 +95,7 @@ in {
 	
 	`settings help` = Embed.Embed::{
 		description =
-			let Option = {name: Text, type: Text, default: < Bool: Bool | JSON: JSON.Type >, descr: Text}
+			let Option = {name: Text, type: Text, default: < Bool: Bool | JSON: JSON/Type >, descr: Text}
 			let option-list = Text/concatSep "\n\n" (List/map Option Text (\(option: Option) -> "`${option.name}`: ${option.descr}") options)
 			in Some ''
 			To change an option, use `l.settings <option name> <value>` <value> can be on or off.
