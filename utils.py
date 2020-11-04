@@ -12,9 +12,7 @@ def get_yaml(filename):
 		return yaml.safe_load(stream)
 
 embed_color = get_yaml("embed-color")
-options = {
-	option["name"]: {"type": option["type"], "default": option["default"], "descr": option["descr"]}
-	for option in get_yaml("options")}
+options = get_yaml("options")
 option_names = list(options.keys())
 icons = get_yaml("icons")
 emojis = get_yaml("emojis")
