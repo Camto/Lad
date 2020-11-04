@@ -40,18 +40,7 @@ class Help(commands.Cog):
 		elif cmd[0] == "convert":
 			await ctx.send(embed = utils.embeds["convert help"])
 		elif cmd[0] == "settings":
-			option_list = "\n\n".join(map(
-				lambda option: f"`{option[0]}`: {option[1]['descr']}",
-				utils.options.items()))
-			
-			await ctx.send(embed = discord.Embed(
-				description = f"""To change an option, use `l.settings <option name> <value>` <value> can be on or off.
-
-	{option_list}""",
-				color = utils.embed_color)
-				.set_author(
-				name = "Settings Help",
-				icon_url = utils.icons["settings"]))
+			await ctx.send(embed = utils.embeds["settings help"])
 
 def setup(client):
 	client.add_cog(Help(client))

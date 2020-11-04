@@ -101,6 +101,30 @@ roll error:
   description: Your input is too big to calculate.
 roll more args:
   description: "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
+settings help:
+  author:
+    icon_url: "https://raw.githubusercontent.com/Camto/Lad/master/Images/settings.png"
+    name: Settings Help
+  description: |
+    To change an option, use `l.settings <option name> <value>` <value> can be on or off.
+
+    `ascii`: If it's on, the command will work.
+
+    `autoresponse_file`: This will be the file used when auto-responding to messages.
+
+    `autoresponses`: If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponse_file` to see the preprogrammed messages.
+
+    `bible`: If it's on, the command will work. Use `l.help bible` for more information.
+
+    `bitcoin`: If it's on, the command will work.
+
+    `dino`: If it's on, the command will work.
+
+    `ping`: If it's on, the command will work.
+
+    `reddit`: If it's on, the command will work.
+
+    `say`: If it's on, the command will work.
 settings more args:
   author:
     icon_url: "https://raw.githubusercontent.com/Camto/Lad/master/Images/settings.png"

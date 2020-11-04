@@ -1,36 +1,36 @@
-ascii:
-  default: true
+- default: true
   descr: "If it's on, the command will work."
+  name: ascii
   type: bool
-autoresponse_file:
-  default: []
+- default: []
   descr: "This will be the file used when auto-responding to messages."
+  name: autoresponse_file
   type: json
-autoresponses:
-  default: true
+- default: true
   descr: "If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponse_file` to see the preprogrammed messages."
+  name: autoresponses
   type: bool
-bible:
-  default: true
+- default: true
   descr: "If it's on, the command will work. Use `l.help bible` for more information."
+  name: bible
   type: bool
-bitcoin:
-  default: true
+- default: true
   descr: "If it's on, the command will work."
+  name: bitcoin
   type: bool
-dino:
-  default: true
+- default: true
   descr: "If it's on, the command will work."
+  name: dino
   type: bool
-ping:
-  default: true
+- default: true
   descr: "If it's on, the command will work."
+  name: ping
   type: bool
-reddit:
-  default: true
+- default: true
   descr: "If it's on, the command will work."
+  name: reddit
   type: bool
-say:
-  default: true
+- default: true
   descr: "If it's on, the command will work."
+  name: say
   type: bool

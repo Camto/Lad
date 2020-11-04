@@ -18,7 +18,9 @@ def lad_embed_from_dict(dict):
 	embed.color = embed_color
 	return embed
 
-options = get_yaml("options")
+options = {
+	option["name"]: {"type": option["type"], "default": option["default"], "descr": option["descr"]}
+	for option in get_yaml("options")}
 option_names = list(options.keys())
 icons = get_yaml("icons")
 emojis = get_yaml("emojis")

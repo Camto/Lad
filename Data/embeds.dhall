@@ -1,7 +1,11 @@
 let List/map = ./Prelude/List/map
+let Text/concatSep = ./Prelude/Text/concatSep
+let Prelude = ./Prelude/package.dhall
+let JSON = Prelude.JSON
 
 let Embed = ./Embed.dhall
 let icons = ./icons.dhall
+let options = ./options.dhall
 
 let icon_title = \(name: Text) -> \(icon_url: Text) ->
 	Some Embed.Author::{name = Some name, icon_url = Some icon_url}
@@ -88,6 +92,17 @@ in {
 	
 	`roll more args` = Embed.Embed::{
 		description = Some "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
+	},
+	
+	`settings help` = Embed.Embed::{
+		description =
+			let Option = {name: Text, type: Text, default: < Bool: Bool | JSON: JSON.Type >, descr: Text}
+			let option-list = Text/concatSep "\n\n" (List/map Option Text (\(option: Option) -> "`${option.name}`: ${option.descr}") options)
+			in Some ''
+			To change an option, use `l.settings <option name> <value>` <value> can be on or off.
+			
+			${option-list}'',
+		author = icon_title "Settings Help" icons.settings
 	},
 	
 	`settings more args` = Embed.Embed::{
