@@ -4,6 +4,8 @@ import utils
 
 import math
 
+from fuzzywuzzy import fuzz, process
+
 help = utils.get_yaml("help")
 
 chunks = lambda l, n: [l[i * n:(i + 1) * n] for i in range((len(l) + n - 1) // n)]
@@ -35,8 +37,9 @@ class Help(commands.Cog):
 					yield help_embed
 			
 			await utils.menus.list(self.client, ctx, help_menu)
-		elif cmd[0] in ["bible", "convert", "reddit", "settings"]:
-			await ctx.send(embed = utils.embeds[f"{cmd[0]} help"])
+		else:
+			help_category = process.extractOne(cmd[0], ["bible", "convert", "reddit", "settings"])[0]
+			await ctx.send(embed = utils.embeds[f"{help_category} help"])
 
 def setup(client):
 	client.add_cog(Help(client))
