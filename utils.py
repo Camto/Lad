@@ -4,7 +4,6 @@ from discord.ext import commands
 import asyncio
 import yaml
 
-embed_color = 0xe07bb8
 global db
 settings = {}
 
@@ -12,6 +11,7 @@ def get_yaml(filename):
 	with open(f"./Data/{filename}.yaml", encoding = "utf-8") as stream:
 		return yaml.safe_load(stream)
 
+embed_color = get_yaml("embed-color")
 options = {
 	option["name"]: {"type": option["type"], "default": option["default"], "descr": option["descr"]}
 	for option in get_yaml("options")}
