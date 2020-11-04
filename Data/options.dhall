@@ -13,9 +13,7 @@ let default-bool = Option-Type.Bool True
 let default-json = Option-Type.JSON (JSON.array ([] : List JSON.Type))
 let option-command-disabling = \(name: Text) -> option name default-bool "If it's on, the command will work."
 
-in
-
-[
+in [
 	option-command-disabling "ascii",
 	option "autoresponse_file" default-json
 		"This will be the file used when auto-responding to messages.",
