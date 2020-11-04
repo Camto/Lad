@@ -1,0 +1,3 @@
+[submodule "Data/dhall-discord"]
+	path = Data/dhall-discord
+	url = https://github.com/camto/dhall-discord
