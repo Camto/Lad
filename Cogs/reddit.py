@@ -46,25 +46,18 @@ async def handle_sub(self, ctx, args):
 	elif args[1] in sorting_methods:
 		if args[1] != "top":
 			# Sort by method other than top.
-			posts = get_n_posts_by_sort(
-				sub,
-				int(args[2]) if len(args) >= 3 else 25,
-				args[1])
+			n = int(args[2]) if len(args) >= 3 else 25
+			posts = get_n_posts_by_sort(sub, n, args[1])
 		elif len(args) >= 3 and args[2] in top_sub_sorts:
 			# Sort by top of all time as the default for top.
-			posts = get_n_posts_by_sort(
-				sub,
-				int(args[3]) if len(args) >= 4 else 25,
-				args[1],
-				args[2])
+			n = int(args[3]) if len(args) >= 4 else 25
+			posts = get_n_posts_by_sort(sub, n, args[1], args[2])
 		else:
 			# Sort by top of all X.
-			posts = get_n_posts_by_sort(
-				sub,
-				int(args[2]) if len(args) >= 3 else 25,
-				args[1])
+			n = int(args[2]) if len(args) >= 3 else 25
+			posts = get_n_posts_by_sort(sub, n, args[1])
 		
-		await menu_posts(self, ctx, posts)
+		await menu_posts(self, ctx, posts[-n:])
 	else:
 		await ctx.send(embed = discord.Embed(
 			description = f"Error, {args[1]} is not a sorting method this bot knows of. Use one of `hot`, `new`, `rising`, `top`, or `controversial` instead.",
@@ -98,31 +91,22 @@ async def handle_user(self, ctx, args):
 		sub = args[0] + "/submitted"
 		
 		if len(args) == 2:
-			posts = get_n_posts_by_sort(
-				sub,
-				int(args[3]) if len(args) >= 4 else 25,
-				"new")
+			n = int(args[3]) if len(args) >= 4 else 25
+			posts = get_n_posts_by_sort(sub, n, "new")
 		elif args[2] != "top":
 			# Sort by method other than top.
-			posts = get_n_posts_by_sort(
-				sub,
-				int(args[3]) if len(args) >= 4 else 25,
-				args[2])
+			n = int(args[3]) if len(args) >= 4 else 25
+			posts = get_n_posts_by_sort(sub, n, args[2])
 		elif len(args) >= 4 and args[3] in top_sub_sorts:
 			# Sort by top of all time as the default for top.
-			posts = get_n_posts_by_sort(
-				sub,
-				int(args[4]) if len(args) >= 5 else 25,
-				args[2],
-				args[3])
+			n = int(args[4]) if len(args) >= 5 else 25
+			posts = get_n_posts_by_sort(sub, n, args[2], args[3])
 		else:
 			# Sort by top of all X.
-			posts = get_n_posts_by_sort(
-				sub,
-				int(args[3]) if len(args) >= 4 else 25,
-				args[2])
+			n = int(args[3]) if len(args) >= 4 else 25
+			posts = get_n_posts_by_sort(sub, n, args[2])
 		
-		await menu_posts(self, ctx, posts)
+		await menu_posts(self, ctx, posts[-n:])
 	else:
 		await ctx.send(embed = discord.Embed(
 			description = f"``{args[1]}`` is not a property this bot knows how to get from Reddit users. Only `about` (the default) and `posts` work.",
