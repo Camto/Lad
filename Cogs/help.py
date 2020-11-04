@@ -38,7 +38,7 @@ class Help(commands.Cog):
 			
 			await utils.menus.list(self.client, ctx, help_menu)
 		else:
-			help_category = process.extractOne(cmd[0], ["bible", "convert", "reddit", "settings"])[0]
+			help_category = process.extractOne(cmd[0], list(map(lambda cmd: cmd["cmd"], help)))[0]
 			await ctx.send(embed = utils.embeds[f"{help_category} help"])
 
 def setup(client):
