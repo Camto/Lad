@@ -12,7 +12,7 @@ let option = \(default: Option-Type) -> \(descr: Text) ->
 let default-bool = Option-Type.Bool True
 let default-json = Option-Type.JSON (JSON.array ([] : List JSON.Type))
 let option-command-disabling = option default-bool "If it's on, the command will work."
-let keyOption = Map/keyValue {type: Text, default: < Bool: Bool | JSON: JSON.Type >, descr: Text}
+let keyOption = Map/keyValue {type: Text, default: Option-Type, descr: Text}
 
 in [
 	keyOption "ascii" option-command-disabling,
