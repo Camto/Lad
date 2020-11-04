@@ -3,7 +3,7 @@ let Map/Entry = ./Prelude/Map/Entry
 let Text/concatSep = ./Prelude/Text/concatSep
 let JSON/Type = ./Prelude/JSON/Type
 
-let Embed = ./Embed.dhall
+let Embed = ./embed_.dhall
 let icons = ./icons.dhall
 let options = ./options.dhall
 
