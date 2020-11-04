@@ -59,7 +59,7 @@ in {
 		title = Some "To search type NUMBER first; followed by BOOK",
 		author = icon-title "Bible Help" icons.bible,
 		fields = Some (List/map Embed.Field.Type Embed.Field.Type
-			(\(field: Embed.Field.Type) -> field // {inline = Some False})
+			(\(field: Embed.Field.Type) -> field with inline = Some False)
 			[
 				Embed.Field::{name = "Matthew", value = "5:9 | 28:19 | 5:28 | 6:5 | 21:18-22 | 11:30 | 12:33 | 18:8 | 18:9"},
 				Embed.Field::{name = "Leviticus", value = "19:19 | 19:27 | 9:10 | 15:19-20 | 25:44-46 | 21:17-23"},
@@ -97,11 +97,12 @@ in {
 	`settings help` = Embed.Embed::{
 		description =
 			let Option = Map/Entry Text {type: Text, default: < Bool: Bool | JSON: JSON/Type >, descr: Text}
-			let option-list = Text/concatSep "\n\n" (List/map Option Text (\(option: Option) -> "`${option.mapKey}`: ${option.mapValue.descr}") options)
+			let option-list = Text/concatSep "\n\n" (
+				List/map Option Text (\(option: Option) -> "`${option.mapKey}`: ${option.mapValue.descr}") options)
 			in Some ''
-			To change an option, use `l.settings <option name> <value>` <value> can be on or off.
-			
-			${option-list}'',
+				To change an option, use `l.settings <option name> <value>` <value> can be on or off.
+				
+				${option-list}'',
 		author = icon-title "Settings Help" icons.settings
 	},
 	
