@@ -7,7 +7,7 @@ let Embed = ./Embed.dhall
 let icons = ./icons.dhall
 let options = ./options.dhall
 
-let icon_title = \(name: Text) -> \(icon_url: Text) ->
+let icon-title = \(name: Text) -> \(icon_url: Text) ->
 	Some Embed.Author::{name = Some name, icon_url = Some icon_url}
 
 in {
@@ -22,7 +22,7 @@ in {
 	
 	`reddit error` = Embed.Embed::{
 		description = Some "Error, you did not provide a subreddit (starting with `r/`) or a user (starting with `u/`) You can use `l.help reddit` for help.",
-		author = icon_title "Wrong Arguments" icons.reddit
+		author = icon-title "Wrong Arguments" icons.reddit
 	},
 	
 	`bitcoin error` = Embed.Embed::{
@@ -57,7 +57,7 @@ in {
 	
 	`bible help` = Embed.Embed::{
 		title = Some "To search type NUMBER first; followed by BOOK",
-		author = icon_title "Bible Help" icons.bible,
+		author = icon-title "Bible Help" icons.bible,
 		fields = Some (List/map Embed.Field.Type Embed.Field.Type
 			(\(field: Embed.Field.Type) -> field // {inline = Some False})
 			[
@@ -102,16 +102,16 @@ in {
 			To change an option, use `l.settings <option name> <value>` <value> can be on or off.
 			
 			${option-list}'',
-		author = icon_title "Settings Help" icons.settings
+		author = icon-title "Settings Help" icons.settings
 	},
 	
 	`settings more args` = Embed.Embed::{
 		description = Some "Not enough arguments were given to change an option, for help with `l.settings`, please use `l.help settings`.",
-		author = icon_title "Not Enough Arguments" icons.settings
+		author = icon-title "Not Enough Arguments" icons.settings
 	},
 	
 	`settings not admin` = Embed.Embed::{
 		description = Some "You're not an admin, you can't access the settings.",
-		author = icon_title "Denied Access" icons.settings
+		author = icon-title "Denied Access" icons.settings
 	}
 }
