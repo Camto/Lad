@@ -10,6 +10,9 @@ let options = ./options.dhall
 let icon-title = \(name: Text) -> \(icon-url: Text) ->
 	Some Embed.Author::{name = Some name, icon_url = Some icon-url}
 
+let inline-fields = List/map Embed.Field.Type Embed.Field.Type
+	(\(field: Embed.Field.Type) -> field with inline = Some False)
+
 in {
 	`command disabled` = Embed.Embed::{
 		title = Some "Command Disabled!",
@@ -18,6 +21,31 @@ in {
 	
 	`command not found` = Embed.Embed::{
 		title = Some ":x: Command Not Found | Use `l.help` for command list"
+	},
+	
+	`reddit help` = Embed.Embed::{
+		description = Some "The Reddit command searches for posts either in a subreddit (starting with `r/`) or by a user (starting with `u/`.)",
+		author = icon-title "Reddit Help" icons.reddit,
+		fields = Some (inline-fields [
+			Embed.Field::{name = "Getting from subreddits", value = ''
+				Putting the subreddit name will get random posts from there. For example: `l.reddit r/aww`
+				
+				You can sort by:
+				- `hot`
+				- `new`
+				- `rising`
+				- `top`, where you can also specify if you want top of: `hour`, `day`, `week`, `month`, `year`, or `all`.
+				- `controversial`
+				
+				For example: `l.reddit r/aww rising` or `l.reddit r/aww top year`
+				
+				After sorting, a number can be added at the end to specify how many posts you want to fetch. For example: `l.reddit r/aww hot 5`''
+			},
+			Embed.Field::{name = "Getting from users", value = ''
+				With users, you can get their profile information or their posts. For example `l.reddit u/camto about` will get that user's information, and `l.reddit u/camto posts` will get their newest posts.
+				
+				If getting posts, sorting and specifying the number of posts can be done the same way as it's done for subreddits. For example, `l.reddit u/camto posts top all 5` will get that user's top 5 posts they ever made.''}
+		])
 	},
 	
 	`reddit error` = Embed.Embed::{
@@ -58,9 +86,7 @@ in {
 	`bible help` = Embed.Embed::{
 		title = Some "To search type NUMBER first; followed by BOOK",
 		author = icon-title "Bible Help" icons.bible,
-		fields = Some (List/map Embed.Field.Type Embed.Field.Type
-			(\(field: Embed.Field.Type) -> field with inline = Some False)
-			[
+		fields = Some (inline-fields [
 				Embed.Field::{name = "Matthew", value = "5:9 | 28:19 | 5:28 | 6:5 | 21:18-22 | 11:30 | 12:33 | 18:8 | 18:9"},
 				Embed.Field::{name = "Leviticus", value = "19:19 | 19:27 | 9:10 | 15:19-20 | 25:44-46 | 21:17-23"},
 				Embed.Field::{name = "Deuteronomy", value = "22:28-29 | 25:11-1 | 23:1 | 31:8 | 33:27 | 25:11-12"},

@@ -35,12 +35,8 @@ class Help(commands.Cog):
 					yield help_embed
 			
 			await utils.menus.list(self.client, ctx, help_menu)
-		elif cmd[0] == "bible":
-			await ctx.send(embed = utils.embeds["bible help"])
-		elif cmd[0] == "convert":
-			await ctx.send(embed = utils.embeds["convert help"])
-		elif cmd[0] == "settings":
-			await ctx.send(embed = utils.embeds["settings help"])
+		elif cmd[0] in ["bible", "convert", "reddit", "settings"]:
+			await ctx.send(embed = utils.embeds[f"{cmd[0]} help"])
 
 def setup(client):
 	client.add_cog(Help(client))
