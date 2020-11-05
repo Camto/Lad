@@ -20,9 +20,11 @@ in [
 	command "help"
 		"Show this message."
 		no-help-embed,
+	
 	command "ascii"
 		"Returns your message in ASCII art!"
 		no-help-embed,
+	
 	command "bible"
 		"Returns a random bible verse. For verses, do `l.help bible`."
 		embed.Embed::{
@@ -55,12 +57,14 @@ in [
 					embed.Field::{name = "Samuel", value = "6:19"}
 				])
 		},
+	
 	command "bitcoin"
 		"Get the current price of bitcoin with a wide range of currencies to choose from."
 		embed.Embed::{
 			title = Some "Bitcoin -> Currency Conversion",
 			description = Some "To change the currency output on [CoinDesk](https://www.coindesk.com/price/bitcoin) (ex. USD, EUR, GBP):"
 		},
+	
 	command "convert"
 		"Converts a file type to another file type. Type `l.help convert` for all file types."
 		embed.Embed::{
@@ -70,12 +74,15 @@ in [
 				url = Some "https://media.discordapp.net/attachments/711140380384559186/730876183025287290/croppimmage.png?width=549&height=279"
 			}
 		},
+	
 	command "dino"
 		"Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
 		no-help-embed,
+	
 	command "ping"
 		"Responds with pong."
 		no-help-embed,
+	
 	command "reddit"
 		"Sends a link to a random reddit post."
 		embed.Embed::{
@@ -102,12 +109,15 @@ in [
 					If getting posts, sorting and specifying the number of posts can be done the same way as it's done for subreddits. For example, `l.reddit u/camto posts top all 5` will get that user's top 5 posts they ever made.''}
 			]
 		},
+	
 	command "roll"
 		"Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
 		no-help-embed,
+	
 	command "say"
 		"Make the bot say something."
 		no-help-embed,
+	
 	command "settings"
 		"Change Lad's options, like enabling or disabling certain commands. Can only be used by admins."
 		embed.Embed::{
