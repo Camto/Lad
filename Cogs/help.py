@@ -7,6 +7,7 @@ import math
 from fuzzywuzzy import fuzz, process
 
 help = utils.get_yaml("help")
+for i in range(len(help)): help[i]["embed"] = discord.Embed.from_dict(help[i]["embed"])
 
 chunks = lambda l, n: [l[i * n:(i + 1) * n] for i in range((len(l) + n - 1) // n)]
 
@@ -39,7 +40,7 @@ class Help(commands.Cog):
 			await utils.menus.list(self.client, ctx, help_menu)
 		else:
 			help_category = process.extractOne(cmd[0], list(map(lambda cmd: cmd["cmd"], help)))[0]
-			await ctx.send(embed = utils.embeds[f"{help_category} help"])
+			await ctx.send(embed = list(filter(lambda cmd_help: cmd_help["cmd"] == help_category, help))[0]["embed"])
 
 def setup(client):
 	client.add_cog(Help(client))
