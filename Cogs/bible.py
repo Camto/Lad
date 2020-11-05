@@ -2,14 +2,11 @@ import discord
 from discord.ext import commands
 import utils
 
-import asyncio
 import random
 
 from fuzzywuzzy import fuzz, process
 
 quotes = utils.get_yaml("bible quotes")
-
-reload_emoji = utils.emojis["reload"]
 
 # Starting the bible study.
 class Bible(commands.Cog):
