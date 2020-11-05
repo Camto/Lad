@@ -144,7 +144,8 @@
 - cmd: say
   embed:
     color: 14711736
-    title: "There's no help available for this command yet."
+    description: "Using `l.say` the bot will repeat!"
+    title: Say How To
   msg: Make the bot say something.
 - cmd: settings
   embed:

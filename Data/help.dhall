@@ -119,7 +119,10 @@ in [
 	
 	command "say"
 		"Make the bot say something."
-		no-help-embed,
+		embed.Embed::{
+			title = Some "Say How To",
+			description = Some "Using `l.say` the bot will repeat!"
+		},
 	
 	command "settings"
 		"Change Lad's options, like enabling or disabling certain commands. Can only be used by admins."
