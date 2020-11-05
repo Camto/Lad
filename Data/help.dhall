@@ -112,7 +112,10 @@ in [
 	
 	command "roll"
 		"Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
-		no-help-embed,
+		embed.Embed::{
+			title = Some "Rolling How To",
+			description = Some "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
+		},
 	
 	command "say"
 		"Make the bot say something."
