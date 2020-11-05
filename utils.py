@@ -90,7 +90,7 @@ def list_menu(gen_):
 			await gen.__anext__(),
 			f"{idx+1}/{total_embeds}")]
 		
-		dir = yield embeds[0], [next_emoji]
+		dir = yield embeds[0], ([next_emoji] if total_embeds > 1 else [])
 		
 		while True:
 			idx += 1 if dir == next_emoji else -1
@@ -101,7 +101,8 @@ def list_menu(gen_):
 					f"{idx+1}/{total_embeds}"))
 			
 			reactions = None
-			if idx == 0: reactions = [next_emoji]
+			if total_embeds == 1: reactions = []
+			elif idx == 0: reactions = [next_emoji]
 			elif idx == total_embeds - 1: reactions = [prev_emoji]
 			elif (
 				idx == 1 and dir == next_emoji or
