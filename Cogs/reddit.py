@@ -106,7 +106,7 @@ async def handle_user(self, ctx, args):
 			await menu_posts(self, ctx, posts[-n:])
 		else:
 			await ctx.send(embed = discord.Embed(
-			description = f"Error, {args[1]} is not a sorting method this bot knows of. Use one of `hot`, `new`, `rising`, `top`, or `controversial` instead.",
+			description = f"Error, {args[2]} is not a sorting method this bot knows of. Use one of `hot`, `new`, `rising`, `top`, or `controversial` instead.",
 			color = utils.embed_color)
 			.set_author(
 				name = "Invalid Sorting Method",
