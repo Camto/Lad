@@ -1,4 +1,5 @@
 let List/map = ./Prelude/List/map
+let Text/default = ./Prelude/Text/default
 let Map/Entry = ./Prelude/Map/Entry
 let Text/concatSep = ./Prelude/Text/concatSep
 let JSON/Type = ./Prelude/JSON/Type
@@ -77,7 +78,11 @@ in [
 	
 	command "dino"
 		"Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
-		no-help-embed,
+		embed.Embed::{
+			title = Some "Dino How To",
+			author = icon-title "Dino-ing" (Text/default (List/head Text icons.dinos)),
+			description = Some "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
+		},
 	
 	command "ping"
 		"Responds with pong."

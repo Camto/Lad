@@ -99,8 +99,12 @@
   msg: "Converts a file type to another file type. Type `l.help convert` for all file types."
 - cmd: dino
   embed:
+    author:
+      icon_url: "https://raw.githubusercontent.com/Camto/Lad/master/Images/dinos/dino%201.png"
+      name: "Dino-ing"
     color: 14711736
-    title: "There's no help available for this command yet."
+    description: "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
+    title: Dino How To
   msg: "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
 - cmd: ping
   embed:
