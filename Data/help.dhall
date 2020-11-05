@@ -11,7 +11,7 @@ let options = ./options.dhall
 let icon-title = \(name: Text) -> \(icon-url: Text) ->
 	Some embed.Author::{name = Some name, icon_url = Some icon-url}
 
-let command = \(cmd: Text) -> \(msg: Text) -> \(embed: embed.Embed.Type) -> {cmd = cmd, msg = msg, embed = embed}
+let command = \(cmd: Text) -> \(msg: Text) -> \(embed: embed.Embed.Type) -> {cmd, msg, embed}
 
 let no-help-embed = embed.Embed::{
 	title = Some "There's no help available for this command yet."
