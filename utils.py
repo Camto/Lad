@@ -53,7 +53,7 @@ async def menu(client, ctx, gen_):
 			await msg.edit(embed = embed)
 			await msg.remove_reaction(str(reaction.emoji), user)
 			
-			if new_reactions != None:
+			if new_reactions != reactions:
 				for reaction in reactions:
 					await msg.remove_reaction(reaction, client.user)
 				for reaction in new_reactions:
@@ -73,7 +73,7 @@ def reload_menu(gen_):
 			reload_number += 1
 			yield (
 				prepend_footer_text(await gen.__anext__(), f"#{reload_number}"),
-				None)
+				[emojis["reload"]])
 		await gen.aclose()
 	return inner
 
@@ -100,14 +100,10 @@ def list_menu(gen_):
 					await gen.__anext__(),
 					f"{idx+1}/{total_embeds}"))
 			
-			reactions = None
 			if total_embeds == 1: reactions = []
 			elif idx == 0: reactions = [next_emoji]
 			elif idx == total_embeds - 1: reactions = [prev_emoji]
-			elif (
-				idx == 1 and dir == next_emoji or
-				idx == total_embeds - 2 and dir == prev_emoji):
-				reactions = [prev_emoji, next_emoji]
+			else: reactions = [prev_emoji, next_emoji]
 			
 			dir = yield embeds[idx], reactions
 	

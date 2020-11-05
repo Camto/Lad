@@ -129,7 +129,7 @@ def post_to_embed(post):
 		.set_author(
 			name = post["title"],
 			icon_url = utils.icons["reddit"],
-			url = f'https://www.reddit.com{post["permalink"]}'))
+			url = f"https://www.reddit.com{post['permalink']}"))
 	
 	if not post["is_self"]:
 		if "post_hint" in post:
