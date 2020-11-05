@@ -62,7 +62,7 @@ in [
 	command "bitcoin"
 		"Get the current price of bitcoin with a wide range of currencies to choose from."
 		embed.Embed::{
-			title = Some "Bitcoin -> Currency Conversion",
+			title = Some "Bitcoin → Currency Conversion",
 			description = Some "To change the currency output on [CoinDesk](https://www.coindesk.com/price/bitcoin) (ex. USD, EUR, GBP):"
 		},
 	
@@ -79,8 +79,7 @@ in [
 	command "dino"
 		"Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
 		embed.Embed::{
-			title = Some "Dino How To",
-			author = icon-title "Dino-ing" (Text/default (List/head Text icons.dinos)),
+			author = icon-title "Dino Help" (Text/default (List/head Text icons.dinos)),
 			description = Some "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
 		},
 	
@@ -118,15 +117,15 @@ in [
 	command "roll"
 		"Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
 		embed.Embed::{
-			title = Some "Rolling How To",
+			title = Some ":game_die: Roll Help",
 			description = Some "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
 		},
 	
 	command "say"
 		"Make the bot say something."
 		embed.Embed::{
-			title = Some "Say How To",
-			description = Some "Using `l.say` the bot will repeat!"
+			title = Some "Say Help",
+			description = Some "Use `l.say <anything>` to make the bot say anything."
 		},
 	
 	command "settings"

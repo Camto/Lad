@@ -87,7 +87,7 @@
   embed:
     color: 14711736
     description: "To change the currency output on [CoinDesk](https://www.coindesk.com/price/bitcoin) (ex. USD, EUR, GBP):"
-    title: "Bitcoin -> Currency Conversion"
+    title: "Bitcoin → Currency Conversion"
   msg: Get the current price of bitcoin with a wide range of currencies to choose from.
 - cmd: convert
   embed:
@@ -101,10 +101,9 @@
   embed:
     author:
       icon_url: "https://raw.githubusercontent.com/Camto/Lad/master/Images/dinos/dino%201.png"
-      name: "Dino-ing"
+      name: Dino Help
     color: 14711736
     description: "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
-    title: Dino How To
   msg: "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
 - cmd: ping
   embed:
@@ -143,13 +142,13 @@
   embed:
     color: 14711736
     description: "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
-    title: Rolling How To
+    title: ":game_die: Roll Help"
   msg: "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
 - cmd: say
   embed:
     color: 14711736
-    description: "Using `l.say` the bot will repeat!"
-    title: Say How To
+    description: "Use `l.say <anything>` to make the bot say anything."
+    title: Say Help
   msg: Make the bot say something.
 - cmd: settings
   embed:
