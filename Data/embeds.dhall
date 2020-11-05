@@ -57,7 +57,7 @@ in {
 
 	`bitcoin help` = Embed.Embed::{
 		title = Some "Bitcoin -> Currency Conversion",
-		description = Some "To change the currency output onCoinDesk](https://www.coindesk.com/price/bitcoin) (ex. USD, EUR, GBP):"
+		description = Some "To change the currency output on [CoinDesk](https://www.coindesk.com/price/bitcoin) (ex. USD, EUR, GBP):"
 	},
 
 	`convert help` = Embed.Embed::{

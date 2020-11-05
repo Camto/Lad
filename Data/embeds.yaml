@@ -75,6 +75,10 @@ bitcoin error:
   color: 14711736
   description: "Current list of currencies: [Official Website](https://www.coindesk.com/price/bitcoin)"
   title: ":anger: Error, currency not found"
+bitcoin help:
+  color: 14711736
+  description: "To change the currency output on [CoinDesk](https://www.coindesk.com/price/bitcoin) (ex. USD, EUR, GBP):"
+  title: "Bitcoin -> Currency Conversion"
 command disabled:
   color: 14711736
   description: This command was disabled in the settings by an admin.
