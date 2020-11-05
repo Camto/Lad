@@ -9,8 +9,6 @@ from fuzzywuzzy import fuzz, process
 dinos = utils.get_yaml("dinos")
 dino_names = list(dinos.keys())
 
-reload_emoji = utils.emojis["reload"]
-
 # Process dino related requests.
 class Dino(commands.Cog):
 	def __init__(self, client):

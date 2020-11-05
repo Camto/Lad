@@ -7,9 +7,6 @@ import urllib.parse
 
 import requests
 
-reload_emoji = utils.emojis["reload"]
-next_emoji = utils.emojis["right pointer"]
-prev_emoji = utils.emojis["left pointer"]
 sorting_methods = ["hot", "new", "rising", "top", "controversial"]
 top_sub_sorts = ["hour", "day", "week", "month", "year", "all"]
 
