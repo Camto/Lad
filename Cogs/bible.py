@@ -31,7 +31,7 @@ def bible_menu(book_name = None):
 	async def bible_menu_gen(_):
 		while True:
 			if book_name == None: book = random.choice(bible)
-			else: book = list(filter(lambda book: book["name"] != book_name, bible))[0]
+			else: book = list(filter(lambda book: book["name"].lower() == book_name, bible))[0]
 			chapters = book['chapters']
 			chapter = random.randrange(len(chapters))
 			verse = random.randrange(len(chapters[chapter]))
