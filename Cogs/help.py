@@ -9,8 +9,6 @@ from fuzzywuzzy import fuzz, process
 help = utils.get_yaml("help")
 for i in range(len(help)): help[i]["embed"] = discord.Embed.from_dict(help[i]["embed"])
 
-chunks = lambda l, n: [l[i * n:(i + 1) * n] for i in range((len(l) + n - 1) // n)]
-
 # Show command descriptions.
 class Help(commands.Cog):
 	def __init__(self, client):
@@ -22,7 +20,7 @@ class Help(commands.Cog):
 			
 			async def help_menu(_):
 				yield math.ceil(len(help) / 5)
-				for chunk in chunks(help, 5):
+				for chunk in utils.chunks(help, 5):
 					help_embed = (discord.Embed(
 						title = "Commands",
 						description = "This bot's prefix is ``l.``",

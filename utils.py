@@ -28,6 +28,8 @@ def get_setting(guild_id, option):
 	else:
 		return options[option]["default"]
 
+chunks = lambda l, n: [l[i * n:(i + 1) * n] for i in range((len(l) + n - 1) // n)]
+
 async def menu(client, ctx, gen_):
 	gen = gen_(ctx.author)
 	
