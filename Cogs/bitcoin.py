@@ -31,7 +31,7 @@ class Bitcoin(commands.Cog):
 				elif request.status_code == 200:
 					info = json.loads(request.text)
 					await ctx.send(embed = discord.Embed(
-						title = ":information_source: Info",
+						title = ":coin:",
 						description = f"Bitcoin price is: {info['bpi'][currency]['rate']} {currency}",
 						color = utils.embed_color))
 		else:
