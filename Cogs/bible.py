@@ -7,6 +7,7 @@ import random
 from fuzzywuzzy import fuzz, process
 
 bible = utils.get_yaml("bible")
+book_names = list(map(lambda book: book["name"].lower(), bible))
 
 # Starting the bible study.
 class Bible(commands.Cog):
@@ -16,24 +17,26 @@ class Bible(commands.Cog):
 	@commands.command()
 	async def bible(self, ctx, *args):
 		if utils.get_setting(ctx.guild.id, "bible"):
-			if len(args) > 0:
-				pass#quote = process.extractOne(
-				#	args[0],
-				#	quotes,
-				#	scorer = fuzz.partial_token_sort_ratio)[0]
-				#await ctx.send(embed = bible_to_embed(quote))
+			if len(args) > 1:
+				pass
+			elif len(args) == 1:
+				await utils.menus.reload(self.client, ctx,
+					bible_menu(book_name = process.extractOne(args[0], book_names)[0]))
 			else:
-				await utils.menus.reload(self.client, ctx, bible_menu)
+				await utils.menus.reload(self.client, ctx, bible_menu())
 		else:
 			await ctx.send(embed = utils.command_disabled)
 
-async def bible_menu(_):
-	while True:
-		book = random.choice(bible)
-		chapters = book['chapters']
-		chapter = random.randrange(len(chapters))
-		verse = random.randrange(len(chapters[chapter]))
-		yield bible_to_embed(chapters[chapter][verse], f"{book['name']} {chapter+1}:{verse+1}")
+def bible_menu(book_name = None):
+	async def bible_menu_gen(_):
+		while True:
+			if book_name == None: book = random.choice(bible)
+			else: book = list(filter(lambda book: book["name"] != book_name, bible))[0]
+			chapters = book['chapters']
+			chapter = random.randrange(len(chapters))
+			verse = random.randrange(len(chapters[chapter]))
+			yield bible_to_embed(chapters[chapter][verse], f"{book['name']} {chapter+1}:{verse+1}")
+	return bible_menu_gen
 
 def bible_to_embed(quote, loc):
 	return (discord.Embed(
