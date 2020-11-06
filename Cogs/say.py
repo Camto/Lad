@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import utils
 
-# Process dino related requests.
+# Make the bot say anything.
 class Say(commands.Cog):
 	def __init__(self, client):
 		self.client = client
