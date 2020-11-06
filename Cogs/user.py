@@ -14,7 +14,7 @@ class User(commands.Cog):
 		embed = (discord.Embed(
 			title = f"{member.name}#{member.discriminator}'s Info",
 			color = utils.embed_color)
-			.set_image(url = member.avatar_url))
+			.set_thumbnail(url = member.avatar_url))
 		
 		fields = [
 			("Nickname", member.nick),
