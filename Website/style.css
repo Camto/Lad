@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "Whitney";
-  src: url("./Whitney/whitney-medium.otf");
+  src: url("./Whitney/whitney-light.otf");
 }
 
 @font-face {
@@ -10,87 +10,27 @@
   src: url("./Consolas/CONSOLA.TTF");
 }
 
-@media print {
-  *,
-  *:before,
-  *:after {
-    background: transparent !important;
-    color: #000 !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-
-  a[href]:after {
-    content: " (" attr(href) ")";
-  }
-
-  abbr[title]:after {
-    content: " (" attr(title) ")";
-  }
-
-  a[href^="#"]:after,
-  a[href^="javascript:"]:after {
-    content: "";
-  }
-
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
-
-  thead {
-    display: table-header-group;
-  }
-
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
-
-  img {
-    max-width: 100% !important;
-  }
-
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
-
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
-}
-
-pre,
-code {
+pre, code {
   font-family: Consolas;
+  border-radius: 3px;
+  padding: 2.72px;
+  background: #2f3136;
 }
 
 pre {
-  padding: .5rem;
   line-height: 1.25;
   overflow-x: scroll;
 }
 
-a {text-decoration: none;}
+a {
+  text-decoration: none;
+}
 
-a,
-a:visited {
+a, a:visited {
   color: #00b0f4;
 }
 
-a:hover,
-a:focus,
-a:active {
+a:hover, a:focus, a:active {
   color: #00b0f4;
   text-decoration: underline;
 }
@@ -98,10 +38,6 @@ a:active {
 .tag {
   color: #7289da;
   display: inline;
-}
-
-.modest-no-decoration {
-  text-decoration: none;
 }
 
 html {
@@ -125,8 +61,7 @@ body {
   line-height: 1.85;
 }
 
-p,
-.modest-p {
+p {
   font-size: 1rem;
   margin-bottom: 1.3rem;
 }
@@ -239,4 +174,8 @@ blockquote {
 pre,
 code {
   background-color: rgb(47, 49, 54);
+}
+
+li {
+  margin-bottom: 4px;
 }
