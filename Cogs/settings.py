@@ -74,9 +74,9 @@ class Settings(commands.Cog):
 						set_msg = f'Set {option} to "{val}".'
 					elif opt_type == "json":
 						if val.startswith("```"): val = val[3:]
-						if val.startswith("yaml"): val = val[4:]
-						if val.startswith("yml"): val = val[3:]
-						if val.endswith("```"): val = val[:-3]
+							if val.startswith("yaml"): val = val[4:]
+							elif val.startswith("yml"): val = val[3:]
+							if val.endswith("```"): val = val[:-3]
 						
 						try:
 							val = yaml.safe_load(val)
