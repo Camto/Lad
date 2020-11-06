@@ -12,12 +12,12 @@ class User(commands.Cog):
 			member = ctx.author
 		
 		embed = (discord.Embed(
-			title = "User Info",
+			title = f"{member.name}#{member.discriminator}'s Info",
 			color = utils.embed_color)
 			.set_image(url = member.avatar_url))
 		
 		fields = [
-			("ID", member.id),
+			("Nickname", member.nick),
 			("Top role", member.top_role.mention),
 			("Bot", member.bot),
 			("Created At", member.created_at.strftime("%b. %d, %Y")),
