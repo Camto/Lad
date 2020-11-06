@@ -111,7 +111,7 @@ def get_passage_chunk(chapters, passage_chunk):
 	if start_chapter == end_chapter and start_verse > end_verse: raise(Exception("Moron: wrong verse order"))
 	if start_chapter == 0 or start_verse == 0: raise(Exception("Moron: not in there"))
 	if start_chapter > len(chapters) or start_verse > len(chapters[start_chapter - 1]): raise(Exception("Moron: not in there"))
-	if 0 >= end_chapter > len(chapters) or end_verse > len(chapters[end_chapter - 1]): raise(Exception("Moron: not in there"))
+	if end_chapter > len(chapters) or end_verse > len(chapters[end_chapter - 1]): raise(Exception("Moron: not in there"))
 	
 	res = []
 	
