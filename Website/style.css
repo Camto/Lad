@@ -1,4 +1,4 @@
-/* This is the Modest stylesheet by John Otander at https://github.com/markdowncss/modest It uses the MIT license. */
+/* Some parts are from https://github.com/markdowncss/modest using the MIT license. */
 
 @font-face {
   font-family: "Whitney";
@@ -66,70 +66,44 @@ p {
   margin-bottom: 1.3rem;
 }
 
-h1,
-.modest-h1,
-h2,
-.modest-h2,
-h3,
-.modest-h3,
-h4,
-.modest-h4 {
+h1, h2, h3, h4 {
   margin: 1.414rem 0 .5rem;
   font-weight: inherit;
   line-height: 1.42;
 }
 
-h1,
-.modest-h1 {
+h1 {
   margin-top: 0;
   font-size: 3.998rem;
 }
 
-h2,
-.modest-h2 {
+h2 {
   font-size: 2.827rem;
 }
 
-h3,
-.modest-h3 {
+h3 {
   font-size: 1.999rem;
 }
 
-h4,
-.modest-h4 {
+h4 {
   font-size: 1.414rem;
 }
 
-h5,
-.modest-h5 {
+h5 {
   font-size: 1.121rem;
 }
 
-h6,
-.modest-h6 {
+h6 {
   font-size: .88rem;
 }
 
-small,
-.modest-small {
+small {
   font-size: .707em;
 }
 
-/* https://github.com/mrmrs/fluidity */
-
-img,
-canvas,
-iframe,
-video,
-svg,
-select,
-textarea {
+img, canvas, iframe, video, svg, select, textarea {
   max-width: 100%;
 }
-
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700);
-
-@import url(http://fonts.googleapis.com/css?family=Arimo:700,700italic);
 
 html {
   font-size: 18px;
@@ -146,20 +120,7 @@ body {
   padding: .25rem;
 }
 
-/*
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: Arimo, Helvetica, sans-serif;
-}
-*/
-
-h1,
-h2,
-h3 {
+h1, h2, h3 {
   border-bottom: 2px solid #fafafa;
   margin-bottom: 1.15rem;
   padding-bottom: .5rem;
@@ -171,8 +132,7 @@ blockquote {
   padding: 1rem;
 }
 
-pre,
-code {
+pre, code {
   background-color: rgb(47, 49, 54);
 }
 
