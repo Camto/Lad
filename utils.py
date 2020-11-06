@@ -48,9 +48,11 @@ async def menu(client, ctx, gen_):
 		except asyncio.TimeoutError:
 			break
 		else:
-			embed, new_reactions = await gen.asend(str(reaction.emoji))
+			new_embed, new_reactions = await gen.asend(str(reaction.emoji))
 			
-			await msg.edit(embed = embed)
+			if new_embed != embed:
+				await msg.edit(embed = new_embed)
+				embed = new_embed
 			await msg.remove_reaction(str(reaction.emoji), user)
 			
 			if new_reactions != reactions:
