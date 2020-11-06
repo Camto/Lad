@@ -88,6 +88,7 @@ a:active {
 
 html {
   font-size: 12px;
+  background-color:rgb(54, 57, 63);
 }
 
 @media screen and (min-width: 32rem) and (max-width: 48rem) {
@@ -183,7 +184,7 @@ html {
 }
 
 body {
-  color: #444;
+  color: rgb(218, 217, 215);
   font-family: 'Open Sans Condensed', sans-serif;
   font-weight: 300;
   margin: 0 auto;
@@ -217,5 +218,5 @@ blockquote {
 
 pre,
 code {
-  background-color: #fafafa;
+  background-color: rgb(47, 49, 54);
 }
