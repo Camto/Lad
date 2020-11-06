@@ -24,6 +24,7 @@ Get started with `l.help` to show all possible commands. Get help for specific c
 * `l.reddit` → Lets you browse any subreddit's posts. 
 * `l.roll` → Roll dice DnD style (Ex. 1d20).
 * `l.convert` → Convert a file type to another, JPG → PNG, GIF → PNG, and more.
+* `l.user` → Returns information from a given user. This information ranges from their profile picture, to when they created their account.
 
 ## Authors
 

@@ -109,6 +109,7 @@ def get_passage_chunk(chapters, passage_chunk):
 	start_chapter, start_verse, end_chapter, end_verse = passage_chunk
 	if start_chapter > end_chapter: raise(Exception("Moron: wrong chapter order"))
 	if start_chapter == end_chapter and start_verse > end_verse: raise(Exception("Moron: wrong verse order"))
+	if start_chapter == 0 or start_verse == 0: raise(Exception("Moron: not in there"))
 	if start_chapter > len(chapters) or start_verse > len(chapters[start_chapter - 1]): raise(Exception("Moron: not in there"))
 	if end_chapter > len(chapters) or end_verse > len(chapters[end_chapter - 1]): raise(Exception("Moron: not in there"))
 	
@@ -137,7 +138,6 @@ def get_passage_chunk(chapters, passage_chunk):
 
 def chapter_menu(book_name, passages):
 	async def gen(_):
-		print(passages[0])
 		yield sum(map(lambda chapter: math.ceil(len(chapter["verses"]) / 5), passages))
 		for chapter in passages:
 			for chunk in utils.chunks(chapter["verses"], 5):
