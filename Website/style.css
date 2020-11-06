@@ -1,5 +1,15 @@
 /* This is the Modest stylesheet by John Otander at https://github.com/markdowncss/modest It uses the MIT license. */
 
+@font-face {
+  font-family: "Whitney";
+  src: url("./Whitney/whitney-medium.otf");
+}
+
+@font-face {
+  font-family: "Consolas";
+  src: url("./Consolas/CONSOLA.TTF");
+}
+
 @media print {
   *,
   *:before,
@@ -62,7 +72,7 @@
 
 pre,
 code {
-  font-family: Menlo, Monaco, "Courier New", monospace;
+  font-family: Consolas;
 }
 
 pre {
@@ -71,15 +81,23 @@ pre {
   overflow-x: scroll;
 }
 
+a {text-decoration: none;}
+
 a,
 a:visited {
-  color: #3498db;
+  color: #00b0f4;
 }
 
 a:hover,
 a:focus,
 a:active {
-  color: #2980b9;
+  color: #00b0f4;
+  text-decoration: underline;
+}
+
+.tag {
+  color: #7289da;
+  display: inline;
 }
 
 .modest-no-decoration {
@@ -88,7 +106,7 @@ a:active {
 
 html {
   font-size: 12px;
-  background-color:rgb(54, 57, 63);
+  background-color:#36393f;
 }
 
 @media screen and (min-width: 32rem) and (max-width: 48rem) {
@@ -184,8 +202,8 @@ html {
 }
 
 body {
-  color: rgb(218, 217, 215);
-  font-family: 'Open Sans Condensed', sans-serif;
+  color: #dcddde;
+  font-family: "Whitney";
   font-weight: 300;
   margin: 0 auto;
   max-width: 48rem;
@@ -193,6 +211,7 @@ body {
   padding: .25rem;
 }
 
+/*
 h1,
 h2,
 h3,
@@ -201,6 +220,7 @@ h5,
 h6 {
   font-family: Arimo, Helvetica, sans-serif;
 }
+*/
 
 h1,
 h2,
