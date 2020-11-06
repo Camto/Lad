@@ -99,13 +99,6 @@ in [
 			description = Some "Use `l.say <anything>` to make the bot say anything."
 		},
 
-	command "user"
-		"Return a user's info."
-		embed.Embed::{
-			title = Some "Get User Info",
-			description = Some "Use `l.user <@user>` to get the user's information."
-		},
-
 	command "settings"
 		"Change Lad's options, like enabling or disabling certain commands. Can only be used by admins."
 		embed.Embed::{
@@ -118,5 +111,12 @@ in [
 					
 					${option-list}'',
 			author = icon-title "Settings Help" icons.settings
+		},
+
+		command "user"
+			"Return a user's info."
+			embed.Embed::{
+				title = Some "Get User Info",
+				description = Some "Use `l.user <@user>` to get the user's information."
 		}
 ]
