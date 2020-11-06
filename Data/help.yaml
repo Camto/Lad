@@ -80,6 +80,12 @@
     description: "Use `l.say <anything>` to make the bot say anything."
     title: Say Help
   msg: Make the bot say something.
+- cmd: user
+  embed:
+    color: 14711736
+    description: "Use `l.user <@user>` to get the user's information."
+    title: Get User Info
+  msg: "Return a user's info."
 - cmd: settings
   embed:
     author:
