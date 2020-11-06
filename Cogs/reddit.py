@@ -2,15 +2,11 @@ import discord
 from discord.ext import commands
 import utils
 
-import asyncio
 import json
 import urllib.parse
 
 import requests
 
-reload_emoji = utils.emojis["reload"]
-next_emoji = utils.emojis["right pointer"]
-prev_emoji = utils.emojis["left pointer"]
 sorting_methods = ["hot", "new", "rising", "top", "controversial"]
 top_sub_sorts = ["hour", "day", "week", "month", "year", "all"]
 
@@ -90,23 +86,31 @@ async def handle_user(self, ctx, args):
 	elif args[1] == "posts":
 		sub = args[0] + "/submitted"
 		
-		if len(args) == 2:
-			n = int(args[3]) if len(args) >= 4 else 25
-			posts = get_n_posts_by_sort(sub, n, "new")
-		elif args[2] != "top":
-			# Sort by method other than top.
-			n = int(args[3]) if len(args) >= 4 else 25
-			posts = get_n_posts_by_sort(sub, n, args[2])
-		elif len(args) >= 4 and args[3] in top_sub_sorts:
-			# Sort by top of all time as the default for top.
-			n = int(args[4]) if len(args) >= 5 else 25
-			posts = get_n_posts_by_sort(sub, n, args[2], args[3])
+		if len(args) == 2 or args[2].isdigit() or args[2] in sorting_methods:
+			if len(args) == 2 or args[2].isdigit():
+				n = int(args[2]) if len(args) >= 3 else 25
+				posts = get_n_posts_by_sort(sub, n, "new")
+			elif args[2] != "top":
+				# Sort by method other than top.
+				n = int(args[3]) if len(args) >= 4 else 25
+				posts = get_n_posts_by_sort(sub, n, args[2])
+			elif len(args) >= 4 and args[3] in top_sub_sorts:
+				# Sort by top of all time as the default for top.
+				n = int(args[4]) if len(args) >= 5 else 25
+				posts = get_n_posts_by_sort(sub, n, args[2], args[3])
+			else:
+				# Sort by top of all X.
+				n = int(args[3]) if len(args) >= 4 else 25
+				posts = get_n_posts_by_sort(sub, n, args[2])
+			
+			await menu_posts(self, ctx, posts[-n:])
 		else:
-			# Sort by top of all X.
-			n = int(args[3]) if len(args) >= 4 else 25
-			posts = get_n_posts_by_sort(sub, n, args[2])
-		
-		await menu_posts(self, ctx, posts[-n:])
+			await ctx.send(embed = discord.Embed(
+			description = f"Error, {args[2]} is not a sorting method this bot knows of. Use one of `hot`, `new`, `rising`, `top`, or `controversial` instead.",
+			color = utils.embed_color)
+			.set_author(
+				name = "Invalid Sorting Method",
+				icon_url = utils.icons["reddit"]))
 	else:
 		await ctx.send(embed = discord.Embed(
 			description = f"``{args[1]}`` is not a property this bot knows how to get from Reddit users. Only `about` (the default) and `posts` work.",
@@ -129,7 +133,7 @@ def post_to_embed(post):
 		.set_author(
 			name = post["title"],
 			icon_url = utils.icons["reddit"],
-			url = f'https://www.reddit.com{post["permalink"]}'))
+			url = f"https://www.reddit.com{post['permalink']}"))
 	
 	if not post["is_self"]:
 		if "post_hint" in post:
