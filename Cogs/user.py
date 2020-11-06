@@ -20,8 +20,8 @@ class User(commands.Cog):
 			("ID", member.id),
 			("Top role", member.top_role.mention),
 			("Bot", member.bot),
-			("Created At", member.created_at.strftime("%d/%m/%Y")),
-			("Joined At", member.joined_at.strftime("%d/%m/%Y")),
+			("Created At", member.created_at.strftime("%b. %d, %Y")),
+			("Joined At", member.joined_at.strftime("%b. %d, %Y")),
 			("Boosted", bool(member.premium_since))]
 		
 		for name, value in fields:
