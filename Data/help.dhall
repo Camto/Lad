@@ -28,36 +28,7 @@ in [
 	
 	command "bible"
 		"Returns a random bible verse. For verses, do `l.help bible`."
-		embed.Embed::{
-			title = Some "To search type NUMBER first; followed by BOOK",
-			author = icon-title "Bible Help" icons.bible,
-			fields = Some (List/map embed.Field.Type embed.Field.Type
-				(\(field: embed.Field.Type) -> field with inline = Some True)
-				[
-					embed.Field::{name = "Matthew", value = "5:9 | 28:19 | 5:28 | 6:5 | 21:18-22 | 11:30 | 12:33 | 18:8 | 18:9"},
-					embed.Field::{name = "Leviticus", value = "19:19 | 19:27 | 9:10 | 15:19-20 | 25:44-46 | 21:17-23"},
-					embed.Field::{name = "Deuteronomy", value = "22:28-29 | 25:11-1 | 23:1 | 31:8 | 33:27 | 25:11-12"},
-					embed.Field::{name = "Psalms", value = "23:1-6 | 46:1-3 | 9:9-10 | 34:10b | 32:7-8"},
-					embed.Field::{name = "Exodus", value = "8:1-14 | 21:7-8 | 15:2 | 33:14 | 23:19"},
-					embed.Field::{name = "Kings", value = "6:28-29 | 2:23-25 | 23:20-25"},
-					embed.Field::{name = "John", value = "3:3 | 14:14 | 14:6 | 3:16"},
-					embed.Field::{name = "Chronicles", value = "21:14-15 | 16:11"},
-					embed.Field::{name = "Ephesians", value = "2:8 | 6:5 | 5:4"},
-					embed.Field::{name = "Proverbs", value = "18:10 | 15:4"},
-					embed.Field::{name = "Isaiah", value = "41:10 | 26:3-4"},
-					embed.Field::{name = "Timothy", value = "6:6-9 | 3:16"},
-					embed.Field::{name = "Luke", value = "16:18 | 3:11"},
-					embed.Field::{name = "Peter", value = "5:8 | 2:18"},
-					embed.Field::{name = "Numbers", value = "31:17-18"},
-					embed.Field::{name = "Reverend", value = "21:8"},
-					embed.Field::{name = "Nehemiah", value = "8:10"},
-					embed.Field::{name = "Ezekiel", value = "47:11"},
-					embed.Field::{name = "Hebrews", value = "12:1"},
-					embed.Field::{name = "Romans", value = "3:23"},
-					embed.Field::{name = "Genesis", value = "1:1"},
-					embed.Field::{name = "Samuel", value = "6:19"}
-				])
-		},
+		no-help-embed,
 	
 	command "bitcoin"
 		"Get the current price of bitcoin with a wide range of currencies to choose from."
