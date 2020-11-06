@@ -87,7 +87,7 @@
   embed:
     color: 14711736
     description: "To change the currency output use `l.bitcoin <currency>`. Currency list at [CoinDesk](https://www.coindesk.com/price/bitcoin), remember to type in acronym/shortened form (ex. USD, EUR, GBP); capitalization doesn't matter."
-    title: "Bitcoin → Currency Conversion"
+    title: ":coin: Bitcoin → Currency"
   msg: Get the current price of bitcoin with a wide range of currencies to choose from.
 - cmd: convert
   embed:
