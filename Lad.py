@@ -4,6 +4,7 @@ from discord.ext.commands import CommandNotFound
 
 import sys
 import os
+import random
 import asyncio
 import asyncpg
 import json
@@ -26,7 +27,7 @@ async def on_ready():
 		status = discord.Streaming,
 		activity = discord.Streaming(
 			name = "l.help",
-			url = "https://www.twitch.tv/jpvinnie"))
+			url = f"https://www.twitch.tv/{random.choice(['jpvinnie', 'otomac'])}"))
 	print(f"{client.user.name}#{client.user.discriminator} logged in!")
 
 for filename in os.listdir("./Cogs"):
