@@ -12,7 +12,7 @@ autoresponses:
   type: bool
 bible:
   default: true
-  descr: "If it's on, the command will work. Use `l.help bible` for more information."
+  descr: "If it's on, the command will work."
   type: bool
 bitcoin:
   default: true

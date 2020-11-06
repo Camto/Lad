@@ -20,8 +20,7 @@ in [
 		"This will be the file used when auto-responding to messages."),
 	keyOption "autoresponses" (option default-bool
 		"If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponse_file` to see the preprogrammed messages."),
-	keyOption "bible" (option default-bool
-		"If it's on, the command will work. Use `l.help bible` for more information."),
+	keyOption "bible" option-command-disabling,
 	keyOption "bitcoin" option-command-disabling,
 	keyOption "dino" option-command-disabling,
 	keyOption "ping" option-command-disabling,
