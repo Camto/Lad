@@ -95,8 +95,8 @@ ul {
 	padding-left: 0.8em;
 	padding-right: 0.8em;
 	padding-top: 0.8em;
-  padding-bottom: 0.5em;
-  width: 99.5%;
+	padding-bottom: 0.5em;
+	width: 99.5%;
 	/* box-shadow: 4px 0px 0px #7289da inset; */
 }
 
@@ -113,19 +113,19 @@ li {
 
 .flextempl {
 	display: flex;
-  flex-direction: row;
-  justify-content: left;
+	flex-direction: row;
+	justify-content: left;
 	height: fit-content;
 	margin-top: 10px;
 	
 }
 
 .embededge {
-  display: block;
+	display: block;
 	background-color: #e07bb8;
-  width: 0.5%;
-  max-width: 8px;
-  height: auto;
+	width: 0.5%;
+	max-width: 8px;
+	height: auto;
 	margin-right: 0px;
 	border-radius: 3px 0px 0px 3px;
 }
@@ -145,8 +145,8 @@ li {
 #inviteme {
 	margin-left: 0px;
 	margin-top: 0px;
-  margin-bottom: 0px;
-  max-width: 100%;
+	margin-bottom: 0px;
+	max-width: 100%;
 }
 
 form {
@@ -156,8 +156,8 @@ form {
 #authorlist {
 	margin-left: 0px;
 	margin-top: 0px;
-  margin-bottom: 0px;
-  max-width: 40%;
+	margin-bottom: 0px;
+	max-width: 40%;
 }
 
 h1, h2, h3, h4, h5, h6 {
