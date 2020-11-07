@@ -32,7 +32,7 @@ class Bible(commands.Cog):
 					if book_name_match:
 						book_name = book_name_match.group(0)
 						args = args[book_name_match.end():]
-					else: raise(Exception("Moron: No book"))
+					else: raise(Exception(utils.embeds["bible no book"]))
 					
 					book_name = process.extractOne(book_name, book_names)[0]
 					book = list(filter(lambda book: book["name"] == book_name, bible))[0]
@@ -46,8 +46,7 @@ class Bible(commands.Cog):
 							passage_chunks)))
 						await utils.menus.list(self.client, ctx, chapter_menu(book_name, passages))
 				except Exception as e:
-					import traceback
-					print(traceback.format_exc())
+					await ctx.send(embed = e.args[0])
 		else:
 			await ctx.send(embed = utils.command_disabled)
 
@@ -78,7 +77,7 @@ def parse_passage_chunk(chapters, str_):
 			start_verse = 1
 			if ":" not in end:
 				end_chapter = try_nat(end)
-				if end_chapter > len(chapters): raise(Exception("Moron: not a chapter"))
+				if end_chapter > len(chapters): raise(Exception(invalid_chapter_embed(end_chapter)))
 				end_verse = len(chapters[end_chapter - 1])
 			else:
 				end_chapter, end_verse = map(try_nat, end.split(":"))
@@ -93,7 +92,7 @@ def parse_passage_chunk(chapters, str_):
 		start_chapter = try_nat(str_)
 		start_verse = 1
 		end_chapter = start_chapter
-		if start_chapter > len(chapters): raise(Exception("Moron: not a chapter"))
+		if start_chapter > len(chapters): raise(Exception(invalid_chapter_embed(end_chapter)))
 		end_verse = len(chapters[start_chapter - 1])
 	else:
 		start_chapter, start_verse = map(try_nat, str_.split(":"))
@@ -101,17 +100,19 @@ def parse_passage_chunk(chapters, str_):
 	return start_chapter, start_verse, end_chapter, end_verse
 
 def try_nat(str_):
-	if str_ == "": raise(Exception("Moron: Empty int"))
-	if not str_.isdigit(): raise(Exception("Moron: Not number"))
+	if str_ == "": raise(Exception(not_number_embed(str_)))
+	if not str_.isdigit(): raise(Exception(not_number_embed(str_)))
 	return int(str_)
 
 def get_passage_chunk(chapters, passage_chunk):
 	start_chapter, start_verse, end_chapter, end_verse = passage_chunk
-	if start_chapter > end_chapter: raise(Exception("Moron: wrong chapter order"))
-	if start_chapter == end_chapter and start_verse > end_verse: raise(Exception("Moron: wrong verse order"))
-	if start_chapter == 0 or start_verse == 0: raise(Exception("Moron: not in there"))
-	if start_chapter > len(chapters) or start_verse > len(chapters[start_chapter - 1]): raise(Exception("Moron: not in there"))
-	if end_chapter > len(chapters) or end_verse > len(chapters[end_chapter - 1]): raise(Exception("Moron: not in there"))
+	if start_chapter > end_chapter: raise(Exception(utils.embeds["bible wrong chapter order"]))
+	if start_chapter == end_chapter and start_verse > end_verse: raise(Exception(utils.embeds["bible wrong verse order"]))
+	if start_chapter == 0 or start_chapter > len(chapters): raise(Exception(invalid_chapter_embed(start_chapter)))
+	if end_chapter == 0 or end_chapter > len(chapters): raise(Exception(invalid_chapter_embed(end_chapter)))
+	if start_verse == 0 or end_verse == 0: raise(Exception(invalid_verse_embed(start_verse)))
+	if start_verse > len(chapters[start_chapter - 1]): raise(Exception(invalid_verse_embed(start_verse)))
+	if end_verse > len(chapters[end_chapter - 1]): raise(Exception(invalid_verse_embed(end_verse)))
 	
 	res = []
 	
@@ -135,6 +136,30 @@ def get_passage_chunk(chapters, passage_chunk):
 		})
 	
 	return res
+
+def invalid_chapter_embed(chapter):
+	return (discord.Embed(
+		description = f"{chapter} isn't a chapter in this book.",
+		color = utils.embed_color)
+		.set_author(
+			name = "Invalid Chapter",
+			icon_url = utils.icons["bible"]))
+
+def invalid_verse_embed(verse):
+	return (discord.Embed(
+		description = f"{verse} isn't a verse in this book.",
+		color = utils.embed_color)
+		.set_author(
+			name = "Invalid Verse",
+			icon_url = utils.icons["bible"]))
+
+def not_number_embed(n):
+	return (discord.Embed(
+		description = f'"{n}" is not a valid number',
+		color = utils.embed_color)
+		.set_author(
+			name = "Invalid Number",
+			icon_url = utils.icons["bible"]))
 
 def chapter_menu(book_name, passages):
 	async def gen(_):

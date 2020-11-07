@@ -1,3 +1,21 @@
+bible no book:
+  author:
+    icon_url: "https://raw.githubusercontent.com/Camto/Lad/master/Images/bible.png"
+    name: No Book Given
+  color: 14711736
+  description: You need to pass a book from the Bible to search in.
+bible wrong chapter order:
+  author:
+    icon_url: "https://raw.githubusercontent.com/Camto/Lad/master/Images/bible.png"
+    name: Reversed Chapter Order
+  color: 14711736
+  description: The inputted chapter to end at comes before the chapter to start at.
+bible wrong verse order:
+  author:
+    icon_url: "https://raw.githubusercontent.com/Camto/Lad/master/Images/bible.png"
+    name: Reversed Verse Order
+  color: 14711736
+  description: The inputted verse to end at comes before the verse to start at.
 bitcoin error:
   color: 14711736
   description: "Current list of currencies: [Official Website](https://www.coindesk.com/price/bitcoin)"
