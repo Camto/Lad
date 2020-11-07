@@ -62,5 +62,20 @@ in {
 	`settings not admin` = embed.Embed::{
 		description = Some "You're not an admin, you can't access the settings.",
 		author = icon-title "Denied Access" icons.settings
+	},
+	
+	`bible no book` = embed.Embed::{
+		description = Some "You need to pass a book from the Bible to search in.",
+		author = icon-title "No Book Given" icons.bible
+	},
+	
+	`bible wrong chapter order` = embed.Embed::{
+		description = Some "The inputted chapter to end at comes before the chapter to start at.",
+		author = icon-title "Reversed Chapter Order" icons.bible
+	},
+	
+	`bible wrong verse order` = embed.Embed::{
+		description = Some "The inputted verse to end at comes before the verse to start at.",
+		author = icon-title "Reversed Verse Order" icons.bible
 	}
 }
