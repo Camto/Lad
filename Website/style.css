@@ -11,6 +11,11 @@
 }
 
 @font-face {
+  font-family: "Whitney Bold";
+  src: url("./Whitney/whitney-bold.otf");
+}
+
+@font-face {
   font-family: "Consolas";
   src: url("./Consolas/CONSOLA.TTF");
 }
@@ -78,13 +83,17 @@ body {
 
 p {
   font-size: 1rem;
-  margin-bottom: 1.3rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #7289da;
+  font-family: "Whitney Bold";
 }
 
 h1, h2, h3, h4 {
-  margin: 1.414rem 0 .5rem;
   font-weight: inherit;
   line-height: 1.42;
+  margin-block-end: 0;
 }
 
 h1 {
@@ -136,9 +145,6 @@ body {
 }
 
 h1, h2, h3 {
-  border-bottom: 2px solid #fafafa;
-  margin-bottom: 1.15rem;
-  padding-bottom: .5rem;
   text-align: center;
 }
 
@@ -160,7 +166,7 @@ button {
   color: #fff;
   background-color: #7289da;
   min-width: 96px;
-  min-height: 38px;
+  height: 38px;
   border: none;
   border-radius: 3px;
   padding-left: 16px;
@@ -189,4 +195,11 @@ button:active {
 
 .button-wrapper {
   float: right;
+}
+
+.button-text {
+  float: left;
+  height: 38px;
+  line-height: 38px;
+  vertical-align: middle;
 }
