@@ -7,7 +7,7 @@ import random
 import art
 
 # The autoresponse system.
-class On_Message(commands.Cog):
+class Autoresponses(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 	
@@ -24,4 +24,4 @@ class On_Message(commands.Cog):
 						return await msg.channel.send(random.choice(pair["responses"]))
 
 def setup(client):
-	client.add_cog(On_Message(client))
+	client.add_cog(Autoresponses(client))
