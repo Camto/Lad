@@ -81,6 +81,10 @@ body {
   line-height: 1.85;
 }
 
+#banner {
+  border-radius: 3px;
+}
+
 p {
   font-size: 1rem;
 }
