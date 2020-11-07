@@ -35,7 +35,7 @@ a:hover, a:focus, a:active {
   text-decoration: underline;
 }
 
-.mention {
+.mention, .mention:visited {
   border-radius: 3px;
   background-color: rgba(114,137,218,.1);
   color: #7289da;
@@ -44,9 +44,10 @@ a:hover, a:focus, a:active {
   padding-right: 2px;
 }
 
-.mention:hover {
+.mention:hover, .mention:focus, .mention:active {
   color: #fff;
   background-color: #7289da;
+  text-decoration: none;
 }
 
 html {
