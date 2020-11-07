@@ -35,9 +35,18 @@ a:hover, a:focus, a:active {
   text-decoration: underline;
 }
 
-.tag {
+.mention {
+  border-radius: 3px;
+  background-color: rgba(114,137,218,.1);
   color: #7289da;
   display: inline;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.mention:hover {
+  color: #fff;
+  background-color: #7289da;
 }
 
 html {
