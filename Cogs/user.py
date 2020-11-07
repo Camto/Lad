@@ -27,6 +27,10 @@ class User(commands.Cog):
 			embed.add_field(name = name, value = value, inline = True)
 		
 		await ctx.send(embed = embed)
+	
+	@user.error
+	async def user_error(self, ctx, error):
+		await ctx.send(embed = utils.embeds["user error"])
 
 def setup(client):
 	client.add_cog(User(client))
