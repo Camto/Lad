@@ -182,6 +182,7 @@ button {
 
 button:hover {
   background-color: #677bc4;
+  cursor: pointer;
 }
 
 button:focus {
