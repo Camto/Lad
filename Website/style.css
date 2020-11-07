@@ -95,7 +95,8 @@ ul {
 	padding-left: 0.8em;
 	padding-right: 0.8em;
 	padding-top: 0.8em;
-	padding-bottom: 0.5em;
+  padding-bottom: 0.5em;
+  width: 99.5%;
 	/* box-shadow: 4px 0px 0px #7289da inset; */
 }
 
@@ -112,17 +113,21 @@ li {
 
 .flextempl {
 	display: flex;
-	flex-direction: row;
+  flex-direction: row;
+  justify-content: left;
 	height: fit-content;
 	margin-top: 10px;
 	
 }
 
 .embededge {
+  display: block;
 	background-color: #e07bb8;
-	width: 6px;
+  width: 0.5%;
+  max-width: 8px;
+  height: auto;
 	margin-right: 0px;
-	border-radius: 4px 0px 0px 4px;
+	border-radius: 3px 0px 0px 3px;
 }
 
 #commandlist {
