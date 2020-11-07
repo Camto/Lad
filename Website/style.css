@@ -6,6 +6,11 @@
 }
 
 @font-face {
+  font-family: "Whitney Medium";
+  src: url("./Whitney/whitney-medium.otf");
+}
+
+@font-face {
   font-family: "Consolas";
   src: url("./Consolas/CONSOLA.TTF");
 }
@@ -148,4 +153,40 @@ pre, code {
 
 li {
   margin-bottom: 4px;
+}
+
+button {
+  font-family: "Whitney Medium";
+  color: #fff;
+  background-color: #7289da;
+  min-width: 96px;
+  min-height: 38px;
+  border: none;
+  border-radius: 3px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  
+  transition-property: background-color, color;
+  transition-duration: 0.17s, 0.17s;
+  transition-timing-function: ease, ease;
+  transition-delay: 0s, 0s;
+}
+
+button:hover {
+  background-color: #677bc4;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button:active {
+  background-color: #5b6eae;
+  outline: 0;
+}
+
+.button-wrapper {
+  float: right;
 }
