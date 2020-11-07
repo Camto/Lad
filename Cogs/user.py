@@ -8,8 +8,7 @@ class User(commands.Cog):
 	
 	@commands.command()
 	async def user(self, ctx, member: discord.Member = None):
-		if member is None:
-			member = ctx.author
+		if member is None: member = ctx.author
 		
 		embed = (discord.Embed(
 			title = f"{member.name}#{member.discriminator}'s Info",
