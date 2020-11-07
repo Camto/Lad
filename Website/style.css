@@ -145,7 +145,8 @@ li {
 #inviteme {
 	margin-left: 0px;
 	margin-top: 0px;
-	margin-bottom: 0px;
+  margin-bottom: 0px;
+  max-width: 100%;
 }
 
 form {
@@ -155,7 +156,8 @@ form {
 #authorlist {
 	margin-left: 0px;
 	margin-top: 0px;
-	margin-bottom: 0px;
+  margin-bottom: 0px;
+  max-width: 40%;
 }
 
 h1, h2, h3, h4, h5, h6 {
