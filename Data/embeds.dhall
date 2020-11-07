@@ -23,6 +23,11 @@ in {
 		title = Some ":anger: Error, currency not found",
 		description = Some "Current list of currencies: [Official Website](https://www.coindesk.com/price/bitcoin)"
 	},
+
+	`user error` = embed.Embed::{
+		title = Some ":anger: Error",
+		description = Some "No user detected. Tag someone by using @user."
+	},
 	
 	`convert more args` = embed.Embed::{
 		title = Some ":x: Error",

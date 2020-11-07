@@ -46,3 +46,7 @@ settings not admin:
     name: Denied Access
   color: 14711736
   description: "You're not an admin, you can't access the settings."
+user error:
+  color: 14711736
+  description: "No user detected. Tag someone by using @user."
+  title: ":anger: Error"
