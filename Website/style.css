@@ -82,11 +82,75 @@ body {
 }
 
 #banner {
-  border-radius: 3px;
+	border-radius: 3px;
 }
 
 p {
 	font-size: 1rem;
+}
+
+ul {
+	background-color: #292b2f;
+	border-radius: 0px 0.3em 0.3em 0px;
+	padding-left: 0.8em;
+	padding-right: 0.8em;
+	padding-top: 0.8em;
+	padding-bottom: 0.5em;
+	/* box-shadow: 4px 0px 0px #7289da inset; */
+}
+
+li {
+	list-style-type: none;
+}
+
+#letssee {
+	display: flex;
+	flex-direction: row;
+	height: fit-content;
+	align-items: center;
+}
+
+.flextempl {
+	display: flex;
+	flex-direction: row;
+	height: fit-content;
+	margin-top: 10px;
+	
+}
+
+.embededge {
+	background-color: #e07bb8;
+	width: 6px;
+	margin-right: 0px;
+	border-radius: 4px 0px 0px 4px;
+}
+
+#commandlist {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+#getstartedlist {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+#inviteme {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+form {
+	margin-bottom: 0px;
+}
+
+#authorlist {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -200,6 +264,14 @@ button:active {
 
 .button-wrapper {
 	float: right;
+	margin-left: 100px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+button {
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .button-text {
