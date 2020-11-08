@@ -259,7 +259,8 @@ button {
 button:hover {
 	font-family: "Whitney Medium";
 	color: #fff;	
-	background-color: #43b581;
+	background-color: #369167;
+	border: solid 1px #369167;
 	cursor: pointer;
 }
 
@@ -267,6 +268,14 @@ button:hover {
 	font-family: "Whitney Medium";
 	color: #fff;	
 	background-color: #43b581;
+}
+
+#addfriendrow:hover>.button-wrapper>form>button:hover {
+	font-family: "Whitney Medium";
+	color: #fff;	
+	background-color: #369167;
+	border: solid 1px #369167;
+	cursor: pointer;
 }
 
 button:focus {
@@ -340,7 +349,6 @@ button:active {
 
 #addfriendrow:hover {
 	background-color: rgba(79,84,92,.3);
-	cursor: pointer
 }
 
 #lad-avatar {
