@@ -385,7 +385,7 @@
 		margin-left: 0px;
 		height: 32px;
 		width: 32px;
-		clip-path: circle(16px 50 50);
+		clip-path: circle(16px);
 		//clip-path: circle(50 50);
 
 	}
