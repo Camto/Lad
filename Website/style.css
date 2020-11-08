@@ -186,9 +186,9 @@
 		outline: 0;
 	}
 	
-/* endTagElements*/
+/* endTagElements */
 
-/* ClassElements*/
+/* ClassElements */
 	
 	.mention, .mention:visited {
 		border-radius: 3px;
@@ -359,7 +359,7 @@
 	
 /* IdElements */
 
-/* ScrollBarStuff*/
+/* ScrollBarStuff */
 	
 	body { scrollbar-width: auto; }
 	
@@ -385,4 +385,4 @@
 	
 	body::-webkit-scrollbar-corner { background-color: transparent; }
 	
-/*endScrollbarStuff*/
+/* endScrollbarStuff */
