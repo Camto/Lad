@@ -238,26 +238,35 @@ li {
 
 button {
 	font-family: "Whitney Medium";
-	color: #fff;
-	background-color: #7289da;
-	min-width: 96px;
-	height: 38px;
-	border: none;
+	color: #43b581;
+	background-color: #00000000;
+	width: 72px;
+	height: 32px;
+	border: solid 1px #43b581;
 	border-radius: 3px;
 	padding-left: 16px;
 	padding-right: 16px;
 	padding-top: 2px;
 	padding-bottom: 2px;
-	
+	margin-top: 5px;
+	margin-bottom: 5px;
 	transition-property: background-color, color;
-	transition-duration: 0.17s, 0.17s;
+	transition-duration: 0s, 0s;
 	transition-timing-function: ease, ease;
 	transition-delay: 0s, 0s;
 }
 
 button:hover {
-	background-color: #677bc4;
+	font-family: "Whitney Medium";
+	color: #fff;	
+	background-color: #43b581;
 	cursor: pointer;
+}
+
+#addfriendrow:hover>.button-wrapper>form>button {
+	font-family: "Whitney Medium";
+	color: #fff;	
+	background-color: #43b581;
 }
 
 button:focus {
@@ -270,15 +279,90 @@ button:active {
 }
 
 .button-wrapper {
-	float: right;
-	margin-left: 100px;
-	margin-top: 5px;
-	margin-bottom: 5px;
+	display: block;
+	justify-self: flex-end;
+	margin-left: auto;
+	margin-right: 0px;
 }
 
-button {
-	margin-top: 5px;
-	margin-bottom: 5px;
+#invite-container {
+	display: flex;
+	flex-direction: column;
+	height: 180px;
+	width: 500px;
+	background-color: #292b2f;
+	border-radius: 5px;
+}
+
+#main-invite-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	margin-top: 30px;
+	margin-bottom: 40px;
+}
+
+#searchsec {
+	padding: 16px;
+	border-bottom: solid 1px #36393f;
+}
+
+#invite-to-serv-text {
+	font-family: "Whitney Bold";
+	font-size: 16px;
+	font-weight: 600;
+	margin-bottom: 8px;
+	margin-top: 0px;
+}
+
+#invite-search {
+	height: 22px;
+	background-color: #36393f;
+	border-radius: 4px;
+	margin-top: 4px;
+}
+
+#addfriendrow {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 30px;;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-left: 8px;
+	padding-right: 10px;
+	transition-duration: 0s;
+	border-radius: 3px 0px 0px 3px;
+	margin-left: 16px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+#addfriendrow:hover {
+	background-color: rgba(79,84,92,.3);
+	cursor: pointer
+}
+
+#lad-avatar {
+	margin-right: 10px;
+	margin-left: 0px;
+	height: 32px;
+	width: 32px;
+	clip-path: circle(16px);
+	//clip-path: circle(50 50);
+}
+
+#laduser {
+	font-family: "Whitney Medium";
+	font-weight: 400;
+	color: #f6f6f7;
+	font-size: 16px;
+}
+
+#bottomsec {
+	padding: 16px;
+	border-top: solid 1px #36393f;
+	height: 16px;
 }
 
 .button-text {
