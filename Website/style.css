@@ -221,24 +221,11 @@
 
 	}
 
-	.flextempl {
-		display: flex;
-		flex-direction: row;
-		justify-content: left;
+	.embed {
 		height: fit-content;
-		margin-top: 10px;
+		border-left: 4px solid #e07bb8;
+		border-radius: 4px;
 		
-	}
-
-	.embededge {
-		display: block;
-		background-color: #e07bb8;
-		width: 0.5%;
-		max-width: 8px;
-		height: auto;
-		margin-right: 0px;
-		border-radius: 3px 0px 0px 3px;
-
 	}
 
 	.button-text {
