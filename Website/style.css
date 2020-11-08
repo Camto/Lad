@@ -33,26 +33,23 @@
 }
 
 /* Headers */ 
-
+	
 	h1, h2, h3, h4, h5, h6 {
 		color: #7289da;
 		font-family: "Whitney Bold";
-
 	}
 	
 	h1, h2, h3, h4 {
 		font-weight: inherit;
 		line-height: 1.42;
 		margin-block-end: 0;
-
 	}
 	
 	h1, h2, h3 { text-align: center; }
-
+	
 	h1 { 
 		margin-top: 0;
 		font-size: 3.998rem;
-
 	}
 	
 	h2 { font-size: 2.827rem; }
@@ -68,7 +65,7 @@
 /* endHeaders */
 
 /* TagElements */
-
+	
 	html {
 		/* 
 		CONFLICTING RULE -- CHECKCONFLICT -- DECIDE CORRECT VALUE
@@ -80,9 +77,8 @@
 		max-width: 100%;
 		font-size: 18px;
 		background-color:#36393f;
-
 	}
-
+	
 	body {
 		/* 
 		CONFLICTING RULE -- CHECKCONFLICT -- DECIDE CORRECT VALUE
@@ -98,39 +94,35 @@
 		max-width: 48rem;
 		line-height: 1.45;
 		padding: .25rem;
-
 	}
-
+	
 	pre, code {
 		font-family: Consolas;
 		border-radius: 3px;
 		padding: 2.72px;
 		background: #202225;
-
 	}
-
+	
 	pre { 
 		line-height: 1.25; 
 		overflow-x: scroll; 
-
 	}
-
+	
 	a { text-decoration: none; }
-
+	
 	a, a:visited { color: #00b0f4; }
-
+	
 	a:hover, a:focus, a:active {
 		color: #00b0f4;
 		text-decoration: underline;
-
 	}
-
+	
 	form { margin-bottom: 0px; }
-
+	
 	img, canvas, iframe, video, svg, select, textarea { max-width: 100%; }
-
+	
 	p { font-size: 1rem; }
-
+	
 	ul {
 		background-color: #2f3136;
 		border-radius: 0px 0.3em 0.3em 0px;
@@ -139,23 +131,20 @@
 		padding-top: 0.8em;
 		padding-bottom: 0.5em;
 		width: 99.5%;
-
 	}
-
+	
 	li { 
 		list-style-type: none;
 		margin-bottom: 4px;
-
 	}
-
+	
 	small { font-size: .707em; }
-
+	
 	blockquote {
 		border-left: 8px solid #fafafa;
 		padding: 1rem;
-
 	}
-
+	
 	button {
 		font-family: "Whitney Medium";
 		color: #43b581;
@@ -164,23 +153,22 @@
 		height: 32px;
 		border: solid 1px #43b581;
 		border-radius: 3px;
-	
+		
 		/* Padding */
 			padding-left: 16px;
 			padding-right: 16px;
 			padding-top: 2px;
 			padding-bottom: 2px;
-	
+		
 		/* Margins */
 			margin-top: 5px;
 			margin-bottom: 5px;
-	
+		
 		/* Transitiions */
 			transition-property: background-color, color;
 			transition-duration: 0s, 0s;
 			transition-timing-function: ease, ease;
 			transition-delay: 0s, 0s;
-
 	}
 	
 	button:hover {
@@ -189,121 +177,107 @@
 		background-color: #369167;
 		border: solid 1px #369167;
 		cursor: pointer;
-
 	}
-
+	
 	button:focus { outline: 0; }
 	
 	button:active {
 		background-color: #5b6eae;
 		outline: 0;
-
 	}
-
+	
 /* endTagElements*/
 
 /* ClassElements*/
-
+	
 	.mention, .mention:visited {
 		border-radius: 3px;
-		background-color: rgba(114,137,218,.1);
+		background-color: rgba(114, 137, 218, .1);
 		color: #7289da;
 		display: inline;
 		padding-left: 2px;
 		padding-right: 2px;
-
 	}
-
+	
 	.mention:hover, .mention:focus, .mention:active {
 		color: #fff;
 		background-color: #7289da;
 		text-decoration: none;
-
 	}
-
+	
 	.embed {
 		height: fit-content;
 		border-left: 4px solid #e07bb8;
 		border-radius: 4px;
-		
 	}
-
+	
 	.button-text {
 		float: left;
 		height: 38px;
 		line-height: 38px;
 		vertical-align: middle;
-
 	}
-
+	
 	.button-wrapper {
 		display: block;
 		justify-self: flex-end;
 		margin-left: auto;
 		margin-right: 0px;
-
 	}
-
+	
 /* endClassElements */
 
 /* IdElements */
-
+	
 	#banner { border-radius: 3px; }
-
+	
 	#letssee {
 		display: flex;
 		flex-direction: row;
 		height: fit-content;
 		align-items: center;
-
 	}
-
+	
 	#commandlist {
 		margin-left: 0px;
 		margin-top: 0px;
 		margin-bottom: 0px;
-
 	}
-
+	
 	#getstartedlist {
 		margin-left: 0px;
 		margin-top: 0px;
 		margin-bottom: 0px;
-
 	}
-
+	
 	#inviteme {
 		margin-left: 0px;
 		margin-top: 0px;
 		margin-bottom: 0px;
 		max-width: 100%;
-
 	}
-
+	
 	#authorlist {
 		margin-left: 0px;
 		margin-top: 0px;
 		margin-bottom: 0px;
 		max-width: 40%;
-
 	}
-
+	
 	#addfriendrow:hover>.button-wrapper>form>button {
 		font-family: "Whitney Medium";
 		color: #fff;	
 		background-color: #43b581;
-
 	}
-
+	
 	#addfriendrow:hover>.button-wrapper>form>button:hover {
 		font-family: "Whitney Medium";
 		color: #fff;	
 		background-color: #369167;
 		border: solid 1px #369167;
 		cursor: pointer;
-
 	}
-
+	
 	#invite-container {
 		display: flex;
 		flex-direction: column;
@@ -311,41 +285,36 @@
 		width: 500px;
 		background-color: #292b2f;
 		border-radius: 5px;
-
 	}
-
+	
 	#main-invite-container {
 		display: flex;
 		flex-direction: row;
 		justify-content: left;
 		margin-top: 30px;
 		margin-bottom: 40px;
-
 	}
-
+	
 	#searchsec {
 		padding: 16px;
 		border-bottom: solid 1px #36393f;
-
 	}
-
+	
 	#invite-to-serv-text {
 		font-family: "Whitney Bold";
 		font-size: 16px;
 		font-weight: 600;
 		margin-bottom: 8px;
 		margin-top: 0px;
-
 	}
-
+	
 	#invite-search {
 		height: 22px;
 		background-color: #36393f;
 		border-radius: 4px;
 		margin-top: 4px;
-
 	}
-
+	
 	#addfriendrow {
 		display: flex;
 			flex-direction: row;
@@ -362,62 +331,58 @@
 			margin-bottom: 8px;
 		border-radius: 3px 0px 0px 3px;
 		transition-duration: 0s;
-
 	}
-
-	#addfriendrow:hover { background-color: rgba(79,84,92,.3); }
-
+	
+	#addfriendrow:hover { background-color: rgba(79, 84, 92, .3); }
+	
 	#lad-avatar {
 		margin-right: 10px;
 		margin-left: 0px;
 		height: 32px;
 		width: 32px;
 		clip-path: circle(16px);
-		/*clip-path: circle(50 50);*/
-
+		/* clip-path: circle(50 50); */
 	}
-
+	
 	#laduser {
 		font-family: "Whitney Medium";
 		font-weight: 400;
 		color: #f6f6f7;
 		font-size: 16px;
-
 	}
-
+	
 	#bottomsec {
 		padding: 16px;
 		border-top: solid 1px #36393f;
 		height: 16px;
-
 	}
-
+	
 /* IdElements */
 
 /* ScrollBarStuff*/
-
+	
 	body { scrollbar-width: auto; }
-
+	
 	body, body:hover { scrollbar-color: #202225 #2f3136; }
-
+	
 	body::-webkit-scrollbar {
 		width: 16px;
 		height: 16px
 	}
-
+	
 	body::-webkit-scrollbar-track { background-color: #2e3338; }
-
+	
 	body::-webkit-scrollbar-thumb, body::-webkit-scrollbar-track {
 		border: 4px solid transparent;
 		background-clip: padding-box;
 		border-radius: 8px;
 	}
-
+	
 	body::-webkit-scrollbar-thumb {
 		background-color: #202225;
 		min-height: 40px;
 	}
-
+	
 	body::-webkit-scrollbar-corner { background-color: transparent; }
-
+	
 /*endScrollbarStuff*/
