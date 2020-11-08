@@ -59,7 +59,7 @@ in [
 		no-help-embed,
 	
 	command "reddit"
-		"Sends a link to a random reddit post."
+		"Lets you browse subreddits."
 		embed.Embed::{
 			description = Some "The Reddit command searches for posts either in a subreddit (starting with `r/`) or by a user (starting with `u/`.)",
 			author = icon-title "Reddit Help" icons.reddit,
@@ -113,10 +113,10 @@ in [
 			author = icon-title "Settings Help" icons.settings
 		},
 
-		command "user"
-			"Return a user's info."
-			embed.Embed::{
-				title = Some "Get User Info",
-				description = Some "Use `l.user <@user>` to get the user's information."
+	command "user"
+		"Return a user's info."
+		embed.Embed::{
+			title = Some "Get User Info",
+			description = Some "Use `l.user <@user>` to get the user's information."
 		}
 ]
