@@ -105,7 +105,7 @@
 		font-family: Consolas;
 		border-radius: 3px;
 		padding: 2.72px;
-		background: #2f3136;
+		background: #202225;
 
 	}
 
@@ -132,7 +132,7 @@
 	p { font-size: 1rem; }
 
 	ul {
-		background-color: #292b2f;
+		background-color: #2f3136;
 		border-radius: 0px 0.3em 0.3em 0px;
 		padding-left: 0.8em;
 		padding-right: 0.8em;
@@ -386,7 +386,7 @@
 		height: 32px;
 		width: 32px;
 		clip-path: circle(16px);
-		//clip-path: circle(50 50);
+		/*clip-path: circle(50 50);*/
 
 	}
 
