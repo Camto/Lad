@@ -104,7 +104,7 @@
 	
 	a, a:visited { color: #00b0f4; }
 	
-	a:hover {
+	a:hover, a:active, a:focus {
 		color: #00b0f4;
 		text-decoration: underline;
 	}
@@ -167,13 +167,14 @@
 
 /* ClassElements */
 	
-	.mention, .mention:visited {
+	.mention, .mention:visited, .mention:active, .mention:focus {
 		border-radius: 3px;
 		background-color: rgba(114, 137, 218, .1);
 		color: #7289da;
 		display: inline;
 		padding-left: 2px;
 		padding-right: 2px;
+		text-decoration: none;
 	}
 	
 	.mention:hover {
