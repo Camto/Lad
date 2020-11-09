@@ -104,7 +104,7 @@
 	
 	a, a:visited { color: #00b0f4; }
 	
-	a:hover, a:focus, a:active {
+	a:hover {
 		color: #00b0f4;
 		text-decoration: underline;
 	}
@@ -176,7 +176,7 @@
 		padding-right: 2px;
 	}
 	
-	.mention:hover, .mention:focus, .mention:active {
+	.mention:hover {
 		color: #fff;
 		background-color: #7289da;
 		text-decoration: none;
