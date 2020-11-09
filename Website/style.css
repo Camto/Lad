@@ -66,7 +66,7 @@
 		/*		CONFLICTING RULE -- CHECKCONFLICT -- DECIDE CORRECT VALUE
 			>> The following rule was already rendered null by Cascade:
 		
-			font-size: 12px;		
+			font-size: 12px;
 		*/
 		max-width: 100%;
 		font-size: 18px;
@@ -77,7 +77,7 @@
 		/*		CONFLICTING RULE -- CHECKCONFLICT -- DECIDE CORRECT VALUE
 			>> The following rule was already rendered null by Cascade:
 		
-			line-height: 1.85;		
+			line-height: 1.85;
 		*/
 		color: #dcddde;
 		font-family: "Whitney";
@@ -150,16 +150,16 @@
 	
 	button:hover {
 		font-family: "Whitney Medium";
-		color: #fff;	
-		background-color: #369167;
-		border: solid 1px #369167;
+		color: #fff;
+		background-color: #3ca374;
+		border: solid 1px #3ca374;
 		cursor: pointer;
 	}
 	
 	button:focus { outline: 0; }
 	
 	button:active {
-		background-color: #5b6eae;
+		background-color: rgba(67,181,129,.1);
 		outline: 0;
 	}
 	
@@ -250,16 +250,20 @@
 	
 	#addfriendrow:hover>.button-wrapper>form>button {
 		font-family: "Whitney Medium";
-		color: #fff;	
+		color: #fff;
 		background-color: #43b581;
 	}
 	
 	#addfriendrow:hover>.button-wrapper>form>button:hover {
 		font-family: "Whitney Medium";
-		color: #fff;	
-		background-color: #369167;
-		border: solid 1px #369167;
+		color: #fff;
+		background-color: #3ca374;
+		border: solid 1px #3ca374;
 		cursor: pointer;
+	}
+	
+	#addfriendrow:hover>.button-wrapper>form>button:active {
+		background-color: #369167;
 	}
 	
 	#invite-container {
