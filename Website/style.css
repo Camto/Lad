@@ -200,6 +200,9 @@
 	.embed-description {
 		margin-top: 8px;
 		white-space: pre-line;
+		font-size: 0.875rem;
+    line-height: 1.125rem;
+    font-weight: 400;
 	}
 	
 	.embed-fields {
