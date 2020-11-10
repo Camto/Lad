@@ -1,4 +1,4 @@
-let page = document("https://en.wikipedia.org/wiki/List_of_dinosaur_genera")
+let page = document("https://en.wikipedia.org/wiki/List_of_dinosaur_genera", {userAgent: "Ladbot"})
 
 let body = elements(page, ".mw-parser-output ul")
 for section in pop(pop(pop(pop(remove_nth(body, 0)))))
