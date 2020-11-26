@@ -35,8 +35,10 @@ for filename in os.listdir("./Cogs"):
 		client.load_extension(f"Cogs.{filename[:-3]}")
 
 async def start_bot():
+	bot_name = sys.argv[1]
+	
 	# Start up settings database.
-	utils.db = await asyncpg.connect(os.getenv("DATABASE_URL"))
+	utils.db = await asyncpg.connect(os.getenv(f"LAD_{bot_name}_DATABASE_URL"))
 	
 	await utils.db.execute("""
 		create table if not exists settings (
@@ -65,7 +67,7 @@ async def start_bot():
 			utils.settings[guild_id][option] = val
 	
 	# Log the bot in.
-	await client.start(os.getenv("TOKEN"))
+	await client.start(os.getenv(f"LAD_{bot_name}_TOKEN"))
 
 loop = asyncio.get_event_loop()
 
