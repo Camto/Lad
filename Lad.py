@@ -58,7 +58,7 @@ async def start_bot():
 		guild_id = int(guild["guild_id"])
 		utils.settings[guild_id] = {}
 		for option in utils.option_names:
-			if option in guild:
+			if option in guild and guild[option] is not None:
 				val = guild[option]
 				if utils.options[option]["type"] == "json":
 					val = json.loads(val)
