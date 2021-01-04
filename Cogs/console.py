@@ -13,7 +13,13 @@ class Console(commands.Cog):
 	@commands.Cog.listener()
 	async def on_ready(self):
 		while True:
-			cmd = await aioconsole.ainput()
+			cmd = ""
+			last_line = await aioconsole.ainput()
+			while last_line[0] == "#":
+				cmd += last_line[1:] + "\n"
+				last_line = await aioconsole.ainput()
+			cmd += last_line
+			
 			await run_cmd(self.client, cmd)
 	
 	@commands.Cog.listener()
