@@ -30,11 +30,6 @@ async def on_ready():
 			name = "l.help",
 			url = f"https://www.twitch.tv/{random.choice(['jpvinnie', 'otomac'])}"))
 	print(f"{client.user.name}#{client.user.discriminator} logged in!")
-	
-	while True:
-		cmd = await aioconsole.ainput()
-		args = cmd.split()
-		await client.get_channel(int(args[0])).send(" ".join(args[1:]))
 
 for filename in os.listdir("./Cogs"):
 	if filename.endswith(".py"):
