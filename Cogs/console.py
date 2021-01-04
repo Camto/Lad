@@ -15,10 +15,6 @@ class Console(commands.Cog):
 		while True:
 			cmd = await aioconsole.ainput()
 			await run_cmd(self.client, cmd)
-
-class Discord_Console(commands.Cog):
-	def __init__(self, client):
-		self.client = client
 	
 	@commands.Cog.listener()
 	async def on_message(self, msg):
@@ -34,4 +30,3 @@ async def run_cmd(client, cmd):
 
 def setup(client):
 	client.add_cog(Console(client))
-	client.add_cog(Discord_Console(client))
