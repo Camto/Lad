@@ -34,11 +34,9 @@ for filename in os.listdir("./Cogs"):
 	if filename.endswith(".py"):
 		client.load_extension(f"Cogs.{filename[:-3]}")
 
-async def start_bot():
-	master_settings = json.loads(os.getenv(f"LADBOT_{sys.argv[1]}"))
-	
+async def start_bot():	
 	# Start up settings database.
-	utils.db = await asyncpg.connect(master_settings["database url"])
+	utils.db = await asyncpg.connect(utils.master_settings["database url"])
 	
 	await utils.db.execute("""
 		create table if not exists settings (
@@ -67,7 +65,7 @@ async def start_bot():
 			utils.settings[guild_id][option] = val
 	
 	# Log the bot in.
-	await client.start(master_settings["token"])
+	await client.start(utils.master_settings["token"])
 
 loop = asyncio.get_event_loop()
 

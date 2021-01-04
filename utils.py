@@ -1,9 +1,13 @@
 import discord
 from discord.ext import commands
 
+import sys
+import os
 import asyncio
+import json
 import yaml
 
+master_settings = json.loads(os.getenv(f"LADBOT_{sys.argv[1]}"))
 global db
 settings = {}
 
