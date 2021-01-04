@@ -9,6 +9,7 @@ import yaml
 
 master_settings = json.loads(os.getenv(f"LADBOT_{sys.argv[1]}"))
 master_settings["admins"] = list(map(int, master_settings["admins"]))
+master_settings["console"] = int(master_settings["console"])
 print(master_settings)
 
 global db
