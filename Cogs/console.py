@@ -8,20 +8,6 @@ import ast
 import aioconsole
 import lark
 
-async def aexec(stmts, env = None):
-	parsed_stmts = ast.parse(stmts)
-	
-	fn = f"async def async_fn(): pass"
-	parsed_fn = ast.parse(fn)
-	
-	for node in parsed_stmts.body:
-		ast.increment_lineno(node)
-	
-	parsed_fn.body[0].body = parsed_stmts.body
-	exec(compile(parsed_fn, filename = "<ast>", mode = "exec"), env)
-	
-	return await eval(f"async_fn()", env)
-
 # The master console!
 
 class Console(commands.Cog):
@@ -115,7 +101,7 @@ class Lad_Script_Transformer(lark.Transformer):
 	int = lambda self, n: {"type": Types.int, "int": int(n[0])}
 	float = lambda self, n: {"type": Types.float, "float": float(n[0])}
 	string = lambda self, s: {"type": Types.string, "string": s[0]}
-	eval = lambda self, e: {"type": Types.eval, "eval": e[0][3:-3]}
+	eval = lambda self, e: {"type": Types.eval, "eval": remove_prefix(remove_prefix(e[0][3:-3], "python"), "py")}
 	plain_path = lambda self, p: {"type": Types.path, "path": p[0]}
 	quoted_path = lambda self, p: {"type": Types.path, "path": p[0][1:-1]}
 	mention = lambda self, m: {"type": Types.mention, "mention": p[0][1:-1]}
@@ -195,6 +181,25 @@ async def run(client, actions, locals_):
 					st.append(instr)
 				elif instr["type"] == Types.eval:
 					await aexec(instr["eval"], dict(globals(), **locals()))
+
+async def aexec(stmts, env = None):
+	parsed_stmts = ast.parse(stmts)
+	
+	fn = f"async def async_fn(): pass"
+	parsed_fn = ast.parse(fn)
+	
+	for node in parsed_stmts.body:
+		ast.increment_lineno(node)
+	
+	parsed_fn.body[0].body = parsed_stmts.body
+	exec(compile(parsed_fn, filename = "<ast>", mode = "exec"), env)
+	
+	return await eval(f"async_fn()", env)
+
+def remove_prefix(text, prefix):
+	if text.startswith(prefix):
+		return text[len(prefix):]
+	return text
 
 def setup(client):
 	client.add_cog(Console(client))
