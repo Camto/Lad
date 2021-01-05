@@ -144,7 +144,6 @@ async def run(client, msg, actions, locals_):
 				vars[aliases[action["name"]]] = st.pop()
 			else:
 				vars[action["name"]] = st.pop()
-			print(vars)
 		else:
 			for instr in action["instrs"]:
 				if instr["type"] == Types.name:
