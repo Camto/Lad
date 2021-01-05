@@ -116,20 +116,26 @@ async def run(client, actions, locals):
 	for action in actions:
 		if action["type"] == Types.msg:
 			if "channel" in vars:
-				channel = client.get_channel(vars["channel"]["int"])
+				channel = client.get_channel(vars["channel"])
 				if action["msg"] != "":
 					await channel.send(action["msg"])
 				elif len(st) >= 1:
 					msg = st.pop()
-					if msg["type"] == Types.string:
-						await channel.send(msg["string"])
+					if type(msg) == str:
+						await channel.send(msg)
 		elif action["type"] == Types.var:
 			await run(client, action["def"], locals)
 			vars[action["name"]] = st.pop()
 			print(vars)
 		else:
 			for instr in action["instrs"]:
-				if instr["type"] in [Types.int, Types.float, Types.string, Types.path, Types.mention, Types.func]:
+				if instr["type"] == Types.int:
+					st.append(instr["int"])
+				if instr["type"] == Types.float:
+					st.append(instr["float"])
+				if instr["type"] == Types.string:
+					st.append(instr["string"])
+				if instr["type"] in [Types.path, Types.mention, Types.func]:
 					st.append(instr)
 				elif instr["type"] == Types.eval:
 					eval(instr["eval"])
