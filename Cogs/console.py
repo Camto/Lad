@@ -101,7 +101,7 @@ class Lad_Script_Transformer(lark.Transformer):
 	int = lambda self, n: {"type": Types.int, "int": int(n[0])}
 	float = lambda self, n: {"type": Types.float, "float": float(n[0])}
 	string = lambda self, s: {"type": Types.string, "string": s[0]}
-	eval = lambda self, e: {"type": Types.eval, "eval": remove_prefix(remove_prefix(e[0][3:-3], "python"), "py")}
+	eval = lambda self, e: {"type": Types.eval, "eval": remove_prefix(remove_prefix(e[0][3:-3], "py"), "thon")}
 	plain_path = lambda self, p: {"type": Types.path, "path": p[0]}
 	quoted_path = lambda self, p: {"type": Types.path, "path": p[0][1:-1]}
 	mention = lambda self, m: {"type": Types.mention, "mention": p[0][1:-1]}
