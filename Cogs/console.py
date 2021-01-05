@@ -4,8 +4,23 @@ import utils
 
 import enum
 import json
+import ast
 import aioconsole
 import lark
+
+async def aexec(stmts, env = None):
+	parsed_stmts = ast.parse(stmts)
+	
+	fn = f"async def async_fn(): pass"
+	parsed_fn = ast.parse(fn)
+	
+	for node in parsed_stmts.body:
+		ast.increment_lineno(node)
+	
+	parsed_fn.body[0].body = parsed_stmts.body
+	exec(compile(parsed_fn, filename = "<ast>", mode = "exec"), env)
+	
+	return await eval(f"async_fn()", env)
 
 # The master console!
 
@@ -118,19 +133,22 @@ async def run_cmd(client, cmd):
 	print(actions)
 	await run(client, actions, [])
 
-async def run(client, actions, locals):
+async def run(client, actions, locals_):
 	for action in actions:
 		if action["type"] == Types.msg:
 			if "channel" in vars:
-				channel = client.get_channel(vars["channel"])
-				if action["msg"] != "":
-					await channel.send(action["msg"])
-				elif len(st) >= 1:
-					msg = st.pop()
-					if type(msg) == str:
-						await channel.send(msg)
+				if type(vars["channel"]) == int:
+					channel = client.get_channel(vars["channel"])
+					if action["msg"] != "":
+						await channel.send(action["msg"])
+					elif len(st) >= 1:
+						msg = st.pop()
+						if type(msg) == str:
+							await channel.send(msg)
+				else:
+					print("Invalid type for channel.")
 		elif action["type"] == Types.var:
-			await run(client, action["def"], locals)
+			await run(client, action["def"], locals_)
 			if action["name"] in aliases:
 				vars[aliases[action["name"]]] = st.pop()
 			else:
@@ -139,7 +157,7 @@ async def run(client, actions, locals):
 		else:
 			for instr in action["instrs"]:
 				if instr["type"] == Types.name:
-					local = list(filter(lambda l: l[0] == instr["name"], locals))
+					local = list(filter(lambda l: l[0] == instr["name"], locals_))
 					if local:
 						var = local[0][1]
 					elif instr["name"] in aliases:
@@ -153,9 +171,9 @@ async def run(client, actions, locals):
 					if type(var) != dict or var["type"] != Types.func:
 						st.append(var)
 					else:
-						await run(client, var["body"], locals)
+						await run(client, var["body"], locals_)
 				elif instr["type"] == Types.ref:
-					local = list(filter(lambda l: l[0] == instr["name"], locals))
+					local = list(filter(lambda l: l[0] == instr["name"], locals_))
 					if local:
 						var = local[0][1]
 					elif instr["name"] in aliases:
@@ -176,7 +194,7 @@ async def run(client, actions, locals):
 				elif instr["type"] in [Types.path, Types.mention, Types.func]:
 					st.append(instr)
 				elif instr["type"] == Types.eval:
-					exec(instr["eval"], globals())
+					await aexec(instr["eval"], dict(globals(), **locals()))
 
 def setup(client):
 	client.add_cog(Console(client))
