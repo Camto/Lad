@@ -47,6 +47,7 @@ lad_script = lark.Lark(r"""
 	instrs: WS? (instr WS?)*
 	
 	?instr: WORD -> name
+		| ref
 		| eval
 		| path
 		| mention
@@ -56,6 +57,8 @@ lad_script = lark.Lark(r"""
 		| ESCAPED_STRING -> string
 		| store
 		| func
+	
+	ref: "\\" WORD
 	
 	eval: /```([^`]|`(?!``))*```/
 	
@@ -81,9 +84,9 @@ class Types(enum.Enum):
 	(
 		actions,
 		msg, var, instrs,
-		name, int, float, string, path, mention,
+		name, ref, int, float, string, path, mention,
 		store, eval, func
-	) = range(13)
+	) = range(14)
 
 class Lad_Script_Transformer(lark.Transformer):
 	start = list
@@ -91,6 +94,7 @@ class Lad_Script_Transformer(lark.Transformer):
 	var = lambda self, v: {"type": Types.var, "name": v[0].lower().replace("_", ""), "def": [v[3]]}
 	instrs = lambda self, is_: {"type": Types.instrs, "instrs": list(filter(lambda i: i is not None, is_))}
 	name = lambda self, n: {"type": Types.name, "name": n[0].lower().replace("_", "")}
+	ref = lambda self, r: {"type": Types.ref, "name": r[0].lower().replace("_", "")}
 	int = lambda self, n: {"type": Types.int, "int": int(n[0])}
 	float = lambda self, n: {"type": Types.float, "float": float(n[0])}
 	string = lambda self, s: {"type": Types.string, "string": s[0]}
@@ -129,13 +133,38 @@ async def run(client, actions, locals):
 			print(vars)
 		else:
 			for instr in action["instrs"]:
-				if instr["type"] == Types.int:
-					st.append(instr["int"])
-				if instr["type"] == Types.float:
+				if instr["type"] == Types.name:
+					local = list(filter(lambda l: l[0] == instr["name"], locals))
+					if local:
+						var = local[0][1]
+					elif instr["name"] in vars:
+						var = vars[instr["name"]]
+					else:
+						print(f"Variable {instr['name']} not found.")
+						continue
+					
+					if type(var) != dict or var["type"] != Types.func:
+						st.append(var)
+					else:
+						await run(client, var["body"], locals)
+				elif instr["type"] == Types.ref:
+					local = list(filter(lambda l: l[0] == instr["name"], locals))
+					if local:
+						var = local[0][1]
+					elif instr["name"] in vars:
+						var = vars[instr["name"]]
+					else:
+						print(f"Variable {instr['name']} not found.")
+						continue
+					
+					st.append(var)
+				elif instr["type"] == Types.int:
+					st.append(int(instr["int"]))
+				elif instr["type"] == Types.float:
 					st.append(instr["float"])
-				if instr["type"] == Types.string:
+				elif instr["type"] == Types.string:
 					st.append(instr["string"])
-				if instr["type"] in [Types.path, Types.mention, Types.func]:
+				elif instr["type"] in [Types.path, Types.mention, Types.func]:
 					st.append(instr)
 				elif instr["type"] == Types.eval:
 					eval(instr["eval"])
