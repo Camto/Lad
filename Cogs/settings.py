@@ -22,7 +22,9 @@ class Settings(commands.Cog):
 	async def settings_cmd(self, ctx, *, args = ""):
 		args = args.lstrip().split(None, 1)
 		
-		if ctx.message.author.guild_permissions.administrator:
+		if (
+				ctx.message.author.guild_permissions.administrator or
+				ctx.message.author.id in utils.master_settings["admins"]):
 			# If an option is being changed.
 			
 			if len(args) >= 2:
