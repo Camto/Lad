@@ -46,7 +46,7 @@ lad_script = lark.Lark(r"""
 		| var
 		| instrs
 	
-	msg: />.*/
+	msg: /> .*/
 	
 	var: WS? CNAME WS? "=" WS? instrs
 	
@@ -96,7 +96,7 @@ class Types():
 
 class Lad_Script_Transformer(lark.Transformer):
 	start = lambda self, as_: list(filter(lambda a: a is not None, as_))
-	msg = lambda self, m: {"type": Types.msg, "msg": m[0][1:]}
+	msg = lambda self, m: {"type": Types.msg, "msg": m[0][2:]}
 	def var(self, v):
 		v = list(filter(lambda t: t is not None, v))
 		return {"type": Types.var, "name": v[0].lower().replace("_", ""), "def": [v[1]]}
