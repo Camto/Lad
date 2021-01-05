@@ -32,7 +32,12 @@ class Console(commands.Cog):
 				msg.channel.id == utils.master_settings["console"] and
 				msg.author.id in utils.master_settings["admins"]):
 			cmd = msg.content
-			await run_cmd(self.client, cmd)
+			await run_cmd(self.client, cmd, msg)
+	
+	@commands.command()
+	async def ls(self, ctx, *, arg):
+		if ctx.message.author.id in utils.master_settings["admins"]:
+			await run_cmd(self.client, arg, ctx.message)
 
 lad_script = lark.Lark(r"""
 	start: WS? (action WS? (";" WS? action WS?)*)
@@ -114,12 +119,12 @@ st = []
 vars = utils.get_json("../Console/vars")
 aliases = utils.get_json("../Console/aliases")
 
-async def run_cmd(client, cmd):
+async def run_cmd(client, cmd, msg = None):
 	actions = Lad_Script_Transformer().transform(lad_script.parse(cmd))
 	print(actions)
-	await run(client, actions, [])
+	await run(client, msg, actions, [])
 
-async def run(client, actions, locals_):
+async def run(client, msg, actions, locals_):
 	for action in actions:
 		if action["type"] == Types.msg:
 			if "channel" in vars:
@@ -134,7 +139,7 @@ async def run(client, actions, locals_):
 				else:
 					print("Invalid type for channel.")
 		elif action["type"] == Types.var:
-			await run(client, action["def"], locals_)
+			await run(client, msg, action["def"], locals_)
 			if action["name"] in aliases:
 				vars[aliases[action["name"]]] = st.pop()
 			else:
@@ -157,7 +162,7 @@ async def run(client, actions, locals_):
 					if type(var) != dict or var["type"] != Types.func:
 						st.append(var)
 					else:
-						await run(client, var["body"], locals_)
+						await run(client, msg, var["body"], locals_)
 				elif instr["type"] == Types.ref:
 					local = list(filter(lambda l: l[0] == instr["name"], locals_))
 					if local:
