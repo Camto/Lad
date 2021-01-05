@@ -31,8 +31,7 @@ class Console(commands.Cog):
 		if (
 				msg.channel.id == utils.master_settings["console"] and
 				msg.author.id in utils.master_settings["admins"]):
-			cmd = msg.content
-			await run_cmd(self.client, cmd, msg)
+			await run_cmd(self.client, msg.content, msg)
 	
 	@commands.command()
 	async def ls(self, ctx, *, arg):
