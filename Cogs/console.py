@@ -48,6 +48,7 @@ lad_script = lark.Lark(r"""
 	
 	?instr: WORD -> name
 		| path
+		| mention
 		| INT -> int
 		| FLOAT -> float
 		| ESCAPED_STRING -> string
@@ -56,6 +57,8 @@ lad_script = lark.Lark(r"""
 	
 	?path: /\.+(\/[^ \n]+)?/ -> plain_path
 		| "/" ESCAPED_STRING -> quoted_path
+	
+	mention: "@" ESCAPED_STRING
 	
 	store: "->" WORD
 	
@@ -72,14 +75,14 @@ class Types(enum.Enum):
 	(
 		actions,
 		msg, var, instrs,
-		name, int, float, string, path,
+		name, int, float, string, path, mention,
 		store, func
-	) = range(11)
+	) = range(12)
 
 class Lad_Script_Transformer(lark.Transformer):
 	start = list
 	msg = lambda self, m: {"type": Types.msg, "msg": m[0][1:]}
-	var = lambda self, v: {"type": Types.var, "name": v[0][0:], "def": [v[3]]}
+	var = lambda self, v: {"type": Types.var, "name": v[0][0:].lower().replace("_", ""), "def": [v[3]]}
 	instrs = lambda self, is_: {"type": Types.instrs, "instrs": list(filter(lambda i: i is not None, is_))}
 	name = lambda self, n: {"type": Types.name, "name": n[0].lower().replace("_", "")}
 	int = lambda self, n: {"type": Types.int, "int": int(n[0])}
@@ -87,6 +90,7 @@ class Lad_Script_Transformer(lark.Transformer):
 	string = lambda self, s: {"type": Types.string, "string": eval(s[0].replace("\n", "\\n"))}
 	plain_path = lambda self, p: {"type": Types.path, "path": p[0][0:]}
 	quoted_path = lambda self, p: {"type": Types.path, "path": p[0][1:-1]}
+	mention = lambda self, m: {"type": Types.mention, "mention": p[0][1:-1]}
 	store = lambda self, s: {"type": Types.store, "name": s[0].lower().replace("_", "")}
 	func = lambda self, f: {"type": Types.func, "body": f[0]}
 	WS = lambda self, _: None
@@ -104,14 +108,20 @@ async def run(client, actions, locals):
 	for action in actions:
 		if action["type"] == Types.msg:
 			if "channel" in vars:
-				await client.get_channel(vars["channel"]["int"]).send(action["msg"])
+				channel = client.get_channel(vars["channel"]["int"])
+				if action["msg"] != "":
+					await channel.send(action["msg"])
+				elif len(st) >= 1:
+					msg = st.pop()
+					if msg["type"] == Types.string:
+						await channel.send(msg["string"])
 		elif action["type"] == Types.var:
 			await run(client, action["def"], locals)
 			vars[action["name"]] = st.pop()
 			print(vars)
 		else:
 			for instr in action["instrs"]:
-				if instr["type"] == Types.int:
+				if instr["type"] in [Types.int, Types.float, Types.string, Types.path, Types.mention, Types.func]:
 					st.append(instr)
 
 def setup(client):
