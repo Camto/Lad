@@ -42,11 +42,11 @@ lad_script = lark.Lark(r"""
 	
 	msg: />.*/
 	
-	var: WS? WORD WS? "=" WS? instrs
+	var: WS? CNAME WS? "=" WS? instrs
 	
 	instrs: WS? (instr WS?)*
 	
-	?instr: WORD -> name
+	?instr: CNAME -> name
 		| ref
 		| eval
 		| path
@@ -58,7 +58,7 @@ lad_script = lark.Lark(r"""
 		| store
 		| func
 	
-	ref: "\\" WORD
+	ref: "\\" CNAME
 	
 	eval: /```([^`]|`(?!``))*```/
 	
@@ -67,15 +67,15 @@ lad_script = lark.Lark(r"""
 	
 	mention: "@" ESCAPED_STRING
 	
-	word_string: "'" WORD
+	word_string: "'" CNAME
 	
-	store: "->" WORD
+	store: "->" CNAME
 	
 	func: "(" start ")"
 	
 	ESCAPED_STRING: /"([^"\\]|(\\.))*"/
 	
-	%import common.WORD
+	%import common.CNAME
 	%import common.WS
 	%import common.INT
 	%import common.FLOAT""")
@@ -89,7 +89,7 @@ class Types():
 	) = range(14)
 
 class Lad_Script_Transformer(lark.Transformer):
-	start = list
+	start = lambda self, as_: list(filter(lambda a: a is not None, as_))
 	msg = lambda self, m: {"type": Types.msg, "msg": m[0][1:]}
 	def var(self, v):
 		v = list(filter(lambda t: t is not None, v))
