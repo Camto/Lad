@@ -80,7 +80,7 @@ lad_script = lark.Lark(r"""
 	%import common.INT
 	%import common.FLOAT""")
 
-class Types(enum.Enum):
+class Types():
 	(
 		actions,
 		msg, var, instrs,
@@ -91,7 +91,9 @@ class Types(enum.Enum):
 class Lad_Script_Transformer(lark.Transformer):
 	start = list
 	msg = lambda self, m: {"type": Types.msg, "msg": m[0][1:]}
-	var = lambda self, v: {"type": Types.var, "name": v[0].lower().replace("_", ""), "def": [v[3]]}
+	def var(self, v):
+		v = list(filter(lambda t: t is not None, v))
+		return {"type": Types.var, "name": v[0].lower().replace("_", ""), "def": [v[1]]}
 	instrs = lambda self, is_: {"type": Types.instrs, "instrs": list(filter(lambda i: i is not None, is_))}
 	name = lambda self, n: {"type": Types.name, "name": n[0].lower().replace("_", "")}
 	ref = lambda self, r: {"type": Types.ref, "name": r[0].lower().replace("_", "")}
@@ -129,7 +131,10 @@ async def run(client, actions, locals):
 						await channel.send(msg)
 		elif action["type"] == Types.var:
 			await run(client, action["def"], locals)
-			vars[action["name"]] = st.pop()
+			if action["name"] in aliases:
+				vars[aliases[action["name"]]] = st.pop()
+			else:
+				vars[action["name"]] = st.pop()
 			print(vars)
 		else:
 			for instr in action["instrs"]:
@@ -137,11 +142,13 @@ async def run(client, actions, locals):
 					local = list(filter(lambda l: l[0] == instr["name"], locals))
 					if local:
 						var = local[0][1]
+					elif instr["name"] in aliases:
+						var = vars[aliases[instr["name"]]]
 					elif instr["name"] in vars:
 						var = vars[instr["name"]]
 					else:
 						print(f"Variable {instr['name']} not found.")
-						continue
+						break
 					
 					if type(var) != dict or var["type"] != Types.func:
 						st.append(var)
@@ -151,11 +158,13 @@ async def run(client, actions, locals):
 					local = list(filter(lambda l: l[0] == instr["name"], locals))
 					if local:
 						var = local[0][1]
+					elif instr["name"] in aliases:
+						var = vars[aliases[instr["name"]]]
 					elif instr["name"] in vars:
 						var = vars[instr["name"]]
 					else:
 						print(f"Variable {instr['name']} not found.")
-						continue
+						break
 					
 					st.append(var)
 				elif instr["type"] == Types.int:
@@ -163,11 +172,11 @@ async def run(client, actions, locals):
 				elif instr["type"] == Types.float:
 					st.append(instr["float"])
 				elif instr["type"] == Types.string:
-					st.append(instr["string"])
+					st.append(str(instr["string"]))
 				elif instr["type"] in [Types.path, Types.mention, Types.func]:
 					st.append(instr)
 				elif instr["type"] == Types.eval:
-					eval(instr["eval"])
+					exec(instr["eval"], globals())
 
 def setup(client):
 	client.add_cog(Console(client))
