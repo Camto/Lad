@@ -98,7 +98,14 @@ in [
 			title = Some "Say Help",
 			description = Some "Use `l.say <anything>` to make the bot say anything."
 		},
-
+	
+	command "server"
+		"Return the server's info."
+		embed.Embed::{
+			title = Some "Get Server Info",
+			description = Some "Use `l.server` to get the server's information."
+		},
+	
 	command "settings"
 		"Change Lad's options, like enabling or disabling certain commands. Can only be used by admins."
 		embed.Embed::{
