@@ -26,8 +26,9 @@ class User(commands.Cog):
 		for name, value in fields:
 			embed.add_field(name = name, value = value, inline = True)
 		
+		embed.set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url)
+		
 		await ctx.send(embed = embed)
-		.set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url)
 	
 	@user.error
 	async def user_error(self, ctx, error):
