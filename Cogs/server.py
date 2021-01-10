@@ -26,7 +26,8 @@ class Server(commands.Cog):
 		
 	for name, value in fields:
 		print(f"Did field {name}")
-		embed.add_field(name = name, value = value, inline = True).set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url)
+		embed.add_field(name = name, value = value, inline = True)
+		.set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url)
 		
 		await ctx.send(embed = embed)
 
