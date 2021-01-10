@@ -12,33 +12,21 @@ class Server(commands.Cog):
 			title="Server information",
 			color = utils.embed_color)
 			.set_thumbnail(url = ctx.guild.icon_url))
+	
+	fields = [
+		("ID", ctx.guild.id),
+		("Region", ctx.guild.region),
+		("Created at", ctx.guild.created_at.strftime("%d/%m/%Y")),
+		("Members", str(ctx.guild.member_count)),
+		("Boosters", str(ctx.guild.premium_subscription_count)),
+    ("Roles", len(ctx.guild.roles)),
+		("Text channels", len(ctx.guild.text_channels)),
+		("Voice channels", len(ctx.guild.voice_channels)),
+		("Categories", len(ctx.guild.categories))]
 		
-		#statuses = [
-		#	len(list(filter(lambda m: str(m.status) == "online", ctx.guild.members))),
-		#	len(list(filter(lambda m: str(m.status) == "idle", ctx.guild.members))),
-		#	len(list(filter(lambda m: str(m.status) == "dnd", ctx.guild.members))),
-		#	len(list(filter(lambda m: str(m.status) == "offline", ctx.guild.members)))]
-		
-		fields = [
-			("ID", ctx.guild.id),
-			("Owner", ctx.guild.owner),
-			("Region", ctx.guild.region),
-			("Created at", ctx.guild.created_at.strftime("%d/%m/%Y %H:%M:%S")),
-			("Members", len(ctx.guild.members)),
-			("Humans", len([m for m in ctx.guild.members if not m.bot])),
-			("Bots", len(list(filter(lambda m: m.bot, ctx.guild.members)))),
-			("Banned members", len(await ctx.guild.bans())),
-			# ("Statuses", f"🟢 {statuses[0]} 🟠 {statuses[1]} 🔴 {statuses[2]} ⚪ {statuses[3]}"),
-			("Text channels", len(ctx.guild.text_channels)),
-			("Voice channels", len(ctx.guild.voice_channels)),
-			("Categories", len(ctx.guild.categories)),
-			("Roles", len(ctx.guild.roles)),
-			("Invites", len(await ctx.guild.invites())),
-			("\u200b", "\u200b")]
-		
-		for name, value in fields:
-			print(f"Did field {name}")
-			embed.add_field(name = name, value = value, inline = True)
+	for name, value in fields:
+		print(f"Did field {name}")
+		embed.add_field(name = name, value = value, inline = True).set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url)
 		
 		await ctx.send(embed = embed)
 
