@@ -25,7 +25,7 @@ class Server(commands.Cog):
 			("Region", ctx.guild.region),
 			("Created at", ctx.guild.created_at.strftime("%d/%m/%Y %H:%M:%S")),
 			("Members", len(ctx.guild.members)),
-			("Humans", len(list(filter(lambda m: not m.bot, ctx.guild.members)))),
+			("Humans", len([m for m in ctx.guild.members if not m.bot])),
 			("Bots", len(list(filter(lambda m: m.bot, ctx.guild.members)))),
 			("Banned members", len(await ctx.guild.bans())),
 			# ("Statuses", f"🟢 {statuses[0]} 🟠 {statuses[1]} 🔴 {statuses[2]} ⚪ {statuses[3]}"),
