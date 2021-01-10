@@ -6,22 +6,22 @@ class Server(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 	
-  @commands.command()
+	@commands.command()
 	async def server(self, ctx):
 		
-    embed = (discord.Embed(
-      title="Server information",
+		embed = (discord.Embed(
+			title="Server information",
 			color = utils.embed_color)
-      .set_thumbnail(url = ctx.guild.icon_url)
+			.set_thumbnail(url = ctx.guild.icon_url))
 
 		statuses = [
-      len(list(filter(lambda m: str(m.status) == "online", ctx.guild.members))),
+			len(list(filter(lambda m: str(m.status) == "online", ctx.guild.members))),
 			len(list(filter(lambda m: str(m.status) == "idle", ctx.guild.members))),
 			len(list(filter(lambda m: str(m.status) == "dnd", ctx.guild.members))),
 			len(list(filter(lambda m: str(m.status) == "offline", ctx.guild.members)))]
 
 		fields = [
-      ("ID", ctx.guild.id, True),
+			("ID", ctx.guild.id, True),
 			("Owner", ctx.guild.owner, True),
 			("Region", ctx.guild.region, True),
 			("Created at", ctx.guild.created_at.strftime("%d/%m/%Y %H:%M:%S"), True),
