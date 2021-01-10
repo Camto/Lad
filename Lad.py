@@ -13,7 +13,10 @@ import aioconsole
 sys.path.append(".")
 import utils
 
-client = commands.Bot(command_prefix = "l.")
+intents = discord.Intents(messages=True, guilds=True)
+intents.members = True
+
+client = commands.Bot(command_prefix = "l.", intents = intents)
 
 client.remove_command("help")
 
