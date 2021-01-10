@@ -11,7 +11,8 @@ class Server(commands.Cog):
 		embed = (discord.Embed(
 			title="Server information",
 			color = utils.embed_color)
-			.set_thumbnail(url = ctx.guild.icon_url))
+			.set_thumbnail(url = ctx.guild.icon_url)
+			.set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url))
 		
 		fields = [
 			("ID", ctx.guild.id),
@@ -25,10 +26,7 @@ class Server(commands.Cog):
 			("Categories", len(ctx.guild.categories))]
 		
 		for name, value in fields:
-			print(f"Did field {name}")
 			embed.add_field(name = name, value = value, inline = True)
-		
-		embed.set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url)
 		
 		await ctx.send(embed = embed)
 

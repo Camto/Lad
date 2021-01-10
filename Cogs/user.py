@@ -13,7 +13,8 @@ class User(commands.Cog):
 		embed = (discord.Embed(
 			title = f"{member.name}#{member.discriminator}'s Info",
 			color = utils.embed_color)
-			.set_thumbnail(url = member.avatar_url))
+			.set_thumbnail(url = member.avatar_url)
+			.set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url))
 		
 		fields = [
 			("Nickname", member.nick),
@@ -25,8 +26,6 @@ class User(commands.Cog):
 		
 		for name, value in fields:
 			embed.add_field(name = name, value = value, inline = True)
-		
-		embed.set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url)
 		
 		await ctx.send(embed = embed)
 	
