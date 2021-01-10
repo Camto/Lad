@@ -15,7 +15,7 @@ class Server(commands.Cog):
 			.set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url))
 		
 		fields = [
-			("ID", ctx.guild.id),
+			("Owner", str(ctx.guild.owner)),
 			("Region", ctx.guild.region),
 			("Created at", ctx.guild.created_at.strftime("%d/%m/%Y")),
 			("Members", str(ctx.guild.member_count)),
