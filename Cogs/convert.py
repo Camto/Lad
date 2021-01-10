@@ -35,7 +35,7 @@ class Convert(commands.Cog):
 					im.save(f"{temp_file}.{extension}", quality = 100)
 					nfile = discord.File(
 						f"{temp_file}.{extension}", filename = f"Converted File.{extension}")
-					await ctx.send(file = nfile, embed = utils.embeds["convert success"])
+					await ctx.send(file = nfile, embed = utils.embeds["convert success"]).set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url)
 				except:
 					await ctx.send(embed = utils.embeds["convert error converting"])
 			except:

@@ -20,7 +20,7 @@ class Bitcoin(commands.Cog):
 				info = json.loads(request.text)
 				await ctx.send(embed = discord.Embed(
 					title = f":coin: Bitcoin price is: {info['bpi']['USD']['rate']} USD",
-					color = utils.embed_color))
+					color = utils.embed_color).set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url))
 			else:
 				currency = cmd[0].upper()
 				request = requests.get(
@@ -31,7 +31,7 @@ class Bitcoin(commands.Cog):
 					info = json.loads(request.text)
 					await ctx.send(embed = discord.Embed(
 						title = f":coin: Bitcoin price is: {info['bpi'][currency]['rate']} {currency}",
-						color = utils.embed_color))
+						color = utils.embed_color).set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url))
 		else:
 			await ctx.send(embed = utils.command_disabled)
 
