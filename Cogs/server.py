@@ -8,18 +8,17 @@ class Server(commands.Cog):
 	
 	@commands.command()
 	async def server(self, ctx):
-		
 		embed = (discord.Embed(
 			title="Server information",
 			color = utils.embed_color)
 			.set_thumbnail(url = ctx.guild.icon_url))
-
+		
 		statuses = [
 			len(list(filter(lambda m: str(m.status) == "online", ctx.guild.members))),
 			len(list(filter(lambda m: str(m.status) == "idle", ctx.guild.members))),
 			len(list(filter(lambda m: str(m.status) == "dnd", ctx.guild.members))),
 			len(list(filter(lambda m: str(m.status) == "offline", ctx.guild.members)))]
-
+		
 		fields = [
 			("ID", ctx.guild.id, True),
 			("Owner", ctx.guild.owner, True),
@@ -36,10 +35,10 @@ class Server(commands.Cog):
 			("Roles", len(ctx.guild.roles), True),
 			("Invites", len(await ctx.guild.invites()), True),
 			("\u200b", "\u200b", True)]
-
+		
 		for name, value in fields:
 			embed.add_field(name = name, value = value, inline = True)
-
+		
 		await ctx.send(embed = embed)
 
 def setup(client):
