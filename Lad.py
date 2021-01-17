@@ -13,8 +13,7 @@ import aioconsole
 sys.path.append(".")
 import utils
 
-intents = discord.Intents(messages=True, guilds=True)
-intents.members = True
+intents = discord.Intents().all()
 
 client = commands.Bot(command_prefix = "l.", intents = intents)
 
