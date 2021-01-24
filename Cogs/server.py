@@ -12,7 +12,7 @@ class Server(commands.Cog):
 			title="Server information",
 			color = utils.embed_color)
 			.set_thumbnail(url = ctx.guild.icon_url)
-			.set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url))
+			.set_footer(text = f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url = ctx.author.avatar_url))
 		
 		fields = [
 			("Owner", str(ctx.guild.owner)),
