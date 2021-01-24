@@ -45,7 +45,7 @@ lad_script = lark.Lark(r"""
 		| var
 		| instrs
 	
-	msg: /> .*/
+	msg: />.*/
 	
 	var: WS? CNAME WS? "=" WS? instrs
 	
@@ -70,7 +70,8 @@ lad_script = lark.Lark(r"""
 	?path: /\.+(\/[^ \n]+)?/ -> plain_path
 		| "/" ESCAPED_STRING -> quoted_path
 	
-	mention: "@" ESCAPED_STRING
+	mention: "<@!" INT ">" -> discord_mention
+		| "@" ESCAPED_STRING -> search_mention
 	
 	word_string: "'" CNAME
 	
@@ -93,33 +94,36 @@ class Types():
 		store, eval, func
 	) = range(14)
 
-class Lad_Script_Transformer(lark.Transformer):
-	start = lambda self, as_: list(filter(lambda a: a is not None, as_))
-	msg = lambda self, m: {"type": Types.msg, "msg": m[0][2:]}
-	def var(self, v):
-		v = list(filter(lambda t: t is not None, v))
-		return {"type": Types.var, "name": v[0].lower().replace("_", ""), "def": [v[1]]}
-	instrs = lambda self, is_: {"type": Types.instrs, "instrs": list(filter(lambda i: i is not None, is_))}
-	name = lambda self, n: {"type": Types.name, "name": n[0].lower().replace("_", "")}
-	ref = lambda self, r: {"type": Types.ref, "name": r[0].lower().replace("_", "")}
-	int = lambda self, n: {"type": Types.int, "int": int(n[0])}
-	float = lambda self, n: {"type": Types.float, "float": float(n[0])}
-	string = lambda self, s: {"type": Types.string, "string": s[0]}
-	eval = lambda self, e: {"type": Types.eval, "eval": remove_prefix(remove_prefix(e[0][3:-3], "py"), "thon")}
-	plain_path = lambda self, p: {"type": Types.path, "path": p[0]}
-	quoted_path = lambda self, p: {"type": Types.path, "path": p[0][1:-1]}
-	mention = lambda self, m: {"type": Types.mention, "mention": p[0][1:-1]}
-	word_string = lambda self, s: {"type": Types.string, "string": s[0]}
-	store = lambda self, s: {"type": Types.store, "name": s[0].lower().replace("_", "")}
-	func = lambda self, f: {"type": Types.func, "body": f[0]}
-	WS = lambda self, _: None
+def lad_script_transformer(client, msg):
+	class Lad_Script_Transformer(lark.Transformer):
+		start = lambda self, as_: list(filter(lambda a: a is not None, as_))
+		msg = lambda self, m: {"type": Types.msg, "msg": m[0][2:]}
+		def var(self, v):
+			v = list(filter(lambda t: t is not None, v))
+			return {"type": Types.var, "name": v[0].lower().replace("_", ""), "def": [v[1]]}
+		instrs = lambda self, is_: {"type": Types.instrs, "instrs": list(filter(lambda i: i is not None, is_))}
+		name = lambda self, n: {"type": Types.name, "name": n[0].lower().replace("_", "")}
+		ref = lambda self, r: {"type": Types.ref, "name": r[0].lower().replace("_", "")}
+		int = lambda self, n: {"type": Types.int, "int": int(n[0])}
+		float = lambda self, n: {"type": Types.float, "float": float(n[0])}
+		string = lambda self, s: {"type": Types.string, "string": s[0]}
+		eval = lambda self, e: {"type": Types.eval, "eval": remove_prefix(remove_prefix(e[0][3:-3], "py"), "thon")}
+		plain_path = lambda self, p: {"type": Types.path, "path": p[0]}
+		quoted_path = lambda self, p: {"type": Types.path, "path": p[0][1:-1]}
+		discord_mention = lambda self, m: {"type": Types.mention, "mention": client.get_user(int(m[0]))}
+		search_mention = lambda self, m: {"type": Types.mention, "mention": 0 if True else m[0][1:-1]}
+		word_string = lambda self, s: {"type": Types.string, "string": s[0]}
+		store = lambda self, s: {"type": Types.store, "name": s[0].lower().replace("_", "")}
+		func = lambda self, f: {"type": Types.func, "body": f[0]}
+		WS = lambda self, _: None
+	return Lad_Script_Transformer()
 
 st = []
 vars = utils.get_json("../Console/vars")
 aliases = utils.get_json("../Console/aliases")
 
 async def run_cmd(client, cmd, msg = None):
-	actions = Lad_Script_Transformer().transform(lad_script.parse(cmd))
+	actions = lad_script_transformer(client, msg).transform(lad_script.parse(cmd))
 	print(actions)
 	await run(client, msg, actions, [])
 
@@ -180,6 +184,8 @@ async def run(client, msg, actions, locals_):
 					st.append(instr["float"])
 				elif instr["type"] == Types.string:
 					st.append(str(instr["string"]))
+				elif instr["type"] == Types.mention:
+					st.append(instr["mention"])
 				elif instr["type"] in [Types.path, Types.mention, Types.func]:
 					st.append(instr)
 				elif instr["type"] == Types.eval:
