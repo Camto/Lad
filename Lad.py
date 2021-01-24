@@ -27,19 +27,7 @@ async def on_ready():
 
 print("Loading cogs:")
 
-cogs = sys.argv[2]
-cogs_to_load = []
-for cog in cogs.split(","):
-	if cog == "all":
-		for filename in os.listdir("./Cogs"):
-			if filename.endswith(".py"):
-				cogs_to_load.append(f"Cogs.{filename[:-3]}")
-	elif cog[0] == "!":
-		cogs_to_load.remove(f"Cogs.{cog[1:]}")
-	else:
-		cogs_to_load.append(f"Cogs.{cog}")
-
-for cog in cogs_to_load:
+for cog in utils.cogs_to_load:
 	print(f"  Loading {cog}")
 	client.load_extension(cog)
 

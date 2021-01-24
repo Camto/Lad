@@ -138,3 +138,15 @@ class menus():
 		return await menu(client, ctx, reload_menu(gen))
 	async def list(client, ctx, gen):
 		return await menu(client, ctx, list_menu(gen))
+
+cogs = sys.argv[2]
+cogs_to_load = []
+for cog in cogs.split(","):
+	if cog == "all":
+		for filename in os.listdir("./Cogs"):
+			if filename.endswith(".py"):
+				cogs_to_load.append(f"Cogs.{filename[:-3]}")
+	elif cog[0] == "!":
+		cogs_to_load.remove(f"Cogs.{cog[1:]}")
+	else:
+		cogs_to_load.append(f"Cogs.{cog}")
