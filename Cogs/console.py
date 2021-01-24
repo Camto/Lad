@@ -2,6 +2,9 @@ import discord
 from discord.ext import commands
 import utils
 
+utils.master_settings["admins"] = list(map(int, utils.master_settings["admins"]))
+utils.master_settings["console"] = int(utils.master_settings["console"])
+
 import enum
 import json
 import ast

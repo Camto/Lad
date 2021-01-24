@@ -9,7 +9,7 @@ class Feedback(commands.Cog):
 	
 	@commands.Cog.listener()
 	async def on_ready(self):
-		self.channel = self.client.get_channel(utils.master_settings["feedback"])
+		self.channel = self.client.get_channel(int(utils.master_settings["feedback"]))
 	
 	@commands.command()
 	async def feedback(self, ctx, *, arg):
