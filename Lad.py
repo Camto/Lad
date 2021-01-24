@@ -40,7 +40,7 @@ for cog in cogs.split(","):
 		cogs_to_load.append(f"Cogs.{cog}")
 
 for cog in cogs_to_load:
-	print(f"  Loading cog {cog}")
+	print(f"  Loading {cog}")
 	client.load_extension(cog)
 
 print("Done")
