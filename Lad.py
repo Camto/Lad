@@ -4,7 +4,6 @@ from discord.ext.commands import CommandNotFound
 
 import sys
 import os
-import random
 import asyncio
 import asyncpg
 import json
@@ -24,11 +23,6 @@ async def on_command_error(ctx, error):
 
 @client.event
 async def on_ready():
-	await client.change_presence(
-		status = discord.Streaming,
-		activity = discord.Streaming(
-			name = "l.help",
-			url = f"https://www.twitch.tv/{random.choice(['jpvinnie', 'otomac'])}"))
 	print(f"{client.user.name}#{client.user.discriminator} logged in!")
 
 print("Loading cogs:")
