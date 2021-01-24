@@ -33,9 +33,25 @@ async def on_ready():
 			url = f"https://www.twitch.tv/{random.choice(['jpvinnie', 'otomac'])}"))
 	print(f"{client.user.name}#{client.user.discriminator} logged in!")
 
-for filename in os.listdir("./Cogs"):
-	if filename.endswith(".py"):
-		client.load_extension(f"Cogs.{filename[:-3]}")
+print("Loading cogs:")
+
+cogs = sys.argv[2]
+cogs_to_load = []
+for cog in cogs.split(","):
+	if cog == "all":
+		for filename in os.listdir("./Cogs"):
+			if filename.endswith(".py"):
+				cogs_to_load.append(f"Cogs.{filename[:-3]}")
+	elif cog[0] == "!":
+		cogs_to_load.remove(f"Cogs.{cog[1:]}")
+	else:
+		cogs_to_load.append(f"Cogs.{cog}")
+
+for cog in cogs_to_load:
+	print(f"  Loading cog {cog}")
+	client.load_extension(cog)
+
+print("Done")
 
 async def start_bot():	
 	# Start up settings database.
