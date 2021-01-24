@@ -14,6 +14,7 @@ class Feedback(commands.Cog):
 	@commands.command()
 	async def feedback(self, ctx, *, arg):
 		await self.channel.send(arg)
+		await ctx.send("Feedback recieved!")
 
 def setup(client):
 	client.add_cog(Feedback(client))
