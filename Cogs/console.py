@@ -88,11 +88,10 @@ lad_script = lark.Lark(r"""
 
 class Types():
 	(
-		actions,
 		msg, var, instrs,
 		name, ref, int, float, string, path, mention,
 		store, eval, func
-	) = range(14)
+	) = range(13)
 
 def lad_script_transformer(client, msg):
 	class Lad_Script_Transformer(lark.Transformer):
@@ -106,7 +105,7 @@ def lad_script_transformer(client, msg):
 		ref = lambda self, r: {"type": Types.ref, "name": r[0].lower().replace("_", "")}
 		int = lambda self, n: {"type": Types.int, "int": int(n[0])}
 		float = lambda self, n: {"type": Types.float, "float": float(n[0])}
-		string = lambda self, s: {"type": Types.string, "string": s[0]}
+		string = lambda self, s: {"type": Types.string, "string": eval(s[0])}
 		eval = lambda self, e: {"type": Types.eval, "eval": remove_prefix(remove_prefix(e[0][3:-3], "py"), "thon")}
 		plain_path = lambda self, p: {"type": Types.path, "path": p[0]}
 		quoted_path = lambda self, p: {"type": Types.path, "path": p[0][1:-1]}
@@ -189,6 +188,7 @@ async def run(client, msg, actions, locals_):
 				elif instr["type"] in [Types.path, Types.mention, Types.func]:
 					st.append(instr)
 				elif instr["type"] == Types.eval:
+					# load doesn't work, as globals seem untouchable.
 					await aexec(instr["eval"], dict(globals(), **locals()))
 
 async def aexec(stmts, env = None):
