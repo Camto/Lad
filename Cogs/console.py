@@ -69,11 +69,9 @@ lad_script = lark.Lark(r"""
 		| func
 	
 	?op: "[" -> list_start
-		| "]" -> list_end
 		| "{" -> obj_start
-		| "}" -> obj_end
+		| /\]|}|,/ -> list_or_obj_cont
 		| ":" -> obj_sep
-		| "," -> cont
 	
 	ref: "\\" CNAME
 	
@@ -103,8 +101,8 @@ class Types():
 		msg, var, instrs,
 		name, ref, int, float, string, path, mention,
 		store, eval, func,
-		list_start, list_end, obj_start, obj_end, cont
-	) = range(18)
+		list_start, obj_start, list_or_obj_cont
+	) = range(16)
 
 def lad_script_transformer(client, msg):
 	class Lad_Script_Transformer(lark.Transformer):
@@ -115,11 +113,9 @@ def lad_script_transformer(client, msg):
 			return {"type": Types.var, "name": v[0].lower().replace("_", ""), "def": [v[1]]}
 		instrs = lambda self, is_: {"type": Types.instrs, "instrs": list(filter(lambda i: i is not None, is_))}
 		list_start = lambda self, _: {"type": Types.list_start}
-		list_end = lambda self, _: {"type": Types.list_end}
 		obj_start = lambda self, _: {"type": Types.obj_start}
-		obj_end = lambda self, _: {"type": Types.obj_end}
+		list_or_obj_cont = lambda self, _: {"type": Types.list_or_obj_cont}
 		obj_sep = lambda self, _: None
-		cont = lambda self, _: {"type": Types.cont}
 		name = lambda self, n: {"type": Types.name, "name": n[0].lower().replace("_", "")}
 		ref = lambda self, r: {"type": Types.ref, "name": r[0].lower().replace("_", "")}
 		int = lambda self, n: {"type": Types.int, "int": int(n[0])}
@@ -213,7 +209,7 @@ async def run(client, msg, actions, locals_):
 					st.append([])
 				elif instr["type"] == Types.obj_start:
 					st.append({})
-				elif instr["type"] in [Types.list_end, Types.obj_end, Types.cont]:
+				elif instr["type"] == Types.list_or_obj_cont:
 					item = st.pop()
 					ls_or_key = st.pop()
 					if type(ls_or_key) == list:
