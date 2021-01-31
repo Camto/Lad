@@ -7,6 +7,7 @@ utils.master_settings["console"] = int(utils.master_settings["console"])
 
 import enum
 import json
+import asyncio
 import ast
 import aioconsole
 import lark
@@ -54,7 +55,8 @@ lad_script = lark.Lark(r"""
 	
 	instrs: WS? (instr WS?)*
 	
-	?instr: CNAME -> name
+	?instr: op
+		| CNAME -> name
 		| ref
 		| eval
 		| path
@@ -65,6 +67,10 @@ lad_script = lark.Lark(r"""
 		| ESCAPED_STRING -> string
 		| store
 		| func
+	
+	?op: "[" -> start_list
+		| "," -> cont_list
+		| "]" -> end_list
 	
 	ref: "\\" CNAME
 	
@@ -93,8 +99,9 @@ class Types():
 	(
 		msg, var, instrs,
 		name, ref, int, float, string, path, mention,
-		store, eval, func
-	) = range(13)
+		store, eval, func,
+		start_list, cont_list, end_list
+	) = range(16)
 
 def lad_script_transformer(client, msg):
 	class Lad_Script_Transformer(lark.Transformer):
@@ -104,6 +111,9 @@ def lad_script_transformer(client, msg):
 			v = list(filter(lambda t: t is not None, v))
 			return {"type": Types.var, "name": v[0].lower().replace("_", ""), "def": [v[1]]}
 		instrs = lambda self, is_: {"type": Types.instrs, "instrs": list(filter(lambda i: i is not None, is_))}
+		start_list = lambda self, _: {"type": Types.start_list}
+		cont_list = lambda self, _: {"type": Types.cont_list}
+		end_list = lambda self, _: {"type": Types.end_list}
 		name = lambda self, n: {"type": Types.name, "name": n[0].lower().replace("_", "")}
 		ref = lambda self, r: {"type": Types.ref, "name": r[0].lower().replace("_", "")}
 		int = lambda self, n: {"type": Types.int, "int": int(n[0])}
@@ -193,6 +203,13 @@ async def run(client, msg, actions, locals_):
 				elif instr["type"] == Types.eval:
 					# load doesn't work, as globals seem untouchable.
 					await aexec(instr["eval"], dict(globals(), **locals()))
+				elif instr["type"] == Types.start_list:
+					st.append([])
+				elif instr["type"] in [Types.cont_list, Types.end_list]:
+					item = st.pop()
+					ls = st.pop()
+					st.append(ls + [item])
+					
 
 async def aexec(stmts, env = None):
 	parsed_stmts = ast.parse(stmts)
