@@ -81,9 +81,12 @@ lad_script = lark.Lark(r"""
 		| "/" ESCAPED_STRING -> quoted_path
 	
 	?discord_obj: mention
+		| emoji
 	
 	mention: "<@!" INT ">" -> discord_mention
 		| "@" ESCAPED_STRING -> search_mention
+	
+	emoji: "<:" /[A-Za-z0-9_]+/ ":" INT ">"
 	
 	word_string: "'" CNAME
 	
@@ -101,12 +104,14 @@ lad_script = lark.Lark(r"""
 class Types():
 	(
 		msg, var, instrs,
-		name, ref, int, float, string, path, mention,
+		name, ref, int, float, string, path,
+		mention, emoji,
 		store, eval, func,
 		list_start, obj_start, list_or_obj_cont
 	) = (
 		"msg", "var", "instrs",
-		"name", "ref", "int", "float", "string", "path", "mention",
+		"name", "ref", "int", "float", "string", "path",
+		"mention", "emoji",
 		"store", "eval", "func",
 		"list_start", "obj_start", "list_or_obj_cont"
 	)
@@ -131,8 +136,9 @@ def lad_script_transformer(client, msg):
 		eval = lambda self, e: {"type": Types.eval, "eval": remove_prefix(remove_prefix(e[0][3:-3], "py"), "thon")}
 		plain_path = lambda self, p: {"type": Types.path, "path": p[0]}
 		quoted_path = lambda self, p: {"type": Types.path, "path": p[0][1:-1]}
-		discord_mention = lambda self, m: {"type": Types.mention, "mention": client.get_user(int(m[0])).id}
+		discord_mention = lambda self, m: {"type": Types.mention, "mention": int(m[0])}
 		search_mention = lambda self, m: {"type": Types.mention, "mention": 0 if True else m[0][1:-1]}
+		emoji = lambda self, e: {"type": Types.emoji, "emoji": int(e[1])}
 		word_string = lambda self, s: {"type": Types.string, "string": s[0]}
 		store = lambda self, s: {"type": Types.store, "name": s[0].lower().replace("_", "")}
 		func = lambda self, f: {"type": Types.func, "body": f[0]}
@@ -205,9 +211,9 @@ async def run(client, msg, actions, locals_):
 					st.append(instr["float"])
 				elif instr["type"] == Types.string:
 					st.append(str(instr["string"]))
-				elif instr["type"] == Types.mention:
+				elif instr["type"] in [Types.mention, Types.emoji]:
 					st.append(instr)
-				elif instr["type"] in [Types.path, Types.mention, Types.func]:
+				elif instr["type"] in [Types.path, Types.func]:
 					st.append(instr)
 				elif instr["type"] == Types.eval:
 					# load doesn't work, as globals seem untouchable.
