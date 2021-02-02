@@ -81,7 +81,6 @@ lad_script = lark.Lark(r"""
 		| "/" ESCAPED_STRING -> quoted_path
 	
 	?discord_obj: mention
-		| emoji
 	
 	mention: "<@!" INT ">" -> discord_mention
 		| "@" ESCAPED_STRING -> search_mention
