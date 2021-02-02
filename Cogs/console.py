@@ -60,7 +60,7 @@ lad_script = lark.Lark(r"""
 		| ref
 		| eval
 		| path
-		| mention
+		| discord_obj
 		| INT -> int
 		| FLOAT -> float
 		| word_string
@@ -79,6 +79,9 @@ lad_script = lark.Lark(r"""
 	
 	?path: /\.+(\/[^ \n]+)?/ -> plain_path
 		| "/" ESCAPED_STRING -> quoted_path
+	
+	?discord_obj: mention
+		| emoji
 	
 	mention: "<@!" INT ">" -> discord_mention
 		| "@" ESCAPED_STRING -> search_mention
@@ -124,7 +127,7 @@ def lad_script_transformer(client, msg):
 		eval = lambda self, e: {"type": Types.eval, "eval": remove_prefix(remove_prefix(e[0][3:-3], "py"), "thon")}
 		plain_path = lambda self, p: {"type": Types.path, "path": p[0]}
 		quoted_path = lambda self, p: {"type": Types.path, "path": p[0][1:-1]}
-		discord_mention = lambda self, m: {"type": Types.mention, "mention": client.get_user(int(m[0]))}
+		discord_mention = lambda self, m: {"type": Types.mention, "mention": client.get_user(int(m[0])).id}
 		search_mention = lambda self, m: {"type": Types.mention, "mention": 0 if True else m[0][1:-1]}
 		word_string = lambda self, s: {"type": Types.string, "string": s[0]}
 		store = lambda self, s: {"type": Types.store, "name": s[0].lower().replace("_", "")}
@@ -199,7 +202,7 @@ async def run(client, msg, actions, locals_):
 				elif instr["type"] == Types.string:
 					st.append(str(instr["string"]))
 				elif instr["type"] == Types.mention:
-					st.append(instr["mention"])
+					st.append(instr)
 				elif instr["type"] in [Types.path, Types.mention, Types.func]:
 					st.append(instr)
 				elif instr["type"] == Types.eval:
