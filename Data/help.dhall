@@ -81,7 +81,8 @@ in [
 				embed.Field::{name = "Getting from users", value = ''
 					With users, you can get their profile information or their posts. For example `l.reddit u/camto about` will get that user's information, and `l.reddit u/camto posts` will get their newest posts.
 					
-					If getting posts, sorting and specifying the number of posts can be done the same way as it's done for subreddits. For example, `l.reddit u/camto posts top all 5` will get that user's top 5 posts they ever made.''}
+					If getting posts, sorting and specifying the number of posts can be done the same way as it's done for subreddits. For example, `l.reddit u/camto posts top all 5` will get that user's top 5 posts they ever made.''
+				}
 			]
 		},
 	
