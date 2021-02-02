@@ -28,7 +28,10 @@ class Console(commands.Cog):
 				last_line = await aioconsole.ainput()
 			cmd += last_line
 			
-			await run_cmd(self.client, cmd)
+			try:
+				await run_cmd(self.client, cmd)
+			except:
+				pass
 	
 	@commands.Cog.listener()
 	async def on_message(self, msg):
@@ -148,6 +151,7 @@ def lad_script_transformer(client, msg):
 st = []
 vars = utils.get_json("../Console/vars")
 aliases = utils.get_json("../Console/aliases")
+g = globals()
 
 async def run_cmd(client, cmd, msg = None):
 	actions = lad_script_transformer(client, msg).transform(lad_script.parse(cmd))
@@ -217,7 +221,7 @@ async def run(client, msg, actions, locals_):
 					st.append(instr)
 				elif instr["type"] == Types.eval:
 					# load doesn't work, as globals seem untouchable.
-					await aexec(instr["eval"], dict(globals(), **locals()))
+					await aexec(instr["eval"], globals(), locals())
 				elif instr["type"] == Types.list_start:
 					st.append([])
 				elif instr["type"] == Types.obj_start:
@@ -232,7 +236,7 @@ async def run(client, msg, actions, locals_):
 						obj[ls_or_key] = item
 						st.append(obj)
 
-async def aexec(stmts, env = None):
+async def aexec(stmts, globals = None, locals = None):
 	parsed_stmts = ast.parse(stmts)
 	
 	fn = f"async def async_fn(): pass"
@@ -242,9 +246,9 @@ async def aexec(stmts, env = None):
 		ast.increment_lineno(node)
 	
 	parsed_fn.body[0].body = parsed_stmts.body
-	exec(compile(parsed_fn, filename = "<ast>", mode = "exec"), env)
+	exec(compile(parsed_fn, filename = "<ast>", mode = "exec"), globals, locals)
 	
-	return await eval(f"async_fn()", env)
+	return await eval(f"async_fn()", globals, locals)
 
 def remove_prefix(text, prefix):
 	if text.startswith(prefix):
