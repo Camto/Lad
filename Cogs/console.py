@@ -30,8 +30,8 @@ class Console(commands.Cog):
 			
 			try:
 				await run_cmd(self.client, cmd)
-			except:
-				pass
+			except Exception as err:
+				print(err)
 	
 	@commands.Cog.listener()
 	async def on_message(self, msg):
@@ -225,7 +225,7 @@ async def run(client, msg, actions, locals_):
 				elif instr["type"] in [Types.path, Types.func]:
 					st.append(instr)
 				elif instr["type"] == Types.eval:
-					await aexec(instr["eval"], globals(), locals())
+					await aexec(instr["eval"], dict(globals(), **locals()))
 				elif instr["type"] == Types.list_start:
 					st.append([])
 				elif instr["type"] == Types.obj_start:
@@ -240,7 +240,7 @@ async def run(client, msg, actions, locals_):
 						obj[ls_or_key] = item
 						st.append(obj)
 
-async def aexec(stmts, globals = None, locals = None):
+async def aexec(stmts, env = None):
 	parsed_stmts = ast.parse(stmts)
 	
 	fn = f"async def async_fn(): pass"
@@ -250,9 +250,9 @@ async def aexec(stmts, globals = None, locals = None):
 		ast.increment_lineno(node)
 	
 	parsed_fn.body[0].body = parsed_stmts.body
-	exec(compile(parsed_fn, filename = "<ast>", mode = "exec"), globals, locals)
+	exec(compile(parsed_fn, filename = "<ast>", mode = "exec"), env)
 	
-	return await eval(f"async_fn()", globals, locals)
+	return await eval(f"async_fn()", env)
 
 def remove_prefix(text, prefix):
 	if text.startswith(prefix):
