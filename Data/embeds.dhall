@@ -77,5 +77,9 @@ in {
 	`bible wrong verse order` = embed.Embed::{
 		description = Some "The inputted verse to end at comes before the verse to start at.",
 		author = icon-title "Reversed Verse Order" icons.bible
+	},
+	
+	secret = embed.Embed::{
+		description = Some "Send me a screenshot if you can get Ladbot to send this embed in Discord :)"
 	}
 }
