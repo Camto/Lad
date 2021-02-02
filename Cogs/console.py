@@ -85,11 +85,14 @@ lad_script = lark.Lark(r"""
 	
 	?discord_obj: mention
 		| emoji
+		| channel
 	
 	mention: "<@!" INT ">" -> discord_mention
 		| "@" ESCAPED_STRING -> search_mention
 	
-	emoji: "<:" /[A-Za-z0-9_]+/ ":" INT ">"
+	emoji: /<a?:[A-Za-z0-9_]+:/ INT ">" -> discord_emoji
+	
+	channel: "<#" INT ">" -> discord_channel
 	
 	word_string: "'" CNAME
 	
@@ -108,13 +111,13 @@ class Types():
 	(
 		msg, var, instrs,
 		name, ref, int, float, string, path,
-		mention, emoji,
+		mention, emoji, channel,
 		store, eval, func,
 		list_start, obj_start, list_or_obj_cont
 	) = (
 		"msg", "var", "instrs",
 		"name", "ref", "int", "float", "string", "path",
-		"mention", "emoji",
+		"mention", "emoji", "channel",
 		"store", "eval", "func",
 		"list_start", "obj_start", "list_or_obj_cont"
 	)
@@ -141,7 +144,8 @@ def lad_script_transformer(client, msg):
 		quoted_path = lambda self, p: {"type": Types.path, "path": p[0][1:-1]}
 		discord_mention = lambda self, m: {"type": Types.mention, "mention": int(m[0])}
 		search_mention = lambda self, m: {"type": Types.mention, "mention": 0 if True else m[0][1:-1]}
-		emoji = lambda self, e: {"type": Types.emoji, "emoji": int(e[1])}
+		discord_emoji = lambda self, e: {"type": Types.emoji, "emoji": int(e[1])}
+		discord_channel = lambda self, c: {"type": Types.channel, "channel": int(c[0])}
 		word_string = lambda self, s: {"type": Types.string, "string": s[0]}
 		store = lambda self, s: {"type": Types.store, "name": s[0].lower().replace("_", "")}
 		func = lambda self, f: {"type": Types.func, "body": f[0]}
