@@ -144,6 +144,7 @@ def lad_script_transformer(client, msg):
 		quoted_path = lambda self, p: {"type": Types.path, "path": p[0][1:-1]}
 		discord_mention = lambda self, m: {"type": Types.mention, "mention": int(m[0])}
 		search_mention = lambda self, m: {"type": Types.mention, "mention": 0 if True else m[0][1:-1]}
+		# Add is_animated prop for proper rendering
 		discord_emoji = lambda self, e: {"type": Types.emoji, "emoji": int(e[1])}
 		discord_channel = lambda self, c: {"type": Types.channel, "channel": int(c[0])}
 		word_string = lambda self, s: {"type": Types.string, "string": s[0]}
@@ -224,7 +225,6 @@ async def run(client, msg, actions, locals_):
 				elif instr["type"] in [Types.path, Types.func]:
 					st.append(instr)
 				elif instr["type"] == Types.eval:
-					# load doesn't work, as globals seem untouchable.
 					await aexec(instr["eval"], globals(), locals())
 				elif instr["type"] == Types.list_start:
 					st.append([])
