@@ -104,7 +104,12 @@ class Types():
 		name, ref, int, float, string, path, mention,
 		store, eval, func,
 		list_start, obj_start, list_or_obj_cont
-	) = range(16)
+	) = (
+		"msg", "var", "instrs",
+		"name", "ref", "int", "float", "string", "path", "mention",
+		"store", "eval", "func",
+		"list_start", "obj_start", "list_or_obj_cont"
+	)
 
 def lad_script_transformer(client, msg):
 	class Lad_Script_Transformer(lark.Transformer):
