@@ -86,6 +86,7 @@ lad_script = lark.Lark(r"""
 	?discord_obj: mention
 		| emoji
 		| channel
+		| role
 	
 	mention: "<@!" INT ">" -> discord_mention
 		| "@" ESCAPED_STRING -> search_mention
@@ -93,6 +94,8 @@ lad_script = lark.Lark(r"""
 	emoji: /<a?:[A-Za-z0-9_]+:/ INT ">" -> discord_emoji
 	
 	channel: "<#" INT ">" -> discord_channel
+	
+	role: "<@&" INT ">" -> discord_role
 	
 	word_string: "'" CNAME
 	
@@ -111,13 +114,13 @@ class Types():
 	(
 		msg, var, instrs,
 		name, ref, int, float, string, path,
-		mention, emoji, channel,
+		mention, emoji, channel, role,
 		store, eval, func,
 		list_start, obj_start, list_or_obj_cont
 	) = (
 		"msg", "var", "instrs",
 		"name", "ref", "int", "float", "string", "path",
-		"mention", "emoji", "channel",
+		"mention", "emoji", "channel", "role",
 		"store", "eval", "func",
 		"list_start", "obj_start", "list_or_obj_cont"
 	)
@@ -147,6 +150,7 @@ def lad_script_transformer(client, msg):
 		# Add is_animated prop for proper rendering
 		discord_emoji = lambda self, e: {"type": Types.emoji, "emoji": int(e[1])}
 		discord_channel = lambda self, c: {"type": Types.channel, "channel": int(c[0])}
+		discord_role = lambda self, r: {"type": Types.role, "role": int(r[0])}
 		word_string = lambda self, s: {"type": Types.string, "string": s[0]}
 		store = lambda self, s: {"type": Types.store, "name": s[0].lower().replace("_", "")}
 		func = lambda self, f: {"type": Types.func, "body": f[0]}
@@ -220,7 +224,7 @@ async def run(client, msg, actions, locals_):
 					st.append(instr["float"])
 				elif instr["type"] == Types.string:
 					st.append(str(instr["string"]))
-				elif instr["type"] in [Types.mention, Types.emoji]:
+				elif instr["type"] in [Types.mention, Types.emoji, Types.channel, Types.role]:
 					st.append(instr)
 				elif instr["type"] in [Types.path, Types.func]:
 					st.append(instr)
