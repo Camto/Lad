@@ -13,8 +13,11 @@ class Feedback(commands.Cog):
 	
 	@commands.command()
 	async def feedback(self, ctx, *, arg):
-		await self.channel.send(arg)
-		await ctx.send("Feedback recieved!")
+		if utils.get_setting(ctx.guild.id, "feedback"):
+			await self.channel.send(arg)
+			await ctx.send("Feedback recieved!")
+		else:
+			await ctx.send(embed = utils.command_disabled)
 
 def setup(client):
 	client.add_cog(Feedback(client))

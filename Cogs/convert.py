@@ -17,34 +17,37 @@ class Convert(commands.Cog):
 	
 	@commands.command()
 	async def convert(self, ctx, *args):
-		if len(args) <= 1 :
-			await ctx.send(embed = utils.embeds["convert more args"])
-		else:
-			url = args[1]
-			extension = args[0]
-			temp_file = "".join(
-				random.choice(string.ascii_lowercase)
-				for _ in range(10))
-			
-			try:
-				image_file = requests.get(url, allow_redirects = True)
-				open(temp_file, "wb").write(image_file.content)
-
+		if utils.get_setting(ctx.guild.id, "convert"):
+			if len(args) <= 1 :
+				await ctx.send(embed = utils.embeds["convert more args"])
+			else:
+				url = args[1]
+				extension = args[0]
+				temp_file = "".join(
+					random.choice(string.ascii_lowercase)
+					for _ in range(10))
+				
 				try:
-					im = Image.open(temp_file)
-					im.save(f"{temp_file}.{extension}", quality = 100)
-					nfile = discord.File(
-						f"{temp_file}.{extension}", filename = f"Converted File.{extension}")
-					await ctx.send(file = nfile, embed = utils.embeds["convert success"])
+					image_file = requests.get(url, allow_redirects = True)
+					open(temp_file, "wb").write(image_file.content)
+
+					try:
+						im = Image.open(temp_file)
+						im.save(f"{temp_file}.{extension}", quality = 100)
+						nfile = discord.File(
+							f"{temp_file}.{extension}", filename = f"Converted File.{extension}")
+						await ctx.send(file = nfile, embed = utils.embeds["convert success"])
+					except:
+						await ctx.send(embed = utils.embeds["convert error converting"])
 				except:
-					await ctx.send(embed = utils.embeds["convert error converting"])
-			except:
-				await ctx.send(embed = utils.embeds["convert error downloading"])
-			finally:
-				if os.path.isfile(f"{temp_file}.{extension}"):
-					os.remove(f"{temp_file}.{extension}")
-				if os.path.isfile(temp_file):
-					os.remove(temp_file)
+					await ctx.send(embed = utils.embeds["convert error downloading"])
+				finally:
+					if os.path.isfile(f"{temp_file}.{extension}"):
+						os.remove(f"{temp_file}.{extension}")
+					if os.path.isfile(temp_file):
+						os.remove(temp_file)
+		else:
+			await ctx.send(embed = utils.command_disabled)
 
 def setup(client):
 	client.add_cog(Convert(client))

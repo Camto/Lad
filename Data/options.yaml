@@ -18,7 +18,19 @@ bitcoin:
   default: true
   descr: "If it's on, the command will work."
   type: bool
+convert:
+  default: true
+  descr: "If it's on, the command will work."
+  type: bool
 dino:
+  default: true
+  descr: "If it's on, the command will work."
+  type: bool
+feedback:
+  default: true
+  descr: "If it's on, the command will work."
+  type: bool
+minesweeper:
   default: true
   descr: "If it's on, the command will work."
   type: bool
@@ -30,7 +42,19 @@ reddit:
   default: true
   descr: "If it's on, the command will work."
   type: bool
+roll:
+  default: true
+  descr: "If it's on, the command will work."
+  type: bool
 say:
+  default: true
+  descr: "If it's on, the command will work."
+  type: bool
+server:
+  default: true
+  descr: "If it's on, the command will work."
+  type: bool
+ymlsux:
   default: true
   descr: "If it's on, the command will work."
   type: bool
