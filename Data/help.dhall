@@ -27,7 +27,7 @@ in [
 		no-help-embed,
 	
 	command "bible"
-		"Returns a random bible verse. For verses, do `l.help bible`."
+		"Returns a random bible verse."
 		no-help-embed,
 	
 	command "bitcoin"
@@ -52,6 +52,13 @@ in [
 		embed.Embed::{
 			author = icon-title "Dino Help" (Text/default (List/head Text icons.dinos)),
 			description = Some "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
+		},
+	
+	command "minesweeper"
+		"Makes a Minesweeper board."
+		embed.Embed::{
+			title = Some ":bomb: Minesweeper Help",
+			description = Some "To use `l.minesweeper`, you can either pass nothing, or three positive numbers for width, height, and number of mines, for example `l.minesweeper 7 13 15` would give a 7x13 board with 15 mines."
 		},
 	
 	command "ping"
