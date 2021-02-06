@@ -79,6 +79,21 @@ in {
 		author = icon-title "Reversed Verse Order" icons.bible
 	},
 	
+	`minesweeper error` = embed.Embed::{
+		title = Some ":bomb: Minesweeper Error",
+		description = Some "The arguments are invalid. To use `l.minesweeper`, you can either pass nothing, or three positive numbers for width, height, and number of mines, for example `l.minesweeper 7 13 15` would give a 7x13 board with 10 mines."
+	},
+	
+	`minesweeper limits` = embed.Embed::{
+		title = Some ":bomb: Minesweeper Limits",
+		description = Some "The width and height have to be under 40 each and you can't have more mines than space is available."
+	},
+	
+	`minesweeper char limit` = embed.Embed::{
+		title = Some ":bomb: Minesweeper Message Length Limit",
+		description = Some "The message that was generated was too long to send to Discord. Consider using a smaller board."
+	},
+	
 	secret = embed.Embed::{
 		description = Some "Send me a screenshot if you can get Ladbot to send this embed in Discord :)"
 	}
