@@ -54,6 +54,10 @@ in [
 			description = Some "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
 		},
 	
+	command "feedback"
+		"Use `l.feedback <message>` to send the message as feedback to the devs :)"
+		no-help-embed,
+	
 	command "minesweeper"
 		"Makes a Minesweeper board."
 		embed.Embed::{

@@ -12,7 +12,7 @@
   embed:
     color: 14711736
     title: "There's no help available for this command yet."
-  msg: "Returns a random bible verse. For verses, do `l.help bible`."
+  msg: Returns a random bible verse.
 - cmd: bitcoin
   embed:
     color: 14711736
@@ -35,6 +35,11 @@
     color: 14711736
     description: "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
   msg: "Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name."
+- cmd: feedback
+  embed:
+    color: 14711736
+    title: "There's no help available for this command yet."
+  msg: "Use `l.feedback <message>` to send the message as feedback to the devs :)"
 - cmd: minesweeper
   embed:
     color: 14711736
@@ -111,7 +116,11 @@
 
       `bitcoin`: If it's on, the command will work.
 
+      `convert`: If it's on, the command will work.
+
       `dino`: If it's on, the command will work.
+
+      `feedback`: If it's on, the command will work.
 
       `ping`: If it's on, the command will work.
 
