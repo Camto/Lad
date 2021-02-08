@@ -21,14 +21,14 @@ def get_json(filename):
 	with open(f"./Data/{filename}.json", encoding = "utf-8") as stream:
 		return json.load(stream)
 
-embed_color = get_yaml("embed-color")
-options = get_yaml("options")
+embed_color = get_json("embed-color")
+options = get_json("options")
 option_names = list(options.keys())
-icons = get_yaml("icons")
-emojis = get_yaml("emojis")
+icons = get_json("icons")
+emojis = get_json("emojis")
 embeds = my_dictionary = {
 	k: discord.Embed.from_dict(v)
-	for k, v in get_yaml("embeds").items()}
+	for k, v in get_json("embeds").items()}
 
 command_disabled = embeds["command disabled"]
 

@@ -6,7 +6,7 @@ import math
 
 from fuzzywuzzy import fuzz, process
 
-help = utils.get_yaml("help")
+help = utils.get_json("help")
 for i in range(len(help)): help[i]["embed"] = discord.Embed.from_dict(help[i]["embed"])
 
 # Show command descriptions.

@@ -39,7 +39,7 @@ class Cmd_8ball(commands.Cog):
 	
 	@commands.command(name = "8ball")
 	async def cmd_8ball(self, ctx, *_):
-		if utils.get_setting(ctx.guild.id, "b"):
+		if utils.get_setting(ctx.guild.id, "cmd_8ball"):
 			async with ctx.typing():
 				await ctx.send(":8ball: **Divining your fate...**")
 				await asyncio.sleep(2)
