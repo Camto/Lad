@@ -13,10 +13,6 @@ print(f"Loaded master settings: {', '.join(master_settings.keys())}")
 global db
 settings = {}
 
-def get_yaml(filename):
-	with open(f"./Data/{filename}.yaml", encoding = "utf-8") as stream:
-		return yaml.safe_load(stream)
-
 def get_json(filename):
 	with open(f"./Data/{filename}.json", encoding = "utf-8") as stream:
 		return json.load(stream)
