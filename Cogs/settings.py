@@ -119,6 +119,43 @@ class Settings(commands.Cog):
 						.set_author(
 							name = "Invalid Option",
 							icon_url = utils.icons["settings"]))
+			elif len(args) == 1:
+				guild_id = ctx.guild.id
+				
+				# Make sure server is in settings database.
+				guild_in_db = await utils.db.fetch(
+					"select * from settings where guild_id = $1",
+					str(guild_id))
+				
+				if not guild_in_db:
+					await utils.db.execute(f"""
+						insert into settings
+							(guild_id)
+						values
+							($1)""", str(guild_id))
+					print(f"Server {ctx.guild.name} ({guild_id}) has been added to the settings database.")
+				
+				option = args[0]
+				if option in utils.option_names:
+					opt_type = utils.options[option]["type"]
+					
+					val = (await utils.db.fetch(
+						f"""select {option} from settings where guild_id = $1""",
+						str(guild_id)))[0][option]
+					
+					await ctx.send(embed = discord.Embed(
+						description = str(val),
+						color = utils.embed_color)
+						.set_author(
+							name = option,
+							icon_url = utils.icons["settings"]))
+				else:
+					await ctx.send(embed = discord.Embed(
+						description = f"{option} is not an option that can be fetched.",
+						color = utils.embed_color)
+						.set_author(
+							name = "Invalid Option",
+							icon_url = utils.icons["settings"]))
 			else:
 				await ctx.send(embed = utils.embeds["settings more args"])
 		else:
