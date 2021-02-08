@@ -5,7 +5,6 @@ import sys
 import os
 import asyncio
 import json
-import yaml
 
 master_settings = json.loads(os.getenv(f"LADBOT_{sys.argv[1]}"))
 print(f"Loaded master settings: {', '.join(master_settings.keys())}")
