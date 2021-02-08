@@ -1,16 +1,16 @@
-let Prelude = ./Prelude/package.dhall
-let JSON = Prelude.JSON
+let JSON/Type = ./Prelude/JSON/Type
+let JSON/array = ./Prelude/JSON/array
 let Map/keyValue = ./Prelude/Map/keyValue
 
-let Option-Type = < Bool: Bool | JSON: JSON.Type >
+let Option-Type = < Bool: Bool | JSON: JSON/Type >
 let option = \(default: Option-Type) -> \(descr: Text) ->
 	{
-		type = merge {Bool = \(b: Bool) -> "bool", JSON = \(j: JSON.Type) -> "json"} default,
+		type = merge {Bool = \(b: Bool) -> "bool", JSON = \(j: JSON/Type) -> "json"} default,
 		default = default,
 		descr = descr
 	}
 let default-bool = Option-Type.Bool True
-let default-json = Option-Type.JSON (JSON.array ([] : List JSON.Type))
+let default-json = Option-Type.JSON (JSON/array ([] : List JSON/Type))
 let option-command-disabling = option default-bool "If it's on, the command will work."
 let key-option = Map/keyValue {type: Text, default: Option-Type, descr: Text}
 
