@@ -3,6 +3,11 @@
     color: 14711736
     title: "There's no help available for this command yet."
   msg: Show this message.
+- cmd: 8ball
+  embed:
+    color: 14711736
+    title: "There's no help available for this command yet."
+  msg: "Ask the Magic 8-Ball for help."
 - cmd: ascii
   embed:
     color: 14711736
@@ -106,6 +111,8 @@
     description: |
       To change an option, use `l.settings <option name> <value>` <value> can be on or off.
 
+      `8ball`: If it's on, the command will work.
+
       `ascii`: If it's on, the command will work.
 
       `autoresponse_file`: This will be the file used when auto-responding to messages.
@@ -122,11 +129,19 @@
 
       `feedback`: If it's on, the command will work.
 
+      `minesweeper`: If it's on, the command will work.
+
       `ping`: If it's on, the command will work.
 
       `reddit`: If it's on, the command will work.
 
+      `roll`: If it's on, the command will work.
+
       `say`: If it's on, the command will work.
+
+      `server`: If it's on, the command will work.
+
+      `ymlsux`: If it's on, `l.user` will work.
   msg: "Change Lad's options, like enabling or disabling certain commands. Can only be used by admins."
 - cmd: user
   embed:

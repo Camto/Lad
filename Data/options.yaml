@@ -10,6 +10,10 @@ autoresponses:
   default: true
   descr: "If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponse_file` to see the preprogrammed messages."
   type: bool
+b:
+  default: true
+  descr: "If it's on, the command will work."
+  type: bool
 bible:
   default: true
   descr: "If it's on, the command will work."
@@ -56,5 +60,5 @@ server:
   type: bool
 ymlsux:
   default: true
-  descr: "If it's on, the command will work."
+  descr: "If it's on, `l.user` will work."
   type: bool

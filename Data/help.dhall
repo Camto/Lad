@@ -22,6 +22,10 @@ in [
 		"Show this message."
 		no-help-embed,
 	
+	command "8ball"
+		"Ask the Magic 8-Ball for help."
+		no-help-embed,
+	
 	command "ascii"
 		"Returns your message in ASCII art!"
 		no-help-embed,

@@ -15,6 +15,7 @@ let option-command-disabling = option default-bool "If it's on, the command will
 let key-option = Map/keyValue {type: Text, default: Option-Type, descr: Text}
 
 in [
+	key-option "b" option-command-disabling,
 	key-option "ascii" option-command-disabling,
 	key-option "autoresponse_file" (option default-json
 		"This will be the file used when auto-responding to messages."),
@@ -31,5 +32,5 @@ in [
 	key-option "roll" option-command-disabling,
 	key-option "say" option-command-disabling,
 	key-option "server" option-command-disabling,
-	key-option "ymlsux" option-command-disabling
+	key-option "ymlsux" (option default-bool "If it's on, `l.user` will work.")
 ]
