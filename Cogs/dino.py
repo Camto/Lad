@@ -6,7 +6,7 @@ import random
 
 from fuzzywuzzy import fuzz, process
 
-dinos = utils.get_yaml("dinos")
+dinos = utils.get_json("dinos")
 dino_names = list(dinos.keys())
 
 # Process dino related requests.
