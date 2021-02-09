@@ -35,6 +35,18 @@ def get_setting(guild_id, option):
 
 chunks = lambda l, n: [l[i * n:(i + 1) * n] for i in range((len(l) + n - 1) // n)]
 
+async def wait_for_response(client, channel, user, timeout = None):
+	try:
+		msg = await client.wait_for(
+			"message",
+			timeout = timeout,
+			check = lambda msg:
+				msg.channel == channel and
+				msg.author == user)
+		return msg
+	except asyncio.TimeoutError:
+		return None
+
 async def menu(client, ctx, gen_):
 	gen = gen_(ctx.author)
 	

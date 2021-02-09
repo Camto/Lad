@@ -7,8 +7,7 @@ import asyncio
 
 responses = list(map(
 	discord.Embed.from_dict,
-	utils.get_json("8ball")
-))
+	utils.get_json("8ball")))
 
 class Cmd_8ball(commands.Cog):
 	def __init__(self, client):
