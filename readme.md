@@ -10,21 +10,26 @@ Clicking [this link here](https://discord.com/api/oauth2/authorize?client_id=709
 
 ## Get Started 
 
-Get started with `l.help` to show all possible commands. Get help for specific commands by doing `l.help <command>`
+Get started with `l.help` to show all possible commands. Get more help for specific commands by doing `l.help <command>`.
 
 ## Commands
 
-* `l.settings` → Admin settings to disable/enable commands and change behavior.
-* `l.bible` → Returns a random Bible verse.
-* `l.dino` → Returns a random dinosaur or can search for a specific one.
-* `l.ping` → Responds with Pong!
-* `l.say` → Make the bot say something.
-* `l.ascii` → Make the bot say something, in ASCII art.
-* `l.bitcoin` → Get the current price of Bitcoin with a wide range of currencies to choose from.
-* `l.reddit` → Lets you browse any subreddit's posts. 
-* `l.roll` → Roll dice DnD style (Ex. 1d20).
-* `l.convert` → Convert a file type to another, JPG → PNG, GIF → PNG, and more.
-* `l.user` → Returns information from a given user. This information ranges from their profile picture, to when they created their account. -
+* `l.8ball` — Ask the Magic 8-Ball for help.
+* `l.ascii` — Returns your message in ASCII art!
+* `l.bible` — Returns a random bible verse.
+* `l.bitcoin` — Get the current price of bitcoin with a wide range of currencies to choose from.
+* `l.convert` — Converts a file type to another file type. Type `l.help convert` for all file types.
+* `l.dino` — Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.
+* `l.feedback` — Use `l.feedback <message>` to send the message as feedback to the devs :)
+* `l.knockknock` — Just try it, you'll see :)
+* `l.minesweeper` — Makes a Minesweeper board.
+* `l.ping` — Responds with pong.
+* `l.reddit` — Lets you browse subreddits.
+* `l.roll` — Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)
+* `l.say` — Make the bot say something.
+* `l.server` — Return the server's info.
+* `l.settings` — Change Lad's options, like enabling or disabling certain commands. Can only be used by admins.
+* `l.user` — Return a user's info.
 
 ## Authors
 
