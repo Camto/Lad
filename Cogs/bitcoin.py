@@ -7,6 +7,8 @@ import urllib
 
 import requests
 
+import datetime
+
 class Bitcoin(commands.Cog):
 	def __init__(self, client):
 		self.client = client
@@ -19,8 +21,10 @@ class Bitcoin(commands.Cog):
 					"https://api.coindesk.com/v1/bpi/currentprice/USD.json")
 				info = json.loads(request.text)
 				await ctx.send(embed = discord.Embed(
-					title = f":coin: Bitcoin price is: {info['bpi']['USD']['rate']} USD",
-					color = utils.embed_color))
+					title = f":coin: Bitcoin {info[]}",
+					description = f"{info['bpi']['USD']['rate']} USD",
+					color = utils.embed_color)
+					.set_footer(text = "Disclaimer: This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org"))
 			else:
 				currency = cmd[0].upper()
 				request = requests.get(
@@ -31,7 +35,8 @@ class Bitcoin(commands.Cog):
 					info = json.loads(request.text)
 					await ctx.send(embed = discord.Embed(
 						title = f":coin: Bitcoin price is: {info['bpi'][currency]['rate']} {currency}",
-						color = utils.embed_color))
+						color = utils.embed_color)
+						.set_footer(text = "Disclaimer: This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org"))
 		else:
 			await ctx.send(embed = utils.command_disabled)
 
