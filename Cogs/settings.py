@@ -85,7 +85,7 @@ class Settings(commands.Cog):
 							val = yaml.safe_load(val)
 						except:
 							return await ctx.send(embed = discord.Embed(
-								description = "The YAML sent wasn't valid.",
+								description = "The YAML or JSON sent wasn't valid.",
 								color = utils.embed_color)
 								.set_author(
 									name = "Invalid Value",
