@@ -79,6 +79,7 @@ class Settings(commands.Cog):
 							val = val[3:]
 							if val.startswith("yaml"): val = val[4:]
 							elif val.startswith("yml"): val = val[3:]
+							elif val.startswith("json"): val = val[4:]
 							if val.endswith("```"): val = val[:-3]
 						
 						try:
