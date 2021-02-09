@@ -21,8 +21,7 @@ class Bitcoin(commands.Cog):
 					"https://api.coindesk.com/v1/bpi/currentprice/USD.json")
 				info = json.loads(request.text)
 				await ctx.send(embed = discord.Embed(
-					title = f":coin: Bitcoin {info['time']['updated']}",
-					description = f"{info['bpi']['USD']['rate']} USD",
+					title = f"[{info['time']['updated']}] 1 Bitcoin  = {info['bpi']['USD']['rate']} USD",
 					color = utils.embed_color)
 					.set_footer(text = "Disclaimer: This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org"))
 			else:
@@ -34,8 +33,7 @@ class Bitcoin(commands.Cog):
 				elif request.status_code == 200:
 					info = json.loads(request.text)
 					await ctx.send(embed = discord.Embed(
-						title = f":coin: Bitcoin {info['time']['updated']}",
-						description = f"{info['bpi'][currency]['rate']} {currency}",
+						title = f"[{info['time']['updated']}] 1 Bitcoin = {info['bpi'][currency]['rate']} {currency}",
 						color = utils.embed_color)
 						.set_footer(text = "Disclaimer: This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org"))
 		else:
