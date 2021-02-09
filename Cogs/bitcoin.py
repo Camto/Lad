@@ -35,7 +35,7 @@ class Bitcoin(commands.Cog):
 					info = json.loads(request.text)
 					await ctx.send(embed = discord.Embed(
 						title = f":coin: Bitcoin {info['time']['updated']}",
-						description = f"{info['bpi'][currency]['rate']} {currency}","
+						description = f"{info['bpi'][currency]['rate']} {currency}",
 						color = utils.embed_color)
 						.set_footer(text = "Disclaimer: This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org"))
 		else:
