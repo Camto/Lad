@@ -17,7 +17,7 @@ class Server(commands.Cog):
 		fields = [
 			("Owner", str(ctx.guild.owner)),
 			("Region", ctx.guild.region),
-			("Created at", ctx.guild.created_at.strftime("%d/%m/%Y")),
+			("Created at", ctx.guild.created_at.strftime("%b. %d, %Y")),
 			("Members", str(ctx.guild.member_count)),
 			("Boosters", str(ctx.guild.premium_subscription_count)),
 			("Roles", len(ctx.guild.roles)),
