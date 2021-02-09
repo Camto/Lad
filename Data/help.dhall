@@ -62,6 +62,10 @@ in [
 		"Use `l.feedback <message>` to send the message as feedback to the devs :)"
 		no-help-embed,
 	
+	command "knockknock"
+		"Just try it, you'll see :)"
+		no-help-embed,
+	
 	command "minesweeper"
 		"Makes a Minesweeper board."
 		embed.Embed::{

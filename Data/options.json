@@ -44,6 +44,11 @@
     "descr": "If it's on, the command will work.",
     "type": "bool"
   },
+  "knockknock": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
   "minesweeper": {
     "default": true,
     "descr": "If it's on, the command will work.",
