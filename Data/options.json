@@ -1,0 +1,87 @@
+{
+  "ascii": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "autoresponse_file": {
+    "default": [],
+    "descr": "This will be the file used when auto-responding to messages.",
+    "type": "json"
+  },
+  "autoresponses": {
+    "default": true,
+    "descr": "If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponse_file` to see the preprogrammed messages.",
+    "type": "bool"
+  },
+  "bible": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "bitcoin": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "cmd_8ball": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "convert": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "dino": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "feedback": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "knockknock": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "minesweeper": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "ping": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "reddit": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "roll": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "say": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "server": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
+  "user_": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  }
+}

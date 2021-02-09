@@ -5,7 +5,6 @@ import sys
 import os
 import asyncio
 import json
-import yaml
 
 master_settings = json.loads(os.getenv(f"LADBOT_{sys.argv[1]}"))
 print(f"Loaded master settings: {', '.join(master_settings.keys())}")
@@ -13,22 +12,18 @@ print(f"Loaded master settings: {', '.join(master_settings.keys())}")
 global db
 settings = {}
 
-def get_yaml(filename):
-	with open(f"./Data/{filename}.yaml", encoding = "utf-8") as stream:
-		return yaml.safe_load(stream)
-
 def get_json(filename):
 	with open(f"./Data/{filename}.json", encoding = "utf-8") as stream:
 		return json.load(stream)
 
-embed_color = get_yaml("embed-color")
-options = get_yaml("options")
+embed_color = get_json("embed-color")
+options = get_json("options")
 option_names = list(options.keys())
-icons = get_yaml("icons")
-emojis = get_yaml("emojis")
+icons = get_json("icons")
+emojis = get_json("emojis")
 embeds = my_dictionary = {
 	k: discord.Embed.from_dict(v)
-	for k, v in get_yaml("embeds").items()}
+	for k, v in get_json("embeds").items()}
 
 command_disabled = embeds["command disabled"]
 
@@ -39,6 +34,18 @@ def get_setting(guild_id, option):
 		return options[option]["default"]
 
 chunks = lambda l, n: [l[i * n:(i + 1) * n] for i in range((len(l) + n - 1) // n)]
+
+async def wait_for_response(client, channel, user, timeout = None):
+	try:
+		msg = await client.wait_for(
+			"message",
+			timeout = timeout,
+			check = lambda msg:
+				msg.channel == channel and
+				msg.author == user)
+		return msg
+	except asyncio.TimeoutError:
+		return None
 
 async def menu(client, ctx, gen_):
 	gen = gen_(ctx.author)

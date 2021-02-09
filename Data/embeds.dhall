@@ -81,7 +81,7 @@ in {
 	
 	`minesweeper error` = embed.Embed::{
 		title = Some ":bomb: Minesweeper Error",
-		description = Some "The arguments are invalid. To use `l.minesweeper`, you can either pass nothing, or three positive numbers for width, height, and number of mines, for example `l.minesweeper 7 13 15` would give a 7x13 board with 10 mines."
+		description = Some "The arguments are invalid. To use `l.minesweeper`, you can either pass nothing, or three positive numbers for width, height, and number of mines, for example `l.minesweeper 7 13 15` would give a 7x13 board with 15 mines."
 	},
 	
 	`minesweeper limits` = embed.Embed::{

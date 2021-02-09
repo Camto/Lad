@@ -9,7 +9,7 @@ import random
 
 from fuzzywuzzy import fuzz, process
 
-bible = utils.get_yaml("bible")
+bible = utils.get_json("bible")
 book_names = list(map(lambda book: book["name"], bible))
 
 search_chars = re.compile("[^A-Za-z0-9:\-;]")

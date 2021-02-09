@@ -10,28 +10,31 @@ class Minesweeper(commands.Cog):
 	
 	@commands.command()
 	async def minesweeper(self, ctx, *args):
-		if len(args) == 0:
-			width = 9
-			height = 9
-			mine_count = 10
-		elif len(args) == 3 and all(map(lambda s: s.isnumeric(), args)):
-			int_args = list(map(int, args))
-			if any(map(lambda n: n < 1, int_args)):
+		if utils.get_setting(ctx.guild.id, "minesweeper"):
+			if len(args) == 0:
+				width = 9
+				height = 9
+				mine_count = 10
+			elif len(args) == 3 and all(map(lambda s: s.isnumeric(), args)):
+				int_args = list(map(int, args))
+				if any(map(lambda n: n < 1, int_args)):
+					return await ctx.send(embed = utils.embeds["minesweeper error"])
+				width, height, mine_count = int_args
+			else:
 				return await ctx.send(embed = utils.embeds["minesweeper error"])
-			width, height, mine_count = int_args
+			
+			if (
+					width > 40 or height > 40 or
+					mine_count > width * height):
+				return await ctx.send(embed = utils.embeds["minesweeper limits"])
+			
+			minesweeper_board = gen_minesweeper(width, height, mine_count)
+			
+			if len(minesweeper_board) > 2000:
+				return await ctx.send(embed = utils.embeds["minesweeper char limit"])
+			await ctx.send(minesweeper_board)
 		else:
-			return await ctx.send(embed = utils.embeds["minesweeper error"])
-		
-		if (
-				width > 40 or height > 40 or
-				mine_count > width * height):
-			return await ctx.send(embed = utils.embeds["minesweeper limits"])
-		
-		minesweeper_board = gen_minesweeper(width, height, mine_count)
-		
-		if len(minesweeper_board) > 2000:
-			return await ctx.send(embed = utils.embeds["minesweeper char limit"])
-		await ctx.send(minesweeper_board)
+			await ctx.send(embed = utils.command_disabled)
 
 def gen_minesweeper(width, height, mine_count):
 	board = [[0 for _ in range(width + 2)] for _ in range(height + 2)]

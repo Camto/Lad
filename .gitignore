@@ -9,6 +9,9 @@ Thumbs.db
 ferret.log
 Ferret Queries/*.json
 
+# Dhall
+dhall.ps1
+
 # Python
 __pycache__
 
