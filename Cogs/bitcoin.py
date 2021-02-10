@@ -23,7 +23,7 @@ class Bitcoin(commands.Cog):
 				await ctx.send(embed = discord.Embed(
 					title = f":coin: 1 Bitcoin  = {info['bpi']['USD']['rate']} USD",
 					color = utils.embed_color)
-					.set_footer(text = f"[{info['time']['updated']}] Disclaimer: This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org"))
+					.set_footer(text = f"[{info['time']['updated']}] Disclaimer: This data was produced from the CoinDesk Bitcoin Price Index (USD)."))
 			else:
 				currency = cmd[0].upper()
 				request = requests.get(
