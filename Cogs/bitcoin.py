@@ -27,8 +27,8 @@ class Bitcoin(commands.Cog):
       today = datetime.date.today()
       week = today - datetime.timedelta(days=7)
       dates = []
-      for i in range(8):
-        dates.append(str(datetime.date.today() - datetime.timedelta(days=i)))    
+      for date in range(8):
+        dates.append(str(datetime.date.today() - datetime.timedelta(days=date)))    
       request = requests.get(f"https://api.coindesk.com/v1/bpi/historical/close.json?start={week}&end={today}")
       info = json.loads(request.text)
       await ctx.send(embed = discord.Embed(
