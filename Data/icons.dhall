@@ -1,5 +1,7 @@
 {
 	bible = "https://raw.githubusercontent.com/Camto/Lad/master/Images/bible.png",
+
+	bitcoin = "https://raw.githubusercontent.com/Camto/Lad/master/Images/bitcoin.png",
 	
 	dinos = [
 		"https://raw.githubusercontent.com/Camto/Lad/master/Images/dinos/dino%201.png",
