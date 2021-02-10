@@ -60,7 +60,7 @@ class Bitcoin(commands.Cog):
         await ctx.send(embed = discord.Embed(
           title = f":coin: 1 BTC = {info['bpi'][currency]['rate']} {currency}",
           color = utils.embed_color)
-          .set_footer(text = "https://www.coindesk.com/price/bitcoin"))
+          .set_footer(text = "https://www.coindesk.com/price/bitcoin | Non-USD currency is updated hourly, therefore prices are delayed by 60 minutes."))
 	else:
     await ctx.send(embed = utils.command_disabled)
 
