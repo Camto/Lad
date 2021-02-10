@@ -19,7 +19,7 @@ class Bitcoin(commands.Cog):
 		if len(cmd) == 0:
 			request = requests.get("https://api.coindesk.com/v1/bpi/currentprice/USD.json")
 			info = json.loads(request.text)
-
+			
 			await ctx.send(embed = discord.Embed(
 				title = f":coin: 1 BTC = {info['bpi']['USD']['rate']} USD",
 				color = utils.embed_color)
@@ -42,7 +42,7 @@ class Bitcoin(commands.Cog):
 				color = utils.embed_color).set_footer(text = "https://www.coindesk.com/price/bitcoin"))
 			for name, value in fields:
 				embed.add_field(name = name, value = value, inline = False)
-
+			
 			await ctx.send(embed = embed)
 		else:
 			currency = cmd[0].upper()
@@ -52,7 +52,7 @@ class Bitcoin(commands.Cog):
 				await ctx.send(embed = utils.embeds["bitcoin error"])
 			elif request.status_code == 200:
 				info = json.loads(request.text)
-
+				
 				await ctx.send(embed = discord.Embed(
 					title = f":coin: 1 BTC = {info['bpi'][currency]['rate']} {currency}",
 					color = utils.embed_color)
