@@ -41,7 +41,7 @@ class Bitcoin(commands.Cog):
 			embed = (discord.Embed(
 				color = utils.embed_color)
 				.set_author(
-					name = "BTC price for the last 7 days",
+					name = "BTC to USD last week",
 					icon_url = utils.icons["bitcoin"]))
 			for name, value in fields:
 				embed.add_field(name = name, value = value, inline = False)
