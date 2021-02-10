@@ -20,9 +20,9 @@ class Bitcoin(commands.Cog):
       request = requests.get("https://api.coindesk.com/v1/bpi/currentprice/USD.json")
       info = json.loads(request.text)
       await ctx.send(embed = discord.Embed(
-        title = f":coin: 1 Bitcoin = {info['bpi']['USD']['rate']} USD",
+        title = f":coin: 1 BTC = {info['bpi']['USD']['rate']} USD",
         color = utils.embed_color)
-        .set_footer(text = f"[{info['time']['updated']}] Disclaimer: This data was produced from the CoinDesk Bitcoin Price Index (USD)."))
+        .set_footer(text = "https://www.coindesk.com/price/bitcoin"))
     elif cmd[0].lower() == "history":
       today = datetime.date.today()
       week = today - datetime.timedelta(days=7)
@@ -31,11 +31,25 @@ class Bitcoin(commands.Cog):
         dates.append(str(datetime.date.today() - datetime.timedelta(days=date)))    
       request = requests.get(f"https://api.coindesk.com/v1/bpi/historical/close.json?start={week}&end={today}")
       info = json.loads(request.text)
-      await ctx.send(embed = discord.Embed(
-        title = "Bitcoin price the last 7 days",
-        description = f":coin: Today | ${info['bpi'][dates[0]]} \n\n :coin: {dates[1]} | ${info['bpi'][dates[1]]} \n\n :coin: {dates[2]} | ${info['bpi'][dates[2]]} \n\n :coin: {dates[3]} | ${info['bpi'][dates[3]]} \n\n :coin: {dates[4]} | ${info['bpi'][dates[4]]} \n\n :coin: {dates[5]} | ${info['bpi'][dates[5]]} \n\n :coin: {dates[6]} | ${info['bpi'][dates[6]]} \n\n :coin: {dates[7]} | ${info['bpi'][dates[7]]}",
-        color = utils.embed_color)
-        .set_footer(text = f"[{info['time']['updated']}] Disclaimer: This data was produced from the CoinDesk Bitcoin Price Index (USD)."))
+    
+      fields = [
+        (f"${info['bpi'][dates[1]]}", f"{dates[1]}"),
+        (f"${info['bpi'][dates[2]]}", f"{dates[2]}"),
+        (f"${info['bpi'][dates[3]]}", f"{dates[3]}"),
+        (f"${info['bpi'][dates[4]]}", f"{dates[4]}"),
+        (f"${info['bpi'][dates[5]]}", f"{dates[5]}"),
+        (f"${info['bpi'][dates[6]]}", f"{dates[6]}"),
+        (f"${info['bpi'][dates[7]]}", f"{dates[7]}")]
+
+      embed = (discord.Embed(
+        title = ":coin: BTC price for the last 7 days",
+        color = utils.embed_color).set_footer(text = "https://www.coindesk.com/price/bitcoin"))
+
+      for name, value in fields:
+        embed.add_field(name = name, value = value, inline = False)
+
+      await ctx.send(embed = embed)
+
     else:
       currency = cmd[0].upper()
       request = requests.get(f"https://api.coindesk.com/v1/bpi/currentprice/{urllib.parse.quote(currency, safe = '')}.json")
@@ -44,9 +58,9 @@ class Bitcoin(commands.Cog):
       elif request.status_code == 200:
         info = json.loads(request.text)
         await ctx.send(embed = discord.Embed(
-          title = f":coin: 1 Bitcoin = {info['bpi'][currency]['rate']} {currency}",
+          title = f":coin: 1 BTC = {info['bpi'][currency]['rate']} {currency}",
           color = utils.embed_color)
-          .set_footer(text = f"[{info['time']['updated']}] Disclaimer: This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org"))
+          .set_footer(text = "https://www.coindesk.com/price/bitcoin"))
 	else:
     await ctx.send(embed = utils.command_disabled)
 
