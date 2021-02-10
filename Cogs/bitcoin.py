@@ -32,14 +32,7 @@ class Bitcoin(commands.Cog):
 			request = requests.get(f"https://api.coindesk.com/v1/bpi/historical/close.json?start={week}&end={today}")
 			info = json.loads(request.text)
 
-			fields = [
-				(f"${info['bpi'][dates[1]]}", f"{dates[1]}"),
-				(f"${info['bpi'][dates[2]]}", f"{dates[2]}"),
-				(f"${info['bpi'][dates[3]]}", f"{dates[3]}"),
-				(f"${info['bpi'][dates[4]]}", f"{dates[4]}"),
-				(f"${info['bpi'][dates[5]]}", f"{dates[5]}"),
-				(f"${info['bpi'][dates[6]]}", f"{dates[6]}"),
-				(f"${info['bpi'][dates[7]]}", f"{dates[7]}")]
+			fields = tuple((f"${info['bpi'][dates[i]]}", f"{dates[i]}") for i in range(1,8))
 
 			embed = (discord.Embed(
 				title = ":coin: BTC price for the last 7 days",
