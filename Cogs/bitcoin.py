@@ -21,9 +21,10 @@ class Bitcoin(commands.Cog):
 			info = json.loads(request.text)
 			
 			await ctx.send(embed = discord.Embed(
-				title = f":coin: 1 BTC = {info['bpi']['USD']['rate']} USD",
 				color = utils.embed_color)
-				.set_footer(text = "https://www.coindesk.com/price/bitcoin"))
+				.set_author(
+					name = f"1 BTC = {info['bpi']['USD']['rate']} USD",
+					icon_url = utils.icons["bitcoin"]))
 		elif cmd[0].lower() == "history":
 			today = datetime.date.today()
 			week = today - datetime.timedelta(days = 7)
@@ -38,8 +39,10 @@ class Bitcoin(commands.Cog):
 			fields = tuple((f"${info['bpi'][dates[i]]}", f"{dates[i]}") for i in range(1,8))
 			
 			embed = (discord.Embed(
-				title = ":coin: BTC price for the last 7 days",
-				color = utils.embed_color).set_footer(text = "https://www.coindesk.com/price/bitcoin"))
+				color = utils.embed_color)
+				.set_author(
+					name = "BTC price for the last 7 days",
+					icon_url = utils.icons["bitcoin"]))
 			for name, value in fields:
 				embed.add_field(name = name, value = value, inline = False)
 			
@@ -54,9 +57,10 @@ class Bitcoin(commands.Cog):
 				info = json.loads(request.text)
 				
 				await ctx.send(embed = discord.Embed(
-					title = f":coin: 1 BTC = {info['bpi'][currency]['rate']} {currency}",
 					color = utils.embed_color)
-					.set_footer(text = "https://www.coindesk.com/price/bitcoin | Non-USD currency is updated hourly, therefore prices are delayed by 60 minutes."))
+					.set_author(
+						name = f"1 BTC = {info['bpi'][currency]['rate']} {currency}",
+						icon_url = utils.icons["bitcoin"]))
 	else:
 		await ctx.send(embed = utils.command_disabled)
 
