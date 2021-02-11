@@ -43,8 +43,7 @@ in [
 					- `l.bible book chapter`, All verses from the chapter of the book.
 					- `l.bible book chapterrange`, All verses from the chapter range of the book (ex. `l.bible joel 1-2`).
 					- `l.bible book chapter:verse`, The specific verse searched for.
-					- `l.bible book chapter:verserange`, All verses in the range from the chapter (ex. `l.bible joel 1:5-10`).
-					''
+					- `l.bible book chapter:verserange`, All verses in the range from the chapter (ex. `l.bible joel 1:5-10`).''
 				},
 			]
 		},
