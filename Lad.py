@@ -12,7 +12,7 @@ import aioconsole
 sys.path.append(".")
 import utils
 
-command_prefix = lambda client, msg: "l." if msg.content[0] == "l" else "L."
+command_prefix = lambda client, msg: "l." if len(msg.content) == 0 or msg.content[0] == "l" else "L."
 client = commands.Bot(command_prefix = command_prefix, intents = discord.Intents().all())
 
 client.remove_command("help")
