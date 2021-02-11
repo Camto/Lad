@@ -108,7 +108,7 @@ in [
 	command "roll"
 		"Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
 		embed.Embed::{
-			title = Some ":game_die: Roll Help",
+			author = icon-title "Roll Help" icons.roll,
 			description = Some "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
 		},
 	

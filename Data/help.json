@@ -125,9 +125,12 @@
   {
     "cmd": "roll",
     "embed": {
+      "author": {
+        "icon_url": "https://raw.githubusercontent.com/Camto/Lad/master/Images/roll.png",
+        "name": "Roll Help"
+      },
       "color": 14711736,
-      "description": "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)",
-      "title": ":game_die: Roll Help"
+      "description": "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
     },
     "msg": "Roll using DnD rules. (Example: 2d6, where 2 is the number of dice to roll, and 6 is the number of sides on each die.)"
   },
