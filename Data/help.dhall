@@ -32,7 +32,22 @@ in [
 	
 	command "bible"
 		"Returns a random bible verse."
-		no-help-embed,
+		embed.Embed::{
+			description = Some "Search for any verse in the King James Bible",
+			author = icon-title "Bible Help" icons.bible,
+			fields = Some [
+				embed.Field::{name = "Holy Commands", value = ''
+
+					- `l.bible`, A random bible verse from any book. Can return another verse by clicking the reaction.
+					- `l.bible book`, A random bible from the specific book searched for, which can be shortened (ex. `l.bible gen` == `l.bible genesis`). Can return another verse in the same book by clicking the reaction.
+					- `l.bible book chapter`, All verses from the chapter of the book.
+					- `l.bible book chapterrange`, All verses from the chapter range of the book (ex. `l.bible joel 1-2`).
+					- `l.bible book chapter:verse`, The specific verse searched for.
+					- `l.bible book chapter:verserange`, All verses in the range from the chapter (ex. `l.bible joel 1:5-10`).
+					''
+				},
+			]
+		},
 	
 	command "bitcoin"
 		"Get the current price of bitcoin with a wide range of currencies to choose from. For details, do `l.help bitcoin`."
