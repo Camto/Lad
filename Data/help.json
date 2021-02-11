@@ -34,9 +34,12 @@
   {
     "cmd": "bitcoin",
     "embed": {
+      "author": {
+        "icon_url": "https://raw.githubusercontent.com/Camto/Lad/master/Images/bitcoin.png",
+        "name": "Bitcoin → Currency"
+      },
       "color": 14711736,
-      "description": "To change the currency output use `l.bitcoin <currency>`. Currency list at [CoinDesk](https://www.coindesk.com/price/bitcoin), remember to type in acronym/shortened form (ex. USD, EUR, GBP); capitalization doesn't matter. `l.bitcoin history` will return bitcoin price for the last 7 days (ONLY available in USD).",
-      "title": ":coin: Bitcoin → Currency"
+      "description": "To change the currency output use `l.bitcoin <currency>`. Currency list at [CoinDesk](https://www.coindesk.com/price/bitcoin), remember to type in acronym/shortened form (ex. USD, EUR, GBP); capitalization doesn't matter. `l.bitcoin history` will return bitcoin price for the last 7 days (ONLY available in USD)."
     },
     "msg": "Get the current price of bitcoin with a wide range of currencies to choose from."
   },
