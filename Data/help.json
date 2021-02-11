@@ -36,7 +36,7 @@
     "embed": {
       "author": {
         "icon_url": "https://raw.githubusercontent.com/Camto/Lad/master/Images/bitcoin.png",
-        "name": "Bitcoin → Currency"
+        "name": "Bitcoin Help"
       },
       "color": 14711736,
       "description": "To change the currency output use `l.bitcoin <currency>`. Currency list at [CoinDesk](https://www.coindesk.com/price/bitcoin), remember to type in acronym/shortened form (ex. USD, EUR, GBP); capitalization doesn't matter. `l.bitcoin history` will return bitcoin price for the last 7 days (ONLY available in USD)."

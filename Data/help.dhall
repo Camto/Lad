@@ -37,7 +37,7 @@ in [
 	command "bitcoin"
 		"Get the current price of bitcoin with a wide range of currencies to choose from."
 		embed.Embed::{
-			author = icon-title "Bitcoin → Currency" icons.bitcoin,
+			author = icon-title "Bitcoin Help" icons.bitcoin,
 			description = Some "To change the currency output use `l.bitcoin <currency>`. Currency list at [CoinDesk](https://www.coindesk.com/price/bitcoin), remember to type in acronym/shortened form (ex. USD, EUR, GBP); capitalization doesn't matter. `l.bitcoin history` will return bitcoin price for the last 7 days (ONLY available in USD)."
 		},
 	
