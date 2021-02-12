@@ -6,6 +6,7 @@ let JSON/Type = ./Prelude/JSON/Type
 
 let embed = ./embed.dhall
 let icons = ./icons.dhall
+let emojis = ./emojis.dhall
 let options = ./options.dhall
 
 let icon-title = \(name: Text) -> \(icon-url: Text) ->
@@ -33,19 +34,22 @@ in [
 	command "bible"
 		"Returns a random bible verse."
 		embed.Embed::{
-			description = Some "Search for any verse in the King James Bible",
 			author = icon-title "Bible Help" icons.bible,
-			fields = Some [
-				embed.Field::{name = "Holy Commands", value = ''
-
-					- `l.bible`, A random bible verse from any book. Can return another verse by clicking the reaction.
-					- `l.bible book`, A random bible from the specific book searched for, which can be shortened (ex. `l.bible gen` == `l.bible genesis`). Can return another verse in the same book by clicking the reaction.
-					- `l.bible book chapter`, All verses from the chapter of the book.
-					- `l.bible book chapterrange`, All verses from the chapter range of the book (ex. `l.bible joel 1-2`).
-					- `l.bible book chapter:verse`, The specific verse searched for (ex. `l.bible gen 1:10`).
-					- `l.bible book chapter:verserange`, All verses in the range from the chapter (ex. `l.bible joel 1:5-10`).''
-				},
-			]
+			description = Some ''
+				Search for any verse in the King James Bible.
+				
+				How to use the command:
+				
+				- `l.bible` fetches a random bible verse from any book.
+				- `l.bible <book>` fetches a random verse from that book. The book name can be shortened, so `l.bible gen` does the same thing as `l.bible genesis`.
+				- `l.bible <book> <chapter>` fetches that chapter from the book.
+				- `l.bible <book> <chapter>-<chapter>` fetches the chapters in that range from the book. For example: `l.bible joel 1-3`
+				- `l.bible <book> <chapter>:<verse>` fetches that specific verse from the book. For example: `l.bible gen 1:10`
+				- `l.bible <book> <chapter>:<verse>-<verse>` fetches the verses in that range from the book. For example: `l.bible joel 1:5-10`
+				
+				If a response has the ${emojis.reload} reaction, that reaction can be clicked to fetch another verse.
+				
+				If a response has the ${emojis.`right pointer`} reaction, it has multiple pages that can be viewed using the ${emojis.`left pointer`} and ${emojis.`right pointer`} reactions.''
 		},
 	
 	command "bitcoin"
