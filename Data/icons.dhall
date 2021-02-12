@@ -21,7 +21,5 @@
 	
 	reddit = "https://raw.githubusercontent.com/Camto/Lad/master/Images/reddit.png",
 
-	roll = "https://raw.githubusercontent.com/Camto/Lad/master/Images/roll.png",
-
 	google = "https://raw.githubusercontent.com/Camto/Lad/master/Images/google.png"
 }
