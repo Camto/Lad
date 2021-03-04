@@ -33,5 +33,6 @@ in [
 	key-option "roll" option-command-disabling,
 	key-option "say" option-command-disabling,
 	key-option "server" option-command-disabling,
+    key-option "useless" option-command-disabling,
 	key-option "user_" option-command-disabling
 ]

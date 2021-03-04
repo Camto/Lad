@@ -79,6 +79,11 @@
     "descr": "If it's on, the command will work.",
     "type": "bool"
   },
+  "useless": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
   "user_": {
     "default": true,
     "descr": "If it's on, the command will work.",

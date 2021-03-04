@@ -161,9 +161,18 @@
         "name": "Settings Help"
       },
       "color": 14711736,
-      "description": "To change an option, use `l.settings <option name> <value>` <value> can be on or off.\n\n`cmd_8ball`: If it's on, the command will work.\n\n`ascii`: If it's on, the command will work.\n\n`autoresponse_file`: This will be the file used when auto-responding to messages.\n\n`autoresponses`: If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponse_file` to see the preprogrammed messages.\n\n`bible`: If it's on, the command will work.\n\n`bitcoin`: If it's on, the command will work.\n\n`convert`: If it's on, the command will work.\n\n`dino`: If it's on, the command will work.\n\n`feedback`: If it's on, the command will work.\n\n`knockknock`: If it's on, the command will work.\n\n`minesweeper`: If it's on, the command will work.\n\n`ping`: If it's on, the command will work.\n\n`reddit`: If it's on, the command will work.\n\n`roll`: If it's on, the command will work.\n\n`say`: If it's on, the command will work.\n\n`server`: If it's on, the command will work.\n\n`user_`: If it's on, the command will work."
+      "description": "To change an option, use `l.settings <option name> <value>` <value> can be on or off.\n\n`cmd_8ball`: If it's on, the command will work.\n\n`ascii`: If it's on, the command will work.\n\n`autoresponse_file`: This will be the file used when auto-responding to messages.\n\n`autoresponses`: If it's on, the bot will respond with preprogrammed messages when a keyword is said. Use `l.settings autoresponse_file` to see the preprogrammed messages.\n\n`bible`: If it's on, the command will work.\n\n`bitcoin`: If it's on, the command will work.\n\n`convert`: If it's on, the command will work.\n\n`dino`: If it's on, the command will work.\n\n`feedback`: If it's on, the command will work.\n\n`knockknock`: If it's on, the command will work.\n\n`minesweeper`: If it's on, the command will work.\n\n`ping`: If it's on, the command will work.\n\n`reddit`: If it's on, the command will work.\n\n`roll`: If it's on, the command will work.\n\n`say`: If it's on, the command will work.\n\n`server`: If it's on, the command will work.\n\n`useless`: If it's on, the command will work.\n\n`user_`: If it's on, the command will work."
     },
     "msg": "Change Lad's options, like enabling or disabling certain commands. Can only be used by admins."
+  },
+  {
+    "cmd": "useless",
+    "embed": {
+      "color": 14711736,
+      "description": "Use `l.useless` to do absolutely nothing, exactly once.",
+      "title": "Do nothing"
+    },
+    "msg": "nothing"
   },
   {
     "cmd": "user",

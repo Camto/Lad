@@ -94,6 +94,11 @@ in {
 		description = Some "The message that was generated was too long to send to Discord. Consider using a smaller board."
 	},
 	
+    useless = embed.Embed::{
+        title = Some "???",
+		description = Some "this command serves no purpose"
+    },
+
 	secret = embed.Embed::{
 		description = Some "Send me a screenshot if you can get Ladbot to send this embed in Discord :)"
 	}

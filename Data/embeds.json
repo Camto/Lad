@@ -105,6 +105,11 @@
     "color": 14711736,
     "description": "You're not an admin, you can't access the settings."
   },
+  "useless": {
+    "color": 14711736,
+    "description": "this command serves no purpose",
+    "title": "???"
+  },
   "user error": {
     "color": 14711736,
     "description": "No user detected. Tag someone by using @user.",
