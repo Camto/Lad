@@ -157,14 +157,14 @@ in [
 					${option-list}'',
 			author = icon-title "Settings Help" icons.settings
 		},
-
-    command "useless"
-        "nothing"
-        embed.Embed::{
-            title = Some "Do nothing",
-            description = Some "Use `l.useless` to do absolutely nothing, exactly once."
-        },
-
+	
+	command "useless"
+		"Do nothing. Use `l.help useless` for more information."
+		embed.Embed::{
+			title = Some "Do nothing",
+			description = Some "Use `l.useless` to do absolutely nothing, exactly once."
+		},
+	
 	command "user"
 		"Return a user's info."
 		embed.Embed::{

@@ -172,7 +172,7 @@
       "description": "Use `l.useless` to do absolutely nothing, exactly once.",
       "title": "Do nothing"
     },
-    "msg": "nothing"
+    "msg": "Do nothing. Use `l.help useless` for more information."
   },
   {
     "cmd": "user",
