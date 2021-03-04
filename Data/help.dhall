@@ -162,7 +162,14 @@ in [
 		"Do nothing. Use `l.help useless` for more information."
 		embed.Embed::{
 			title = Some "Do nothing",
-			description = Some "Use `l.useless` to do absolutely nothing, exactly once."
+			description = Some ''
+				Use `l.useless` to do absolutely nothing, exactly once.
+				This command has the following subcommands:
+				1.
+				2.
+				3.
+				4.
+				5.''
 		},
 	
 	command "user"

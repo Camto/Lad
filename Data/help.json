@@ -169,7 +169,7 @@
     "cmd": "useless",
     "embed": {
       "color": 14711736,
-      "description": "Use `l.useless` to do absolutely nothing, exactly once.",
+      "description": "Use `l.useless` to do absolutely nothing, exactly once.\nThis command has the following subcommands:\n1.\n2.\n3.\n4.\n5.",
       "title": "Do nothing"
     },
     "msg": "Do nothing. Use `l.help useless` for more information."
