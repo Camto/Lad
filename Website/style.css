@@ -206,7 +206,7 @@
     font-weight: 400;
 	}
 	
-	.embed-fields {
+	#embed-fields {
 		margin-top: 8px;
 		display: grid;
 			grid-column: 1/1;
