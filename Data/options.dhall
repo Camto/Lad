@@ -27,6 +27,7 @@ in [
 	key-option "dino" option-command-disabling,
 	key-option "feedback" option-command-disabling,
 	key-option "knockknock" option-command-disabling,
+	key-option "laugh" option-command-disabling,
 	key-option "minesweeper" option-command-disabling,
 	key-option "ping" option-command-disabling,
 	key-option "reddit" option-command-disabling,

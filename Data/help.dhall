@@ -84,6 +84,10 @@ in [
 		"Just try it, you'll see :)"
 		no-help-embed,
 	
+	command "laugh"
+		"Bad jokes? Lad's got your back"
+		no-help-embed,
+
 	command "minesweeper"
 		"Makes a Minesweeper board."
 		embed.Embed::{

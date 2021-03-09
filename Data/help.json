@@ -88,6 +88,14 @@
     "msg": "Just try it, you'll see :)"
   },
   {
+    "cmd": "laugh",
+    "embed": {
+      "color": 14711736,
+      "title": "There's no help available for this command yet."
+    },
+    "msg": "Bad jokes? Lad's got your back"
+  },
+  {
     "cmd": "minesweeper",
     "embed": {
       "color": 14711736,

@@ -49,6 +49,11 @@
     "descr": "If it's on, the command will work.",
     "type": "bool"
   },
+  "laugh": {
+    "default": true,
+    "descr": "If it's on, the command will work.",
+    "type": "bool"
+  },
   "minesweeper": {
     "default": true,
     "descr": "If it's on, the command will work.",
