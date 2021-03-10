@@ -21,7 +21,9 @@ class Autoresponses(commands.Cog):
 			for pair in utils.get_setting(msg.guild.id, "autoresponse_file"):
 				for keyword in pair["keywords"]:
 					if keyword in text:
-						return await msg.channel.send(random.choice(pair["responses"]))
+						response = random.choice(pair["responses"])
+						if response != "":
+							return await msg.channel.send(response)
 
 def setup(client):
 	client.add_cog(Autoresponses(client))
