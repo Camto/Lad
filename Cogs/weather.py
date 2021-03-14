@@ -11,7 +11,7 @@ class Weather(commands.Cog):
 	@commands.command()
 	async def weather(self, ctx, *, city: str):
 		cityName = city
-		url = "http://api.openweathermap.org/data/2.5/weather?" + "appid=" + "64dfdf86422ef9ce4e4763229c6f15e8" + "&q=" + cityName
+		url = f"http://api.openweathermap.org/data/2.5/weather?appid=64dfdf86422ef9ce4e4763229c6f15e8&q={cityName}"
 		response = requests.get(url)
 		weather = response.json()
 		channel = ctx.message.channel
