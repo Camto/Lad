@@ -25,6 +25,8 @@ class Weather(commands.Cog):
 				cPressure = info["pressure"]
 				cHumidity = info["humidity"]
 				w = weather["weather"]
+				country = weather["sys"]["country"]
+				timezone = weather["timezone"]
 				weatherDescription = w[0]["description"]
 
 				embed = discord.Embed(
@@ -38,6 +40,8 @@ class Weather(commands.Cog):
 				embed.add_field(name = "Temperature(C)", value = f"**{str(temperatureC)}°C**", inline = True)
 				embed.add_field(name = "Humidity(%)", value = f"**{cHumidity}%**", inline = False)
 				embed.add_field(name = "Atmospheric Pressure(hPa)", value = f"**{cPressure}hPa**", inline = False)
+				embed.add_field(name = "Country", value = f"**{country}**", inline = False)
+				embed.add_field(name= "Timezone", value = f"**{timezone}**", inline = False )
 				embed.set_thumbnail(url = "https://raw.githubusercontent.com/Camto/Lad/master/Images/weather.png")
 				embed.set_footer(text = f"Requested by {ctx.author.name}#{ctx.author.discriminator}")
 
