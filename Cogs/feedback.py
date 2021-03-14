@@ -14,7 +14,12 @@ class Feedback(commands.Cog):
 	@commands.command()
 	async def feedback(self, ctx, *, arg):
 		if utils.get_setting(ctx.guild.id, "feedback"):
-			await self.channel.send(arg)
+			embed = (discord.Embed(
+				title = "Feedback",
+				color = utils.embed_color)
+				.set_description(arg)
+				.set_footer(text = f"Feedback submitted by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id}) in server {ctx.guild.name} ({ctx.guild.id})"))
+			await self.channel.send(embed)
 			await ctx.send("Feedback recieved!")
 		else:
 			await ctx.send(embed = utils.command_disabled)
