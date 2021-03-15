@@ -30,7 +30,6 @@ class Weather(commands.Cog):
 				weatherDescription = w[0]["description"]
 
 				embed = discord.Embed(
-					title = f"Weather in {cityName}",
 					color = utils.embed_color,
 					timestamp = ctx.message.created_at)
 					.set_footer(
@@ -57,8 +56,10 @@ class Weather(commands.Cog):
 
 		else:
 			await channel.send(embed = discord.Embed(
-				title = "City not found :x:", 
-				color = utils.embed_color))
+				color = utils.embed_color)
+				.set_author(
+					name = f':x: City *{cityName}* not found'),
+					icon_url = utils.icons["weather"])
 
 def setup(client):
 	client.add_cog(Weather(client))
