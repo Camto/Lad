@@ -181,5 +181,12 @@ in [
 		embed.Embed::{
 			title = Some "Get User Info",
 			description = Some "Use `l.user <@user>` to get the user's information."
+		},
+
+	command "weather"
+		"Get the current weather status in a specific city."
+		embed.Embed::{
+			title = Some "City Weather",
+			description = Some "`l.weather <city>` will return the weather status for the biggest city in the world with that name."
 		}
 ]
