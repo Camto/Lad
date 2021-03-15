@@ -42,7 +42,7 @@ class Weather(commands.Cog):
 				embed.add_field(name = "Atmospheric Pressure(hPa)", value = f"**{cPressure}hPa**", inline = False)
 				embed.add_field(name = "Country", value = f"**{country}**", inline = False)
 				embed.add_field(name= "Timezone", value = f"**{timezone}**", inline = False )
-				embed.set_thumbnail(url = "https://raw.githubusercontent.com/Camto/Lad/master/Images/weather.png")
+				embed.set_author(name = f"Weather in {cityName}", icon_url = utils.icons["weather"])
 				embed.set_footer(text = f"Requested by {ctx.author.name}#{ctx.author.discriminator}")
 
 			await channel.send(embed = embed)
