@@ -194,9 +194,12 @@
   {
     "cmd": "weather",
     "embed": {
+      "author": {
+        "icon_url": "https://raw.githubusercontent.com/Camto/Lad/master/Images/weather.png",
+        "name": "Weather Help"
+      },
       "color": 14711736,
-      "description": "`l.weather <city>` will return the weather status for the biggest city in the world with that name.",
-      "title": "City Weather"
+      "description": "`l.weather <city>` will return the weather status for the biggest city in the world with that name."
     },
     "msg": "Get the current weather status for a specific city."
   }

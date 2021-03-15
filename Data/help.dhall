@@ -186,7 +186,7 @@ in [
 	command "weather"
 		"Get the current weather status for a specific city."
 		embed.Embed::{
-			title = Some "City Weather",
+			author = icon-title "Weather Help" icons.weather,
 			description = Some "`l.weather <city>` will return the weather status for the biggest city in the world with that name."
 		}
 ]
