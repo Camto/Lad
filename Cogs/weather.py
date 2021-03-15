@@ -40,13 +40,13 @@ class Weather(commands.Cog):
 					icon_url = utils.icons["weather"])
 				
 				fields = [
-					("Description", f"**{weather_description}**"),
-					("Temperature(F)", f"**{temperature_f}°F**"), 
-					("Temperature(C)", f"**{temperature_c}°C**"),
-					("Humidity(%)", f"**{humidity}%**"),
-					("Atmospheric Pressure(hPa)", f"**{pressure}hPa**"),
-					("Country", f"**{country}**"),
-					("Timezone", f"**{timezone}**")
+					("Description", weather_description),
+					("Temperature(F)", f"{temperature_f}°F"), 
+					("Temperature(C)", f"{temperature_c}°C"),
+					("Humidity(%)", f"{humidity}%"),
+					("Atmospheric Pressure(hPa)", f"{pressure}hPa"),
+					("Country", country),
+					("Timezone", timezone)
 				]
 				
 				for name, value in fields:
