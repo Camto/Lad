@@ -22,8 +22,8 @@ class Weather(commands.Cog):
 				temperature = info["temp"]
 				temperature_c = round(temperature - 273.15)
 				temperature_f = round(temperature_c * 9/5) + 32
-				c_pressure = info["pressure"]
-				c_humidity = info["humidity"]
+				pressure = info["pressure"]
+				humidity = info["humidity"]
 				w = weather["weather"]
 				country = weather["sys"]["country"]
 				timezone = weather["timezone"]
@@ -43,8 +43,8 @@ class Weather(commands.Cog):
 					("Description", f"**{weather_description}**"),
 					("Temperature(F)", f"**{temperature_f}°F**"), 
 					("Temperature(C)", f"**{temperature_c}°C**"),
-					("Humidity(%)", f"**{c_humidity}%**"),
-					("Atmospheric Pressure(hPa)", f"**{c_pressure}hPa**"),
+					("Humidity(%)", f"**{humidity}%**"),
+					("Atmospheric Pressure(hPa)", f"**{pressure}hPa**"),
 					("Country", f"**{country}**"),
 					("Timezone", f"**{timezone}**")
 				]
