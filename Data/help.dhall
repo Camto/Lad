@@ -182,7 +182,7 @@ in [
 			title = Some "Get User Info",
 			description = Some "Use `l.user <@user>` to get the user's information."
 		},
-
+	
 	command "weather"
 		"Get the current weather status for a specific city."
 		embed.Embed::{

@@ -10,8 +10,8 @@ class Weather(commands.Cog):
 
 	@commands.command()
 	async def weather(self, ctx, *, city: str):
-		cityName = city
-		url = f"http://api.openweathermap.org/data/2.5/weather?appid=64dfdf86422ef9ce4e4763229c6f15e8&q={cityName}"
+		city_name = city
+		url = f"http://api.openweathermap.org/data/2.5/weather?appid=64dfdf86422ef9ce4e4763229c6f15e8&q={city_name}"
 		response = requests.get(url)
 		weather = response.json()
 		channel = ctx.message.channel
@@ -20,14 +20,14 @@ class Weather(commands.Cog):
 			async with channel.typing():
 				info = weather["main"]
 				temperature = info["temp"]
-				temperatureC = round(temperature - 273.15)
-				temperatureF = str(round(temperatureC * 9/5) + 32)
-				cPressure = info["pressure"]
-				cHumidity = info["humidity"]
+				temperature_c = round(temperature - 273.15)
+				temperature_f = str(round(temperature_c * 9/5) + 32)
+				c_pressure = info["pressure"]
+				c_humidity = info["humidity"]
 				w = weather["weather"]
 				country = weather["sys"]["country"]
 				timezone = weather["timezone"]
-				weatherDescription = w[0]["description"]
+				weather_description = w[0]["description"]
 
 				embed = discord.Embed(
 					color = utils.embed_color,
@@ -36,15 +36,15 @@ class Weather(commands.Cog):
 					text = f"Requested by {ctx.author.name}#{ctx.author.discriminator}")
 				
 				embed.set_author(
-					name = f"Weather in {cityName}", 
+					name = f"Weather in {city_name}", 
 					icon_url = utils.icons["weather"])
 
 				fields = [
-					("Description", f"**{weatherDescription}**"),
-					("Temperature(F)", f"**{temperatureF}°F**"), 
-					("Temperature(C)", f"**{str(temperatureC)}°C**"),
-					("Humidity(%)", f"**{cHumidity}%**"),
-					("Atmospheric Pressure(hPa)", f"**{cPressure}hPa**"),
+					("Description", f"**{weather_description}**"),
+					("Temperature(F)", f"**{temperature_f}°F**"), 
+					("Temperature(C)", f"**{str(temperature_c)}°C**"),
+					("Humidity(%)", f"**{c_humidity}%**"),
+					("Atmospheric Pressure(hPa)", f"**{c_pressure}hPa**"),
 					("Country", f"**{country}**"),
 					("Timezone", f"**{timezone}**")
 				]
@@ -58,7 +58,7 @@ class Weather(commands.Cog):
 			await channel.send(embed = discord.Embed(
 				color = utils.embed_color)
 				.set_author(
-					name = f':x: City *{cityName}* not found',
+					name = f':x: City *{city_name}* not found',
 					icon_url = utils.icons["weather"]))
 
 def setup(client):
