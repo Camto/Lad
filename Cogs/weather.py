@@ -6,8 +6,7 @@ import requests
 
 class Weather(commands.Cog):
 	def __init__(self, client):
-		self.client = client
-	
+		self.client =	
 	@commands.command()
 	async def weather(self, ctx, *, city: str):
 		city_name = city
@@ -41,7 +40,7 @@ class Weather(commands.Cog):
 				
 				fields = [
 					("Description", f"**{weather_description}**"),
-					("Temperature", f"**{temperature_f}°F** | **{temperature_c}°C**"),
+					("Temperature(F)", f"**{temperature_f}°F** | **{temperature_c}°C**"), 
 					("Humidity(%)", f"**{c_humidity}%**"),
 					("Atmospheric Pressure(hPa)", f"**{c_pressure}hPa**"),
 					("Country", f"**{country}**"),
