@@ -41,8 +41,7 @@ class Weather(commands.Cog):
 				
 				fields = [
 					("Description", f"**{weather_description}**"),
-					("Temperature(F)", f"**{temperature_f}°F**"), 
-					("Temperature(C)", f"**{temperature_c}°C**"),
+					("Temperature", f"**{temperature_f}°F** | **{temperature_c}°C**"),
 					("Humidity(%)", f"**{c_humidity}%**"),
 					("Atmospheric Pressure(hPa)", f"**{c_pressure}hPa**"),
 					("Country", f"**{country}**"),
