@@ -14,10 +14,11 @@ class Feedback(commands.Cog):
 	async def feedback(self, ctx, *, arg):
 		if utils.get_setting(ctx.guild.id, "feedback"):
 			await self.channel.send(embed = discord.Embed(
-				title = "Feedback",
-				description = arg,
 				color = utils.embed_color)
-				.set_footer(text = f"Feedback submitted by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id}) in server {ctx.guild.name} ({ctx.guild.id})"))
+				.add_field(name = "Feedback", value = arg, inline = False)
+				.add_field(name = "Username", value = f"{ctx.author.name}#{ctx.author.discriminator}", inline = False)
+				.add_field(name = "User ID", value = ctx.author.id, inline = False)
+				.add_field(name = "Server ID", value = ctx.guild.id if ctx.guild else "DMs", inline = False))
 			await ctx.send("Feedback recieved!")
 		else:
 			await ctx.send(embed = utils.command_disabled)
