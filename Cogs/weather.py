@@ -32,18 +32,26 @@ class Weather(commands.Cog):
 				embed = discord.Embed(
 					title = f"Weather in {cityName}",
 					color = utils.embed_color,
-					timestamp = ctx.message.created_at
-				)
+					timestamp = ctx.message.created_at)
+					.set_footer(
+					text = f"Requested by {ctx.author.name}#{ctx.author.discriminator}")
+				
+				embed.set_author(
+					name = f"Weather in {cityName}", 
+					icon_url = utils.icons["weather"])
 
-				embed.add_field(name = "Description", value = f"**{weatherDescription}**", inline = False)
-				embed.add_field(name = "Temperature(F)", value = f"**{temperatureF}°F**", inline = False)
-				embed.add_field(name = "Temperature(C)", value = f"**{str(temperatureC)}°C**", inline = True)
-				embed.add_field(name = "Humidity(%)", value = f"**{cHumidity}%**", inline = False)
-				embed.add_field(name = "Atmospheric Pressure(hPa)", value = f"**{cPressure}hPa**", inline = False)
-				embed.add_field(name = "Country", value = f"**{country}**", inline = False)
-				embed.add_field(name= "Timezone", value = f"**{timezone}**", inline = False )
-				embed.set_author(name = f"Weather in {cityName}", icon_url = utils.icons["weather"])
-				embed.set_footer(text = f"Requested by {ctx.author.name}#{ctx.author.discriminator}")
+				fields = [
+					("Description", f"**{weatherDescription}**"),
+					("Temperature(F)", f"**{temperatureF}°F**"), 
+					("Temperature(C)", f"**{str(temperatureC)}°C**"),
+					("Humidity(%)", f"**{cHumidity}%**"),
+					("Atmospheric Pressure(hPa)", f"**{cPressure}hPa**"),
+					("Country", f"**{country}**"),
+					("Timezone", f"**{timezone}**")
+				]
+
+				for name, value in fields:
+					embed.add_field(name = name, value = value, inline = False)
 
 			await channel.send(embed = embed)
 
