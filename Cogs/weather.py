@@ -57,7 +57,7 @@ class Weather(commands.Cog):
 			await channel.send(embed = discord.Embed(
 				color = utils.embed_color)
 				.set_author(
-					name = f':x: City *{city_name}* not found',
+					name = f"❌ City {city_name} not found",
 					icon_url = utils.icons["weather"]))
 
 def setup(client):
