@@ -7,7 +7,7 @@ import requests
 class Weather(commands.Cog):
 	def __init__(self, client):
 		self.client = client
-
+	
 	@commands.command()
 	async def weather(self, ctx, *, city: str):
 		city_name = city
@@ -15,7 +15,7 @@ class Weather(commands.Cog):
 		response = requests.get(url)
 		weather = response.json()
 		channel = ctx.message.channel
-
+		
 		if weather["cod"] != "404":
 			async with channel.typing():
 				info = weather["main"]
@@ -28,17 +28,17 @@ class Weather(commands.Cog):
 				country = weather["sys"]["country"]
 				timezone = weather["timezone"]
 				weather_description = w[0]["description"]
-
-				embed = discord.Embed(
+				
+				embed = (discord.Embed(
 					color = utils.embed_color,
 					timestamp = ctx.message.created_at)
 					.set_footer(
-					text = f"Requested by {ctx.author.name}#{ctx.author.discriminator}")
+						text = f"Requested by {ctx.author.name}#{ctx.author.discriminator}"))
 				
 				embed.set_author(
 					name = f"Weather in {city_name}", 
 					icon_url = utils.icons["weather"])
-
+				
 				fields = [
 					("Description", f"**{weather_description}**"),
 					("Temperature(F)", f"**{temperature_f}°F**"), 
@@ -48,12 +48,12 @@ class Weather(commands.Cog):
 					("Country", f"**{country}**"),
 					("Timezone", f"**{timezone}**")
 				]
-
+				
 				for name, value in fields:
 					embed.add_field(name = name, value = value, inline = False)
-
-			await channel.send(embed = embed)
-
+				
+				await channel.send(embed = embed)
+		
 		else:
 			await channel.send(embed = discord.Embed(
 				color = utils.embed_color)
