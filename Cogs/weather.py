@@ -21,7 +21,7 @@ class Weather(commands.Cog):
 				info = weather["main"]
 				temperature = info["temp"]
 				temperature_c = round(temperature - 273.15)
-				temperature_f = str(round(temperature_c * 9/5) + 32)
+				temperature_f = round(temperature_c * 9/5) + 32
 				c_pressure = info["pressure"]
 				c_humidity = info["humidity"]
 				w = weather["weather"]
@@ -42,7 +42,7 @@ class Weather(commands.Cog):
 				fields = [
 					("Description", f"**{weather_description}**"),
 					("Temperature(F)", f"**{temperature_f}°F**"), 
-					("Temperature(C)", f"**{str(temperature_c)}°C**"),
+					("Temperature(C)", f"**{temperature_c}°C**"),
 					("Humidity(%)", f"**{c_humidity}%**"),
 					("Atmospheric Pressure(hPa)", f"**{c_pressure}hPa**"),
 					("Country", f"**{country}**"),
