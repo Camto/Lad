@@ -198,6 +198,6 @@
       "description": "`l.weather <city>` will return the weather status for the biggest city in the world with that name.",
       "title": "City Weather"
     },
-    "msg": "Get the current weather status in a specific city."
+    "msg": "Get the current weather status for a specific city."
   }
 ]
