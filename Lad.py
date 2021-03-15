@@ -26,11 +26,12 @@ async def on_command_error(ctx, error):
 async def on_ready():
 	print(f"{client.user.name}#{client.user.discriminator} logged in!")
 
+# Make into cog
 @client.event
 async def on_guild_join(guild):
   await guild.owner.send(embed = discord.Embed(
 		title = f"Thank you for adding Ladbot to {ctx.guild.name} ({ctx.guild.id})!",
-		description = "For a list of all commands use `l.help` and for any feedback you would like to give the developers use `l.feedback <your message>`."
+		description = "For a list of all commands use `l.help` and for any feedback you would like to give the developers use `l.feedback <your message>`.",
 		color = utils.embed_color)
 		.set_thumbnail(url = ctx.guild.icon_url))
 
