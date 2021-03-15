@@ -6,7 +6,8 @@ import requests
 
 class Weather(commands.Cog):
 	def __init__(self, client):
-		self.client =	
+		self.client =	client
+	
 	@commands.command()
 	async def weather(self, ctx, *, city: str):
 		city_name = city
@@ -21,8 +22,8 @@ class Weather(commands.Cog):
 				temperature = info["temp"]
 				temperature_c = round(temperature - 273.15)
 				temperature_f = round(temperature_c * 9/5) + 32
-				c_pressure = info["pressure"]
-				c_humidity = info["humidity"]
+				pressure = info["pressure"]
+				humidity = info["humidity"]
 				w = weather["weather"]
 				country = weather["sys"]["country"]
 				timezone = weather["timezone"]
