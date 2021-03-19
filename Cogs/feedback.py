@@ -18,7 +18,8 @@ class Feedback(commands.Cog):
 				.add_field(name = "Feedback", value = arg, inline = False)
 				.add_field(name = "Username", value = f"{ctx.author.name}#{ctx.author.discriminator}", inline = False)
 				.add_field(name = "User ID", value = ctx.author.id, inline = False)
-				.add_field(name = "Server ID", value = ctx.guild.id if ctx.guild else "DMs", inline = False))
+				.add_field(name = "Server ID", value = ctx.guild.id if ctx.guild else "DMs", inline = False)
+				.add_field(name = "Channel ID", value = ctx.channel.id if ctx.guild else "DMs", inline = False))
 			await ctx.send("Feedback recieved!")
 		else:
 			await ctx.send(embed = utils.command_disabled)
