@@ -13,7 +13,7 @@ class Bitcoin(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 	
-	@commands.command()
+	@commands.command(aliases=["btc"])
 	async def bitcoin(self, ctx, *cmd):
 		if utils.get_setting(ctx.guild.id, "bitcoin"):
 			if len(cmd) == 0:
