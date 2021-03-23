@@ -17,7 +17,7 @@ class Convert(commands.Cog):
 	
 	@commands.command()
 	async def convert(self, ctx, *args):
-		if utils.get_setting(ctx.guild.id, "convert"):
+		if utils.get_setting(ctx.guild, "convert"):
 			if len(args) <= 1 :
 				await ctx.send(embed = utils.embeds["convert more args"])
 			else:

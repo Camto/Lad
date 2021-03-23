@@ -8,7 +8,7 @@ class Useless(commands.Cog):
 	
 	@commands.command()
 	async def useless(self, ctx):
-		if utils.get_setting(ctx.guild.id, "useless"):
+		if utils.get_setting(ctx.guild, "useless"):
 			await ctx.send(embed = utils.embeds["useless"])
 		else:
 			await ctx.send(embed = utils.command_disabled)

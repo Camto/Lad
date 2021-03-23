@@ -27,9 +27,10 @@ embeds = my_dictionary = {
 
 command_disabled = embeds["command disabled"]
 
-def get_setting(guild_id, option):
-	if guild_id in settings:
-		return settings[guild_id][option]
+def get_setting(guild, option):
+	# Guild is None if it's a DM
+	if guild and guild.id in settings:
+		return settings[guild.id][option]
 	else:
 		return options[option]["default"]
 

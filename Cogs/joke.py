@@ -13,7 +13,7 @@ class Joke(commands.Cog):
 	
 	@commands.command()
 	async def knockknock(self, ctx):
-		if utils.get_setting(ctx.guild.id, "knockknock"):
+		if utils.get_setting(ctx.guild, "knockknock"):
 			channel = ctx.channel
 			user = ctx.author
 			
@@ -33,14 +33,17 @@ class Joke(commands.Cog):
 	
 	@commands.command()
 	async def laugh(self, ctx):
-		if utils.get_setting(ctx.guild.id, "laugh"):
+		if utils.get_setting(ctx.guild, "laugh"):
 			await ctx.send(random.choice(responses))
 		else:
 			await ctx.send(embed = utils.command_disabled)
 	
 	@commands.command()
 	async def luagh(self, ctx):
-		await ctx.send(embed = discord.Embed(title = "Fuck you", color = utils.embed_color))
+		if utils.get_setting(ctx.guild, "laugh"):
+			await ctx.send(embed = discord.Embed(title = "Fuck you", color = utils.embed_color))
+		else:
+			await ctx.send(embed = utils.command_disabled)
 
 async def slow_send(channel, content, wait_time):
 	async with channel.typing():

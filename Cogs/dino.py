@@ -16,7 +16,7 @@ class Dino(commands.Cog):
 	
 	@commands.command()
 	async def dino(self, ctx, *args):
-		if utils.get_setting(ctx.guild.id, "dino"):
+		if utils.get_setting(ctx.guild, "dino"):
 			if len(args) != 0:
 				dino = process.extractOne(args[0], dino_names)[0]
 				await ctx.send(embed = dino_to_embed(dino))

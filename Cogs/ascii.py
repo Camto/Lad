@@ -11,7 +11,7 @@ class Ascii(commands.Cog):
 	
 	@commands.command()
 	async def ascii(self, ctx, *, arg):
-		if utils.get_setting(ctx.guild.id, "ascii"):
+		if utils.get_setting(ctx.guild, "ascii"):
 			await ctx.send(f"```\n{art.text2art(arg)}\n```")
 		else:
 			await ctx.send(embed = utils.command_disabled)

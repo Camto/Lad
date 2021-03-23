@@ -10,7 +10,7 @@ class Minesweeper(commands.Cog):
 	
 	@commands.command()
 	async def minesweeper(self, ctx, *args):
-		if utils.get_setting(ctx.guild.id, "minesweeper"):
+		if utils.get_setting(ctx.guild, "minesweeper"):
 			if len(args) == 0:
 				width = 9
 				height = 9

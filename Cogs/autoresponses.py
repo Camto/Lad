@@ -15,10 +15,10 @@ class Autoresponses(commands.Cog):
 	async def on_message(self, msg):
 		if (
 				msg.author.id != self.client.user.id and
-				utils.get_setting(msg.guild.id, "autoresponses") and
+				utils.get_setting(msg.guild, "autoresponses") and
 				not msg.content.startswith("l.")):
 			text = msg.content.lower()
-			for pair in utils.get_setting(msg.guild.id, "autoresponse_file"):
+			for pair in utils.get_setting(msg.guild, "autoresponse_file"):
 				for keyword in pair["keywords"]:
 					if keyword in text:
 						response = random.choice(pair["responses"])

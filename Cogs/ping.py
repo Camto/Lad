@@ -9,7 +9,7 @@ class Ping(commands.Cog):
 	
 	@commands.command()
 	async def ping(self, ctx):
-		if utils.get_setting(ctx.guild.id, "ping"):
+		if utils.get_setting(ctx.guild, "ping"):
 			await ctx.send(embed = discord.Embed(
 				title = ":ping_pong: Pong!",
 				description = f"Hey, {ctx.message.author.mention}. Current ping is: ``{round(self.client.latency * 1000)}`` ms.",
