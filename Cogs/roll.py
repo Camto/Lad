@@ -8,7 +8,7 @@ class Roll(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 	
-	@commands.command()
+	@commands.command(aliases=["r"])
 	async def roll(self, ctx, *cmd):
 		if utils.get_setting(ctx.guild, "roll"):
 			try:
