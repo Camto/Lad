@@ -6,7 +6,7 @@ class User(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 	
-	@commands.command(aliases=["profile"])
+	@commands.command(aliases = ["profile"])
 	async def user(self, ctx, member: discord.Member = None):
 		if utils.get_setting(ctx.guild, "user_"):
 			if member is None: member = ctx.author
