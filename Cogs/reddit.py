@@ -17,7 +17,7 @@ class Reddit(commands.Cog):
 	
 	@commands.command()
 	async def reddit(self, ctx, *args):
-		if utils.get_setting(ctx.guild.id, "reddit"):
+		if utils.get_setting(ctx.guild, "reddit"):
 			if len(args) >= 1:
 				if args[0].startswith("r/"):
 					await handle_sub(self, ctx, args)

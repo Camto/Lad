@@ -22,7 +22,7 @@ class Bible(commands.Cog):
 	
 	@commands.command()
 	async def bible(self, ctx, *, args = None):
-		if utils.get_setting(ctx.guild.id, "bible"):
+		if utils.get_setting(ctx.guild, "bible"):
 			if args == None:
 				await utils.menus.reload(self.client, ctx, random_passage_menu())
 			else:

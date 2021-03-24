@@ -12,7 +12,7 @@ class Feedback(commands.Cog):
 	
 	@commands.command()
 	async def feedback(self, ctx, *, arg):
-		if utils.get_setting(ctx.guild.id, "feedback"):
+		if utils.get_setting(ctx.guild, "feedback"):
 			await self.channel.send(embed = discord.Embed(
 				color = utils.embed_color)
 				.add_field(name = "Feedback", value = arg, inline = False)

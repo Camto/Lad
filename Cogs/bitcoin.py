@@ -15,7 +15,7 @@ class Bitcoin(commands.Cog):
 	
 	@commands.command(aliases=["btc"])
 	async def bitcoin(self, ctx, *cmd):
-		if utils.get_setting(ctx.guild.id, "bitcoin"):
+		if utils.get_setting(ctx.guild, "bitcoin"):
 			if len(cmd) == 0:
 				request = requests.get("https://api.coindesk.com/v1/bpi/currentprice/USD.json")
 				info = json.loads(request.text)

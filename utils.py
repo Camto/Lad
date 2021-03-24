@@ -27,9 +27,10 @@ embeds = my_dictionary = {
 
 command_disabled = embeds["command disabled"]
 
-def get_setting(guild_id, option):
-	if guild_id in settings:
-		return settings[guild_id][option]
+def get_setting(guild, option):
+	# Guild is None if it's a DM
+	if guild and guild.id in settings:
+		return settings[guild.id][option]
 	else:
 		return options[option]["default"]
 
@@ -72,11 +73,16 @@ async def menu(client, ctx, gen_):
 			if new_embed != embed:
 				await msg.edit(embed = new_embed)
 				embed = new_embed
-			await msg.remove_reaction(str(reaction.emoji), user)
+			# Try because we could be in a DM
+			try:
+				await msg.remove_reaction(str(reaction.emoji), user)
+			except: pass
 			
 			if new_reactions != reactions:
 				for reaction in reactions:
-					await msg.remove_reaction(reaction, client.user)
+					try:
+						await msg.remove_reaction(reaction, client.user)
+					except: pass
 				for reaction in new_reactions:
 					await msg.add_reaction(reaction)
 				reactions = new_reactions

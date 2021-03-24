@@ -8,7 +8,7 @@ class User(commands.Cog):
 	
 	@commands.command(aliases=["profile"])
 	async def user(self, ctx, member: discord.Member = None):
-		if utils.get_setting(ctx.guild.id, "user_"):
+		if utils.get_setting(ctx.guild, "user_"):
 			if member is None: member = ctx.author
 			
 			embed = (discord.Embed(
@@ -34,7 +34,7 @@ class User(commands.Cog):
 	
 	@user.error
 	async def user_error(self, ctx, error):
-		if utils.get_setting(ctx.guild.id, "user_"):
+		if utils.get_setting(ctx.guild, "user_"):
 			await ctx.send(embed = utils.embeds["user error"])
 		else:
 			await ctx.send(embed = utils.command_disabled)

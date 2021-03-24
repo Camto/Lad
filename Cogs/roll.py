@@ -10,7 +10,7 @@ class Roll(commands.Cog):
 	
 	@commands.command(aliases=["r"])
 	async def roll(self, ctx, *cmd):
-		if utils.get_setting(ctx.guild.id, "roll"):
+		if utils.get_setting(ctx.guild, "roll"):
 			try:
 				amount, side = (
 					map(int, cmd[0].split("d"))
