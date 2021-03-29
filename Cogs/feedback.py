@@ -26,10 +26,10 @@ class Feedback(commands.Cog):
 	
 	@commands.command()
 	async def fb_respond(self, ctx, *, args):
-		chnl_id, msg_id, resp = args.lstrip().split(None, 2)
+		chnl_id, msg_id, content = args.lstrip().split(None, 2)
 		chnl_id, msg_id = int(chnl_id), int(msg_id)
 		msg = await self.client.get_channel(chnl_id).fetch_message(msg_id)
-		await msg.reply(resp)
+		await msg.reply(content)
 
 def setup(client):
 	client.add_cog(Feedback(client))
