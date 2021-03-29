@@ -19,10 +19,17 @@ class Feedback(commands.Cog):
 				.add_field(name = "Username", value = f"{ctx.author.name}#{ctx.author.discriminator}", inline = False)
 				.add_field(name = "User ID", value = ctx.author.id, inline = False)
 				.add_field(name = "Server ID", value = ctx.guild.id if ctx.guild else "DMs", inline = False)
-				.add_field(name = "Channel ID", value = ctx.channel.id if ctx.guild else "DMs", inline = False))
+				.add_field(name = "Respond to", value = f"{ctx.channel.id} {ctx.message.id}" if ctx.guild else "DMs", inline = False))
 			await ctx.send("Feedback recieved!")
 		else:
 			await ctx.send(embed = utils.command_disabled)
+	
+	@commands.command()
+	async def fb_respond(self, ctx, *, args):
+		chnl_id, msg_id, resp = args.lstrip().split(None, 2)
+		chnl_id, msg_id = int(chnl_id), int(msg_id)
+		msg = await self.client.get_channel(chnl_id).fetch_message(msg_id)
+		await msg.reply(resp)
 
 def setup(client):
 	client.add_cog(Feedback(client))
