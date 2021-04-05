@@ -12,8 +12,11 @@ class Sayembed(commands.Cog):
 	
 	@commands.command()
 	async def sayembed(self, ctx, *, arg):
-		if ctx.message.author.id in utils.master_settings["admins"]:
-			await ctx.send(embed = discord.Embed.from_dict(json.loads(arg)))
+		try:
+			if ctx.message.author.id in utils.master_settings["admins"]:
+				await ctx.send(embed = discord.Embed.from_dict(json.loads(arg)))
+		except Exception as err:
+			print(err)
 
 def setup(client):
 	client.add_cog(Sayembed(client))
