@@ -25,7 +25,7 @@ class Bitcoin(commands.Cog):
 					.set_author(
 						name = f"1 BTC = {info['bpi']['USD']['rate']} USD",
 						icon_url = utils.icons["bitcoin"]))
-			elif cmd[0].lower() == "history":
+			elif cmd[0].lower() == "history" or "h":
 				today = datetime.date.today()
 				week = today - datetime.timedelta(days = 7)
 				dates = []
