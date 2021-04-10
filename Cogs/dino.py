@@ -14,7 +14,7 @@ class Dino(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 	
-	@commands.command()
+	@commands.command(aliases = ["dinosaur"])
 	async def dino(self, ctx, *args):
 		if utils.get_setting(ctx.guild, "dino"):
 			if len(args) != 0:
