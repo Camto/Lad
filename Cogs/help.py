@@ -14,7 +14,7 @@ class Help(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 	
-	@commands.command()
+	@commands.command(aliases = ["commands"])
 	async def help(self, ctx, *cmd):
 		if len(cmd) == 0:
 			
