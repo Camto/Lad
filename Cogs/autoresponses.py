@@ -20,7 +20,9 @@ class Autoresponses(commands.Cog):
 			text = msg.content.lower()
 			for pair in utils.get_setting(msg.guild, "autoresponse_file"):
 				for keyword in pair["keywords"]:
-					if keyword in text:
+					if (
+						keyword in text and
+						abs(random.gauss(0, 1) < 1)):
 						response = random.choice(pair["responses"])
 						if response != "":
 							return await msg.channel.send(response)
