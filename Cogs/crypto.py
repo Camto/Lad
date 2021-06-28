@@ -37,7 +37,7 @@ class Crypto(commands.Cog):
 
 			fields = [
 			("Market Cap:", f"${market_cap}", False),
-			("Percent change in the last 24 hours", f"%{percent_change_24h}", False)]
+			("Percent change in the last 24 hours", f"{percent_change_24h}%", False)]
 
 			for name, value, inline in fields:
 				embed.add_field(name=name, value=value, inline=inline)
