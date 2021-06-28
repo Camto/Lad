@@ -36,16 +36,16 @@
     "msg": "Returns a random bible verse."
   },
   {
-    "cmd": "bitcoin",
+    "cmd": "crypto",
     "embed": {
       "author": {
         "icon_url": "https://raw.githubusercontent.com/Camto/Lad/master/Images/bitcoin.png",
-        "name": "Bitcoin Help"
+        "name": "Crypto Help"
       },
       "color": 14711736,
-      "description": "To change the currency output use `l.bitcoin <currency>`. Currency list at [CoinDesk](https://www.coindesk.com/price/bitcoin), remember to type in acronym/shortened form (ex. USD, EUR, GBP); capitalization doesn't matter. `l.bitcoin history` will return bitcoin price for the last 7 days (ONLY available in USD)."
+      "description": "This command uses [CoinMarketCap](https://coinmarketcap.com/) for all the data. For a list of all the currencies click [here](https://coinmarketcap.com/all/views/all/)."
     },
-    "msg": "Get the current price of bitcoin with a wide range of currencies to choose from. For details, do `l.help bitcoin`."
+    "msg": "Get the current price of whichever cryptocurrency you choose in USD. For details, do `l.help crypto`."
   },
   {
     "cmd": "convert",

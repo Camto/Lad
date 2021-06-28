@@ -52,11 +52,11 @@ in [
 				If a response has the ${emojis.`right pointer`} reaction, it has multiple pages that can be viewed using the ${emojis.`left pointer`} and ${emojis.`right pointer`} reactions.''
 		},
 	
-	command "bitcoin"
-		"Get the current price of bitcoin with a wide range of currencies to choose from. For details, do `l.help bitcoin`."
+	command "crypto"
+		"Get the current price of whichever cryptocurrency you choose in USD. For details, do `l.help crypto`."
 		embed.Embed::{
-			author = icon-title "Bitcoin Help" icons.bitcoin,
-			description = Some "To change the currency output use `l.bitcoin <currency>`. Currency list at [CoinDesk](https://www.coindesk.com/price/bitcoin), remember to type in acronym/shortened form (ex. USD, EUR, GBP); capitalization doesn't matter. `l.bitcoin history` will return bitcoin price for the last 7 days (ONLY available in USD)."
+			author = icon-title "Crypto Help" icons.bitcoin,
+			description = Some "This command uses [CoinMarketCap](https://coinmarketcap.com/) for all the data. For a list of all the currencies click [here](https://coinmarketcap.com/all/views/all/)."
 		},
 	
 	command "convert"
