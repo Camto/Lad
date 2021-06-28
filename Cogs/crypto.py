@@ -36,7 +36,7 @@ class Crypto(commands.Cog):
 				color = utils.embed_color).set_footer(text=datetime.now())
 
 			fields = [
-			("Market Cap:", f"${market_cap}", False),
+			("Market Cap", f"${market_cap}", False),
 			("Percent change in the last 24 hours", f"{percent_change_24h}%", False)]
 
 			for name, value, inline in fields:
