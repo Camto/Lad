@@ -45,7 +45,7 @@
       "color": 14711736,
       "description": "This command uses [CoinMarketCap](https://coinmarketcap.com/) for all the data. For a list of all the currencies click [here](https://coinmarketcap.com/all/views/all/)."
     },
-    "msg": "Get the current price of whichever cryptocurrency you choose in USD. For details, do `l.help crypto`."
+    "msg": "Get the current price (USD) of whichever cryptocurrency you choose. For details, do `l.help crypto`. Inputs in symbol form (ex. ETH, BTC, DOGE)"
   },
   {
     "cmd": "convert",

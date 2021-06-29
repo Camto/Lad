@@ -53,7 +53,7 @@ in [
 		},
 	
 	command "crypto"
-		"Get the current price of whichever cryptocurrency you choose in USD. For details, do `l.help crypto`."
+		"Get the current price of (USD) whichever cryptocurrency you choose. For details, do `l.help crypto`. Inputs in symbol form (ex. ETH, BTC, DOGE)"
 		embed.Embed::{
 			author = icon-title "Crypto Help" icons.bitcoin,
 			description = Some "This command uses [CoinMarketCap](https://coinmarketcap.com/) for all the data. For a list of all the currencies click [here](https://coinmarketcap.com/all/views/all/)."
