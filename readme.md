@@ -17,7 +17,7 @@ Get started with `l.help` to show all possible commands. Get more help for speci
 * `l.8ball` — Ask the Magic 8-Ball for help.
 * `l.ascii` — Returns your message in ASCII art!
 * `l.bible` — Returns a random bible verse.
-* `l.bitcoin` — Get the current price of bitcoin with a wide range of currencies to choose from.
+* `l.crypto` — Get the current price of any crypto in USD.
 * `l.convert` — Converts a file type to another file type. Type `l.help convert` for all file types.
 * `l.dino` — Use `l.dino` for a random dinosaur, `l.dino <dinosaur name here>` to find the dinosaur with that name.
 * `l.feedback` — Use `l.feedback <message>` to send the message as feedback to the devs :)
