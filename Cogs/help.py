@@ -23,7 +23,7 @@ class Help(commands.Cog):
 				for chunk in utils.chunks(help, 5):
 					help_embed = (discord.Embed(
 						title = "Commands",
-						description = "This bot's prefix is ``l.``",
+						description = "This bot's prefix is `l.`",
 						color = utils.embed_color)
 						.set_footer(
 							text = f"https://github.com/Camto/Lad - In {len(self.client.guilds)} servers!",
