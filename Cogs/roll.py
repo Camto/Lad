@@ -30,12 +30,12 @@ class Roll(commands.Cog):
 				try:
 					await ctx.send(embed = discord.Embed(
 						title = ":game_die: Rolling dice...",
-						description = f"Your destiny is... ``{final_dice}``",
+						description = f"Your destiny is... `{final_dice}``",
 						color = utils.embed_color).set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url))
 				except:
 					await ctx.send(embed = discord.Embed(
 						title = ":game_die: Rolling dice...",
-						description = f"Your destiny is... ``{sum(dice)}``",
+						description = f"Your destiny is... `{sum(dice)}`",
 						color = utils.embed_color)
 						.set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar_url))
 			except:
