@@ -46,7 +46,7 @@ class Crypto(commands.Cog):
 
 		else:
 			await ctx.send(embed=discord.Embed(
-				tite = "ERROR, please provide a valid cryptocurrency's symbol (for example, ``BTC`` or ``ETH``.",
+				tite = "ERROR, please provide a valid cryptocurrency's symbol (for example, `BTC` or `ETH`.",
 				color = utils.embed_color))
 
 def setup(client):
